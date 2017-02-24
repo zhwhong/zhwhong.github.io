@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux,ubuntu,theme," />
+  <meta name="keywords" content="Machine Learning,Knowledge," />
 
 
 
@@ -89,27 +89,35 @@
 
 
 
+<meta name="description" content="CS231n课程：面向视觉识别的卷积神经网络
+
+课程官网：CS231n: Convolutional Neural Networks for Visual Recognition
+Github：https://github.com/cs231n/cs231n.github.io | http://cs231n.github.io/
+教学安排及大纲：Schedule and Syllabus
+课程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[Linux] Ubuntu下超好看扁平主题 : Flatabulous">
-<meta property="og:url" content="https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu下超好看扁平主题-Flatabulous/index.html">
+<meta property="og:title" content="\[斯坦福CS231n课程整理\] Convolutional Neural Networks for Visual Recognition(附翻译，作业)">
+<meta property="og:url" content="https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/index.html">
 <meta property="og:site_name" content="Zhiwei's Blog">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-909d61913233d890.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-1564d71f915f7cef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-e639fe182b0b743b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-c073230df8a73b8b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-c937f438f034d8bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-1e90b53fc9d14f68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-a9408b3132214304.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-63d8986b44433f99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-ac6eca94b5b50a2e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-b0e714419dcd6433.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-9c99a2b56e70c30f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-0e6a006a57adb9d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-421d8c2880c84c62.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-02-24T08:48:50.147Z">
+<meta property="og:description" content="CS231n课程：面向视觉识别的卷积神经网络
+
+课程官网：CS231n: Convolutional Neural Networks for Visual Recognition
+Github：https://github.com/cs231n/cs231n.github.io | http://cs231n.github.io/
+教学安排及大纲：Schedule and Syllabus
+课程">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-a0eeadfcd667b7bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-df9eb2f6ea9512fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-3b415a85af702e04.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-02-24T09:35:35.684Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[Linux] Ubuntu下超好看扁平主题 : Flatabulous">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/145616-909d61913233d890.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="\[斯坦福CS231n课程整理\] Convolutional Neural Networks for Visual Recognition(附翻译，作业)">
+<meta name="twitter:description" content="CS231n课程：面向视觉识别的卷积神经网络
+
+课程官网：CS231n: Convolutional Neural Networks for Visual Recognition
+Github：https://github.com/cs231n/cs231n.github.io | http://cs231n.github.io/
+教学安排及大纲：Schedule and Syllabus
+课程">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/145616-a0eeadfcd667b7bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -137,13 +145,13 @@
 
 
 
-  <link rel="canonical" href="https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu下超好看扁平主题-Flatabulous/"/>
+  <link rel="canonical" href="https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/"/>
 
 
 
 
 
-  <title> [Linux] Ubuntu下超好看扁平主题 : Flatabulous | Zhiwei's Blog </title>
+  <title> \[斯坦福CS231n课程整理\] Convolutional Neural Networks for Visual Recognition(附翻译，作业) | Zhiwei's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -346,7 +354,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu下超好看扁平主题-Flatabulous/">
+  <link itemprop="mainEntityOfPage" href="https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="zhwhong">
@@ -370,7 +378,7 @@
             
             
               
-                [Linux] Ubuntu下超好看扁平主题 : Flatabulous
+                \[斯坦福CS231n课程整理\] Convolutional Neural Networks for Visual Recognition(附翻译，作业)
               
             
           </h1>
@@ -385,7 +393,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-24T16:12:16+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-24T17:27:52+08:00">
                 2017-02-24
               </time>
             
@@ -408,8 +416,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/machine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">machine learning</span>
                   </a>
                 </span>
 
@@ -426,8 +434,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/24/Linux-Ubuntu下超好看扁平主题-Flatabulous/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/24/Linux-Ubuntu下超好看扁平主题-Flatabulous/" itemprop="commentCount"></span>
+                <a href="/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -435,7 +443,7 @@
 
           
           
-             <span id="/2017/02/24/Linux-Ubuntu下超好看扁平主题-Flatabulous/" class="leancloud_visitors" data-flag-title="[Linux] Ubuntu下超好看扁平主题 : Flatabulous">
+             <span id="/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/" class="leancloud_visitors" data-flag-title="\[斯坦福CS231n课程整理\] Convolutional Neural Networks for Visual Recognition(附翻译，作业)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -469,44 +477,73 @@
       
 
       
-        <p><img src="http://upload-images.jianshu.io/upload_images/145616-909d61913233d890.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Flatabulous"></p>
-<a id="more"></a>
-<p>使用ubuntu的小伙伴们，不知道你们对ubuntu自带主题有什么看法，反正我个人不太喜欢，个人比较喜欢扁平化的风格。<br>下面给大家推荐一个我长期使用的扁平化风格的主题－<a href="https://github.com/anmoljagetia/Flatabulous" target="_blank" rel="external">Flatabulous</a> 。<br>先看一下我的桌面(个人比较偏向单色调，不要在意这些细节啦)：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/145616-1564d71f915f7cef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="My Desktop"></p>
-<p>那么<strong>Flatabulous</strong>到底是什么呢？<br>　　“This is a Flat theme for Ubuntu and other debian based Linux Systems. This is based on the Ultra-Flat theme. Special thanks to @steftrikia and Satyajit Sahoo for the original work.”<br>哈哈，不卖关子了，它其实就是一个超级好看的扁平化Ubuntu主题。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/145616-e639fe182b0b743b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>下面就开始说说怎么安装它吧~</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="[ 安装 ]"></a>[ 安装 ]</h1><h2 id="Step-1-安装-Unity-Tweak-Tool"><a href="#Step-1-安装-Unity-Tweak-Tool" class="headerlink" title="Step 1　安装 Unity Tweak Tool"></a>Step 1　安装 Unity Tweak Tool</h2><p>要安装这个主题，首先要安装<a href="https://launchpad.net/unity-tweak-tool" target="_blank" rel="external">Unity Tweak Tool</a>或者<a href="https://github.com/tualatrix/ubuntu-tweak" target="_blank" rel="external">Ubuntu Tweak Tool</a>。<br>安装Unity Tweak Tool可以很简单地执行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install unity-tweak-tool</div></pre></td></tr></table></figure></p>
-<p>安装Ubuntu Tweak Tool可以使用如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo add-apt-repository ppa:tualatrix/ppa  </div><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install ubuntu-tweak</div></pre></td></tr></table></figure></p>
-<p>或者跑到它们的网站下载.deb文件(推荐)，打开Ubuntu软件中心安装或者使用命令<code>dpkg -i</code>(推荐)安装。</p>
-<p>注：If you are on Ubuntu 16.04 or higher, run the commands below to install Ubuntu Tweak:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ wget -q -O - http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add -</div><div class="line">$ sudo sh -c &apos;echo &quot;deb http://archive.getdeb.net/ubuntu xenial-getdeb apps&quot; &gt;&gt; /etc/apt/sources.list.d/getdeb.list&apos;</div><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install ubuntu-tweak</div></pre></td></tr></table></figure>
-<p>安装完毕后，我们可以就搜到Ubuntu Tweak这款软件了，如下图：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/145616-c073230df8a73b8b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h2 id="Step-2-安装Flatabulous主题"><a href="#Step-2-安装Flatabulous主题" class="headerlink" title="Step 2　安装Flatabulous主题"></a>Step 2　安装Flatabulous主题</h2><h3 id="方式1：Using-the-deb-file-for-Debian-Ubuntu-and-derivatives-Recommended"><a href="#方式1：Using-the-deb-file-for-Debian-Ubuntu-and-derivatives-Recommended" class="headerlink" title="方式1：Using the .deb file for Debian, Ubuntu and derivatives (Recommended)"></a>方式1：Using the .deb file for Debian, Ubuntu and derivatives (Recommended)</h3><p>下载.deb文件，点击<a href="https://github.com/anmoljagetia/Flatabulous/releases" target="_blank" rel="external">这里</a>，下载后，打开Ubuntu软件中心或者使用命令<code>dpkg -i</code>（推荐）安装。</p>
-<h3 id="方式2：Using-the-noobslab-PPA"><a href="#方式2：Using-the-noobslab-PPA" class="headerlink" title="方式2：Using the noobslab PPA"></a>方式2：Using the noobslab PPA</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo add-apt-repository ppa:noobslab/themes</div><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install flatabulous-theme</div></pre></td></tr></table></figure>
-<h3 id="方式3：下载Flatabulous源码"><a href="#方式3：下载Flatabulous源码" class="headerlink" title="方式3：下载Flatabulous源码"></a>方式3：下载Flatabulous源码</h3><p>下载主题源码，点击<a href="https://github.com/anmoljagetia/Flatabulous/archive/master.zip" target="_blank" rel="external">这里</a>，或者使用git克隆下来，Github仓库地址： <a href="https://github.com/anmoljagetia/Flatabulous" target="_blank" rel="external">https://github.com/anmoljagetia/Flatabulous</a><br>如果下载的是zip文件，先将其解压，然后移动到/usr/share/themes/下。如果是git clone下来的，直接执行下如下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo mv Flatabulous /usr/share/themes/</div></pre></td></tr></table></figure>
-<h2 id="Step-3-Tweak配置"><a href="#Step-3-Tweak配置" class="headerlink" title="Step 3　Tweak配置"></a>Step 3　Tweak配置</h2><p>我们打开Ubuntu Tweak，选择<strong>调整-&gt;主题</strong>，如下：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/145616-c937f438f034d8bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>然后，配置GTK主题和窗口主题，选择Flatabulous，如下：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/145616-1e90b53fc9d14f68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>你们可以模仿我的配置，不过此时还有一个问题，就是你发现图标主题没有<code>Ultra-Flat</code>选项，这个<code>icon</code>需要额外下载，原生的<code>Tweak</code>里面并没有。<br>对于图标，我使用的是ultra-flat-icons主题。有蓝色（推荐），橙色和薄荷绿颜色可用。要安装它，你可以运行下面的命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo add-apt-repository ppa:noobslab/icons</div><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install ultra-flat-icons</div></pre></td></tr></table></figure></p>
-<p>或者你也可以运行<code>sudo apt-get install ultra-flat-icons-orange</code>或者 <code>sudo apt-get install ultra-flat-icons-green</code>。<br>根据你自己喜欢的颜色选择，我推荐的是扁平图标，但是你也可以看看<strong>Numix</strong>和<strong>Flattr</strong>。</p>
-<p>图标安装好后，再打开Ubuntu Tweak，选择 <code>调整-&gt;主题</code>，选择图标主题为<code>Ultra-Flat</code>。</p>
-<p>安装完以后，只需要在theme进行相应的配置，然后换一个自己喜欢的桌面壁纸，我们就能看到超级好看的ubuntu啦。如果不行，重启计算机，应该就可以了。重启之后你的计算机看起来差不多是这样的：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/145616-a9408b3132214304.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="扁平化图标"></p>
-<h1 id="部分效果图截图"><a href="#部分效果图截图" class="headerlink" title="[ 部分效果图截图 ]"></a>[ 部分效果图截图 ]</h1><h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2><p><img src="http://upload-images.jianshu.io/upload_images/145616-63d8986b44433f99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h2 id="Theme-with-Sublime-Text-3-and-JavaScript-Code"><a href="#Theme-with-Sublime-Text-3-and-JavaScript-Code" class="headerlink" title="Theme with Sublime Text 3 and JavaScript Code"></a>Theme with Sublime Text 3 and JavaScript Code</h2><p><img src="http://upload-images.jianshu.io/upload_images/145616-ac6eca94b5b50a2e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h2 id="系统设置"><a href="#系统设置" class="headerlink" title="系统设置"></a>系统设置</h2><p><img src="http://upload-images.jianshu.io/upload_images/145616-b0e714419dcd6433.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h2 id="Posters"><a href="#Posters" class="headerlink" title="Posters"></a>Posters</h2><p><img src="http://upload-images.jianshu.io/upload_images/145616-9c99a2b56e70c30f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/145616-0e6a006a57adb9d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h2 id="Terminal"><a href="#Terminal" class="headerlink" title="Terminal"></a>Terminal</h2><p><img src="http://upload-images.jianshu.io/upload_images/145616-421d8c2880c84c62.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="[ Reference ]"></a>[ Reference ]</h1><ul>
-<li><a href="http://www.xulukun.cn/flatabulous-ubuntu.html" target="_blank" rel="external">Flatabulous：超级好看的Ubuntu 扁平主题</a></li>
-<li><a href="https://github.com/anmoljagetia/Flatabulous" target="_blank" rel="external">Github -&gt; Flatabulous</a></li>
+        <blockquote>
+<h1 id="CS231n课程：面向视觉识别的卷积神经网络"><a href="#CS231n课程：面向视觉识别的卷积神经网络" class="headerlink" title="CS231n课程：面向视觉识别的卷积神经网络"></a>CS231n课程：面向视觉识别的卷积神经网络</h1></blockquote>
+<ul>
+<li>课程官网：<a href="http://cs231n.stanford.edu/" target="_blank" rel="external">CS231n: Convolutional Neural Networks for Visual Recognition</a></li>
+<li>Github：<a href="https://github.com/cs231n/cs231n.github.io" target="_blank" rel="external">https://github.com/cs231n/cs231n.github.io</a> | <a href="http://cs231n.github.io/" target="_blank" rel="external">http://cs231n.github.io/</a></li>
+<li>教学安排及大纲：<a href="http://vision.stanford.edu/teaching/cs231n/syllabus.html" target="_blank" rel="external">Schedule and Syllabus</a></li>
+<li>课程视频：Youtube上查看<a href="https://link.zhihu.com/?target=https%3A//www.youtube.com/channel/UCPk8m_r6fkUSYmvgCBwq-sw" target="_blank" rel="external">Andrej Karpathy</a>创建的<a href="https://link.zhihu.com/?target=https%3A//www.youtube.com/playlist%3Flist%3DPLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC" target="_blank" rel="external">播放列表</a>，或者<a href="http://study.163.com/course/introduction/1003223001.htm#/courseDetail" target="_blank" rel="external">网易云课堂</a></li>
+<li>课程pdf及视频下载：<a href="https://pan.baidu.com/s/1eRHH4L8" target="_blank" rel="external">百度网盘下载</a>，密码是4efx</li>
 </ul>
-<p>(转载请注明原作者及出处, 谢谢！)</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-a0eeadfcd667b7bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<a id="more"></a>
+<blockquote>
+<h1 id="授课-Stanford-Vision-Lab"><a href="#授课-Stanford-Vision-Lab" class="headerlink" title="授课 (Stanford Vision Lab)"></a>授课 (<a href="http://vision.stanford.edu/index.html" target="_blank" rel="external">Stanford Vision Lab</a>)</h1></blockquote>
+<ul>
+<li><a href="http://vision.stanford.edu/feifeili/" target="_blank" rel="external">Fei-Fei Li</a> (Associate Professor, Stanford University)</li>
+<li><a href="http://cs.stanford.edu/people/karpathy/" target="_blank" rel="external">Andrej Karpathy</a> | <a href="https://github.com/karpathy" target="_blank" rel="external">Github</a> | <a href="http://karpathy.github.io/" target="_blank" rel="external">Blog</a> | <a href="https://twitter.com/karpathy" target="_blank" rel="external">Twitter</a></li>
+<li><a href="http://cs.stanford.edu/people/jcjohns/" target="_blank" rel="external">Justin Johnson</a> | <a href="https://github.com/jcjohnson" target="_blank" rel="external">Github</a></li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-df9eb2f6ea9512fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Course Instructors and Teaching Assistants"></p>
+<blockquote>
+<h1 id="课程原文-amp-作业-amp-中文翻译笔记"><a href="#课程原文-amp-作业-amp-中文翻译笔记" class="headerlink" title="课程原文 &amp; 作业 &amp; 中文翻译笔记"></a>课程原文 &amp; 作业 &amp; 中文翻译笔记</h1><ul>
+<li>知乎专栏：<a href="https://zhuanlan.zhihu.com/intelligentunit" target="_blank" rel="external"><strong>智能单元</strong></a></li>
+<li>作者：<a href="https://www.zhihu.com/people/du-ke/answers" target="_blank" rel="external"><strong>杜客</strong></a> (在此对作者表示特别感谢！)</li>
+</ul>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-3b415a85af702e04.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="翻译得到Karpathy许可"></p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/21930884?refer=intelligentunit" target="_blank" rel="external">贺完结！CS231n官方笔记授权翻译总集篇发布</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/20870307?refer=intelligentunit" target="_blank" rel="external">获得授权翻译斯坦福CS231n课程笔记系列</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/20878530?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：Python Numpy教程</a> | <a href="http://cs231n.github.io/python-numpy-tutorial/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/20894041?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：图像分类笔记（上）</a> | <a href="http://cs231n.github.io/classification/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/20900216?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：图像分类笔记（下）</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/20918580?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：线性分类笔记（上）</a> | <a href="http://cs231n.github.io/linear-classify/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/20945670?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：线性分类笔记（中）</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21102293?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：线性分类笔记（下）</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21354230?refer=intelligentunit" target="_blank" rel="external">知友智靖远关于CS231n课程字幕翻译的倡议 </a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21360434?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：最优化笔记（上）</a> | <a href="http://cs231n.github.io/optimization-1/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21387326?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：最优化笔记（下）</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21407711?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：反向传播笔记 </a> | <a href="http://cs231n.github.io/optimization-2/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21441838?refer=intelligentunit" target="_blank" rel="external">斯坦福CS231n课程作业 # 1 简介 </a> | <a href="http://cs231n.github.io/assignments2016/assignment1/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21462488?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：神经网络笔记 1（上）</a> | <a href="http://cs231n.github.io/neural-networks-1/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21513367?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：神经网络笔记 1（下）</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21560667?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：神经网络笔记 2 </a> | <a href="http://cs231n.github.io/neural-networks-2/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21741716?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：神经网络笔记 3（上）</a> | <a href="http://cs231n.github.io/neural-networks-3/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21798784?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：神经网络笔记 3（下）</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21941485?refer=intelligentunit" target="_blank" rel="external">斯坦福CS231n课程作业 # 2 简介 </a> | <a href="http://cs231n.github.io/assignments2016/assignment2/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/22038289?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：卷积神经网络笔记 </a> | <a href="http://cs231n.github.io/convolutional-networks/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21946525?refer=intelligentunit" target="_blank" rel="external">斯坦福CS231n课程作业 # 3 简介 </a> | <a href="http://cs231n.github.io/assignments2016/assignment3/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/22282421?refer=intelligentunit" target="_blank" rel="external">Andrej Karpathy的回信和Quora活动邀请</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/22232836?refer=intelligentunit" target="_blank" rel="external">知行合一码作业，深度学习真入门 </a></li>
+</ul>
+<p><strong>【附录 - Assignment】：</strong></p>
+<ul>
+<li>[简书] <a href="http://www.jianshu.com/p/004c99623104" target="_blank" rel="external">CS231n (winter 2016) : Assignment1</a></li>
+<li>[简书] <a href="http://www.jianshu.com/p/9c4396653324" target="_blank" rel="external">CS231n (winter 2016) : Assignment2</a></li>
+<li>[简书] <a href="http://www.jianshu.com/p/e46b1aa48886" target="_blank" rel="external">CS231n (winter 2016) : Assignment3（更新中）</a></li>
+<li>[Github] CS231n作业<a href="https://github.com/MyHumbleSelf/cs231n" target="_blank" rel="external"> 参考1</a> | <a href="https://github.com/dengfy/cs231n" target="_blank" rel="external">参考2</a> ……</li>
+</ul>
+<hr>
+<p>(再次感谢<a href="https://zhuanlan.zhihu.com/intelligentunit" target="_blank" rel="external">智能单元-知乎专栏</a>，以及知乎作者<a href="https://www.zhihu.com/people/du-ke/answers" target="_blank" rel="external">@杜客</a>和相关朋友<a href="https://www.zhihu.com/people/584f06e4ed2edc6007e4793179e7cdc1" target="_blank" rel="external">@ShiqingFan</a>，<a href="https://www.zhihu.com/people/hmonkey" target="_blank" rel="external">@猴子</a>，<a href="https://www.zhihu.com/people/e7fcc05b0cf8a90a3e676d0206f888c9" target="_blank" rel="external">@堃堃</a>，<a href="https://www.zhihu.com/people/f11e78650e8185db2b013af42fd9a481" target="_blank" rel="external">@李艺颖</a>等为CS231n课程翻译工作做出的贡献，辛苦了！)</p>
+<hr>
+<p><strong>其他课程整理：</strong></p>
+<ul>
+<li><a href="http://www.jianshu.com/p/062d2bbbef93" target="_blank" rel="external">[斯坦福CS224d课程整理] Natural Language Processing with Deep Learning</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
+<li><a href="http://www.jianshu.com/p/0a6ef31ff77a" target="_blank" rel="external">[斯坦福CS229课程整理] Machine Learning Autumn 2016</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
+<li><a href="http://www.jianshu.com/p/c68d0df13e0b" target="_blank" rel="external">[coursera 机器学习课程] Machine Learning by Andrew Ng</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
+</ul>
 
       
     </div>
@@ -551,11 +588,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
           
-            <a href="/tags/ubuntu/" rel="tag"># ubuntu</a>
-          
-            <a href="/tags/theme/" rel="tag"># theme</a>
+            <a href="/tags/Knowledge/" rel="tag"># Knowledge</a>
           
         </div>
       
@@ -568,8 +603,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/23/Machine-Learning-Materials/" rel="next" title="Machine Learning Materials">
-                <i class="fa fa-chevron-left"></i> Machine Learning Materials
+              <a href="/2017/02/24/Linux-Ubuntu_Flatabulous/" rel="next" title="[Linux] Ubuntu下超好看扁平主题 : Flatabulous">
+                <i class="fa fa-chevron-left"></i> [Linux] Ubuntu下超好看扁平主题 : Flatabulous
               </a>
             
           </div>
@@ -591,10 +626,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2017/02/24/Linux-Ubuntu下超好看扁平主题-Flatabulous/"
-     data-title="[Linux] Ubuntu下超好看扁平主题 : Flatabulous"
+        <div class="ds-share flat" data-thread-key="2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/"
+     data-title="\[斯坦福CS231n课程整理\] Convolutional Neural Networks for Visual Recognition(附翻译，作业)"
      data-content=""
-     data-url="https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu下超好看扁平主题-Flatabulous/">
+     data-url="https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -624,8 +659,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/02/24/Linux-Ubuntu下超好看扁平主题-Flatabulous/"
-           data-title="[Linux] Ubuntu下超好看扁平主题 : Flatabulous" data-url="https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu下超好看扁平主题-Flatabulous/">
+      <div class="ds-thread" data-thread-key="2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/"
+           data-title="\[斯坦福CS231n课程整理\] Convolutional Neural Networks for Visual Recognition(附翻译，作业)" data-url="https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/">
       </div>
     
   </div>
@@ -674,7 +709,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -806,7 +841,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">[ 安装 ]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1-安装-Unity-Tweak-Tool"><span class="nav-number">1.1.</span> <span class="nav-text">Step 1　安装 Unity Tweak Tool</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2-安装Flatabulous主题"><span class="nav-number">1.2.</span> <span class="nav-text">Step 2　安装Flatabulous主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方式1：Using-the-deb-file-for-Debian-Ubuntu-and-derivatives-Recommended"><span class="nav-number">1.2.1.</span> <span class="nav-text">方式1：Using the .deb file for Debian, Ubuntu and derivatives (Recommended)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方式2：Using-the-noobslab-PPA"><span class="nav-number">1.2.2.</span> <span class="nav-text">方式2：Using the noobslab PPA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方式3：下载Flatabulous源码"><span class="nav-number">1.2.3.</span> <span class="nav-text">方式3：下载Flatabulous源码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-3-Tweak配置"><span class="nav-number">1.3.</span> <span class="nav-text">Step 3　Tweak配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部分效果图截图"><span class="nav-number">2.</span> <span class="nav-text">[ 部分效果图截图 ]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件管理"><span class="nav-number">2.1.</span> <span class="nav-text">文件管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Theme-with-Sublime-Text-3-and-JavaScript-Code"><span class="nav-number">2.2.</span> <span class="nav-text">Theme with Sublime Text 3 and JavaScript Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统设置"><span class="nav-number">2.3.</span> <span class="nav-text">系统设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Posters"><span class="nav-number">2.4.</span> <span class="nav-text">Posters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Terminal"><span class="nav-number">2.5.</span> <span class="nav-text">Terminal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">[ Reference ]</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CS231n课程：面向视觉识别的卷积神经网络"><span class="nav-number">1.</span> <span class="nav-text">CS231n课程：面向视觉识别的卷积神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#授课-Stanford-Vision-Lab"><span class="nav-number">2.</span> <span class="nav-text">授课 (Stanford Vision Lab)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#课程原文-amp-作业-amp-中文翻译笔记"><span class="nav-number">3.</span> <span class="nav-text">课程原文 & 作业 & 中文翻译笔记</span></a></li></ol></div>
             
 
           </div>
@@ -1122,26 +1157,6 @@
 
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
