@@ -93,10 +93,7 @@
 Github代码：https://github.com/Hzwcode/lstm
 
 
-前面我们介绍过CNN中普通的BP反向传播算法的推导，但是在RNN（比如LSTM）中，反向传播被称作BPTT（Back Propagation Through Time），它是和时间序列有关的。
-
-
-A few weeks ago I released s">
+前面我们介绍过CNN中普通的BP反向传播算法的推导，但是在RNN（比如LSTM）中，反向传播被称作BPTT（Back Propagation Through Time），它是和时间序列有关的。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[RNN] Simple LSTM代码实现 & BPTT理论推导">
 <meta property="og:url" content="https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/index.html">
@@ -105,10 +102,7 @@ A few weeks ago I released s">
 Github代码：https://github.com/Hzwcode/lstm
 
 
-前面我们介绍过CNN中普通的BP反向传播算法的推导，但是在RNN（比如LSTM）中，反向传播被称作BPTT（Back Propagation Through Time），它是和时间序列有关的。
-
-
-A few weeks ago I released s">
+前面我们介绍过CNN中普通的BP反向传播算法的推导，但是在RNN（比如LSTM）中，反向传播被称作BPTT（Back Propagation Through Time），它是和时间序列有关的。">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-4ae3ab8b8426cdcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-113aeedc747a3628.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-4951e5c5352a88f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -137,17 +131,14 @@ A few weeks ago I released s">
 <meta property="og:image" content="http://latex.codecogs.com/png.latex?\\\frac{dL(t)}{ds_i(t)}%20=%20\frac{dL(t)}{dh_i(t)}%20\frac{dh_i(t)}{ds_i(t)}%20+%20\frac{dL(t)}{dh_i(t+1)}%20\frac{dh_i(t+1)}{ds_i(t)}%20\\\\\\=%20\frac{dL(t)}{dh_i(t)}%20\frac{dh_i(t)}{ds_i(t)}%20+%20\frac{dL(t+1)}{dh_i(t+1)}%20\frac{dh_i(t+1)}{ds_i(t)}%20\\\\\\=%20\frac{dL(t)}{dh_i(t)}%20\frac{dh_i(t)}{ds_i(t)}%20+%20\frac{dL(t+1)}{ds_i(t)}%20\\\\\\%20=%20\frac{dL(t)}{dh_i(t)}%20\frac{dh_i(t)}{ds_i(t)}%20+%20[\texttt{top\_diff\_s}]_i%20\\">
 <meta property="og:image" content="http://latex.codecogs.com/png.latex?h(t)%20=%20s(t)%20*%20o(t)">
 <meta property="og:image" content="http://latex.codecogs.com/png.latex?\frac{dL(t)}{dh_i(t)}%20*%20\frac{dh_i(t)}{ds_i(t)}%20=%20o_i(t)%20*%20[\texttt{top\_diff\_h}]_i">
-<meta property="og:updated_time" content="2017-02-24T10:27:46.164Z">
+<meta property="og:updated_time" content="2017-02-24T10:29:27.824Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[RNN] Simple LSTM代码实现 & BPTT理论推导">
 <meta name="twitter:description" content="参考：Nico’s Blog - Simple LSTM
 Github代码：https://github.com/Hzwcode/lstm
 
 
-前面我们介绍过CNN中普通的BP反向传播算法的推导，但是在RNN（比如LSTM）中，反向传播被称作BPTT（Back Propagation Through Time），它是和时间序列有关的。
-
-
-A few weeks ago I released s">
+前面我们介绍过CNN中普通的BP反向传播算法的推导，但是在RNN（比如LSTM）中，反向传播被称作BPTT（Back Propagation Through Time），它是和时间序列有关的。">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/145616-4ae3ab8b8426cdcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -516,6 +507,7 @@ A few weeks ago I released s">
 <p>前面我们介绍过CNN中普通的<a href="http://www.jianshu.com/p/408ab8177a53" target="_blank" rel="external">BP反向传播算法的推导</a>，但是在RNN（比如<a href="https://en.wikipedia.org/wiki/Long_short-term_memory" target="_blank" rel="external">LSTM</a>）中，反向传播被称作<a href="https://en.wikipedia.org/wiki/Backpropagation_through_time" target="_blank" rel="external">BPTT</a>（Back Propagation Through Time），它是和时间序列有关的。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/145616-4ae3ab8b8426cdcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/145616-113aeedc747a3628.gif?imageMogr2/auto-orient/strip" alt="Back Propagation Through Time"></p>
+<a id="more"></a>
 <p>A few weeks ago I released some <a href="https://github.com/nicodjimenez/lstm" target="_blank" rel="external">code</a> on Github to help people understand how LSTM’s work at the implementation level. The forward pass is well explained elsewhere and is straightforward to understand, but I derived the backprop equations myself and the backprop code came without any explanation whatsoever. The goal of this post is to explain the so called <em>backpropagation through time</em> in the context of LSTM’s.</p>
 <p>If you feel like anything is confusing, please post a comment below or submit an issue on Github.</p>
 <p><strong>Note:</strong> this post assumes you understand the forward pass of an LSTM network, as this part is relatively simple. Please read this <a href="http://arxiv.org/abs/1506.00019" target="_blank" rel="external">great intro paper</a> if you are not familiar with this, as it contains a very nice intro to LSTM’s. I follow the same notation as this paper so I recommend reading having the tutorial open in a separate browser tab for easy reference while reading this post.</p>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Hzwcode.github.io/"/>
-  <updated>2017-02-24T10:27:46.164Z</updated>
+  <updated>2017-02-24T10:29:27.824Z</updated>
   <id>https://Hzwcode.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/"/>
     <id>https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/</id>
     <published>2017-02-24T10:26:58.000Z</published>
-    <updated>2017-02-24T10:27:46.164Z</updated>
+    <updated>2017-02-24T10:29:27.824Z</updated>
     
     <content type="html"><![CDATA[<ul>
 <li>参考：<a href="http://nicodjimenez.github.io/2014/08/08/lstm.html" target="_blank" rel="external">Nico’s Blog - Simple LSTM</a></li>
@@ -30,6 +30,7 @@
 <p>前面我们介绍过CNN中普通的<a href="http://www.jianshu.com/p/408ab8177a53" target="_blank" rel="external">BP反向传播算法的推导</a>，但是在RNN（比如<a href="https://en.wikipedia.org/wiki/Long_short-term_memory" target="_blank" rel="external">LSTM</a>）中，反向传播被称作<a href="https://en.wikipedia.org/wiki/Backpropagation_through_time" target="_blank" rel="external">BPTT</a>（Back Propagation Through Time），它是和时间序列有关的。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/145616-4ae3ab8b8426cdcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/145616-113aeedc747a3628.gif?imageMogr2/auto-orient/strip" alt="Back Propagation Through Time"></p>
+<a id="more"></a>
 <p>A few weeks ago I released some <a href="https://github.com/nicodjimenez/lstm" target="_blank" rel="external">code</a> on Github to help people understand how LSTM’s work at the implementation level. The forward pass is well explained elsewhere and is straightforward to understand, but I derived the backprop equations myself and the backprop code came without any explanation whatsoever. The goal of this post is to explain the so called <em>backpropagation through time</em> in the context of LSTM’s.</p>
 <p>If you feel like anything is confusing, please post a comment below or submit an issue on Github.</p>
 <p><strong>Note:</strong> this post assumes you understand the forward pass of an LSTM network, as this part is relatively simple. Please read this <a href="http://arxiv.org/abs/1506.00019" target="_blank" rel="external">great intro paper</a> if you are not familiar with this, as it contains a very nice intro to LSTM’s. I follow the same notation as this paper so I recommend reading having the tutorial open in a separate browser tab for easy reference while reading this post.</p>
@@ -119,8 +120,13 @@
     <summary type="html">
     
       &lt;ul&gt;
-&lt;li&gt;参考：&lt;a href=&quot;http://nicodjimenez.github.io/2014/08/08/lstm.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Nico’s Blog - Simple LSTM&lt;/a&gt;&lt;/li&gt;
-&lt;
+&lt;li&gt;参考：&lt;a href=&quot;http://nicodjimenez.github.io/2014/08/08/lstm.html&quot;&gt;Nico’s Blog - Simple LSTM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Github代码：&lt;a href=&quot;https://github.com/Hzwcode/lstm&quot;&gt;https://github.com/Hzwcode/lstm&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;前面我们介绍过CNN中普通的&lt;a href=&quot;http://www.jianshu.com/p/408ab8177a53&quot;&gt;BP反向传播算法的推导&lt;/a&gt;，但是在RNN（比如&lt;a href=&quot;https://en.wikipedia.org/wiki/Long_short-term_memory&quot;&gt;LSTM&lt;/a&gt;）中，反向传播被称作&lt;a href=&quot;https://en.wikipedia.org/wiki/Backpropagation_through_time&quot;&gt;BPTT&lt;/a&gt;（Back Propagation Through Time），它是和时间序列有关的。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/145616-4ae3ab8b8426cdcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/145616-113aeedc747a3628.gif?imageMogr2/auto-orient/strip&quot; alt=&quot;Back Propagation Through Time&quot;&gt;&lt;/p&gt;
     
     </summary>
     
@@ -136,7 +142,7 @@
     <link href="https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/"/>
     <id>https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/</id>
     <published>2017-02-24T10:23:35.000Z</published>
-    <updated>2017-02-24T10:25:07.911Z</updated>
+    <updated>2017-02-24T10:29:56.164Z</updated>
     
     <content type="html"><![CDATA[<ul>
 <li><a href="http://www.jianshu.com/p/c7e3f417641c" target="_blank" rel="external">关于简书中如何编辑Latex数学公式</a></li>
@@ -146,6 +152,7 @@
 <p>【知识预备】： <a href="http://deeplearning.stanford.edu/wiki/index.php/%E5%8F%8D%E5%90%91%E4%BC%A0%E5%AF%BC%E7%AE%97%E6%B3%95" target="_blank" rel="external">UFLDL教程 - 反向传导算法</a></p>
 <p>首先我们不讲数学，先上图解，看完图不懂再看后面：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/145616-be0f5712599bf47b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<a id="more"></a>
 <p><img src="http://upload-images.jianshu.io/upload_images/145616-190148f7a5f6d59a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <hr>
 <p><img src="http://upload-images.jianshu.io/upload_images/145616-9c0e2a3e41e50184.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
@@ -251,8 +258,13 @@
     <summary type="html">
     
       &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/c7e3f417641c&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;关于简书中如何编辑Latex数学公式&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.
+&lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/c7e3f417641c&quot;&gt;关于简书中如何编辑Latex数学公式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/2aca6e8ac7c8&quot;&gt;[RNN] Simple LSTM代码实现 &amp;amp; BPTT理论推导&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;【知识预备】： &lt;a href=&quot;http://deeplearning.stanford.edu/wiki/index.php/%E5%8F%8D%E5%90%91%E4%BC%A0%E5%AF%BC%E7%AE%97%E6%B3%95&quot;&gt;UFLDL教程 - 反向传导算法&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;首先我们不讲数学，先上图解，看完图不懂再看后面：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/145616-be0f5712599bf47b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
     
     </summary>
     
@@ -268,7 +280,7 @@
     <link href="https://Hzwcode.github.io/2017/02/24/Detection-CNN/"/>
     <id>https://Hzwcode.github.io/2017/02/24/Detection-CNN/</id>
     <published>2017-02-24T10:20:50.000Z</published>
-    <updated>2017-02-24T10:22:48.399Z</updated>
+    <updated>2017-02-24T10:28:50.432Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h1><ul>
 <li><a href="http://arxiv.org/abs/1311.2524" target="_blank" rel="external">RCNN</a> </li>
@@ -281,6 +293,7 @@
 <li>xywh VS xyxy</li>
 </ul>
 <hr>
+<a id="more"></a>
 <h1 id="RCNN"><a href="#RCNN" class="headerlink" title="RCNN"></a>RCNN</h1><p><a href="http://arxiv.org/abs/1311.2524" target="_blank" rel="external">Rich feature hierarchies for accurate object detection and semantic segmentation</a> </p>
 <p>早期，使用窗口扫描进行物体识别，计算量大。 RCNN去掉窗口扫描，用聚类方式，对图像进行分割分组，得到多个侯选框的层次组。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/145616-f4c5c9a89c842dcb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
@@ -395,7 +408,16 @@
     <summary type="html">
     
       &lt;h1 id=&quot;Index&quot;&gt;&lt;a href=&quot;#Index&quot; class=&quot;headerlink&quot; title=&quot;Index&quot;&gt;&lt;/a&gt;Index&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://arxiv.org/abs/1311.2524&quot; target=&quot;_bl
+&lt;li&gt;&lt;a href=&quot;http://arxiv.org/abs/1311.2524&quot;&gt;RCNN&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://arxiv.org/abs/1504.08083&quot;&gt;Fast RCNN&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://arxiv.org/abs/1506.01497&quot;&gt;Faster RCNN&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://arxiv.org/pdf/1605.06409v1.pdf&quot;&gt;R-FCN&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://arxiv.org/abs/1506.02640&quot;&gt;YOLO&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cs.unc.edu/~wliu/papers/ssd.pdf&quot;&gt;SSD&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;NMS&lt;/li&gt;
+&lt;li&gt;xywh VS xyxy&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
     
     </summary>
     
