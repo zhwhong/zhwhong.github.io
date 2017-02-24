@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Hzwcode.github.io/"/>
-  <updated>2017-02-24T09:35:35.684Z</updated>
+  <updated>2017-02-24T10:27:46.164Z</updated>
   <id>https://Hzwcode.github.io/</id>
   
   <author>
@@ -16,11 +16,404 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>\[斯坦福CS231n课程整理\] Convolutional Neural Networks for Visual Recognition(附翻译，作业)</title>
+    <title>[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</title>
+    <link href="https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/"/>
+    <id>https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/</id>
+    <published>2017-02-24T10:26:58.000Z</published>
+    <updated>2017-02-24T10:27:46.164Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>参考：<a href="http://nicodjimenez.github.io/2014/08/08/lstm.html" target="_blank" rel="external">Nico’s Blog - Simple LSTM</a></li>
+<li>Github代码：<a href="https://github.com/Hzwcode/lstm" target="_blank" rel="external">https://github.com/Hzwcode/lstm</a></li>
+</ul>
+<hr>
+<p>前面我们介绍过CNN中普通的<a href="http://www.jianshu.com/p/408ab8177a53" target="_blank" rel="external">BP反向传播算法的推导</a>，但是在RNN（比如<a href="https://en.wikipedia.org/wiki/Long_short-term_memory" target="_blank" rel="external">LSTM</a>）中，反向传播被称作<a href="https://en.wikipedia.org/wiki/Backpropagation_through_time" target="_blank" rel="external">BPTT</a>（Back Propagation Through Time），它是和时间序列有关的。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-4ae3ab8b8426cdcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-113aeedc747a3628.gif?imageMogr2/auto-orient/strip" alt="Back Propagation Through Time"></p>
+<p>A few weeks ago I released some <a href="https://github.com/nicodjimenez/lstm" target="_blank" rel="external">code</a> on Github to help people understand how LSTM’s work at the implementation level. The forward pass is well explained elsewhere and is straightforward to understand, but I derived the backprop equations myself and the backprop code came without any explanation whatsoever. The goal of this post is to explain the so called <em>backpropagation through time</em> in the context of LSTM’s.</p>
+<p>If you feel like anything is confusing, please post a comment below or submit an issue on Github.</p>
+<p><strong>Note:</strong> this post assumes you understand the forward pass of an LSTM network, as this part is relatively simple. Please read this <a href="http://arxiv.org/abs/1506.00019" target="_blank" rel="external">great intro paper</a> if you are not familiar with this, as it contains a very nice intro to LSTM’s. I follow the same notation as this paper so I recommend reading having the tutorial open in a separate browser tab for easy reference while reading this post.</p>
+<blockquote>
+<h1 id="Introduction-Simple-LSTM"><a href="#Introduction-Simple-LSTM" class="headerlink" title="Introduction (Simple LSTM)"></a>Introduction (Simple LSTM)</h1></blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-4951e5c5352a88f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="LSTM Block"></p>
+<p>The forward pass of an LSTM node is defined as follows:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\\g(t)%20&amp;=&amp;%20\phi(W_{gx}%20x(t)%20+%20W_{gh}%20h(t-1)%20+%20b_{g})%20\\\\%20i(t)%20&amp;=&amp;%20\sigma(W_{ix}%20x(t)%20+%20W_{ih}%20h(t-1)%20+%20b_{i})%20\\\\%20f(t)%20&amp;=&amp;%20\sigma(W_{fx}%20x(t)%20+%20W_{fh}%20h(t-1)%20+%20b_{f})%20\\\\%20o(t)%20&amp;=&amp;%20\sigma(W_{ox}%20x(t)%20+%20W_{oh}%20h(t-1)%20+%20b_{o})%20\\\\%20s(t)%20&amp;=&amp;%20g(t)%20*%20i(t)%20+%20s(t-1)%20*%20f(t)%20\\\\%20h(t)%20&amp;=&amp;%20s(t)%20*%20o(t)%20\\" alt=""></p>
+<p>(<strong>注</strong>：这里最后一个式子<code>h(t)</code>的计算，普遍认为<code>s(t)</code>前面还有一个tanh激活，然后再乘以<code>o(t)</code>，不过 peephole LSTM paper中建议此处激活函数采用 <code>f(x) = x</code>，所以这里就没有用<code>tanh</code>（下同），可以参见<a href="https://en.wikipedia.org/wiki/Long_short-term_memory" target="_blank" rel="external">Wiki - Long_short-term_memory</a>上面所说的)</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-ad0508a2df64e3ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>By concatenating the <code>x(t)</code> and <code>h(t-1)</code> vectors as follows:</p>
+<p><img src="http://latex.codecogs.com/png.latex?x_c(t)%20=%20[x(t),%20h(t-1)]" alt=""></p>
+<p>we can rewrite parts of the above as follows:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\\g(t)%20&amp;=&amp;%20\phi(W_{g}%20x_c(t)%20+%20b_{g})%20\\\\%20i(t)%20&amp;=&amp;%20\sigma(W_{i}%20x_c(t)%20+%20b_{i})%20\\\\%20f(t)%20&amp;=&amp;%20\sigma(W_{f}%20x_c(t)%20+%20b_{f})%20\\\\%20o(t)%20&amp;=&amp;%20\sigma(W_{o}%20x_c(t)%20+%20b_{o})" alt=""></p>
+<p>Suppose we have a loss <code>l(t)</code> that we wish to minimize at every time step <code>t</code> that depends on the hidden layer <code>h</code> and the label <code>y</code> at the current time via a loss function <code>f</code>:</p>
+<p><img src="http://latex.codecogs.com/png.latex?l(t)%20=%20f(h(t),%20y(t))" alt=""></p>
+<p>where <code>f</code> can be any differentiable loss function, such as the Euclidean loss:</p>
+<p><img src="http://latex.codecogs.com/png.latex?l(t)%20=%20f(h(t),%20y(t))%20=%20\|%20h(t)%20-%20y(t)%20\|^2" alt=""></p>
+<p>Our ultimate goal in this case is to use gradient descent to minimize the loss <code>L</code> over an entire sequence of length <code>T</code>：</p>
+<p><img src="http://latex.codecogs.com/png.latex?L%20=%20\sum_{t=1}^{T}%20l(t)" alt=""></p>
+<p>Let’s work through the algebra of computing the loss gradient:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{dL}{dw}" alt=""></p>
+<p>where <code>w</code> is a scalar parameter of the model (for example it may be an entry in the matrix <code>W_gx</code>). Since the loss <code>l(t) = f(h(t),y(t))</code> only depends on the values of the hidden layer <code>h(t)</code> and the label <code>y(t)</code>, we have by the chain rule:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{dL}{dw}%20=%20\sum_{t%20=%201}^{T}%20\sum_{i%20=%201}^{M}%20\frac{dL}{dh_i(t)}\frac{dh_i(t)}{dw}" alt=""></p>
+<p>where <code>h_i(t)</code> is the scalar corresponding to the <code>i’th</code> memory cell’s hidden output and <code>M</code> is the total number of memory cells. Since the network propagates information forwards in time, changing <code>h_i(t)</code> will have no effect on the loss prior to time <code>t</code>, which allows us to write:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{dL}{dh_i(t)}%20=%20\sum_{s=1}^T%20\frac{dl(s)}{dh_i(t)}%20=%20\sum_{s=t}^T%20\frac{dl(s)}{dh_i(t)}" alt=""></p>
+<p>For notational convenience we introduce the variable <code>L(t)</code> that represents the cumulative loss from step tonwards:</p>
+<p><img src="http://latex.codecogs.com/png.latex?L(t)%20=%20\sum_{s=t}^{s=T}%20l(s)" alt=""></p>
+<p>such that <code>L(1)</code> is the loss for the entire sequence. This allows us to rewrite the above equation as:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{dL}{dh_i(t)}%20=%20\sum_{s=t}^T%20\frac{dl(s)}{dh_i(t)}%20=%20\frac{dL(t)}{dh_i(t)}" alt=""></p>
+<p>With this in mind, we can rewrite our gradient calculation as:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{dL}{dw}%20=%20\sum_{t%20=%201}^{T}%20\sum_{i%20=%201}^{M}%20\frac{dL(t)}{dh_i(t)}\frac{dh_i(t)}{dw}" alt=""></p>
+<p>Make sure you understand this last equation. The computation of <code>dh_i(t) / dw</code> follows directly follows from the forward propagation equations presented earlier. We now show how to compute <code>dL(t) / dh_i(t)</code> which is where the so called <strong><em>backpropagation through time</em></strong> comes into play.</p>
+<blockquote>
+<h1 id="Backpropagation-through-time-BPTT"><a href="#Backpropagation-through-time-BPTT" class="headerlink" title="Backpropagation through time (BPTT)"></a>Backpropagation through time (BPTT)</h1></blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-113aeedc747a3628.gif?imageMogr2/auto-orient/strip" alt="Back Propagation Through Time"></p>
+<p>This variable <code>L(t)</code> allows us to express the following recursion:</p>
+<p><img src="http://latex.codecogs.com/png.latex?L(t)%20=%20\begin{cases}%20l(t)%20+%20L(t+1)%20&amp;%20\text{if}%20\,%20t%20%3C%20T%20\\%20l(t)%20&amp;%20\text{if}%20\,%20t%20=%20T%20\end{cases}" alt=""></p>
+<p>Hence, given activation <code>h(t)</code> of an LSTM node at time <code>t</code>, we have that:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{dL(t)}{dh(t)}%20=%20\frac{dl(t)}{dh(t)}%20+%20\frac{dL(t+1)}{dh(t)}" alt=""></p>
+<p>Now, we know where the first term on the right hand side <code>dl(t) / dh(t)</code> comes from: it’s simply the elementwise derivative of the loss <code>l(t)</code> with respect to the activations <code>h(t)</code> at time <code>t</code>. The second term <code>dL(t+1) / dh(t)</code> is where the recurrent nature of LSTM’s shows up. It shows that the we need the <em>next</em> node’s derivative information in order to compute the current <em>current</em> node’s derivative information. Since we will ultimately need to compute <code>dL(t) / dh(t)</code> for all <code>t = 1, 2, ... , T</code>, we start by computing</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{dL(T)}{dh(T)}%20=%20\frac{dl(T)}{dh(T)}" alt=""></p>
+<p>and work our way backwards through the network. Hence the term <em>backpropagation through time</em>. With these intuitions in place, we jump into the code.</p>
+<blockquote>
+<h1 id="Code-Talk-is-cheap-Show-me-the-code"><a href="#Code-Talk-is-cheap-Show-me-the-code" class="headerlink" title="Code (Talk is cheap, Show me the code)"></a>Code (Talk is cheap, Show me the code)</h1></blockquote>
+<p>We now present the code that performs the backprop pass through a single node at time <code>1 &lt;= t &lt;= T</code>. The code takes as input:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-98208ee1ecaa495f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>And computes:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-28f4a30188b7dd3e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>whose values will need to be propagated backwards in time. The code also adds derivatives to:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-8c47979fe8d86be1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>since recall that we must sum the derivatives from each time step:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{dL}{dw}%20=%20\sum_{t%20=%201}^{T}%20\sum_{i%20=%201}^{M}%20\frac{dL(t)}{dh_i(t)}\frac{dh_i(t)}{dw}" alt=""></p>
+<p>Also, note that we use:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-34424089b87efa6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>where we recall that <code>X_c(t) = [x(t), h(t-1)]</code>. Without any further due, the code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">top_diff_is</span><span class="params">(self, top_diff_h, top_diff_s)</span>:</span></div><div class="line">    <span class="comment"># notice that top_diff_s is carried along the constant error carousel</span></div><div class="line">    ds = self.state.o * top_diff_h + top_diff_s</div><div class="line">    do = self.state.s * top_diff_h</div><div class="line">    di = self.state.g * ds</div><div class="line">    dg = self.state.i * ds</div><div class="line">    df = self.s_prev * ds</div><div class="line"></div><div class="line">    <span class="comment"># diffs w.r.t. vector inside sigma / tanh function</span></div><div class="line">    di_input = (<span class="number">1.</span> - self.state.i) * self.state.i * di</div><div class="line">    df_input = (<span class="number">1.</span> - self.state.f) * self.state.f * df</div><div class="line">    do_input = (<span class="number">1.</span> - self.state.o) * self.state.o * do</div><div class="line">    dg_input = (<span class="number">1.</span> - self.state.g ** <span class="number">2</span>) * dg</div><div class="line"></div><div class="line">    <span class="comment"># diffs w.r.t. inputs</span></div><div class="line">    self.param.wi_diff += np.outer(di_input, self.xc)</div><div class="line">    self.param.wf_diff += np.outer(df_input, self.xc)</div><div class="line">    self.param.wo_diff += np.outer(do_input, self.xc)</div><div class="line">    self.param.wg_diff += np.outer(dg_input, self.xc)</div><div class="line">    self.param.bi_diff += di_input</div><div class="line">    self.param.bf_diff += df_input</div><div class="line">    self.param.bo_diff += do_input</div><div class="line">    self.param.bg_diff += dg_input</div><div class="line"></div><div class="line">    <span class="comment"># compute bottom diff</span></div><div class="line">    dxc = np.zeros_like(self.xc)</div><div class="line">    dxc += np.dot(self.param.wi.T, di_input)</div><div class="line">    dxc += np.dot(self.param.wf.T, df_input)</div><div class="line">    dxc += np.dot(self.param.wo.T, do_input)</div><div class="line">    dxc += np.dot(self.param.wg.T, dg_input)</div><div class="line"></div><div class="line">    <span class="comment"># save bottom diffs</span></div><div class="line">    self.state.bottom_diff_s = ds * self.state.f</div><div class="line">    self.state.bottom_diff_x = dxc[:self.param.x_dim]</div><div class="line">    self.state.bottom_diff_h = dxc[self.param.x_dim:]</div></pre></td></tr></table></figure>
+<blockquote>
+<h1 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h1></blockquote>
+<p>The forward propagation equations show that modifying <code>s(t)</code> affects the loss <code>L(t)</code> by directly changing the values of <code>h(t)</code> as well as <code>h(t+1)</code>. However, modifying <code>s(t)</code> affects <code>L(t+1)</code> only by modifying <code>h(t+1)</code>. Therefore, by the chain rule:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\\\frac{dL(t)}{ds_i(t)}%20=%20\frac{dL(t)}{dh_i(t)}%20\frac{dh_i(t)}{ds_i(t)}%20+%20\frac{dL(t)}{dh_i(t+1)}%20\frac{dh_i(t+1)}{ds_i(t)}%20\\\\\\=%20\frac{dL(t)}{dh_i(t)}%20\frac{dh_i(t)}{ds_i(t)}%20+%20\frac{dL(t+1)}{dh_i(t+1)}%20\frac{dh_i(t+1)}{ds_i(t)}%20\\\\\\=%20\frac{dL(t)}{dh_i(t)}%20\frac{dh_i(t)}{ds_i(t)}%20+%20\frac{dL(t+1)}{ds_i(t)}%20\\\\\\%20=%20\frac{dL(t)}{dh_i(t)}%20\frac{dh_i(t)}{ds_i(t)}%20+%20[\texttt{top\_diff\_s}]_i%20\\" alt=""></p>
+<p>Since the forward propagation equations state:</p>
+<p><img src="http://latex.codecogs.com/png.latex?h(t)%20=%20s(t)%20*%20o(t)" alt=""></p>
+<p>we get that:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{dL(t)}{dh_i(t)}%20*%20\frac{dh_i(t)}{ds_i(t)}%20=%20o_i(t)%20*%20[\texttt{top\_diff\_h}]_i" alt=""></p>
+<p>Putting all this together we have:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ds = self.state.o * top_diff_h + top_diff_s</div></pre></td></tr></table></figure>
+<p>The rest of the equations should be straightforward to derive, please let me know if anything is unclear.</p>
+<hr>
+<blockquote>
+<h1 id="Test-LSTM-Network"><a href="#Test-LSTM-Network" class="headerlink" title="Test  LSTM Network"></a>Test  LSTM Network</h1></blockquote>
+<p>此 <a href="https://github.com/Hzwcode/lstm" target="_blank" rel="external">代码</a> 其是通过自己实现 lstm 网络来逼近一个序列，y_list = [-0.5, 0.2, 0.1, -0.5]，测试结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line">cur iter:  0</div><div class="line">y_pred[0] : 0.041349</div><div class="line">y_pred[1] : 0.069304</div><div class="line">y_pred[2] : 0.116993</div><div class="line">y_pred[3] : 0.165624</div><div class="line">loss:  0.753483886253</div><div class="line">cur iter:  1</div><div class="line">y_pred[0] : -0.223297</div><div class="line">y_pred[1] : -0.323066</div><div class="line">y_pred[2] : -0.394514</div><div class="line">y_pred[3] : -0.433984</div><div class="line">loss:  0.599065083953</div><div class="line">cur iter:  2</div><div class="line">y_pred[0] : -0.140715</div><div class="line">y_pred[1] : -0.181836</div><div class="line">y_pred[2] : -0.219436</div><div class="line">y_pred[3] : -0.238904</div><div class="line">loss:  0.445095565699</div><div class="line">cur iter:  3</div><div class="line">y_pred[0] : -0.138010</div><div class="line">y_pred[1] : -0.166091</div><div class="line">y_pred[2] : -0.203394</div><div class="line">y_pred[3] : -0.233627</div><div class="line">loss:  0.428061605701</div><div class="line">cur iter:  4</div><div class="line">y_pred[0] : -0.139986</div><div class="line">y_pred[1] : -0.157368</div><div class="line">y_pred[2] : -0.195655</div><div class="line">y_pred[3] : -0.237612</div><div class="line">loss:  0.413581711096</div><div class="line">cur iter:  5</div><div class="line">y_pred[0] : -0.144410</div><div class="line">y_pred[1] : -0.151859</div><div class="line">y_pred[2] : -0.191676</div><div class="line">y_pred[3] : -0.246137</div><div class="line">loss:  0.399770442382</div><div class="line">cur iter:  6</div><div class="line">y_pred[0] : -0.150306</div><div class="line">y_pred[1] : -0.147921</div><div class="line">y_pred[2] : -0.189501</div><div class="line">y_pred[3] : -0.257119</div><div class="line">loss:  0.386136380384</div><div class="line">cur iter:  7</div><div class="line">y_pred[0] : -0.157119</div><div class="line">y_pred[1] : -0.144659</div><div class="line">y_pred[2] : -0.188067</div><div class="line">y_pred[3] : -0.269322</div><div class="line">loss:  0.372552465753</div><div class="line">cur iter:  8</div><div class="line">y_pred[0] : -0.164490</div><div class="line">y_pred[1] : -0.141537</div><div class="line">y_pred[2] : -0.186737</div><div class="line">y_pred[3] : -0.281914</div><div class="line">loss:  0.358993892096</div><div class="line">cur iter:  9</div><div class="line">y_pred[0] : -0.172187</div><div class="line">y_pred[1] : -0.138216</div><div class="line">y_pred[2] : -0.185125</div><div class="line">y_pred[3] : -0.294326</div><div class="line">loss:  0.345449256686</div><div class="line">cur iter:  10</div><div class="line">y_pred[0] : -0.180071</div><div class="line">y_pred[1] : -0.134484</div><div class="line">y_pred[2] : -0.183013</div><div class="line">y_pred[3] : -0.306198</div><div class="line">loss:  0.331888922037</div><div class="line"></div><div class="line">……</div><div class="line"></div><div class="line">cur iter:  97</div><div class="line">y_pred[0] : -0.500351</div><div class="line">y_pred[1] : 0.201185</div><div class="line">y_pred[2] : 0.099026</div><div class="line">y_pred[3] : -0.499154</div><div class="line">loss:  3.1926009167e-06</div><div class="line">cur iter:  98</div><div class="line">y_pred[0] : -0.500342</div><div class="line">y_pred[1] : 0.201122</div><div class="line">y_pred[2] : 0.099075</div><div class="line">y_pred[3] : -0.499190</div><div class="line">loss:  2.88684626031e-06</div><div class="line">cur iter:  99</div><div class="line">y_pred[0] : -0.500331</div><div class="line">y_pred[1] : 0.201063</div><div class="line">y_pred[2] : 0.099122</div><div class="line">y_pred[3] : -0.499226</div><div class="line">loss:  2.61076360677e-06</div></pre></td></tr></table></figure>
+<p>可以看出迭代100轮，最后Loss在不断收敛，并且逐渐逼近了预期序列：y_list = [-0.5, 0.2, 0.1, -0.5]。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="http://www.jianshu.com/p/408ab8177a53" target="_blank" rel="external">深度学习 — 反向传播(BP)理论推导 (zhwhong)</a></li>
+<li><a href="http://nicodjimenez.github.io/2014/08/08/lstm.html" target="_blank" rel="external">Nico’s Blog：Simple LSTM</a></li>
+<li><a href="https://github.com/Hzwcode/lstm" target="_blank" rel="external">Github仓库：https://github.com/Hzwcode/lstm</a></li>
+<li><a href="http://www.wildml.com/2015/10/recurrent-neural-networks-tutorial-part-3-backpropagation-through-time-and-vanishing-gradients/" target="_blank" rel="external">RECURRENT NEURAL NETWORKS TUTORIAL, PART 3 – BACKPROPAGATION THROUGH TIME AND VANISHING GRADIENTS</a></li>
+<li><a href="http://www.jianshu.com/p/c930d61e1f16" target="_blank" rel="external">[福利] 深入理解 RNNs &amp; LSTM 网络学习资料</a></li>
+<li><a href="http://www.jianshu.com/p/c7e3f417641c" target="_blank" rel="external">关于简书中如何编辑Latex数学公式</a></li>
+</ul>
+<hr>
+<p>(喜欢的可以点一下红心，转载请注明出处，谢谢！)</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;参考：&lt;a href=&quot;http://nicodjimenez.github.io/2014/08/08/lstm.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Nico’s Blog - Simple LSTM&lt;/a&gt;&lt;/li&gt;
+&lt;
+    
+    </summary>
+    
+      <category term="machine learning" scheme="https://Hzwcode.github.io/categories/machine-learning/"/>
+    
+    
+      <category term="Machine Learning" scheme="https://Hzwcode.github.io/tags/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>深度学习 — 反向传播(BP)理论推导</title>
+    <link href="https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/"/>
+    <id>https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/</id>
+    <published>2017-02-24T10:23:35.000Z</published>
+    <updated>2017-02-24T10:25:07.911Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li><a href="http://www.jianshu.com/p/c7e3f417641c" target="_blank" rel="external">关于简书中如何编辑Latex数学公式</a></li>
+<li><a href="http://www.jianshu.com/p/2aca6e8ac7c8" target="_blank" rel="external">[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</a></li>
+</ul>
+<hr>
+<p>【知识预备】： <a href="http://deeplearning.stanford.edu/wiki/index.php/%E5%8F%8D%E5%90%91%E4%BC%A0%E5%AF%BC%E7%AE%97%E6%B3%95" target="_blank" rel="external">UFLDL教程 - 反向传导算法</a></p>
+<p>首先我们不讲数学，先上图解，看完图不懂再看后面：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-be0f5712599bf47b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-190148f7a5f6d59a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<hr>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-9c0e2a3e41e50184.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-67d7988a4783c6a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-6c9b26999076e229.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-25ed873c3fd53595.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-2af819d45509d1e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-40c7e1c9c6f8cd66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<hr>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-73012c1bbefe6fd4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-d95cd8caa246cfd5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-7b7e599bf97627ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-ef5d956b6c35c904.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-e801483bf206b984.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-74eacee144d4ac4b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<hr>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-7ad6f7e9368f4c91.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-6cb99673d9ba0fa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-7420efdf411bbf82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-ce90b252f0901bc6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-d830f54f90ba8f24.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-84cef5edf507cd73.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<hr>
+<h1 id="“BP”-Math-Principle"><a href="#“BP”-Math-Principle" class="headerlink" title="“BP” Math Principle"></a>“BP” Math Principle</h1><p>======================================================================<br><strong>Example</strong>：下面看一个简单的三层神经网络模型，一层输入层，一层隐藏层，一层输出层。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-4a6d84a2e3f81c87.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>注：定义输入分别为x1, x2（对应图中的i1，i2），期望输出为y1，y2，假设logistic函数采用sigmoid函数:</p>
+<p><img src="http://latex.codecogs.com/png.latex?y%20=%20f(x)=sigmoid(x)%20=\frac{1}{1%20+%20e^{-x}}" alt=""></p>
+<p>易知：<br><img src="http://latex.codecogs.com/png.latex?f%27(x)%20=%20f(x)%20*%20(1%20-%20f(x))" alt=""></p>
+<p>下面开始正式分析(纯手打！！！)。</p>
+<p>======================================================================</p>
+<h1 id="前向传播"><a href="#前向传播" class="headerlink" title="前向传播"></a><strong>前向传播</strong></h1><p>首先分析神经元h1： </p>
+<p><img src="http://latex.codecogs.com/png.latex?input_{(h1)}%20=%20w1%20*%20x1%20+%20w2%20*%20x2%20+%20b1" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?output_{(h1)}%20=%20f(input_{(h1)})%20=%20\frac{1}{1%20+%20e^{-(w1*x1+w2*x2+b1)}}" alt=""></p>
+<p>同理可得神经元h2：<br><img src="http://latex.codecogs.com/png.latex?input_{(h2)}%20=%20w3%20*%20x1%20+%20w4%20*%20x2%20+%20b1" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?output_{(h2)}%20=%20f(input_{(h2)})%20=%20\frac{1}{1%20+%20e^{-(w3*x1+w4*x2+b1)}}" alt=""></p>
+<p>对输出层神经元重复这个过程，使用隐藏层神经元的输出作为输入。这样就能给出o1，o2的输入输出：<br><img src="http://latex.codecogs.com/png.latex?input_{(o1)}%20=%20w5%20*%20output_{(h1)}%20+%20w6%20*%20output_{(h2)}%20+%20b2" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?output_{(o1)}%20=%20f(input_{(o1)})" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?input_{(o2)}%20=%20w7%20*%20output_{(h1)}%20+%20w8%20*%20output_{(h2)}%20+%20b2" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?output_{(o2)}%20=%20f(input_{(o2)})" alt=""></p>
+<p>现在开始统计所有误差，如下：<br><img src="http://latex.codecogs.com/png.latex?J_{total}%20=%20\sum%20\frac{1}{2}(output%20-%20target)^2%20=%20J_{o1}+J_{o2}" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?J_{o1}%20=%20\frac{1}{2}(output(o1)-y1)^2" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?J_{o2}%20=%20\frac{1}{2}(output(o2)-y2)^2" alt=""></p>
+<p>======================================================================</p>
+<h1 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a><strong>反向传播</strong></h1><h2 id="【输出层】"><a href="#【输出层】" class="headerlink" title="【输出层】"></a><strong>【输出层】</strong></h2><p>对于w5，想知道其改变对总误差有多少影响，于是求Jtotal对w5的偏导数，如下：<br><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{total}}{\partial%20w5}=\frac{\partial%20J_{total}}{\partial%20output_{(o1)}}*\frac{\partial%20output_{(o1)}}{\partial%20input_{(o1)}}*\frac{\partial%20input_{(o1)}}{\partial%20w5}" alt=""></p>
+<p>分别求每一项：<br><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{total}}{\partial%20output_{(o1)}}=\frac{\partial%20J_{o1}}{\partial%20output_{(o1)}}=output_{(o1)}-y_1" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20output_{(o1)}}{\partial%20input_{(o1)}}%20=%20f%27(input_{(o1)})=output_{(o1)}*(1%20-%20output_{(o1)})" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20input_{(o1)}}{\partial%20w5}=\frac{\partial%20(w5%20*%20output_{(h1)}%20+%20w6%20*%20output_{(h2)}%20+%20b2)}{\partial%20w5}=output_{(h1)}" alt=""></p>
+<p>于是有Jtotal对w5的偏导数：<br><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{total}}{\partial%20w5}=(output_{(o1)}-y1)*[output_{(o1)}*(1%20-%20output_{(o1)})]*output_{(h1)}" alt=""></p>
+<p>据此更新权重w5，有：<br><img src="http://latex.codecogs.com/png.latex?w5^+%20=%20w5%20-%20\eta*\frac{\partial%20J_{total}}{\partial%20w5}" alt=""></p>
+<p>同理可以更新参数w6，w7，w8。<br>在有新权重导入隐藏层神经元（即，当继续下面的反向传播算法时，使用原始权重，而不是更新的权重）之后，执行神经网络中的实际更新。</p>
+<h2 id="【隐藏层】"><a href="#【隐藏层】" class="headerlink" title="【隐藏层】"></a><strong>【隐藏层】</strong></h2><p><img src="http://upload-images.jianshu.io/upload_images/145616-4f4ed88c60ee15e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>对于w1，想知道其改变对总误差有多少影响，于是求Jtotal对w1的偏导数，如下：<br><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{total}}{\partial%20w1}=\frac{\partial%20J_{total}}{\partial%20output_{(h1)}}*\frac{\partial%20output_{(h1)}}{\partial%20input_{(h1)}}*\frac{\partial%20input_{(h1)}}{\partial%20w1}" alt=""></p>
+<p>分别求每一项：</p>
+<hr>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{total}}{\partial%20output_{(h1)}}=\frac{\partial%20J_{o1}}{\partial%20output_{(h1)}}+\frac{\partial%20J_{o2}}{\partial%20output_{(h1)}}" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{o1}}{\partial%20output_{(h1)}}=\frac{\partial%20J_{o1}}{\partial%20output_{(o1)}}*\frac{\partial%20output_{(o1)}}{\partial%20input_{(o1)}}*\frac{\partial%20input_{(o1)}}{\partial%20output_{(h1)}}" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?=(output_{(o1)}-y1)*[output_{(o1)}*(1%20-%20output_{(o1)})]*w5" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{o2}}{\partial%20output_{(h1)}}=\frac{\partial%20J_{o2}}{\partial%20output_{(o2)}}*\frac{\partial%20output_{(o2)}}{\partial%20input_{(o2)}}*\frac{\partial%20input_{(o2)}}{\partial%20output_{(h1)}}" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?=(output_{(o2)}-y2)*[output_{(o2)}*(1%20-%20output_{(o2)})]*w7" alt=""></p>
+<hr>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20output_{(h1)}}{\partial%20input_{(h1)}}%20=%20f%27(input_{(h1)})=output_{(h1)}*(1%20-%20output_{(h1)})" alt=""></p>
+<hr>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20input_{(h1)}}{\partial%20w1}=\frac{\partial%20(w1%20*%20x1%20+%20w2%20*%20x2%20+%20b1)}{\partial%20w1}=x1" alt=""></p>
+<p>于是有Jtotal对w1的偏导数：</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{total}}{\partial%20w1}=\{(output_{(o1)}-y1)*[output_{(o1)}*(1%20-%20output_{(o1)})]*w5" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?+%20(output_{(o2)}-y2)*[output_{(o2)}*(1%20-%20output_{(o2)})]*w7\}*" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?[output_{(h1)}*(1%20-%20output_{(h1)})]*x1" alt=""></p>
+<p>据此更新w1，有：</p>
+<p><img src="http://latex.codecogs.com/png.latex?w1^+%20=%20w1%20-%20\eta*\frac{\partial%20J_{total}}{\partial%20w1}" alt=""></p>
+<p>同理可以更新参数w2，w3，w4。</p>
+<p>======================================================================</p>
+<h1 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a><strong>应用实例</strong></h1><p>假设对于上述简单三层网络模型，按如下方式初始化权重和偏置：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-c8c0d034ff7a0c4f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>根据上述推导的公式：<br>由</p>
+<p><img src="http://latex.codecogs.com/png.latex?input_{(h1)}%20=%20w1%20*%20x1%20+%20w2%20*%20x2%20+%20b1" alt=""></p>
+<p>得到：<br>input(h1) = 0.15 * 0.05 + 0.20 * 0.10 + 0.35 = 0.3775<br>output(h1) = f(input(h1)) = 1 / (1 + e^(-input(h1))) = 1 / (1 + e^-0.3775) = 0.593269992</p>
+<p>同样得到：<br>input(h2) = 0.25 * 0.05 + 0.30 * 0.10 + 0.35 = 0.3925<br>output(h2) = f(input(h2)) = 1 / (1 + e^(-input(h2))) = 1 / (1 + e^-0.3925) = 0.596884378</p>
+<p>对输出层神经元重复这个过程，使用隐藏层神经元的输出作为输入。这样就能给出o1的输出：<br>input(o1) = w5 * output(h1) + w6 * (output(h2)) + b2 = 0.40 * 0.593269992 + 0.45 * 0.596884378 + 0.60 = 1.105905967<br>output(o1) = f(input(o1)) = 1 / (1 + e^-1.105905967) = 0.75136507</p>
+<p>同理output(o2) = 0.772928465</p>
+<p>开始统计所有误差，求代价函数：<br>Jo1 = 1/2 * (0.75136507 - 0.01)^2 = 0.298371109<br>Jo2 = 1/2 * (0.772928465 - 0.99)^2 = 0.023560026</p>
+<p><strong>综合所述</strong>，可以得到总误差为：Jtotal = Jo1 + Jo2 = 0.321931135</p>
+<p>然后反向传播，根据公式<br><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{total}}{\partial%20w5}=(output_{(o1)}-y1)*[output_{(o1)}*(1%20-%20output_{(o1)})]*output_{(h1)}" alt=""></p>
+<p>求出 Jtotal对w5的偏导数为:<br>a = (0.75136507 - 0.01)*0.75136507*(1-0.75136507)*0.593269992 = 0.082167041</p>
+<p>为了减少误差，然后从当前的权重减去这个值（可选择乘以一个学习率，比如设置为0.5），得：<br>w5+ = w5 - eta * a = 0.40 - 0.5 * 0.082167041 = 0.35891648</p>
+<p>同理可以求出：<br>w6+ = 0.408666186<br>w7+ = 0.511301270<br>w8+ = 0.561370121</p>
+<p>对于隐藏层，更新w1，求Jtotal对w1的偏导数：<br><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{total}}{\partial%20w1}=\{(output_{(o1)}-y1)*[output_{(o1)}*(1%20-%20output_{(o1)})]*w5" alt=""><br><img src="http://latex.codecogs.com/png.latex?+%20(output_{(o2)}-y2)*[output_{(o2)}*(1%20-%20output_{(o2)})]*w7\}*" alt=""><br><img src="http://latex.codecogs.com/png.latex?[output_{(h1)}*(1%20-%20output_{(h1)})]*x1" alt=""></p>
+<p>偏导数为：<br>b = (tmp1 + tmp2) * tmp3</p>
+<p>tmp1 = (0.75136507 - 0.01) * [0.75136507 * (1 - 0.75136507)] * 0.40 = 0.74136507 * 0.186815602 * 0.40 = 0.055399425<br>tmp2 = -0.019049119<br>tmp3 = 0.593269992 * (1 - 0.593269992) * 0.05 = 0.012065035</p>
+<p>于是b = 0.000438568</p>
+<p>更新权重w1为：<br>w1+ = w1 - eta * b = 0.15 - 0.5 * 0.000438568 = 0.149780716</p>
+<p>同样可以求得：<br>w2+ = 0.19956143<br>w3+ = 0.24975114<br>w4+ = 0.29950229</p>
+<p>最后，更新了所有的权重！ 当最初前馈传播时输入为0.05和0.1，网络上的误差是0.298371109。 在第一轮反向传播之后，总误差现在下降到0.291027924。 它可能看起来不太多，但是在重复此过程10,000次之后。例如，错误倾斜到0.000035085。<br>在这一点上，当前馈输入为0.05和0.1时，两个输出神经元产生0.015912196（相对于目标为0.01）和0.984065734（相对于目标为0.99），已经很接近了O(∩_∩)O~~</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/23270674" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/23270674</a></li>
+<li><a href="http://galaxy.agh.edu.pl/~vlsi/AI/backp_t_en/backprop.html" target="_blank" rel="external">Principles of training multi-layer neural network using backpropagation</a></li>
+<li><a href="http://www.jianshu.com/p/2aca6e8ac7c8" target="_blank" rel="external">[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</a></li>
+<li><a href="http://www.jianshu.com/p/c7e3f417641c" target="_blank" rel="external">简书中如何编辑Latex数学公式</a></li>
+</ul>
+<hr>
+<p>(转载请注明出处： <a href="http://www.jianshu.com/p/408ab8177a53" target="_blank" rel="external">深度学习 — 反向传播(BP)理论推导(zhwhong)</a>)</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/c7e3f417641c&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;关于简书中如何编辑Latex数学公式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.
+    
+    </summary>
+    
+      <category term="machine learning" scheme="https://Hzwcode.github.io/categories/machine-learning/"/>
+    
+    
+      <category term="Machine Learning" scheme="https://Hzwcode.github.io/tags/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Detection] CNN 之 &quot;物体检测&quot; 篇</title>
+    <link href="https://Hzwcode.github.io/2017/02/24/Detection-CNN/"/>
+    <id>https://Hzwcode.github.io/2017/02/24/Detection-CNN/</id>
+    <published>2017-02-24T10:20:50.000Z</published>
+    <updated>2017-02-24T10:22:48.399Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h1><ul>
+<li><a href="http://arxiv.org/abs/1311.2524" target="_blank" rel="external">RCNN</a> </li>
+<li><a href="http://arxiv.org/abs/1504.08083" target="_blank" rel="external">Fast RCNN</a> </li>
+<li><a href="http://arxiv.org/abs/1506.01497" target="_blank" rel="external">Faster RCNN</a> </li>
+<li><a href="http://arxiv.org/pdf/1605.06409v1.pdf" target="_blank" rel="external">R-FCN</a></li>
+<li><a href="http://arxiv.org/abs/1506.02640" target="_blank" rel="external">YOLO</a> </li>
+<li><a href="http://www.cs.unc.edu/~wliu/papers/ssd.pdf" target="_blank" rel="external">SSD</a> </li>
+<li>NMS</li>
+<li>xywh VS xyxy</li>
+</ul>
+<hr>
+<h1 id="RCNN"><a href="#RCNN" class="headerlink" title="RCNN"></a>RCNN</h1><p><a href="http://arxiv.org/abs/1311.2524" target="_blank" rel="external">Rich feature hierarchies for accurate object detection and semantic segmentation</a> </p>
+<p>早期，使用窗口扫描进行物体识别，计算量大。 RCNN去掉窗口扫描，用聚类方式，对图像进行分割分组，得到多个侯选框的层次组。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-f4c5c9a89c842dcb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ul>
+<li>原始图片通过Selective Search提取候选框，约有2k个</li>
+<li>侯选框缩放成固定大小</li>
+<li>经过CNN</li>
+<li>经两个全连接后，分类</li>
+</ul>
+<blockquote>
+<p>拓展阅读：<a href="http://blog.csdn.net/hjimce/article/details/50187029" target="_blank" rel="external">基于R-CNN的物体检测-CVPR 2014</a></p>
+</blockquote>
+<h1 id="Fast-RCNN"><a href="#Fast-RCNN" class="headerlink" title="Fast RCNN"></a>Fast RCNN</h1><p><a href="http://arxiv.org/abs/1504.08083" target="_blank" rel="external">Fast R-CNN</a> </p>
+<p>RCNN中有CNN重复计算，Fast RCNN则去掉重复计算，并微调选框位置。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-1d610559358abecf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ul>
+<li>整图经过CNN，得到特征图</li>
+<li>提取域候选框</li>
+<li>把候选框投影到特征图上，Pooling采样成固定大小</li>
+<li>经两个全连接后，分类与微调选框位置</li>
+</ul>
+<h1 id="Faster-RCNN"><a href="#Faster-RCNN" class="headerlink" title="Faster RCNN"></a>Faster RCNN</h1><p><a href="http://arxiv.org/abs/1506.01497" target="_blank" rel="external">Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks</a> </p>
+<p>提取候选框运行在CPU上，耗时2s，效率低下。<br>Faster RCNN使用CNN来预测候选框。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-8b71602ad793eed9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ul>
+<li>整图经过CNN，得到特征图</li>
+<li>经过核为 3×3×256 的卷积，每个点上预测k个anchor box是否是物体，并微调anchor box的位置</li>
+<li>提取出物体框后，采用Fast RCNN同样的方式，进行分类</li>
+<li>选框与分类共用一个CNN网络</li>
+</ul>
+<p>anchor box的设置应比较好的覆盖到不同大小区域，如下图:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-833ff24cf66a7fd6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>一张1000×600的图片，大概可以得到20k个anchor box(60×40×9)。</p>
+<h1 id="R-FCN"><a href="#R-FCN" class="headerlink" title="R-FCN"></a>R-FCN</h1><p><a href="http://arxiv.org/pdf/1605.06409v1.pdf" target="_blank" rel="external">R-FCN: Object Detection via Region-based Fully Convolutional Networks</a> </p>
+<blockquote>
+<p>论文翻译详见：<a href="http://www.jianshu.com/p/db1b74770e52" target="_blank" rel="external">[译] 基于R-FCN的物体检测 (zhwhong)</a></p>
+</blockquote>
+<p>RCNN系列(RCNN、Fast RCNN、Faster RCNN)中，网络由两个子CNN构成。在图片分类中，只需一个CNN，效率非常高。所以物体检测是不是也可以只用一个CNN？ </p>
+<p>图片分类需要兼容形变，而物体检测需要利用形变，如何平衡？ </p>
+<p>R-FCN利用在CNN的最后进行位置相关的特征pooling来解决以上两个问题。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-8eb1556488b4fdc2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>经普通CNN后，做有 k^2(C+1) 个 channel 的卷积，生成位置相关的特征(position-sensitive score maps)。</p>
+<p>C 表示分类数，加 1 表示背景，k 表示后续要pooling 的大小，所以生成 k^2 倍的channel，以应对后面的空间pooling。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-0bcb1e46be5e24c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>普通CNN后，还有一个RPN(Region Proposal Network)，生成候选框。</p>
+<p>假设一个候选框大小为 w×h，将它投影在位置相关的特征上，并采用average-pooling的方式生成一个 k×k×k^2(C+1) 的块(与Fast RCNN一样)，再采用空间相关的pooling(k×k平面上每一个点取channel上对应的部分数据)，生成 k×k×(C+1)的块，最后再做average-pooling生成 C+1 的块，最后做softmax生成分类概率。</p>
+<p>类似的，RPN也可以采用空间pooling的结构，生成一个channel为 4k^2的特征层。</p>
+<p>空间pooling的具体操作可以参考下面。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-4411b2baa05764f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>训练与SSD相似，训练时拿来做lost计算的点取一个常数，如128。 除去正点，剩下的所有使用概率最高的负点。</p>
+<h1 id="YOLO"><a href="#YOLO" class="headerlink" title="YOLO"></a>YOLO</h1><p><a href="http://arxiv.org/abs/1506.02640" target="_blank" rel="external">You Only Look Once: Unified, Real-Time Object Detection</a> </p>
+<p>Faster RCNN需要对20k个anchor box进行判断是否是物体，然后再进行物体识别，分成了两步。 YOLO则把物体框的选择与识别进行了结合，一步输出，即变成”You Only Look Once”。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-881c58173e5fab4b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ul>
+<li>把原始图片缩放成448×448大小</li>
+<li>运行单个CNN</li>
+<li>计算物体中心是否落入单元格、物体的位置、物体的类别</li>
+</ul>
+<p>模型如下:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-148936c1f19644a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ul>
+<li>把缩放成统一大小的图片分割成S×S的单元格</li>
+<li>每个单元格输出B个矩形框(冗余设计)，包含框的位置信息(x, y, w, h)与物体的Confidence</li>
+<li>每个单元格再输出C个类别的条件概率P(Class∣Object)</li>
+<li>最终输出层应有S×S×(B∗5+C)个单元</li>
+<li>x, y 是每个单元格的相对位置</li>
+<li>w, h 是整图的相对大小</li>
+</ul>
+<p>Conficence定义如下:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-772c5abc28591971.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>在原论文中，S = 7，B = 2，C = 20，所以输出的单元数为7×7×30。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-a8d08b9a46de7f9f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>代价函数：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-7f2b9e54c3730d5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>其中 <code>λ_coord=5</code>，<code>λ_noobj=0.5</code>。<br>一般，w与 h 不是在 [0,1]上的均匀分布，偏小，所以开方。</p>
+<p><strong>注: 开方的解释是我自己的估计，可能不对。</strong></p>
+<h1 id="SSD"><a href="#SSD" class="headerlink" title="SSD"></a>SSD</h1><p><a href="http://www.cs.unc.edu/~wliu/papers/ssd.pdf" target="_blank" rel="external">SSD: Single Shot MultiBox Detector</a> </p>
+<p>YOLO在 7×7 的框架下识别物体，遇到大量小物体时，难以处理。<br>SSD则在不同层级的feature map下进行识别，能够覆盖更多范围。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-f481d203b810dba3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>假设在 m 层 feature map 上进行识别，则第 k 层的基本比例为</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-e1ea76b11f39c48a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>比如 s_min=0.2，s_max=0.95，表示整张图片识别物体所占比最小 0.2，最大 0.95。</p>
+<p>在基本比例上，再取多个长宽比，令 a={1, 2, 3, 1/2, 1/3}，长宽分别为</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-d79012d45d6f57a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>Match策略上，取ground truth与以上生成的格子重叠率大于0.5的。</p>
+<h1 id="SSD-vs-YOLO"><a href="#SSD-vs-YOLO" class="headerlink" title="SSD vs YOLO"></a>SSD vs YOLO</h1><p><img src="http://upload-images.jianshu.io/upload_images/145616-70f2fd38db66b76e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>位置采用Smooth L1 Regression，分类采用Softmax。<br>代价函数为：</p>
+<p><img src="http://latex.codecogs.com/png.latex?L%20=%20L_{conf}(x,%20c)%20+%20\alpha%20\cdot%20L_{loc}(c,%20l,%20g))" alt=""></p>
+<p>x  表示类别输出，c 表示目标分类，l 表示位置输出，g 表示目标位置, α是比例常数，可取1。<br>训练过程中负点远多于正点，所以只取负点中，概率最大的几个，数量与正点成 3:1 。</p>
+<h1 id="NMS"><a href="#NMS" class="headerlink" title="NMS"></a>NMS</h1><p>以上方法，同一物体可能有多个预测值。<br>可用NMS(Non-maximum suppression，非极大值抑制)来去重。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-ba89e4a3fde65974.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>如上图所示，一共有6个识别为人的框，每一个框有一个置信率。<br>现在需要消除多余的:</p>
+<ul>
+<li>按置信率排序: 0.95, 0.9, 0.9, 0.8, 0.7, 0.7</li>
+<li>取最大0.95的框为一个物体框</li>
+<li>剩余5个框中，去掉与0.95框重叠率大于0.6(可以另行设置)，则保留0.9, 0.8, 0.7三个框</li>
+<li>重复上面的步骤，直到没有框了，0.9为一个框</li>
+<li>选出来的为: 0.95, 0.9</li>
+</ul>
+<p>两个矩形的重叠率计算方式如下:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-59ba4b17d2cc2538.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h1 id="xywh-VS-xyxy"><a href="#xywh-VS-xyxy" class="headerlink" title="xywh VS xyxy"></a>xywh VS xyxy</h1><p>系列论文中，位置都用 (x,y,w,h)来表示，没有用左上角、右下角 (x,y,x,y) 来表示。<br>初衷是当 (w,h)正确时，(x,y) 一点错，会导致整个框就不准了。<br>在初步的实际实验中，(x,y,x,y) 效果要差一些。</p>
+<p>背后的逻辑，物体位置用 (x,y,w,h) 来学习比较容易。<br>(x,y) 只需要位置相关的加权就能计算出来；<br>(w,h) 就更简单了，直接特征值相加即可。</p>
+<hr>
+<ul>
+<li>原文链接：<a href="http://www.cosmosshadow.com/ml/%E5%BA%94%E7%94%A8/2015/12/07/%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B.html" target="_blank" rel="external">Detection</a></li>
+<li>参考：<a href="http://www.jianshu.com/p/db1b74770e52" target="_blank" rel="external">[译] 基于R-FCN的物体检测 (zhwhong)</a></li>
+</ul>
+<p>(转载请注明出处：<a href="http://www.jianshu.com/p/067f6a989d31" target="_blank" rel="external">[Detection] CNN 之 “物体检测” 篇 (zhwhong)</a>)</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Index&quot;&gt;&lt;a href=&quot;#Index&quot; class=&quot;headerlink&quot; title=&quot;Index&quot;&gt;&lt;/a&gt;Index&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://arxiv.org/abs/1311.2524&quot; target=&quot;_bl
+    
+    </summary>
+    
+      <category term="machine learning" scheme="https://Hzwcode.github.io/categories/machine-learning/"/>
+    
+    
+      <category term="Machine Learning" scheme="https://Hzwcode.github.io/tags/Machine-Learning/"/>
+    
+      <category term="Knowledge" scheme="https://Hzwcode.github.io/tags/Knowledge/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition(附翻译，作业)</title>
     <link href="https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/"/>
     <id>https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/</id>
     <published>2017-02-24T09:27:52.000Z</published>
-    <updated>2017-02-24T09:35:35.684Z</updated>
+    <updated>2017-02-24T10:13:29.414Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <h1 id="CS231n课程：面向视觉识别的卷积神经网络"><a href="#CS231n课程：面向视觉识别的卷积神经网络" class="headerlink" title="CS231n课程：面向视觉识别的卷积神经网络"></a>CS231n课程：面向视觉识别的卷积神经网络</h1></blockquote>
