@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+    
+    
+    
+    
+  <url>
+    <loc>https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/</loc>
+    <lastmod>2017-02-24T10:29:56.164Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习 — 反向传播(BP)理论推导</title>
+        <pubTime>2017-02-24T10:23:35.000Z</pubTime>
+        
+        <tag>Machine Learning</tag>
+         
+         
+           
+             
+              <breadCrumb title="machine learning" url="https://Hzwcode.github.io/categories/machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/</loc>
+    <lastmod>2017-02-24T10:29:27.824Z</lastmod>
+    <data>
+        <display>
+        <title>[RNN] Simple LSTM代码实现 & BPTT理论推导</title>
+        <pubTime>2017-02-24T10:26:58.000Z</pubTime>
+        
+        <tag>Machine Learning</tag>
+         
+         
+           
+             
+              <breadCrumb title="machine learning" url="https://Hzwcode.github.io/categories/machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://Hzwcode.github.io/2017/02/24/Detection-CNN/</loc>
+    <lastmod>2017-02-24T10:28:50.432Z</lastmod>
+    <data>
+        <display>
+        <title>[Detection] CNN 之 "物体检测" 篇</title>
+        <pubTime>2017-02-24T10:20:50.000Z</pubTime>
+        
+        <tag>Machine Learning</tag>
+         
+        <tag>Knowledge</tag>
+         
+         
+           
+             
+              <breadCrumb title="machine learning" url="https://Hzwcode.github.io/categories/machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/</loc>
+    <lastmod>2017-02-24T10:13:29.414Z</lastmod>
+    <data>
+        <display>
+        <title>[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition(附翻译，作业)</title>
+        <pubTime>2017-02-24T09:27:52.000Z</pubTime>
+        
+        <tag>Machine Learning</tag>
+         
+        <tag>Knowledge</tag>
+         
+         
+           
+             
+              <breadCrumb title="machine learning" url="https://Hzwcode.github.io/categories/machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://Hzwcode.github.io/2017/02/23/Machine-Learning-Materials/</loc>
+    <lastmod>2017-02-24T09:32:12.839Z</lastmod>
+    <data>
+        <display>
+        <title>Machine Learning Materials</title>
+        <pubTime>2017-02-23T08:57:14.000Z</pubTime>
+        
+        <tag>Machine Learning</tag>
+         
+        <tag>Knowledge</tag>
+         
+         
+           
+             
+              <breadCrumb title="machine learning" url="https://Hzwcode.github.io/categories/machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu_Flatabulous/</loc>
+    <lastmod>2017-02-24T09:30:50.030Z</lastmod>
+    <data>
+        <display>
+        <title>[Linux] Ubuntu下超好看扁平主题 : Flatabulous</title>
+        <pubTime>2017-02-24T08:12:16.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>ubuntu</tag>
+         
+        <tag>theme</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux" url="https://Hzwcode.github.io/categories/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://Hzwcode.github.io/2017/02/23/hello-world/</loc>
+    <lastmod>2017-02-24T08:17:40.871Z</lastmod>
+    <data>
+        <display>
+        <title>Welcome to Hexo</title>
+        <pubTime>2017-02-23T06:00:00.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+        <tag>github</tag>
+         
+         
+           
+             
+              <breadCrumb title="tool" url="https://Hzwcode.github.io/categories/tool/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+</urlset>
