@@ -113,7 +113,7 @@ Ph.D. candidate, Computer Science, Bioinformatics (September, 20">
  Education
 
 Ph.D. candidate, Computer Science, Bioinformatics (September, 20">
-<meta property="og:updated_time" content="2017-02-25T16:43:41.035Z">
+<meta property="og:updated_time" content="2017-02-25T18:04:38.822Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="About">
 <meta name="twitter:description" content="Basic Info.
@@ -141,9 +141,9 @@ Ph.D. candidate, Computer Science, Bioinformatics (September, 20">
       author: 'zhwhong'
     },
     algolia: {
-      applicationID: 'M68G2FP1HA',
-      apiKey: '93ebde42a3d5dec50d2eaf931827c00c',
-      indexName: 'zhwhong',
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -329,26 +329,20 @@ Ph.D. candidate, Computer Science, Bioinformatics (September, 20">
   
     <div class="site-search">
       
-  
-  <div class="algolia-popup popup">
-    <div class="algolia-search">
-      <div class="algolia-search-input-icon">
-        <i class="fa fa-search"></i>
-      </div>
-      <div class="algolia-search-input" id="algolia-search-input"></div>
-    </div>
-
-    <div class="algolia-results">
-      <div id="algolia-stats"></div>
-      <div id="algolia-hits"></div>
-      <div id="algolia-pagination" class="algolia-pagination"></div>
-    </div>
-
+  <div class="popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
   </div>
-
+  <div id="local-search-result"></div>
+</div>
 
 
 
@@ -409,11 +403,12 @@ Ph.D. candidate, Computer Science, Bioinformatics (September, 20">
 <h3 id="About-the-blog"><a href="#About-the-blog" class="headerlink" title=" About the blog"></a><span class="fa fa-sticky-note"></span> About the blog</h3></blockquote>
 <p>　　博客创建于2017年02月23日，最近觉得自身的缺点还是蛮多的，对知识掌握的也不够牢固，所以想搭建一个自己的博客，积攒知识，巩固知识，提升自身的能力。之前记载东西主要在<a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">简书</a>，简书写文学类文章很方便，自己也很喜欢，但有些东西不是很方便，然后这年头，程序猿不搞个自己的主页还不知道怎么混，所以说干就干。</p>
 <p>　　博客采用 <a href="https://hexo.io/zh-cn/" target="_blank" rel="external">Hexo</a> + Git 搭建，使用 <a href="http://theme-next.iissnan.com/" target="_blank" rel="external">Next</a> 主题，项目托管在 Github - <a href="https://github.com/Hzwcode/Hzwcode.github.io" target="_blank" rel="external">zhwhong’s blog</a>，忙碌了几天完成了博客的雏形。后期需要做的还很多，继续加油～</p>
+<div class="ds-recent-visitors" data-num-items="36" data-avatar-size="42" id="ds-recent-visitors"><br></div>
 
     
   </div>
 
-          
+
           </div>
           
 
@@ -562,6 +557,12 @@ Ph.D. candidate, Computer Science, Bioinformatics (September, 20">
 
         
         
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
 
         
         
@@ -675,7 +676,7 @@ Ph.D. candidate, Computer Science, Bioinformatics (September, 20">
         
       </div>
     
-    
+
   </div>
 
   
@@ -1047,21 +1048,11 @@ Ph.D. candidate, Computer Science, Bioinformatics (September, 20">
 
   
 
-  
-  
-  
-  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
 
   
-  
-  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
-  
-
-  <script src="/js/src/algolia-search.js?v=5.1.0"></script>
 
 
-
-  
+<script type="text/javascript" src="/js/src/particle.js"></script>
 
 </body>
 </html>
