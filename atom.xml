@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Hzwcode.github.io/"/>
-  <updated>2017-02-24T10:29:27.824Z</updated>
+  <updated>2017-02-26T09:17:07.171Z</updated>
   <id>https://Hzwcode.github.io/</id>
   
   <author>
@@ -16,13 +16,57 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>music test</title>
+    <link href="https://Hzwcode.github.io/2017/02/26/music-test/"/>
+    <id>https://Hzwcode.github.io/2017/02/26/music-test/</id>
+    <published>2017-02-26T08:56:23.000Z</published>
+    <updated>2017-02-26T09:17:07.171Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="450" src="http://music.163.com/outchain/player?type=0&id=144236857&auto=0&height=430"></iframe>
+
+<a id="more"></a>
+<center><br><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=34578162&auto=0&height=66"></iframe><br></center>
+
+<div id="aplayer0" class="aplayer" style="margin-bottom: 20px;"></div>
+		<script>
+			new APlayer({
+				element: document.getElementById("aplayer0"),
+				narrow: false,
+				autoplay: false,
+				showlrc: 0,
+				music: {
+					title: "童话镇",
+					author: "陈一发儿",
+					url: "http://mp3.haoduoge.com/s/2016-12-24/1482568978.mp3",
+					pic: "http://p3.music.126.net/tfa811GLreJI_S0h9epqRA==/3394192426154346.jpg?param=130y130",
+				}
+			});
+		</script>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=450 src=&quot;http://music.163.com/outchain/player?type=0&amp;id=144236857&amp;auto=0&amp;height=430&quot;&gt;&lt;/iframe&gt;
+    
+    </summary>
+    
+      <category term="tool" scheme="https://Hzwcode.github.io/categories/tool/"/>
+    
+    
+      <category term="hexo" scheme="https://Hzwcode.github.io/tags/hexo/"/>
+    
+      <category term="music" scheme="https://Hzwcode.github.io/tags/music/"/>
+    
+  </entry>
+  
+  <entry>
     <title>[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</title>
     <link href="https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/"/>
     <id>https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/</id>
     <published>2017-02-24T10:26:58.000Z</published>
     <updated>2017-02-24T10:29:27.824Z</updated>
     
-    <content type="html"><![CDATA[<ul>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><ul>
 <li>参考：<a href="http://nicodjimenez.github.io/2014/08/08/lstm.html" target="_blank" rel="external">Nico’s Blog - Simple LSTM</a></li>
 <li>Github代码：<a href="https://github.com/Hzwcode/lstm" target="_blank" rel="external">https://github.com/Hzwcode/lstm</a></li>
 </ul>
@@ -144,7 +188,7 @@
     <published>2017-02-24T10:23:35.000Z</published>
     <updated>2017-02-24T10:29:56.164Z</updated>
     
-    <content type="html"><![CDATA[<ul>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><ul>
 <li><a href="http://www.jianshu.com/p/c7e3f417641c" target="_blank" rel="external">关于简书中如何编辑Latex数学公式</a></li>
 <li><a href="http://www.jianshu.com/p/2aca6e8ac7c8" target="_blank" rel="external">[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</a></li>
 </ul>
@@ -282,7 +326,7 @@
     <published>2017-02-24T10:20:50.000Z</published>
     <updated>2017-02-24T10:28:50.432Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h1><ul>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h1><ul>
 <li><a href="http://arxiv.org/abs/1311.2524" target="_blank" rel="external">RCNN</a> </li>
 <li><a href="http://arxiv.org/abs/1504.08083" target="_blank" rel="external">Fast RCNN</a> </li>
 <li><a href="http://arxiv.org/abs/1506.01497" target="_blank" rel="external">Faster RCNN</a> </li>
@@ -437,7 +481,7 @@
     <published>2017-02-24T09:27:52.000Z</published>
     <updated>2017-02-24T10:13:29.414Z</updated>
     
-    <content type="html"><![CDATA[<blockquote>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><blockquote>
 <h1 id="CS231n课程：面向视觉识别的卷积神经网络"><a href="#CS231n课程：面向视觉识别的卷积神经网络" class="headerlink" title="CS231n课程：面向视觉识别的卷积神经网络"></a>CS231n课程：面向视觉识别的卷积神经网络</h1></blockquote>
 <ul>
 <li>课程官网：<a href="http://cs231n.stanford.edu/" target="_blank" rel="external">CS231n: Convolutional Neural Networks for Visual Recognition</a></li>
@@ -537,7 +581,7 @@
     <published>2017-02-24T08:12:16.000Z</published>
     <updated>2017-02-24T09:30:50.030Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="http://upload-images.jianshu.io/upload_images/145616-909d61913233d890.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Flatabulous"></p>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p><img src="http://upload-images.jianshu.io/upload_images/145616-909d61913233d890.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Flatabulous"></p>
 <a id="more"></a>
 <p>使用ubuntu的小伙伴们，不知道你们对ubuntu自带主题有什么看法，反正我个人不太喜欢，个人比较喜欢扁平化的风格。<br>下面给大家推荐一个我长期使用的扁平化风格的主题－<a href="https://github.com/anmoljagetia/Flatabulous" target="_blank" rel="external">Flatabulous</a> 。<br>先看一下我的桌面(个人比较偏向单色调，不要在意这些细节啦)：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/145616-1564d71f915f7cef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="My Desktop"></p>
@@ -601,7 +645,7 @@
     <published>2017-02-23T08:57:14.000Z</published>
     <updated>2017-02-24T09:32:12.839Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="http://upload-images.jianshu.io/upload_images/145616-02a9d0afdcfb7047.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p><img src="http://upload-images.jianshu.io/upload_images/145616-02a9d0afdcfb7047.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <hr>
 <blockquote>
 <h1 id="Awesome系列"><a href="#Awesome系列" class="headerlink" title="Awesome系列　"></a>Awesome系列　</h1></blockquote>
@@ -772,7 +816,7 @@
     <published>2017-02-23T06:00:00.000Z</published>
     <updated>2017-02-24T08:17:40.871Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
 <a id="more"></a>
