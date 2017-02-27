@@ -1,0 +1,24 @@
+language: node_js
+node_js:
+- '6.10'
+branches:
+  only:
+  - blog-source
+env:
+  global:
+  - secure: m7UihiBkrmuuG+M/Vs9lA3aIrXo6yhFhTEIx+xYTOmANi6pplRMxT/XU9mTgs5+N9pplWOayLhN4ipNFZ09iPApluFif1dsrU1d7J2LDb00rOHopRZ0kju1sF1c6/sSsvyKyj0iNzfgSnxgQ60RHbbhA1/JT9+dytHsoEScufoxDt2Y0AivjjHv3paZzYVew10dHxNbyIZ5ss2UidbNXD9oQjytlo2vlXbN1gPgp8sIerDXCx9gY8uwSaGrccYjcyxQWM2neaB2WBekIpIMdBlxUyekP2WhTmmS5iVWu/ySX4WeYhmEJnvFTeCYyeQ9McxtxJH1GezyKHQoQFL4Yg69vn838cJYZaTycMC1VU/rP5wREk6LrdSigiicAhrp4dMpK7WEdoQGkKgYZ32y2aYTXTzfIwT59yWLiLwa68DZW3HXY6r58aUP2AHF+Uc15jCXBtRsqyV4U4AYfHedpYwWmsccghcK5pR6ESN9Lvk6YtcIC/qcextvlaDrciFEInVuYIW/PwQxsfBu3b3zv7fHDjjcST8MhTkmX9KSee4oEru6q/JR4Nn1gI3/MHMB9+Pk/PP27VNtmeXQLZiv04SPKAEIQ1Hn00ggXkGSr+MnVMAiuDjmtsIRmv6tMCFNoDgFfJF23960f1+rpJmK5akk+zSwZNmVbXsHUKe5jg4M=
+before_install:
+- export TZ='Asia/Shanghai'
+- npm install -g hexo
+- npm install -g hexo-cli
+before_script:
+- git config --global user.name "Hzwcode"
+- git config --global user.email 1359434736@qq.com
+- sed -i'' "s~git@github.com:Hzwcode/Hzwcode.github.io.git~https://${REPO_TOKEN}:x-oauth-basic@github.com/Hzwcode/Hzwcode.github.io.git~" _config.yml
+install:
+- npm install
+script:
+- hexo clean
+- hexo generate
+after_success:
+- hexo deploy

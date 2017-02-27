@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Allow: /archives/
+
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /lib/
+Disallow: /fancybox/
+
+Sitemap: https://zhwhong.github.com/sitemap.xml
+Sitemap: https://zhwhong.github.com/baidusitemap.xml
