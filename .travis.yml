@@ -28,4 +28,7 @@ install:
 - npm install
 # 执行的命令
 script:
-- npm run deploy  # hexo clean && hexo g -d
+- hexo clean
+- hexo g
+- hexo d
+# hexo clean && hexo g -d
