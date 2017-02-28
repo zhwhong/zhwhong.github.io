@@ -13,13 +13,12 @@ mathjax: true
 
 前面我们介绍过CNN中普通的[BP反向传播算法的推导](http://www.jianshu.com/p/408ab8177a53)，但是在RNN（比如[LSTM](https://en.wikipedia.org/wiki/Long_short-term_memory)）中，反向传播被称作[BPTT](https://en.wikipedia.org/wiki/Backpropagation_through_time)（Back Propagation Through Time），它是和时间序列有关的。
 
-
-![](http://upload-images.jianshu.io/upload_images/145616-4ae3ab8b8426cdcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-
 ![Back Propagation Through Time](http://upload-images.jianshu.io/upload_images/145616-113aeedc747a3628.gif?imageMogr2/auto-orient/strip)
 
 <!--more-->
+
+![](http://upload-images.jianshu.io/upload_images/145616-4ae3ab8b8426cdcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 
 A few weeks ago I released some [code](https://github.com/nicodjimenez/lstm) on Github to help people understand how LSTM’s work at the implementation level. The forward pass is well explained elsewhere and is straightforward to understand, but I derived the backprop equations myself and the backprop code came without any explanation whatsoever. The goal of this post is to explain the so called *backpropagation through time* in the context of LSTM’s.
 
