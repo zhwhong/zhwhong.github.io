@@ -218,7 +218,7 @@
          <span class="post-time">
 	       &nbsp; | &nbsp;
            <span class="post-meta-item-icon">
-             <i class="fa fa-calendar-o"></i>
+             <i class="fa fa-keyboard-o"></i>
            </span>
            <span class="post-meta-item-text">字数统计: </span>
            <span class="post-count">{{ wordcount(post.content) }}(字)</span>
@@ -228,7 +228,7 @@
       <span class="post-time">
 	       &nbsp; | &nbsp;
            <span class="post-meta-item-icon">
-             <i class="fa fa-calendar-o"></i>
+             <i class="fa fa-hourglass-half"></i>
            </span>
            <span class="post-meta-item-text">阅读时长: </span>
            <span class="post-count">{{ min2read(post.content) }}(分)</span>
