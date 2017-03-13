@@ -67,7 +67,7 @@ NUMA node0 CPU(s):     0-7,16-23
 NUMA node1 CPU(s):     8-15,24-31
 ```
 
-使用 **cat /proc/cpuinfo**  命令可以查看每一个cpu核详细信息.
+使用 `cat /proc/cpuinfo`  命令可以查看每一个cpu核详细信息.
 
 # 二、CPU服务器
 
@@ -105,15 +105,15 @@ NUMA node6 CPU(s):     96-111
 NUMA node7 CPU(s):     112-127
 ```
 
-使用 **cat /proc/cpuinfo**  命令可以查看每一个cpu核详细信息.
+使用 `cat /proc/cpuinfo`  命令可以查看每一个cpu核详细信息.
 
 # 三、mnist测试
 
-- 测试代码： [zhwhong/awesome-deep-learning/TensorFlow-Tutorials](https://github.com/Hzwcode/awesome-deep-learning/tree/master/TensorFlow-Tutorials)
+- 测试代码： [**zhwhong/awesome-deep-learning/TensorFlow-Tutorials**](https://github.com/Hzwcode/awesome-deep-learning/tree/master/TensorFlow-Tutorials)
 
 ## (1)逻辑回归logistic测试
 
-Example: [02_logistic_regression.py](https://github.com/Hzwcode/awesome-deep-learning/blob/master/TensorFlow-Tutorials/02_logistic_regression.py)
+Example: [**02_logistic_regression.py**](https://github.com/Hzwcode/awesome-deep-learning/blob/master/TensorFlow-Tutorials/02_logistic_regression.py)
 
 测试结果：
 
@@ -188,7 +188,7 @@ Mon Mar 13 15:13:32 2017
 
 ## (2)卷积神经网络conv测试
 
-Example : [05_convolutional_net.py](https://github.com/Hzwcode/awesome-deep-learning/blob/master/TensorFlow-Tutorials/05_convolutional_net.py)
+Example : [**05_convolutional_net.py**](https://github.com/Hzwcode/awesome-deep-learning/blob/master/TensorFlow-Tutorials/05_convolutional_net.py)
 
 测试结果：
 
@@ -264,7 +264,7 @@ Mon Mar 13 15:44:49 2017
 
 ## (3)循环神经网络lstm测试
 
-Example : [07_lstm.py](https://github.com/Hzwcode/awesome-deep-learning/blob/master/TensorFlow-Tutorials/07_lstm.py)
+Example : [**07_lstm.py**](https://github.com/Hzwcode/awesome-deep-learning/blob/master/TensorFlow-Tutorials/07_lstm.py)
 
 测试结果：
 
@@ -278,7 +278,7 @@ Example : [07_lstm.py](https://github.com/Hzwcode/awesome-deep-learning/blob/mas
 
 **GPU运行结果：**
 
-![](lstm_gpu_2.png)
+![](lstm_gpu_1.png)
 
 ```bash
 zhwhong@news-ai:~/MNIST_test$ nvidia-smi
