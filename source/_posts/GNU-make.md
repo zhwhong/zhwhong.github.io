@@ -17,9 +17,9 @@ Tags： `C` `Make` `Makefile`
 
 ![](http://upload-images.jianshu.io/upload_images/145616-176a6bf4d5dca196.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-（题图：摄于博兹贾阿达岛，土耳其，2013年7月）
-
 <!--more-->
+
+（题图：摄于博兹贾阿达岛，土耳其，2013年7月）
 
 ##一、Make的概念
 

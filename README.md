@@ -15,3 +15,9 @@ My jianshu page : [zhwhong@jianshu](http://www.jianshu.com/u/38cd2a8c425e).
 > [Next 主题中文文档](http://theme-next.iissnan.com/) & [GitHub-hexo_theme_next](https://github.com/iissnan/hexo-theme-next)
 
 > [Hexo 博客补丁](http://frankorz.com/2016/09/30/Hexo-patch/)
+
+> [手把手教从零开始在GitHub上使用Hexo搭建博客教程-知乎](https://zhuanlan.zhihu.com/z-hexo)
+
+> [fontawesome.io/cheatsheet/](http://fontawesome.io/cheatsheet/)
+
+> [多说样式折腾记录 — 添加 UA 浏览器标识、旋转头像等](http://moxfive.xyz/2015/09/29/duoshuo-style/#参考资料)
