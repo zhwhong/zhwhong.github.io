@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<%- partial('_partial/header') %>
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <%- partial('_partial/nav-left') %>
+    </div>
+    <div class="nav-right">
+        <%- partial('_partial/nav-right') %>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <%- partial('_partial/article', {post: page, index: false}) %>
+    </div>
+    <div class="copyright">
+        <%- partial('_partial/copyright')%>
+    </div>
+</div>
+<div class="full-toc">
+    <%- partial('_partial/full-toc') %>
+</div>
+<div class="acParent"></div>
+<%- partial('_partial/dashang')%>
+</body>
+<%- partial('_partial/footer') %>
+</html>

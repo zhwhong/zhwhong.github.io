@@ -1,0 +1,145 @@
+@media screen and (max-width 1024px)
+  .nav
+    position absolute
+    top 0px
+    left 0px
+    z-index 30
+    -webkit-overflow-scrolling touch
+    position absolute
+    margin-left -585px
+    &.fullscreen
+      margin-left 0px
+    &.mobile
+      margin-left 0px
+  .post
+    .pjax,.pjax.fullscreen
+      padding 0 18px
+      article .div_img
+        margin 0 -18px 25px
+  .full-toc
+    .full
+      .min:before
+        float left
+        width 50%
+        content "\e98c"
+      .max:before
+        float left
+        width 50%
+        content "\e98b"
+      .mobile:before
+        content "\e98b"
+    #rocket
+      &:hover::before
+        color #283444
+      &.launch:before
+        color #449fdb
+@media screen and (max-width 426px)
+  .nav
+    width 100%
+    overflow hidden
+    &-left
+      width 100%
+      height auto
+    &-right
+      width 100%
+      height 100%
+      overflow-y hidden
+      form
+        .search
+          width 220px
+        .cross
+          right 116px
+      nav
+        bottom 186px
+    .avatar
+      margin 20px auto 15px
+    ul
+      display none
+    &-right nav a
+      .post-title
+        width 90%
+      .post-date
+        display none
+  .post
+    font-size 16px
+    .pjax
+      padding 0 18px
+      max-width 100%
+      article
+        padding-top 1em
+        .article-meta
+          font-size 0.7em
+          .tag a
+            &:before
+              border 7px solid transparent
+              left -14px
+            &:after
+              top 4px
+        .article-title
+          font-size 1.6em
+    .article_copyright
+      font-size 8px
+  .full-toc
+    .full
+      top 0px
+      right 0px
+      opacity 0.7
+    .post-toc-menu
+      top 43px
+      right 0px
+      opacity 0.7
+    #rocket
+      right -7px
+  .shang_box
+    width: 100%;
+    height 400px;
+    bottom: 0px;
+    left: initial;
+    top: initial;
+    margin-left: initial;
+    padding: 0;
+    .shang_close
+      right 10px
+    .shang_tit
+      font-size 23px
+    .shang_payimg
+      width 200px
+      height 200px
+      .pay_img
+        width 427px
+        &.weixin_img
+          margin-left: -227px
+        img
+          width 200px
+@media screen and (max-width 322px)
+  .nav
+    &-right form
+      .search
+        width 165px
+      .cross
+        right 115px
+  .post .pjax .article_copyright
+    font-size 6px
+  .shang_box
+    height 331px;
+    bottom: 0px;
+    left: initial;
+    top: initial;
+    margin-left: initial;
+    padding: 0;
+    .shang_close
+      font-size 39px
+      right 8px
+    .shang_tit
+      font-size 15px
+    .shang_payimg
+      width 150px
+      height 150px
+      .pay_img
+        width 324px
+        &.weixin_img
+          margin-left: -174px
+        img
+          width 150px
+    .shang_payselect
+      font-size 16px
