@@ -19,6 +19,9 @@ $line-numbers
   pre, code
     font-family: font-mono, monospace, font-chs
     font-size: 1em
+  .line:after
+    content: ''
+    display: inline-block;
   pre
     @extend $code-block
     code
@@ -30,7 +33,7 @@ $line-numbers
   .highlight
     @extend $code-block
     border-radius: 2px
-    max-height: 50em
+    //max-height: 50em
     margin-top: .5em
     margin-bottom: 1em
     overflow: auto
