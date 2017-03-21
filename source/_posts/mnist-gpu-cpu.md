@@ -9,6 +9,8 @@ categories: machine learning
 
 服务器 IP ：`172.xx.xx.98` （4块NVIDIA **TITAN X** GPU，**32** CPU核心）
 
+<!--more-->
+
 ```bash
 zhwhong@news-ai:~$ nvidia-smi
 Mon Mar 13 14:30:39 2017       
@@ -38,8 +40,6 @@ Mon Mar 13 14:30:39 2017
 |  No running processes found                                                 |
 +-----------------------------------------------------------------------------+
 ```
-
-<!--more-->
 
 ```bash
 zhwhong@news-ai:~$ lscpu

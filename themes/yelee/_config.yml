@@ -40,19 +40,19 @@ since: 2017
 ## https://github.com/hexojs/hexo-generator-feed
 
 subnav:
+  RSS: "/atom.xml"
   Email: "mailto:hongzhiwei886@gmail.com"
   新浪微博: "http://weibo.com/zhwhong?refer_flag=1001030102_&is_all=1"
   GitHub: "//github.com/Hzwcode"
   Coding: "https://coding.net/u/Hzw"
-  简书: "http://www.jianshu.com/u/38cd2a8c425e"
   Facebook: "https://www.facebook.com/profile.php?id=100008115764524"
-  Google: "https://plus.google.com/101422785279702510489"
-  Quora: "https://www.quora.com/profile/Zhwhong-1/all_posts"
+  简书: "http://www.jianshu.com/u/38cd2a8c425e"
+  # Google: "https://plus.google.com/101422785279702510489"
+  # Quora: "https://www.quora.com/profile/Zhwhong-1/all_posts"
   知乎: "https://www.zhihu.com/people/zhwhong/activities"
   豆瓣: "https://www.douban.com/people/zhwhong/"
   网易云音乐: "http://music.163.com/#/user/home?id=49576672"
-  虾米音乐: "http://www.xiami.com/u/277707031?spm=a1z1s.6929273.1561534497.3.U6DNt5"
-  RSS: "/atom.xml"
+  # 虾米音乐: "http://www.xiami.com/u/277707031?spm=a1z1s.6929273.1561534497.3.U6DNt5"
   #V2EX: "#"
   #SegmentFault: ""
   #博客园: "cnblogs"
@@ -120,16 +120,16 @@ youyan:
 background_image: 5
 
 # Base Font Size | 字号调节
-base_font_size: 16  #px, 16 - 24
+base_font_size: 18  #px, 16 - 24
 
 ## General Color Scheme | 主题配色方案
 ## 可用值 Value: yilia
-color_scheme:
+color_scheme: yilia
 
 highlight_style:
   #on: true
   inline_code: 1  # Value: 0 - 9 可选
-  code_block: 1  # Value: 0 - 4
+  code_block: 3  # Value: 0 - 4
   # Set inline_code to style highlight text
   # Chose a highlight theme for code block
   # 通过 inline_code 切换内置文本高亮样式
@@ -148,7 +148,7 @@ heading_style: 0 # Value: 0 - 2
 list_style: 0  # value: 0 - 12 可选
 
 # 左边栏宽度 px
-left_col_width: 300
+left_col_width: 310
 
 # Copyright info. of post | 文末版权信息
 copyright: true
@@ -156,9 +156,9 @@ copyright: true
 # Table of contents | 文章目录
 toc:
   on: true
-  list_number: true # 目录序号
+  list_number: false # 目录序号
   max_depth: 3  # 1 - 6 (h1-h6) 目录最大级数
-  nowrap: false # Keep title on same line | 目录标题不换行
+  nowrap: true # Keep title on same line | 目录标题不换行
 
 # 自定义"阅读全文"链接按钮的显示文字
 # Customize the text on excerpt link
@@ -174,8 +174,8 @@ jquery_ui: true
 
 # Max width of right cloumn | 限制右侧内容的宽带
 limit_article_width:
-  on: false
-  max_width: 60 # em
+  on: true
+  max_width: 77 # em
 
 # >>> Small features | 小功能设置 <<<
 

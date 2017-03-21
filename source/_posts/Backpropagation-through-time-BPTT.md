@@ -13,9 +13,9 @@ mathjax: true
 
 前面我们介绍过CNN中普通的[BP反向传播算法的推导](http://www.jianshu.com/p/408ab8177a53)，但是在RNN（比如[LSTM](https://en.wikipedia.org/wiki/Long_short-term_memory)）中，反向传播被称作[BPTT](https://en.wikipedia.org/wiki/Backpropagation_through_time)（Back Propagation Through Time），它是和时间序列有关的。
 
-![Back Propagation Through Time](http://upload-images.jianshu.io/upload_images/145616-113aeedc747a3628.gif?imageMogr2/auto-orient/strip)
-
 <!--more-->
+
+![Back Propagation Through Time](http://upload-images.jianshu.io/upload_images/145616-113aeedc747a3628.gif?imageMogr2/auto-orient/strip)
 
 ![](http://upload-images.jianshu.io/upload_images/145616-4ae3ab8b8426cdcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 

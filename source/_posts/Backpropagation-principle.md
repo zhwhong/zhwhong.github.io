@@ -15,9 +15,9 @@ mathjax: true
 
 首先我们不讲数学，先上图解，看完图不懂再看后面：
 
-![](http://upload-images.jianshu.io/upload_images/145616-be0f5712599bf47b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
 <!--more-->
+
+![](http://upload-images.jianshu.io/upload_images/145616-be0f5712599bf47b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ![](http://upload-images.jianshu.io/upload_images/145616-190148f7a5f6d59a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
