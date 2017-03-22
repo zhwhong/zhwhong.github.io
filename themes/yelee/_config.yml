@@ -295,19 +295,12 @@ progressBar:
   type: "minimal"  # Keep Quotes | 保留引号避免出错
   color: blue
 
-
-## 文章末尾是否显示打赏按钮
+# 文章末尾是否显示打赏按钮
 donate:
-  enable: true
-  text: Enjoy it ? Donate me !  欣赏此文？求鼓励，求支持！
-  alipay:
-  wechat:
-
-reward_comment: 哎呦，不行了，要睡觉了，赏我 e(=2.72) 元咖啡钱吧，您的支持将鼓励我继续创作！
-wechatpay: /images/wechat-reward-image.jpg
-alipay: /images/alipay-reward-image.jpg
-
-
+  on: true
+  reward_comment: 哎呦，不行了，要睡觉了，赏我 e(=2.72) 元咖啡钱吧，您的支持将鼓励我继续创作！
+  wechatpay: /images/wechat-reward-image.jpg
+  alipay: /images/alipay-reward-image.jpg
 
 CDN:
   jquery: //cdn.bootcss.com/jquery/2.2.4/jquery.min.js

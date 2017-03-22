@@ -80,6 +80,7 @@ archive_generator:
 plugins:
     hexo-generator-feed
     hexo-generator-sitemap
+    hexo-generator-search
 
 sitemap:
     path: sitemap.xml
@@ -98,8 +99,8 @@ theme: yelee
 search:
   path: search.xml
   field: post
-  format: html
-  limit: 10000
+  # format: html
+  # limit: 10000
 
 baidu_analytics: c28078cddac47e3f37d968d55b8b4e4f
 
