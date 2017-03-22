@@ -11,9 +11,12 @@
     <% if (post.link || post.title){ %>
       <header class="article-header">
         <%- partial('post/title', {class_name: 'article-title'}) %>
+        <%- partial('post/word') %>
       </header>
       <% if (!index){ %>
       <div class="article-info article-info-post">
+        <br>
+        <br>
         <%- partial('post/category') %>
         <%- partial('post/tag') %>
         <div class="clearfix"></div>
