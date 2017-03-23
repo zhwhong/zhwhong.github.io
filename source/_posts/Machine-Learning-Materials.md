@@ -3,6 +3,7 @@ title: Machine Learning Materials
 date: 2017-02-23 16:57:14
 tags: [Machine Learning, Knowledge]
 categories: machine learning
+top: 1
 ---
 
 ![](http://upload-images.jianshu.io/upload_images/145616-02a9d0afdcfb7047.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)

@@ -248,6 +248,9 @@ search:
 ## http://www.fancyapps.com/fancybox/
 fancybox: true
 
+# 标题下面是否显示文章字数和阅读时长
+word_count: true
+
 # Display Math(LaTeX, MathML...) | 数学公式支持
 ## https://www.mathjax.org/
 mathjax: true

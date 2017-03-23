@@ -2,7 +2,7 @@
     <div class="outer">
         <div id="footer-info">
             <div class="footer-left">
-                <i class="fa fa-copyright"></i> 
+                <i class="fa fa-copyright"></i>
                 <% if (theme.since && !isNaN(theme.since) && theme.since < date(new Date(), 'YYYY')) { %><%- theme.since%>-<% } %><%= date(new Date(), 'YYYY') %> <%= config.author || config.title %>
             </div>
             <div class="footer-right">
@@ -26,6 +26,8 @@
                         </span>
                     </span>
                 <% } %>
+                <span>| </span>
+                <span class="post-count">博客全站共<%= totalcount(site) %>字</span>
             </div>
         <% } %>
     </div>
