@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://Hzwcode.github.io/tags/index.html</loc>
+    
+    <lastmod>2017-03-23T16:15:57.726Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://Hzwcode.github.io/categories/index.html</loc>
+    
+    <lastmod>2017-03-23T16:15:46.346Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://Hzwcode.github.io/about/index.html</loc>
+    
+    <lastmod>2017-03-23T16:12:26.989Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://Hzwcode.github.io/2017/03/23/deal-with-hexo-article-top-problem/</loc>
     
     <lastmod>2017-03-23T09:18:01.769Z</lastmod>
@@ -33,27 +54,6 @@
     <loc>https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/</loc>
     
     <lastmod>2017-03-23T09:03:34.530Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://Hzwcode.github.io/about/index.html</loc>
-    
-    <lastmod>2017-03-23T04:30:41.684Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://Hzwcode.github.io/categories/index.html</loc>
-    
-    <lastmod>2017-03-23T04:30:36.860Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://Hzwcode.github.io/tags/index.html</loc>
-    
-    <lastmod>2017-03-23T04:30:24.872Z</lastmod>
     
   </url>
   
