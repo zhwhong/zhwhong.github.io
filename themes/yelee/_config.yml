@@ -124,7 +124,7 @@ base_font_size: 18  #px, 16 - 24
 
 ## General Color Scheme | 主题配色方案
 ## 可用值 Value: yilia
-color_scheme: yilia
+color_scheme:
 
 highlight_style:
   on: true

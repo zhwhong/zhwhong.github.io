@@ -201,4 +201,4 @@ x  表示类别输出，c 表示目标分类，l 表示位置输出，g 表示�
 - 原文链接：[Detection](http://www.cosmosshadow.com/ml/%E5%BA%94%E7%94%A8/2015/12/07/%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B.html)
 - 参考：[[译] 基于R-FCN的物体检测 (zhwhong)](http://www.jianshu.com/p/db1b74770e52)
 
-(转载请注明出处：[[Detection] CNN 之 "物体检测" 篇 (zhwhong)](http://www.jianshu.com/p/067f6a989d31))
+(转载请联系作者并注明出处，谢谢！)
