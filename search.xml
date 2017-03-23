@@ -1,62 +1,1341 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   
+  
     
     <entry>
-      <title><![CDATA[music test]]></title>
-      <url>%2F2017%2F02%2F26%2Fmusic-test%2F</url>
-      <content type="text"><![CDATA[new APlayer({ element: document.getElementById("aplayer0"), narrow: false, autoplay: false, showlrc: 0, music: { title: "童话镇", author: "陈一发儿", url: "http://mp3.haoduoge.com/s/2016-12-24/1482568978.mp3", pic: "http://p3.music.126.net/tfa811GLreJI_S0h9epqRA==/3394192426154346.jpg?param=130y130", } });]]></content>
+      <title><![CDATA[解决Hexo博客文章置顶问题]]></title>
+      <url>https://Hzwcode.github.io/2017/03/23/deal-with-hexo-article-top-problem/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>Hexo默认只提供了按发布日期的排序，只好网上找了些资料修改。</p>
+<p>原理：在Hexo生成首页HTML时，将top值高的文章排在前面，达到置顶功能。</p>
+<p>修改Hexo文件夹下的<code>node_modules/hexo-generator-index/lib/generator.js</code>，在生成文章之前进行文章top值排序。</p>
+<a id="more"></a>
+<p>需添加的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">posts.data = posts.data.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(a.top &amp;&amp; b.top) &#123; <span class="comment">// 两篇文章top都有定义</span></div><div class="line">        <span class="keyword">if</span>(a.top == b.top) <span class="keyword">return</span> b.date - a.date; <span class="comment">// 若top值一样则按照文章日期降序排</span></div><div class="line">        <span class="keyword">else</span> <span class="keyword">return</span> b.top - a.top; <span class="comment">// 否则按照top值降序排</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(a.top &amp;&amp; !b.top) &#123; <span class="comment">// 以下是只有一篇文章top有定义，那么将有top的排在前面（这里用异或操作居然不行233）</span></div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(!a.top &amp;&amp; b.top) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">return</span> b.date - a.date; <span class="comment">// 都没定义按照文章日期降序排</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>其中涉及Javascript的比较函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cmp(<span class="keyword">var</span> a, <span class="keyword">var</span> b) &#123;</div><div class="line">    <span class="keyword">return</span>  a - b; <span class="comment">// 升序，降序的话就 b - a</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>修改完成后，只需要在front-matter中设置需要置顶文章的top值，将会根据top值大小来选择置顶顺序top值越大越靠前。需要注意的是，这个文件不是主题的一部分，也不是Git管理的，备份的时候比较容易忽略。</p>
+<p>以下是最终的generator.js内容</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> pagination = <span class="built_in">require</span>(<span class="string">'hexo-pagination'</span>);</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">locals</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> config = <span class="keyword">this</span>.config;</div><div class="line">  <span class="keyword">var</span> posts = locals.posts.sort(config.index_generator.order_by);</div><div class="line"></div><div class="line">  posts.data = posts.data.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span>(a.top &amp;&amp; b.top) &#123;</div><div class="line">          <span class="keyword">if</span>(a.top == b.top) <span class="keyword">return</span> b.date - a.date;</div><div class="line">          <span class="keyword">else</span> <span class="keyword">return</span> b.top - a.top;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">else</span> <span class="keyword">if</span>(a.top &amp;&amp; !b.top) &#123;</div><div class="line">          <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">else</span> <span class="keyword">if</span>(!a.top &amp;&amp; b.top) &#123;</div><div class="line">          <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">else</span> <span class="keyword">return</span> b.date - a.date;</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  <span class="keyword">var</span> paginationDir = config.pagination_dir || <span class="string">'page'</span>;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> pagination(<span class="string">''</span>, posts, &#123;</div><div class="line">    <span class="attr">perPage</span>: config.index_generator.per_page,</div><div class="line">    <span class="attr">layout</span>: [<span class="string">'index'</span>, <span class="string">'archive'</span>],</div><div class="line">    <span class="attr">format</span>: paginationDir + <span class="string">'/%d/'</span>,</div><div class="line">    <span class="attr">data</span>: &#123;</div><div class="line">      <span class="attr">__index</span>: <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>Reference：<a href="http://www.netcan666.com/2015/11/22/%E8%A7%A3%E5%86%B3Hexo%E7%BD%AE%E9%A1%B6%E9%97%AE%E9%A2%98/" target="_blank" rel="external">解决Hexo置顶问题</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> tool </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+        
     </entry>
+    
+    <entry>
+      <title><![CDATA[[译] Introduction to debugging neural networks]]></title>
+      <url>https://Hzwcode.github.io/2017/03/20/Introduction-to-debugging-neural-networks/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><ul>
+<li>本文译自：<a href="http://russellsstewart.com/" target="_blank" rel="external">Russell Stewart’s Blog</a> -&gt; <a href="http://russellsstewart.com/blog/0" target="_blank" rel="external">Introduction to debugging neural networks</a></li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-1b69d26b7f4bb783.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="neural network"></p>
+<a id="more"></a>
+<blockquote>
+<h1 id="题目：调试神经网络简介"><a href="#题目：调试神经网络简介" class="headerlink" title="题目：调试神经网络简介"></a>题目：调试神经网络简介</h1></blockquote>
+<p>以下建议主要针对神经网络的初学者，它是基于我的经验对工业界和斯坦福的神经网络新手给出的建议。神经网基本上比大多数程序更难调试，因为大多数神经网络错误不会导致<strong>类型错误</strong>或<strong>运行时间错误</strong>。他们只是导致神经网络<strong>难以收敛</strong>。特别是当你刚接触这个的时候，它可能会让你非常沮丧！但是一个有经验的神经网络训练者将能够系统地克服这些困难，尽管存在着大量似是而非的错误消息：性能错误：你的神经网络没有训练好。对于缺乏经验的人来说，这种信息是令人生畏的。但对有经验的，这是一个非常好的错误信息。这意味着样板代码已经偏离了正确道路，是时候去深挖一下原因了！</p>
+<h1 id="如何应对NaN"><a href="#如何应对NaN" class="headerlink" title="如何应对NaN"></a>如何应对NaN</h1><p>到目前为止，我从学生那里得到的最常见的第一个问题是，“<strong>为什么我出现了 NaNs ？</strong>”。有时候，这个问题的答案很复杂。但大多数情况是，NaNs 在前100轮迭代中就出现了，这时候这个答案就非常简单：<strong>你的学习率设置的太高了</strong>。当学习率非常高时，在训练的前100轮迭代中就会出现NaNs。尝试不断的把学习率除以3，直到在前100轮迭代中不再出现NaNs。一旦这样做起作用了，你就会得到一个很好的初始学习率。根据我的经验，最好的有效学习率一般在你得到NaNs的学习率的1-10倍以下。</p>
+<p>如果你是在超过100轮迭代之后才出现的NaNs，还有2个其他的常见原因。<strong> 1）</strong> 如果你训练的是RNN，请确保使用的是“梯度剪裁（<a href="https://www.zhihu.com/question/29873016/answer/77647103" target="_blank" rel="external"><strong>clip gradient</strong></a> ）”，这可以把全局的梯度二范数(L2)限制在一定的范围内。RNN倾向于在训练早期产生梯度，其中10%或者更少的batch会出现学习尖峰，这些尖峰上的梯度值非常大。如果没有限制幅度，这些尖峰就可能导致NaNs。 <strong>2）</strong> 如果你自己编写了任何自定义的layer，那么这个问题很可能是由这些自定义的layer中一些除零错误引发的。还有一个众所周知的产生NaNs的layer就是softmax层。 softmax的计算在分子和分母中都含有指数函数exp(x)，当inf除以inf时就可能会产生NaNs。所以要确保你使用的是一个稳定版本的softmax实现。</p>
+<h1 id="当神经网络不再学习的时候怎么办"><a href="#当神经网络不再学习的时候怎么办" class="headerlink" title="当神经网络不再学习的时候怎么办"></a>当神经网络不再学习的时候怎么办</h1><p>当你不再碰到NaNs的时候，很可能就会遇到这样一种情况，你的网络顺利地训练了几千轮，但是训练的loss值却在前几百个回合后不再减小。如果你是初次构建代码库的话，基本上不会说需要等待超过2000轮迭代。这不是因为所有网络都能在2000次迭代内开始学习，而是因为你在编码中引入bug的几率很高，与其等待长时间的迭代，不如早早的进入调试模式。现在你应该不断缩小问题的范围，直到你的网络可以在2000次迭代内开始学习。幸运的是，有2个不错的维度来降低复杂度：</p>
+<p><strong>1）把训练集的样本量减小到10。</strong> 任何一个可用的网络通常都能在几百次迭代后过拟合十个样本。但是很多编码bug则会阻止这种情况发生。如果你的网络仍然不能过度拟合训练集的10个样本，请再次确认数据和标签是否是正确对应的。尝试将batch size设为1来检查batch计算中的错误。在代码中加入一些log输出以确保是以你期望的方式运行的。一般来说，通过暴力排查总会找到这些错误。一旦网络可以拟合10个样本了，继续尝试拟合100个。如果现在可以正常训练了但不如预期，则可以进入下一步了。</p>
+<p><strong>2）解决你感兴趣的问题的最简单版本。</strong> 如果你正在做句子翻译，尝试首先为目标语言构建一个语言模型。当上一步成功了，只给出三个源语言的单词，尝试着去预测翻译的第一个词。如果你打算从图像中检测物体，训练回归网络之前试着去分类图像中有多少个物体。在获得一个确保网络可以解决的好的子问题，以及花费最少的时间来使用代码挂接数据之间存在着平衡点。创造力可以起到帮助作用。</p>
+<p>为一个新的想法扩展网络的小技巧就是慢慢地缩小上述两步中所做的简化。这是坐标上升法的一种形式，而且十分有用。一开始，你可以证明这个网络可以记住少量的样本，然后可以证明它在一个简化版的子问题中可以在验证集上具有泛化能力。慢慢提升难度，稳步前进。这并不像第一次Karpathy的风格那么有趣，但至少它是有用的。有些时候你会发现有些问题本身十分困难，难以在2000次迭代内完成学习。这很棒！但是它很少需要以前那种难度级别问题迭代次数的十倍以上。如果真需要这么多次迭代，可以尝试寻找一个中间的复杂度。</p>
+<h1 id="调整超参数"><a href="#调整超参数" class="headerlink" title="调整超参数"></a>调整超参数</h1><p>既然你的网络现在开始学习东西了，你可能觉得很好。但你可能发现它不能解决这个问题中最困难的版本。超参数的调整就是其中的关键。也许有人仅仅下载了一个CNN包然后在上面跑自己的数据集，并告诉你超参数的调整并不会带来改变。你要认识到他们在用已有的框架解决已有的问题。如果你在使用新架构解决新问题，则必须调试超参数来获得一个良好的配置。你最好是为你的特定问题阅读一个超参数教程，但为了完整性我会在这里列出一些基本的想法：</p>
+<ul>
+<li><strong>可视化是关键</strong>。不要害怕花时间在整个训练过程中去写一些好用的可视化工具。如果你的可视化方法还是简单观察终端中的loss值变化，那你该考虑一下升级了。</li>
+<li><strong>权值初始化很重要</strong>。一般来说，大一点幅度的初始权值会好一些，但太大了就会导致NaNs。因此初始权值需要和学习率一起调整。</li>
+<li><strong>确保权值看起来是“健康的”</strong>。要了解这是什么意思，我推荐用ipython notebook打开现有网络的权值。花一些时间来熟悉在标准数据集（如ImageNet或Penn Tree Bank）上训练的成熟网络中的组件的权值直方图应该是什么样子。</li>
+<li><strong>神经网络不是输入尺度不变的</strong>，尤其当它使用SGD训练而不是其他的二阶方法训练时，因为SGD不是一个尺度不变的方法。在确定缩放尺度之前，花点时间来尝试多次缩放输入数据和输出标签。</li>
+<li><strong>在训练结束之前减小学习率总能带来提升</strong>。最佳的decay策略是：在k个epoch后，每n个epoch之后将学习率除以1.5，其中k &gt; n。</li>
+<li><strong>使用超参数配置文件</strong>。虽然在你开始尝试不同的值之前把超参数放在代码中也是ok的。我通过命令行参数加载的方式使用json文件，就像 <a href="https://github.com/Russell91/tensorbox" target="_blank" rel="external">Russell91/TensorBox</a> 中一样，但是具体的形式并不重要。避免总是要去重构你的代码，因为那将是超参数加载的糟糕问题。重构引入了bugs，花费你的训练周期，这种情况能够被避免直到你有一个你觉得不错的网络。</li>
+<li><strong>随机的搜索超参数</strong>，如果可以的话。随机搜索可以产生你想不到的超参数组合， 并且能减少很大工作量一旦你已经训练形成了对于给定超参数会带来什么样的影响的直觉。</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>调试神经网络可能比调试传统程序更费精力，因为几乎所有错误都被投射到整个网络表现的单一维度。尽管如此，二分查找仍然起作用。通过交替<strong>1）调整问题的难度</strong>，和<strong>2）使用少量的训练样本</strong>，你可以快速解决最初的问题。然后超参数调整和长时间的等待就可以解决你剩下的问题了。</p>
+<hr>
+<p>(转载请联系作者并注明出处，谢谢！)</p>
+]]></content>
+      
+        <categories>
+            
+            <category> machine learning </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+            <tag> Neural Network </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[GPU和CPU服务器测试mnist手写数字集]]></title>
+      <url>https://Hzwcode.github.io/2017/03/13/mnist-gpu-cpu/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="一、GPU服务器"><a href="#一、GPU服务器" class="headerlink" title="一、GPU服务器"></a>一、GPU服务器</h1><p>服务器 IP ：<code>172.xx.xx.98</code> （4块NVIDIA <strong>TITAN X</strong> GPU，<strong>32</strong> CPU核心）</p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">zhwhong@news-ai:~$ nvidia-smi</div><div class="line">Mon Mar 13 14:30:39 2017       </div><div class="line">+-----------------------------------------------------------------------------+</div><div class="line">| NVIDIA-SMI 367.48                 Driver Version: 367.48                    |</div><div class="line">|-------------------------------+----------------------+----------------------+</div><div class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</div><div class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</div><div class="line">|===============================+======================+======================|</div><div class="line">|   0  GeForce GTX TIT...  Off  | 0000:01:00.0     Off |                  N/A |</div><div class="line">| 22%   53C    P0    69W / 250W |      0MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   1  GeForce GTX TIT...  Off  | 0000:02:00.0     Off |                  N/A |</div><div class="line">| 22%   57C    P0    72W / 250W |      0MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   2  GeForce GTX TIT...  Off  | 0000:82:00.0     Off |                  N/A |</div><div class="line">| 22%   57C    P0    73W / 250W |      0MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   3  GeForce GTX TIT...  Off  | 0000:83:00.0     Off |                  N/A |</div><div class="line">|  0%   53C    P0    60W / 250W |      0MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line"></div><div class="line">+-----------------------------------------------------------------------------+</div><div class="line">| Processes:                                                       GPU Memory |</div><div class="line">|  GPU       PID  Type  Process name                               Usage      |</div><div class="line">|=============================================================================|</div><div class="line">|  No running processes found                                                 |</div><div class="line">+-----------------------------------------------------------------------------+</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">zhwhong@news-ai:~$ lscpu</div><div class="line">Architecture:          x86_64</div><div class="line">CPU op-mode(s):        32-bit, 64-bit</div><div class="line">Byte Order:            Little Endian</div><div class="line">CPU(s):                32</div><div class="line">On-line CPU(s) list:   0-31</div><div class="line">Thread(s) per core:    2</div><div class="line">Core(s) per socket:    8</div><div class="line">Socket(s):             2</div><div class="line">NUMA node(s):          2</div><div class="line">Vendor ID:             GenuineIntel</div><div class="line">CPU family:            6</div><div class="line">Model:                 63</div><div class="line">Stepping:              2</div><div class="line">CPU MHz:               1201.218</div><div class="line">BogoMIPS:              4800.94</div><div class="line">Virtualization:        VT-x</div><div class="line">L1d cache:             32K</div><div class="line">L1i cache:             32K</div><div class="line">L2 cache:              256K</div><div class="line">L3 cache:              20480K</div><div class="line">NUMA node0 CPU(s):     0-7,16-23</div><div class="line">NUMA node1 CPU(s):     8-15,24-31</div></pre></td></tr></table></figure>
+<p>使用 <code>cat /proc/cpuinfo</code>  命令可以查看每一个cpu核详细信息.</p>
+<h1 id="二、CPU服务器"><a href="#二、CPU服务器" class="headerlink" title="二、CPU服务器"></a>二、CPU服务器</h1><p>服务器 IP ：<code>113.xx.xxx.196</code> （纯CPU服务器，<strong>128核</strong>）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">mye@ubuntu:~$ lscpu</div><div class="line">Architecture:          x86_64</div><div class="line">CPU op-mode(s):        32-bit, 64-bit</div><div class="line">Byte Order:            Little Endian</div><div class="line">CPU(s):                128</div><div class="line">On-line CPU(s) list:   0-127</div><div class="line">Thread(s) per core:    1</div><div class="line">Core(s) per socket:    16</div><div class="line">Socket(s):             8</div><div class="line">NUMA node(s):          8</div><div class="line">Vendor ID:             GenuineIntel</div><div class="line">CPU family:            6</div><div class="line">Model:                 63</div><div class="line">Stepping:              4</div><div class="line">CPU MHz:               1200.031</div><div class="line">BogoMIPS:              4396.82</div><div class="line">Virtualization:        VT-x</div><div class="line">L1d cache:             32K</div><div class="line">L1i cache:             32K</div><div class="line">L2 cache:              256K</div><div class="line">L3 cache:              40960K</div><div class="line">NUMA node0 CPU(s):     0-15</div><div class="line">NUMA node1 CPU(s):     16-31</div><div class="line">NUMA node2 CPU(s):     32-47</div><div class="line">NUMA node3 CPU(s):     48-63</div><div class="line">NUMA node4 CPU(s):     64-79</div><div class="line">NUMA node5 CPU(s):     80-95</div><div class="line">NUMA node6 CPU(s):     96-111</div><div class="line">NUMA node7 CPU(s):     112-127</div></pre></td></tr></table></figure>
+<p>使用 <code>cat /proc/cpuinfo</code>  命令可以查看每一个cpu核详细信息.</p>
+<h1 id="三、mnist测试"><a href="#三、mnist测试" class="headerlink" title="三、mnist测试"></a>三、mnist测试</h1><ul>
+<li>测试代码： <a href="https://github.com/Hzwcode/awesome-deep-learning/tree/master/TensorFlow-Tutorials" target="_blank" rel="external"><strong>zhwhong/awesome-deep-learning/TensorFlow-Tutorials</strong></a></li>
+</ul>
+<h2 id="1-逻辑回归logistic测试"><a href="#1-逻辑回归logistic测试" class="headerlink" title="(1)逻辑回归logistic测试"></a>(1)逻辑回归logistic测试</h2><p>Example: <a href="https://github.com/Hzwcode/awesome-deep-learning/blob/master/TensorFlow-Tutorials/02_logistic_regression.py" target="_blank" rel="external"><strong>02_logistic_regression.py</strong></a></p>
+<p>测试结果：</p>
+<h3 id="a-batch-size-128"><a href="#a-batch-size-128" class="headerlink" title="a.batch_size : 128"></a>a.batch_size : 128</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">—</th>
+<th style="text-align:center">GPU</th>
+<th style="text-align:center">CPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">top信息</td>
+<td style="text-align:center">%CPU：244.2</td>
+<td style="text-align:center">%CPU：472</td>
+</tr>
+<tr>
+<td style="text-align:center">nvidia-smi信息</td>
+<td style="text-align:center">20%左右</td>
+<td style="text-align:center">无</td>
+</tr>
+<tr>
+<td style="text-align:center">mnist运行结果</td>
+<td style="text-align:center">(99, 0.9234, <br> datetime.timedelta(0, 68, 913616)) <br> <strong>统计：68s/100轮</strong></td>
+<td style="text-align:center">(99, 0.92330000000000001, <br> datetime.timedelta(0, 101, 424780)) <br> <strong>统计：101s/100轮</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-batch-size-256"><a href="#b-batch-size-256" class="headerlink" title="b.batch_size : 256"></a>b.batch_size : 256</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">—</th>
+<th style="text-align:center">GPU</th>
+<th style="text-align:center">CPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">top信息</td>
+<td style="text-align:center">%CPU：214.1</td>
+<td style="text-align:center">%CPU：781.1</td>
+</tr>
+<tr>
+<td style="text-align:center">nvidia-smi信息</td>
+<td style="text-align:center">24%左右</td>
+<td style="text-align:center">无</td>
+</tr>
+<tr>
+<td style="text-align:center">mnist运行结果</td>
+<td style="text-align:center">(99, 0.92290000000000005, datetime.timedelta(0, 45, 724627)) <br> <strong>统计：45s/100轮</strong></td>
+<td style="text-align:center">(99, 0.92300000000000004, <br> datetime.timedelta(0, 79, 207202)) <br> <strong>统计：79s/100轮</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="c-batch-size-512"><a href="#c-batch-size-512" class="headerlink" title="c.batch_size : 512"></a>c.batch_size : 512</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">—</th>
+<th style="text-align:center">GPU</th>
+<th style="text-align:center">CPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">top信息</td>
+<td style="text-align:center">%CPU：203.2</td>
+<td style="text-align:center">%CPU：1031</td>
+</tr>
+<tr>
+<td style="text-align:center">nvidia-smi信息</td>
+<td style="text-align:center">29%左右</td>
+<td style="text-align:center">无</td>
+</tr>
+<tr>
+<td style="text-align:center">mnist运行结果</td>
+<td style="text-align:center">(99, 0.92000000000000004, datetime.timedelta(0, 30, 479467)) <br> <strong>统计：30s/100轮</strong></td>
+<td style="text-align:center">(99, 0.92010000000000003,  <br> datetime.timedelta(0, 66, 738092)) <br> <strong>统计：66秒/100轮</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>GPU运行结果：</strong></p>
+<p><img src="logistic_gpu_1.png" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">zhwhong@news-ai:~/MNIST_test$ nvidia-smi</div><div class="line">Mon Mar 13 15:13:32 2017       </div><div class="line">+-----------------------------------------------------------------------------+</div><div class="line">| NVIDIA-SMI 367.48                 Driver Version: 367.48                    |</div><div class="line">|-------------------------------+----------------------+----------------------+</div><div class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</div><div class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</div><div class="line">|===============================+======================+======================|</div><div class="line">|   0  GeForce GTX TIT...  Off  | 0000:01:00.0     Off |                  N/A |</div><div class="line">| 22%   57C    P2    70W / 250W |  11664MiB / 12206MiB |     29%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   1  GeForce GTX TIT...  Off  | 0000:02:00.0     Off |                  N/A |</div><div class="line">| 22%   58C    P2    71W / 250W |  11603MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   2  GeForce GTX TIT...  Off  | 0000:82:00.0     Off |                  N/A |</div><div class="line">| 22%   57C    P2    71W / 250W |  11603MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   3  GeForce GTX TIT...  Off  | 0000:83:00.0     Off |                  N/A |</div><div class="line">| 22%   55C    P2    75W / 250W |  11601MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line"></div><div class="line">+-----------------------------------------------------------------------------+</div><div class="line">| Processes:                                                       GPU Memory |</div><div class="line">|  GPU       PID  Type  Process name                               Usage      |</div><div class="line">|=============================================================================|</div><div class="line">|    0     28564    C   python                                       11660MiB |</div><div class="line">|    1     28564    C   python                                       11599MiB |</div><div class="line">|    2     28564    C   python                                       11599MiB |</div><div class="line">|    3     28564    C   python                                       11597MiB |</div><div class="line">+-----------------------------------------------------------------------------+</div></pre></td></tr></table></figure>
+<p><img src="logistic_gpu_2.png" alt=""></p>
+<p><strong>CPU运行结果：</strong></p>
+<p><img src="logistic_cpu_1.png" alt=""></p>
+<p><img src="logistic_cpu_2.png" alt=""></p>
+<h2 id="2-卷积神经网络conv测试"><a href="#2-卷积神经网络conv测试" class="headerlink" title="(2)卷积神经网络conv测试"></a>(2)卷积神经网络conv测试</h2><p>Example : <a href="https://github.com/Hzwcode/awesome-deep-learning/blob/master/TensorFlow-Tutorials/05_convolutional_net.py" target="_blank" rel="external"><strong>05_convolutional_net.py</strong></a></p>
+<p>测试结果：</p>
+<h3 id="a-batch-size-128-1"><a href="#a-batch-size-128-1" class="headerlink" title="a.batch_size : 128"></a>a.batch_size : 128</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">—</th>
+<th style="text-align:left">GPU</th>
+<th style="text-align:left">CPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">top信息</td>
+<td style="text-align:left">%CPU：141.9</td>
+<td style="text-align:left">%CPU：5224.3</td>
+</tr>
+<tr>
+<td style="text-align:center">nvidia-smi信息</td>
+<td style="text-align:left">75%左右</td>
+<td style="text-align:left">无</td>
+</tr>
+<tr>
+<td style="text-align:center">mnist运行结果</td>
+<td style="text-align:left">(0, 0.93359375, 4, 230888) <br> (1, 0.984375, 7, 929353) <br> (2, 0.97265625, 11, 635471) <br> (3, 0.98828125, 15, 310449) <br> (4, 0.9921875, 19, 3371) <br> (5, 0.98828125, 22, 720680) <br> (6, 1.0, 26, 384165) <br> (7, 0.99609375, 30, 88245) <br> …… <br> (99, 0.9921875, 370, 693523) <br> <strong>平均：3.7s/轮</strong></td>
+<td style="text-align:left">(0, 0.95703125,  54, 907580) <br> (1, 0.98046875, 111, 935452) <br> (2, 0.98828125, 169, 417860) <br> (3, 0.98046875, 227, 60819) <br> (4, 0.9921875, 284, 513000) <br> (5, 0.98828125, 342, 273721) <br> (6, 0.9921875, 399, 981951) <br> (7, 0.984375, 458, 23667) <br> (8, 0.99609375, 516, 282659) <br> …… <br> <strong>平均：57s/轮</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-batch-size-256-1"><a href="#b-batch-size-256-1" class="headerlink" title="b.batch_size : 256"></a>b.batch_size : 256</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">—</th>
+<th style="text-align:left">GPU</th>
+<th style="text-align:left">CPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">top信息</td>
+<td style="text-align:left">%CPU：114.4</td>
+<td style="text-align:left">%CPU：5746</td>
+</tr>
+<tr>
+<td style="text-align:center">nvidia-smi信息</td>
+<td style="text-align:left">82%左右</td>
+<td style="text-align:left">无</td>
+</tr>
+<tr>
+<td style="text-align:center">mnist运行结果</td>
+<td style="text-align:left">(0, 0.6796875, 3, 563670) <br> (1, 0.9609375, 6, 565172) <br> (2, 0.96875, 9, 520787) <br> (3, 0.98828125, 12, 552352) <br> (4, 0.9921875, 15, 509898) <br> (5, 0.984375, 18, 508712) <br> (6, 0.9921875, 21, 465722) <br> …… <br> (99, 1.0, 301, 239776) <br> <strong>平均：3s/轮</strong></td>
+<td style="text-align:left">(0, 0.69921875, 37, 712726) <br> (1, 0.97265625, 75, 387519) <br> (2, 0.984375, 113, 36748) <br> (3, 0.98828125, 150, 694555) <br> (4, 0.98828125, 188, 393595) <br> (5, 0.984375, 225, 962947) <br> (6, 0.98046875, 263, 551988) <br> (7, 0.9921875, 301, 107670) <br> …… <br> <strong>平均：37s/轮</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="c-batch-size-512-1"><a href="#c-batch-size-512-1" class="headerlink" title="c.batch_size : 512"></a>c.batch_size : 512</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">—</th>
+<th style="text-align:left">GPU</th>
+<th style="text-align:left">CPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">top信息</td>
+<td style="text-align:left">%CPU：98.5</td>
+<td style="text-align:left">%CPU：5994</td>
+</tr>
+<tr>
+<td style="text-align:center">nvidia-smi信息</td>
+<td style="text-align:left">90%左右</td>
+<td style="text-align:left">无</td>
+</tr>
+<tr>
+<td style="text-align:center">mnist运行结果</td>
+<td style="text-align:left">(0, 0.09375, 3, 358815) <br> (1, 0.52734375, 5, 918648) <br> (2, 0.91796875, 8, 488475) <br> (3, 0.9296875, 11, 35129) <br> (4, 0.98046875, 13, 605235) <br> (5, 0.96875, 16, 148614) <br> (6, 0.984375, 18, 715051) <br> (7, 0.9765625, 21, 281468) <br> (8, 0.9921875, 23, 854374) <br> …… <br> (99, 1.0, 263, 28433) <br> <strong>平均：2.63s/轮</strong></td>
+<td style="text-align:left">(0, 0.08203125, 31, 125486) <br> (1, 0.796875, 62, 543181) <br> (2, 0.91015625, 94, 522874) <br> (3, 0.9609375, 126, 946088) <br> (4, 0.96484375, 159, 929706) <br> (5, 0.95703125, 193, 230872) <br> (6, 0.9921875, 226, 695604) <br> (7, 0.98828125, 260, 43828) <br> (8, 0.9921875, 293, 214191) <br> (9, 0.99609375, 326, 797200) <br> …… <br> <strong>平均：32.6s/轮</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>GPU运行结果：</strong></p>
+<p><img src="conv_gpu_1.png" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">zhwhong@news-ai:~/MNIST_test$ nvidia-smi</div><div class="line">Mon Mar 13 15:44:49 2017       </div><div class="line">+-----------------------------------------------------------------------------+</div><div class="line">| NVIDIA-SMI 367.48                 Driver Version: 367.48                    |</div><div class="line">|-------------------------------+----------------------+----------------------+</div><div class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</div><div class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</div><div class="line">|===============================+======================+======================|</div><div class="line">|   0  GeForce GTX TIT...  Off  | 0000:01:00.0     Off |                  N/A |</div><div class="line">| 27%   70C    P2   192W / 250W |  11713MiB / 12206MiB |     90%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   1  GeForce GTX TIT...  Off  | 0000:02:00.0     Off |                  N/A |</div><div class="line">| 22%   53C    P2    70W / 250W |  11603MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   2  GeForce GTX TIT...  Off  | 0000:82:00.0     Off |                  N/A |</div><div class="line">| 22%   45C    P2    69W / 250W |  11627MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   3  GeForce GTX TIT...  Off  | 0000:83:00.0     Off |                  N/A |</div><div class="line">| 22%   52C    P5    22W / 250W |  11601MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line"></div><div class="line">+-----------------------------------------------------------------------------+</div><div class="line">| Processes:                                                       GPU Memory |</div><div class="line">|  GPU       PID  Type  Process name                               Usage      |</div><div class="line">|=============================================================================|</div><div class="line">|    0      9587    C   python                                       11709MiB |</div><div class="line">|    1      9587    C   python                                       11599MiB |</div><div class="line">|    2      1552    C   python                                         506MiB |</div><div class="line">|    2      9587    C   python                                       11117MiB |</div><div class="line">|    3      9587    C   python                                       11597MiB |</div><div class="line">+-----------------------------------------------------------------------------+</div></pre></td></tr></table></figure>
+<p><img src="conv_gpu_2.png" alt=""></p>
+<p><strong>CPU运行结果：</strong></p>
+<p><img src="conv_cpu_1.png" alt=""></p>
+<p><img src="conv_cpu_2.png" alt=""></p>
+<h2 id="3-循环神经网络lstm测试"><a href="#3-循环神经网络lstm测试" class="headerlink" title="(3)循环神经网络lstm测试"></a>(3)循环神经网络lstm测试</h2><p>Example : <a href="https://github.com/Hzwcode/awesome-deep-learning/blob/master/TensorFlow-Tutorials/07_lstm.py" target="_blank" rel="external"><strong>07_lstm.py</strong></a></p>
+<p>测试结果：</p>
+<h3 id="batch-size-512"><a href="#batch-size-512" class="headerlink" title="batch_size : 512"></a>batch_size : 512</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">—</th>
+<th style="text-align:left">GPU</th>
+<th style="text-align:left">CPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">top信息</td>
+<td style="text-align:left">%CPU：123.4</td>
+<td style="text-align:left">%CPU：818.4</td>
+</tr>
+<tr>
+<td style="text-align:center">nvidia-smi信息</td>
+<td style="text-align:left">40%左右</td>
+<td style="text-align:left">无</td>
+</tr>
+<tr>
+<td style="text-align:center">mnist运行结果</td>
+<td style="text-align:left">(0, 0.26953125, 2, 390310) <br> (1, 0.37890625, 4, 420676) <br> (2, 0.68359375, 6, 385682) <br> (3, 0.7421875, 8, 494356) <br> (4, 0.7890625, 10, 649750) <br> (5, 0.84375, 12, 547186) <br> (6, 0.83203125, 14, 657817) <br> (7, 0.8671875, 16, 743615) <br> (8, 0.87109375, 18, 737803) <br> …… <br> …… <br> (99, 0.96875, 202, 633241) <br> <strong>平均：2.02s/轮</strong></td>
+<td style="text-align:left">(0, 0.2265625, 10, 367446) <br> (1, 0.3984375, 20, 716101) <br> (2, 0.61328125, 31, 403893) <br> (3, 0.734375, 42, 7851) <br> (4, 0.75, 52, 698565) <br> (5, 0.78515625, 63, 61517) <br> (6, 0.84765625, 73, 529780) <br> (7, 0.84765625, 84, 130221) <br> (8, 0.8828125, 94, 898270) <br> (9, 0.90234375, 105, 455608) <br> …… <br> (99, 0.98046875, 995, 356187) <br> <strong>平均：9.95s/轮</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>GPU运行结果：</strong></p>
+<p><img src="lstm_gpu_1.png" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">zhwhong@news-ai:~/MNIST_test$ nvidia-smi</div><div class="line">Mon Mar 13 16:05:19 2017       </div><div class="line">+-----------------------------------------------------------------------------+</div><div class="line">| NVIDIA-SMI 367.48                 Driver Version: 367.48                    |</div><div class="line">|-------------------------------+----------------------+----------------------+</div><div class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</div><div class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</div><div class="line">|===============================+======================+======================|</div><div class="line">|   0  GeForce GTX TIT...  Off  | 0000:01:00.0     Off |                  N/A |</div><div class="line">| 22%   61C    P2    90W / 250W |    185MiB / 12206MiB |     40%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   1  GeForce GTX TIT...  Off  | 0000:02:00.0     Off |                  N/A |</div><div class="line">| 22%   55C    P5    20W / 250W |    109MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   2  GeForce GTX TIT...  Off  | 0000:82:00.0     Off |                  N/A |</div><div class="line">| 22%   55C    P5    56W / 250W |    109MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   3  GeForce GTX TIT...  Off  | 0000:83:00.0     Off |                  N/A |</div><div class="line">| 22%   54C    P5    21W / 250W |    109MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line"></div><div class="line">+-----------------------------------------------------------------------------+</div><div class="line">| Processes:                                                       GPU Memory |</div><div class="line">|  GPU       PID  Type  Process name                               Usage      |</div><div class="line">|=============================================================================|</div><div class="line">|    0     17988    C   python                                         183MiB |</div><div class="line">|    1     17988    C   python                                         107MiB |</div><div class="line">|    2     17988    C   python                                         107MiB |</div><div class="line">|    3     17988    C   python                                         107MiB |</div><div class="line">+-----------------------------------------------------------------------------+</div></pre></td></tr></table></figure>
+<p><img src="lstm_gpu_2.png" alt=""></p>
+<p><strong>CPU运行结果：</strong></p>
+<p><img src="lstm_cpu_1.png" alt=""></p>
+<p><img src="lstm_cpu_2.png" alt=""></p>
+<hr>
+<p>注：关于训练中每个epoch时间统计，可以使用python <code>datetime</code> 模块，使用<code>datetime.datetime.now()</code> 获取系统时间。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> machine learning </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+            <tag> gpu </tag>
+            
+            <tag> tensorflow </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[GNU MAKE命令]]></title>
+      <url>https://Hzwcode.github.io/2017/03/11/GNU-make/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>代码变成可执行文件，叫做<a href="http://www.ruanyifeng.com/blog/2014/11/compiler.html" target="_blank" rel="external">编译</a>（compile）；先编译这个，还是先编译那个（即编译的安排），叫做<a href="https://en.wikipedia.org/wiki/Software_build" target="_blank" rel="external">构建</a>（build）。</p>
+<p><a href="https://en.wikipedia.org/wiki/Make_%28software%29" target="_blank" rel="external">Make</a>是最常用的构建工具，诞生于1977年，主要用于C语言的项目。但是实际上 ，任何只要某个文件有变化，就要重新构建的项目，都可以用Make构建。</p>
+<p>本文介绍Make命令的用法，从简单的讲起，不需要任何基础，只要会使用命令行，就能看懂。我的参考资料主要是Isaac Schlueter的<a href="https://gist.github.com/isaacs/62a2d1825d04437c6f08" target="_blank" rel="external">《Makefile文件教程》</a>和<a href="https://www.gnu.org/software/make/manual/make.html" target="_blank" rel="external">《GNU Make手册》</a>。</p>
+<a id="more"></a>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-176a6bf4d5dca196.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>（题图：摄于博兹贾阿达岛，土耳其，2013年7月）</p>
+<h2 id="一、Make的概念"><a href="#一、Make的概念" class="headerlink" title="一、Make的概念"></a>一、Make的概念</h2><p>Make这个词，英语的意思是”制作”。Make命令直接用了这个意思，就是要做出某个文件。比如，要做出文件a.txt，就可以执行下面的命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ make a.txt</div></pre></td></tr></table></figure>
+<p>但是，如果你真的输入这条命令，它并不会起作用。因为Make命令本身并不知道，如何做出a.txt，需要有人告诉它，如何调用其他命令完成这个目标。</p>
+<p>比如，假设文件 a.txt 依赖于 b.txt 和 c.txt ，是后面两个文件连接（cat命令）的产物。那么，make 需要知道下面的规则。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a.txt: b.txt c.txt</div><div class="line">    cat b.txt c.txt &gt; a.txt</div></pre></td></tr></table></figure>
+<p>也就是说，make a.txt 这条命令的背后，实际上分成两步：第一步，确认 b.txt 和 c.txt 必须已经存在，第二步使用 cat 命令 将这个两个文件合并，输出为新文件。</p>
+<p>像这样的规则，都写在一个叫做Makefile的文件中，Make命令依赖这个文件进行构建。Makefile文件也可以写为makefile， 或者用命令行参数指定为其他文件名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ make -f rules.txt</div><div class="line"># 或者</div><div class="line">$ make --file=rules.txt</div></pre></td></tr></table></figure>
+<p>上面代码指定make命令依据rules.txt文件中的规则，进行构建。</p>
+<p>总之，make只是一个根据指定的Shell命令进行构建的工具。它的规则很简单，你规定要构建哪个文件、它依赖哪些源文件，当那些文件有变动时，如何重新构建它。</p>
+<h2 id="二、Makefile文件的格式"><a href="#二、Makefile文件的格式" class="headerlink" title="二、Makefile文件的格式"></a>二、Makefile文件的格式</h2><p>构建规则都写在Makefile文件里面，要学会如何Make命令，就必须学会如何编写Makefile文件。</p>
+<h3 id="2-1-概述"><a href="#2-1-概述" class="headerlink" title="2.1 概述"></a>2.1 概述</h3><p>Makefile文件由一系列规则（rules）构成。每条规则的形式如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;target&gt; : &lt;prerequisites&gt;</div><div class="line">[tab]  &lt;commands&gt;</div></pre></td></tr></table></figure>
+<p>上面第一行冒号前面的部分，叫做”目标”（target），冒号后面的部分叫做”前置条件”（prerequisites）；第二行必须由一个tab键起首，后面跟着”命令”（commands）。</p>
+<p>“目标”是必需的，不可省略；”前置条件”和”命令”都是可选的，但是两者之中必须至少存在一个。</p>
+<p>每条规则就明确两件事：构建目标的前置条件是什么，以及如何构建。下面就详细讲解，每条规则的这三个组成部分。</p>
+<h3 id="2-2-目标（target）"><a href="#2-2-目标（target）" class="headerlink" title="2.2 目标（target）"></a>2.2 目标（target）</h3><p>一个目标（target）就构成一条规则。目标通常是文件名，指明Make命令所要构建的对象，比如上文的 a.txt 。目标可以是一个文件名，也可以是多个文件名，之间用空格分隔。</p>
+<p>除了文件名，目标还可以是某个操作的名字，这称为”伪目标”（phony target）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">clean:</div><div class="line">      rm *.o</div></pre></td></tr></table></figure>
+<p>上面代码的目标是clean，它不是文件名，而是一个操作的名字，属于”伪目标 “，作用是删除对象文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ make  clean</div></pre></td></tr></table></figure>
+<p>但是，如果当前目录中，正好有一个文件叫做clean，那么这个命令不会执行。因为Make发现clean文件已经存在，就认为没有必要重新构建了，就不会执行指定的rm命令。</p>
+<p>为了避免这种情况，可以明确声明clean是”伪目标”，写法如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.PHONY: clean</div><div class="line">clean:</div><div class="line">        rm *.o temp</div></pre></td></tr></table></figure>
+<p>声明clean是”伪目标”之后，make就不会去检查是否存在一个叫做clean的文件，而是每次运行都执行对应的命令。像.PHONY这样的内置目标名还有不少，可以查看手册。</p>
+<p>如果Make命令运行时没有指定目标，默认会执行Makefile文件的第一个目标。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ make</div></pre></td></tr></table></figure>
+<p>上面代码执行Makefile文件的第一个目标。</p>
+<h3 id="2-3-前置条件（prerequisites）"><a href="#2-3-前置条件（prerequisites）" class="headerlink" title="2.3 前置条件（prerequisites）"></a>2.3 前置条件（prerequisites）</h3><p>前置条件通常是一组文件名，之间用空格分隔。它指定了”目标”是否重新构建的判断标准：只要有一个前置文件不存在，或者有过更新（前置文件的last-modification时间戳比目标的时间戳新），”目标”就需要重新构建。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">result.txt: source.txt</div><div class="line">    cp source.txt result.txt</div></pre></td></tr></table></figure>
+<p>上面代码中，构建 result.txt 的前置条件是 source.txt 。如果当前目录中，source.txt 已经存在，那么make result.txt可以正常运行，否则必须再写一条规则，来生成 source.txt 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">source.txt:</div><div class="line">    echo &quot;this is the source&quot; &gt; source.txt</div></pre></td></tr></table></figure>
+<p>上面代码中，source.txt后面没有前置条件，就意味着它跟其他文件都无关，只要这个文件还不存在，每次调用make source.txt，它都会生成。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ make result.txt</div><div class="line">$ make result.txt</div></pre></td></tr></table></figure>
+<p>上面命令连续执行两次make result.txt。第一次执行会先新建 source.txt，然后再新建 result.txt。第二次执行，Make发现 source.txt 没有变动（时间戳晚于 result.txt），就不会执行任何操作，result.txt 也不会重新生成。</p>
+<p>如果需要生成多个文件，往往采用下面的写法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source: file1 file2 file3</div></pre></td></tr></table></figure>
+<p>上面代码中，source 是一个伪目标，只有三个前置文件，没有任何对应的命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ make source</div></pre></td></tr></table></figure>
+<p>执行make source命令后，就会一次性生成 file1，file2，file3 三个文件。这比下面的写法要方便很多。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ make file1</div><div class="line">$ make file2</div><div class="line">$ make file3</div></pre></td></tr></table></figure>
+<h3 id="2-4-命令（commands）"><a href="#2-4-命令（commands）" class="headerlink" title="2.4 命令（commands）"></a>2.4 命令（commands）</h3><p>命令（commands）表示如何更新目标文件，由一行或多行的Shell命令组成。它是构建”目标”的具体指令，它的运行结果通常就是生成目标文件。</p>
+<p>每行命令之前必须有一个tab键。如果想用其他键，可以用内置变量.RECIPEPREFIX声明。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.RECIPEPREFIX = &gt;</div><div class="line">all:</div><div class="line">&gt; echo Hello, world</div></pre></td></tr></table></figure>
+<p>上面代码用.RECIPEPREFIX指定，大于号（&gt;）替代tab键。所以，每一行命令的起首变成了大于号，而不是tab键。</p>
+<p>需要注意的是，每行命令在一个单独的shell中执行。这些Shell之间没有继承关系。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var-lost:</div><div class="line">    export foo=bar</div><div class="line">    echo &quot;foo=[$$foo]&quot;</div></pre></td></tr></table></figure>
+<p>上面代码执行后（make var-lost），取不到foo的值。因为两行命令在两个不同的进程执行。一个解决办法是将两行命令写在一行，中间用分号分隔。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var-kept:</div><div class="line">    export foo=bar; echo &quot;foo=[$$foo]&quot;</div></pre></td></tr></table></figure>
+<p>另一个解决办法是在换行符前加反斜杠转义。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var-kept:</div><div class="line">    export foo=bar; \</div><div class="line">    echo &quot;foo=[$$foo]&quot;</div></pre></td></tr></table></figure>
+<p>最后一个方法是加上.ONESHELL:命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.ONESHELL:</div><div class="line">var-kept:</div><div class="line">    export foo=bar;</div><div class="line">    echo &quot;foo=[$$foo]&quot;</div></pre></td></tr></table></figure>
+<h2 id="三、Makefile文件的语法"><a href="#三、Makefile文件的语法" class="headerlink" title="三、Makefile文件的语法"></a>三、Makefile文件的语法</h2><h3 id="3-1-注释"><a href="#3-1-注释" class="headerlink" title="3.1 注释"></a>3.1 注释</h3><p>井号（#）在Makefile中表示注释。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 这是注释</div><div class="line">result.txt: source.txt</div><div class="line">    # 这是注释</div><div class="line">    cp source.txt result.txt # 这也是注释</div></pre></td></tr></table></figure>
+<h3 id="3-2-回声（echoing）"><a href="#3-2-回声（echoing）" class="headerlink" title="3.2 回声（echoing）"></a>3.2 回声（echoing）</h3><p>正常情况下，make会打印每条命令，然后再执行，这就叫做回声（echoing）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">test:</div><div class="line">    # 这是测试</div></pre></td></tr></table></figure>
+<p>执行上面的规则，会得到下面的结果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ make test</div><div class="line"># 这是测试</div></pre></td></tr></table></figure>
+<p>在命令的前面加上@，就可以关闭回声。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">test:</div><div class="line">    @# 这是测试</div></pre></td></tr></table></figure>
+<p>现在再执行make test，就不会有任何输出。</p>
+<p>由于在构建过程中，需要了解当前在执行哪条命令，所以通常只在注释和纯显示的echo命令前面加上@。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">test:</div><div class="line">    @# 这是测试</div><div class="line">    @echo TODO</div></pre></td></tr></table></figure>
+<h3 id="3-3-通配符"><a href="#3-3-通配符" class="headerlink" title="3.3 通配符"></a>3.3 通配符</h3><p>通配符（wildcard）用来指定一组符合条件的文件名。Makefile 的通配符与 Bash 一致，主要有星号（*）、问号（？）和 […] 。比如， *.o 表示所有后缀名为o的文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">clean:</div><div class="line">        rm -f *.o</div></pre></td></tr></table></figure>
+<h3 id="3-4-模式匹配"><a href="#3-4-模式匹配" class="headerlink" title="3.4 模式匹配"></a>3.4 模式匹配</h3><p>Make命令允许对文件名，进行类似正则运算的匹配，主要用到的匹配符是%。比如，假定当前目录下有 f1.c 和 f2.c 两个源码文件，需要将它们编译为对应的对象文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">%.o: %.c</div></pre></td></tr></table></figure>
+<p>等同于下面的写法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">f1.o: f1.c</div><div class="line">f2.o: f2.c</div></pre></td></tr></table></figure>
+<p>使用匹配符%，可以将大量同类型的文件，只用一条规则就完成构建。</p>
+<h3 id="3-5-变量和赋值符"><a href="#3-5-变量和赋值符" class="headerlink" title="3.5 变量和赋值符"></a>3.5 变量和赋值符</h3><p>Makefile 允许使用等号自定义变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">txt = Hello World</div><div class="line">test:</div><div class="line">    @echo $(txt)</div></pre></td></tr></table></figure>
+<p>上面代码中，变量 txt 等于 Hello World。调用时，变量需要放在 $( ) 之中。</p>
+<p>调用Shell变量，需要在美元符号前，再加一个美元符号，这是因为Make命令会对美元符号转义。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">test:</div><div class="line">    @echo $$HOME</div></pre></td></tr></table></figure>
+<p>有时，变量的值可能指向另一个变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">v1 = $(v2)</div></pre></td></tr></table></figure>
+<p>上面代码中，变量 v1 的值是另一个变量 v2。这时会产生一个问题，v1 的值到底在定义时扩展（静态扩展），还是在运行时扩展（动态扩展）？如果 v2 的值是动态的，这两种扩展方式的结果可能会差异很大。</p>
+<p>为了解决类似问题，Makefile一共提供了四个赋值运算符 （=、:=、？=、+=），它们的区别请看StackOverflow。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">VARIABLE = value</div><div class="line"># 在执行时扩展，允许递归扩展。</div><div class="line">VARIABLE := value</div><div class="line"># 在定义时扩展。</div><div class="line">VARIABLE ?= value</div><div class="line"># 只有在该变量为空时才设置值。</div><div class="line">VARIABLE += value</div><div class="line"># 将值追加到变量的尾端。</div></pre></td></tr></table></figure>
+<h3 id="3-6-内置变量（Implicit-Variables）"><a href="#3-6-内置变量（Implicit-Variables）" class="headerlink" title="3.6 内置变量（Implicit Variables）"></a>3.6 内置变量（Implicit Variables）</h3><p>Make命令提供一系列内置变量，比如，$(CC) 指向当前使用的编译器，$(MAKE) 指向当前使用的Make工具。这主要是为了跨平台的兼容性，详细的内置变量清单见手册。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">output:</div><div class="line">    $(CC) -o output input.c</div></pre></td></tr></table></figure>
+<h3 id="3-7-自动变量（Automatic-Variables）"><a href="#3-7-自动变量（Automatic-Variables）" class="headerlink" title="3.7 自动变量（Automatic Variables）"></a>3.7 自动变量（Automatic Variables）</h3><p>Make命令还提供一些自动变量，它们的值与当前规则有关。主要有以下几个。</p>
+<p><em>（1）$@</em></p>
+<pre><code>$@指代当前目标，就是Make命令当前构建的那个目标。比如，make foo的 $@ 就指代foo。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a.txt b.txt:</div><div class="line">    touch $@</div></pre></td></tr></table></figure>
+<p>等同于下面的写法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">a.txt:</div><div class="line">    touch a.txt</div><div class="line">b.txt:</div><div class="line">    touch b.txt</div></pre></td></tr></table></figure>
+<p><em>（2）$&lt;</em></p>
+<p>$&lt; 指代第一个前置条件。比如，规则为 t: p1 p2，那么$&lt; 就指代p1。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a.txt: b.txt c.txt</div><div class="line">    cp $&lt; $@</div></pre></td></tr></table></figure>
+<p>等同于下面的写法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a.txt: b.txt c.txt</div><div class="line">    cp b.txt a.txt</div></pre></td></tr></table></figure>
+<p><em>（3）$?</em></p>
+<pre><code>$? 指代比目标更新的所有前置条件，之间以空格分隔。比如，规则为 t: p1 p2，其中 p2 的时间戳比 t 新，$?就指代p2。
+</code></pre><p><em>（4）$^</em></p>
+<pre><code>$^ 指代所有前置条件，之间以空格分隔。比如，规则为 t: p1 p2，那么 $^ 就指代 p1 p2 。
+</code></pre><p><em>（5）$*</em></p>
+<pre><code>$* 指代匹配符 % 匹配的部分， 比如% 匹配 f1.txt 中的f1 ，$* 就表示 f1。
+</code></pre><p><em>（6）$(@D) 和 $(@F)</em></p>
+<pre><code>$(@D) 和 $(@F) 分别指向 $@ 的目录名和文件名。比如，$@是 src/input.c，那么$(@D) 的值为 src ，$(@F) 的值为 input.c。
+</code></pre><p><em>（7）$(&lt;D)和 $(&lt;F)</em></p>
+<pre><code>$(&lt;D) 和 $(&lt;F) 分别指向 $&lt; 的目录名和文件名。
+</code></pre><p>所有的自动变量清单，请看手册。下面是自动变量的一个例子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dest/%.txt: src/%.txt</div><div class="line">    @[ -d dest ] || mkdir dest</div><div class="line">    cp $&lt; $@</div></pre></td></tr></table></figure>
+<p>上面代码将 src 目录下的 txt 文件，拷贝到 dest 目录下。首先判断 dest 目录是否存在，如果不存在就新建，然后，$&lt; 指代前置文件（src/%.txt）， $@ 指代目标文件（dest/%.txt）。</p>
+<h3 id="3-8-判断和循环"><a href="#3-8-判断和循环" class="headerlink" title="3.8 判断和循环"></a>3.8 判断和循环</h3><p>Makefile使用 Bash 语法，完成判断和循环。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ifeq ($(CC),gcc)</div><div class="line">  libs=$(libs_for_gcc)</div><div class="line">else</div><div class="line">  libs=$(normal_libs)</div><div class="line">endif</div></pre></td></tr></table></figure>
+<p>上面代码判断当前编译器是否 gcc ，然后指定不同的库文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">LIST = one two three</div><div class="line">all:</div><div class="line">    for i in $(LIST); do \</div><div class="line">        echo $$i; \</div><div class="line">    done</div><div class="line"># 等同于</div><div class="line">all:</div><div class="line">    for i in one two three; do \</div><div class="line">        echo $i; \</div><div class="line">    done</div></pre></td></tr></table></figure>
+<p>上面代码的运行结果。</p>
+<blockquote>
+<p>one<br>two<br>three</p>
+</blockquote>
+<h3 id="3-9-函数"><a href="#3-9-函数" class="headerlink" title="3.9 函数"></a>3.9 函数</h3><p>Makefile 还可以使用函数，格式如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(function arguments)</div><div class="line"># 或者</div><div class="line">$&#123;function arguments&#125;</div></pre></td></tr></table></figure>
+<p>Makefile提供了许多<a href="http://www.gnu.org/software/make/manual/html_node/Functions.html" target="_blank" rel="external">内置函数</a>，可供调用。下面是几个常用的内置函数。</p>
+<p>（1）shell 函数</p>
+<p>shell 函数用来执行 shell 命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">srcfiles := $(shell echo src/&#123;00..99&#125;.txt)</div></pre></td></tr></table></figure>
+<p>（2）wildcard 函数</p>
+<p>wildcard 函数用来在 Makefile 中，替换 Bash 的通配符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">srcfiles := $(wildcard src/*.txt)</div></pre></td></tr></table></figure>
+<p>（3）替换函数</p>
+<p>替换函数的写法是：变量名 + 冒号 + 替换规则。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">min: $(OUTPUT:.js=.min.js)</div></pre></td></tr></table></figure>
+<p>上面代码的意思是，将变量OUTPUT中的 .js 全部替换成 .min.js 。</p>
+<h2 id="四、Makefile-的实例"><a href="#四、Makefile-的实例" class="headerlink" title="四、Makefile 的实例"></a>四、Makefile 的实例</h2><h3 id="（1）执行多个目标"><a href="#（1）执行多个目标" class="headerlink" title="（1）执行多个目标"></a>（1）执行多个目标</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">.PHONY: cleanall cleanobj cleandiff</div><div class="line">cleanall : cleanobj cleandiff</div><div class="line">        rm program</div><div class="line">cleanobj :</div><div class="line">        rm *.o</div><div class="line">cleandiff :</div><div class="line">        rm *.diff</div></pre></td></tr></table></figure>
+<p>上面代码可以调用不同目标，删除不同后缀名的文件，也可以调用一个目标（cleanall），删除所有指定类型的文件。</p>
+<h3 id="（2）编译C语言项目"><a href="#（2）编译C语言项目" class="headerlink" title="（2）编译C语言项目"></a>（2）编译C语言项目</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">edit : main.o kbd.o command.o display.o</div><div class="line">    cc -o edit main.o kbd.o command.o display.o</div><div class="line">main.o : main.c defs.h</div><div class="line">    cc -c main.c</div><div class="line">kbd.o : kbd.c defs.h command.h</div><div class="line">    cc -c kbd.c</div><div class="line">command.o : command.c defs.h command.h</div><div class="line">    cc -c command.c</div><div class="line">display.o : display.c defs.h</div><div class="line">    cc -c display.c</div><div class="line">clean :</div><div class="line">     rm edit main.o kbd.o command.o display.o</div><div class="line">.PHONY: edit clean</div></pre></td></tr></table></figure>
+<p>今天，Make命令的介绍就到这里。</p>
+<hr>
+<ul>
+<li>参考：<a href="http://www.ruanyifeng.com/blog/2015/02/make.html" target="_blank" rel="external">阮一峰] - MAKE命令教程</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Linux </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> GNU </tag>
+            
+            <tag> Makefile </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Blog Music Test]]></title>
+      <url>https://Hzwcode.github.io/2017/02/26/music-test/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><center><br><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=38592976&auto=0&height=66"></iframe><br></center>
 
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;center&gt;</div><div class="line">&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=86 src=&quot;//music.163.com/outchain/player?type=2&amp;id=38592976&amp;auto=0&amp;height=66&quot;&gt;&lt;/iframe&gt;</div><div class="line">&lt;/center&gt;</div></pre></td></tr></table></figure>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="450" src="http://music.163.com/outchain/player?type=0&id=3778678&auto=0&height=430"></iframe>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=450 src=&quot;http://music.163.com/outchain/player?type=0&amp;id=3778678&amp;auto=0&amp;height=430&quot;&gt;&lt;/iframe&gt;</div></pre></td></tr></table></figure>
+<div id="aplayer0" class="aplayer" style="margin-bottom: 20px;"></div>
+		<script>
+			new APlayer({
+				element: document.getElementById("aplayer0"),
+				narrow: false,
+				autoplay: false,
+				showlrc: 0,
+				music: {
+					title: "童话镇",
+					author: "陈一发儿",
+					url: "http://mp3.haoduoge.com/s/2016-12-24/1482568978.mp3",
+					pic: "http://p3.music.126.net/tfa811GLreJI_S0h9epqRA==/3394192426154346.jpg?param=130y130",
+				}
+			});
+		</script>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;% aplayer &quot;童话镇&quot; &quot;陈一发儿&quot; &quot;http://mp3.haoduoge.com/s/2016-12-24/1482568978.mp3&quot; &quot;http://p3.music.126.net/tfa811GLreJI_S0h9epqRA==/3394192426154346.jpg?param=130y130&quot; %&#125;</div></pre></td></tr></table></figure>
+<div id="aplayer1" class="aplayer" style="margin-bottom: 20px;"><pre class="aplayer-lrc-content">[ti:告白气球]
+[ar:周杰伦]
+[al:周杰伦的床边故事]
+[by:D.J.]
+歌词千寻 - http://www.lrcgc.com
+[00:00.00]周杰伦 - 告白气球
+[00:08.00]词：方文山
+[00:16.00]曲：周杰伦
+[00:22.90]塞纳河畔 左岸的咖啡
+[00:25.40]我手一杯 品尝你的美
+[00:28.43]留下唇印的嘴
+[00:32.95]花店玫瑰 名字写错谁
+[00:36.59]告白气球 风吹到对街
+[00:39.35]微笑在天上飞
+[00:44.11]你说你有点难追
+[00:46.35]想让我知难而退
+[00:48.62]礼物不需挑最贵
+[00:51.61]只要香榭的落叶
+[00:54.10]喔～营造浪漫的约会
+[00:57.12]不害怕搞砸一切
+[00:59.59]拥有你就拥有 全世界
+[01:04.85]亲爱的 爱上你 从那天起
+[01:11.10]甜蜜的很轻易
+[01:15.60]亲爱的 别任性 你的眼睛
+[01:21.60]在说我愿意
+[01:25.86]
+[01:48.35]塞纳河畔 左岸的咖啡
+[01:50.60]我手一杯 品尝你的美
+[01:54.11]留下唇印的嘴
+[01:58.25]花店玫瑰 名字写错谁
+[02:01.59]告白气球 风吹到对街
+[02:04.60]微笑在天上飞
+[02:09.06]你说你有点难追
+[02:11.60]想让我知难而退
+[02:14.35]礼物不需挑最贵
+[02:16.85]只要香榭的落叶
+[02:19.60]喔～营造浪漫的约会
+[02:22.35]不害怕搞砸一切
+[02:24.61]拥有你就拥有 全世界
+[02:30.11]亲爱的 爱上你 从那天起
+[02:36.60]甜蜜的很轻易
+[02:41.10]亲爱的 别任性 你的眼睛
+[02:47.11]在说我愿意
+[02:51.60]亲爱的 爱上你 恋爱日记
+[02:58.11]飘香水的回忆
+[03:01.57]一整瓶 的梦境 全都有你
+[03:08.11]搅拌在一起
+[03:12.61]亲爱的别任性 你的眼睛
+[03:20.61]在说我愿意
+找歌词，上歌词千寻 www.lrcgc.com。支持歌词找歌名，LRC歌词免费下载。</pre></div>
+		<script>
+			new APlayer({
+				element: document.getElementById("aplayer1"),
+				narrow: false,
+				autoplay: false,
+				showlrc: 2,
+				music: {
+					title: "告白气球",
+					author: "周杰伦",
+					url: "http://mp3.haoduoge.com/s/2016-06-28/1467087399.mp3",
+					pic: "http://p3.music.126.net/cUTk0ewrQtYGP2YpPZoUng==/3265549553028224.jpg?param=130y130",
+				}
+			});
+		</script>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;% aplayer &quot;告白气球&quot; &quot;周杰伦&quot; &quot;http://mp3.haoduoge.com/s/2016-06-28/1467087399.mp3&quot; &quot;http://p3.music.126.net/cUTk0ewrQtYGP2YpPZoUng==/3265549553028224.jpg?param=130y130&quot; &quot;lrc:周杰伦-告白气球.lrc&quot; %&#125;</div></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> tool </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> music </tag>
+            
+        </tags>
+        
+    </entry>
     
     <entry>
       <title><![CDATA[[RNN] Simple LSTM代码实现 & BPTT理论推导]]></title>
-      <url>%2F2017%2F02%2F24%2FBackpropagation-through-time-BPTT%2F</url>
-      <content type="text"><![CDATA[参考：Nico’s Blog - Simple LSTM Github代码：https://github.com/Hzwcode/lstm 前面我们介绍过CNN中普通的BP反向传播算法的推导，但是在RNN（比如LSTM）中，反向传播被称作BPTT（Back Propagation Through Time），它是和时间序列有关的。 A few weeks ago I released some code on Github to help people understand how LSTM’s work at the implementation level. The forward pass is well explained elsewhere and is straightforward to understand, but I derived the backprop equations myself and the backprop code came without any explanation whatsoever. The goal of this post is to explain the so called backpropagation through time in the context of LSTM’s. If you feel like anything is confusing, please post a comment below or submit an issue on Github. Note: this post assumes you understand the forward pass of an LSTM network, as this part is relatively simple. Please read this great intro paper if you are not familiar with this, as it contains a very nice intro to LSTM’s. I follow the same notation as this paper so I recommend reading having the tutorial open in a separate browser tab for easy reference while reading this post. Introduction (Simple LSTM) The forward pass of an LSTM node is defined as follows: (注：这里最后一个式子h(t)的计算，普遍认为s(t)前面还有一个tanh激活，然后再乘以o(t)，不过 peephole LSTM paper中建议此处激活函数采用 f(x) = x，所以这里就没有用tanh（下同），可以参见Wiki - Long_short-term_memory上面所说的) By concatenating the x(t) and h(t-1) vectors as follows: we can rewrite parts of the above as follows: Suppose we have a loss l(t) that we wish to minimize at every time step t that depends on the hidden layer h and the label y at the current time via a loss function f: where f can be any differentiable loss function, such as the Euclidean loss: Our ultimate goal in this case is to use gradient descent to minimize the loss L over an entire sequence of length T： Let’s work through the algebra of computing the loss gradient: where w is a scalar parameter of the model (for example it may be an entry in the matrix W_gx). Since the loss l(t) = f(h(t),y(t)) only depends on the values of the hidden layer h(t) and the label y(t), we have by the chain rule: where h_i(t) is the scalar corresponding to the i’th memory cell’s hidden output and M is the total number of memory cells. Since the network propagates information forwards in time, changing h_i(t) will have no effect on the loss prior to time t, which allows us to write: For notational convenience we introduce the variable L(t) that represents the cumulative loss from step tonwards: such that L(1) is the loss for the entire sequence. This allows us to rewrite the above equation as: With this in mind, we can rewrite our gradient calculation as: Make sure you understand this last equation. The computation of dh_i(t) / dw follows directly follows from the forward propagation equations presented earlier. We now show how to compute dL(t) / dh_i(t) which is where the so called backpropagation through time comes into play. Backpropagation through time (BPTT) This variable L(t) allows us to express the following recursion: Hence, given activation h(t) of an LSTM node at time t, we have that: Now, we know where the first term on the right hand side dl(t) / dh(t) comes from: it’s simply the elementwise derivative of the loss l(t) with respect to the activations h(t) at time t. The second term dL(t+1) / dh(t) is where the recurrent nature of LSTM’s shows up. It shows that the we need the next node’s derivative information in order to compute the current current node’s derivative information. Since we will ultimately need to compute dL(t) / dh(t) for all t = 1, 2, ... , T, we start by computing and work our way backwards through the network. Hence the term backpropagation through time. With these intuitions in place, we jump into the code. Code (Talk is cheap, Show me the code) We now present the code that performs the backprop pass through a single node at time 1 &lt;= t &lt;= T. The code takes as input: And computes: whose values will need to be propagated backwards in time. The code also adds derivatives to: since recall that we must sum the derivatives from each time step: Also, note that we use: where we recall that X_c(t) = [x(t), h(t-1)]. Without any further due, the code: 1234567891011121314151617181920212223242526272829303132333435def top_diff_is(self, top_diff_h, top_diff_s): # notice that top_diff_s is carried along the constant error carousel ds = self.state.o * top_diff_h + top_diff_s do = self.state.s * top_diff_h di = self.state.g * ds dg = self.state.i * ds df = self.s_prev * ds # diffs w.r.t. vector inside sigma / tanh function di_input = (1. - self.state.i) * self.state.i * di df_input = (1. - self.state.f) * self.state.f * df do_input = (1. - self.state.o) * self.state.o * do dg_input = (1. - self.state.g ** 2) * dg # diffs w.r.t. inputs self.param.wi_diff += np.outer(di_input, self.xc) self.param.wf_diff += np.outer(df_input, self.xc) self.param.wo_diff += np.outer(do_input, self.xc) self.param.wg_diff += np.outer(dg_input, self.xc) self.param.bi_diff += di_input self.param.bf_diff += df_input self.param.bo_diff += do_input self.param.bg_diff += dg_input # compute bottom diff dxc = np.zeros_like(self.xc) dxc += np.dot(self.param.wi.T, di_input) dxc += np.dot(self.param.wf.T, df_input) dxc += np.dot(self.param.wo.T, do_input) dxc += np.dot(self.param.wg.T, dg_input) # save bottom diffs self.state.bottom_diff_s = ds * self.state.f self.state.bottom_diff_x = dxc[:self.param.x_dim] self.state.bottom_diff_h = dxc[self.param.x_dim:] Details The forward propagation equations show that modifying s(t) affects the loss L(t) by directly changing the values of h(t) as well as h(t+1). However, modifying s(t) affects L(t+1) only by modifying h(t+1). Therefore, by the chain rule: Since the forward propagation equations state: we get that: Putting all this together we have: 1ds = self.state.o * top_diff_h + top_diff_s The rest of the equations should be straightforward to derive, please let me know if anything is unclear. Test LSTM Network 此 代码 其是通过自己实现 lstm 网络来逼近一个序列，y_list = [-0.5, 0.2, 0.1, -0.5]，测试结果如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687cur iter: 0y_pred[0] : 0.041349y_pred[1] : 0.069304y_pred[2] : 0.116993y_pred[3] : 0.165624loss: 0.753483886253cur iter: 1y_pred[0] : -0.223297y_pred[1] : -0.323066y_pred[2] : -0.394514y_pred[3] : -0.433984loss: 0.599065083953cur iter: 2y_pred[0] : -0.140715y_pred[1] : -0.181836y_pred[2] : -0.219436y_pred[3] : -0.238904loss: 0.445095565699cur iter: 3y_pred[0] : -0.138010y_pred[1] : -0.166091y_pred[2] : -0.203394y_pred[3] : -0.233627loss: 0.428061605701cur iter: 4y_pred[0] : -0.139986y_pred[1] : -0.157368y_pred[2] : -0.195655y_pred[3] : -0.237612loss: 0.413581711096cur iter: 5y_pred[0] : -0.144410y_pred[1] : -0.151859y_pred[2] : -0.191676y_pred[3] : -0.246137loss: 0.399770442382cur iter: 6y_pred[0] : -0.150306y_pred[1] : -0.147921y_pred[2] : -0.189501y_pred[3] : -0.257119loss: 0.386136380384cur iter: 7y_pred[0] : -0.157119y_pred[1] : -0.144659y_pred[2] : -0.188067y_pred[3] : -0.269322loss: 0.372552465753cur iter: 8y_pred[0] : -0.164490y_pred[1] : -0.141537y_pred[2] : -0.186737y_pred[3] : -0.281914loss: 0.358993892096cur iter: 9y_pred[0] : -0.172187y_pred[1] : -0.138216y_pred[2] : -0.185125y_pred[3] : -0.294326loss: 0.345449256686cur iter: 10y_pred[0] : -0.180071y_pred[1] : -0.134484y_pred[2] : -0.183013y_pred[3] : -0.306198loss: 0.331888922037……cur iter: 97y_pred[0] : -0.500351y_pred[1] : 0.201185y_pred[2] : 0.099026y_pred[3] : -0.499154loss: 3.1926009167e-06cur iter: 98y_pred[0] : -0.500342y_pred[1] : 0.201122y_pred[2] : 0.099075y_pred[3] : -0.499190loss: 2.88684626031e-06cur iter: 99y_pred[0] : -0.500331y_pred[1] : 0.201063y_pred[2] : 0.099122y_pred[3] : -0.499226loss: 2.61076360677e-06 可以看出迭代100轮，最后Loss在不断收敛，并且逐渐逼近了预期序列：y_list = [-0.5, 0.2, 0.1, -0.5]。 Reference 深度学习 — 反向传播(BP)理论推导 (zhwhong) Nico’s Blog：Simple LSTM Github仓库：https://github.com/Hzwcode/lstm RECURRENT NEURAL NETWORKS TUTORIAL, PART 3 – BACKPROPAGATION THROUGH TIME AND VANISHING GRADIENTS [福利] 深入理解 RNNs &amp; LSTM 网络学习资料 关于简书中如何编辑Latex数学公式 (喜欢的可以点一下红心，转载请注明出处，谢谢！)]]></content>
+      <url>https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><ul>
+<li>参考：<a href="http://nicodjimenez.github.io/2014/08/08/lstm.html" target="_blank" rel="external">Nico’s Blog - Simple LSTM</a></li>
+<li>Github代码：<a href="https://github.com/Hzwcode/lstm" target="_blank" rel="external">https://github.com/Hzwcode/lstm</a></li>
+</ul>
+<hr>
+<p>前面我们介绍过CNN中普通的<a href="http://www.jianshu.com/p/408ab8177a53" target="_blank" rel="external">BP反向传播算法的推导</a>，但是在RNN（比如<a href="https://en.wikipedia.org/wiki/Long_short-term_memory" target="_blank" rel="external">LSTM</a>）中，反向传播被称作<a href="https://en.wikipedia.org/wiki/Backpropagation_through_time" target="_blank" rel="external">BPTT</a>（Back Propagation Through Time），它是和时间序列有关的。</p>
+<a id="more"></a>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-113aeedc747a3628.gif?imageMogr2/auto-orient/strip" alt="Back Propagation Through Time"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-4ae3ab8b8426cdcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>A few weeks ago I released some <a href="https://github.com/nicodjimenez/lstm" target="_blank" rel="external">code</a> on Github to help people understand how LSTM’s work at the implementation level. The forward pass is well explained elsewhere and is straightforward to understand, but I derived the backprop equations myself and the backprop code came without any explanation whatsoever. The goal of this post is to explain the so called <em>backpropagation through time</em> in the context of LSTM’s.</p>
+<p>If you feel like anything is confusing, please post a comment below or submit an issue on Github.</p>
+<p><strong>Note:</strong> this post assumes you understand the forward pass of an LSTM network, as this part is relatively simple. Please read this <a href="http://arxiv.org/abs/1506.00019" target="_blank" rel="external">great intro paper</a> if you are not familiar with this, as it contains a very nice intro to LSTM’s. I follow the same notation as this paper so I recommend reading having the tutorial open in a separate browser tab for easy reference while reading this post.</p>
+<blockquote>
+<h1 id="Introduction-Simple-LSTM"><a href="#Introduction-Simple-LSTM" class="headerlink" title="Introduction (Simple LSTM)"></a>Introduction (Simple LSTM)</h1></blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-4951e5c5352a88f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="LSTM Block"></p>
+<p>The forward pass of an LSTM node is defined as follows:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\\g(t)%20&amp;=&amp;%20\phi(W_{gx}%20x(t)%20+%20W_{gh}%20h(t-1)%20+%20b_{g})%20\\\\%20i(t)%20&amp;=&amp;%20\sigma(W_{ix}%20x(t)%20+%20W_{ih}%20h(t-1)%20+%20b_{i})%20\\\\%20f(t)%20&amp;=&amp;%20\sigma(W_{fx}%20x(t)%20+%20W_{fh}%20h(t-1)%20+%20b_{f})%20\\\\%20o(t)%20&amp;=&amp;%20\sigma(W_{ox}%20x(t)%20+%20W_{oh}%20h(t-1)%20+%20b_{o})%20\\\\%20s(t)%20&amp;=&amp;%20g(t)%20*%20i(t)%20+%20s(t-1)%20*%20f(t)%20\\\\%20h(t)%20&amp;=&amp;%20s(t)%20*%20o(t)%20\\" alt=""></p>
+<p>(<strong>注</strong>：这里最后一个式子<code>h(t)</code>的计算，普遍认为<code>s(t)</code>前面还有一个tanh激活，然后再乘以<code>o(t)</code>，不过 peephole LSTM paper中建议此处激活函数采用 <code>f(x) = x</code>，所以这里就没有用<code>tanh</code>（下同），可以参见<a href="https://en.wikipedia.org/wiki/Long_short-term_memory" target="_blank" rel="external">Wiki - Long_short-term_memory</a>上面所说的)</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-ad0508a2df64e3ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>By concatenating the <code>x(t)</code> and <code>h(t-1)</code> vectors as follows:</p>
+<p><img src="http://latex.codecogs.com/png.latex?x_c(t)%20=%20[x(t),%20h(t-1)]" alt=""></p>
+<p>we can rewrite parts of the above as follows:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\\g(t)%20&amp;=&amp;%20\phi(W_{g}%20x_c(t)%20+%20b_{g})%20\\\\%20i(t)%20&amp;=&amp;%20\sigma(W_{i}%20x_c(t)%20+%20b_{i})%20\\\\%20f(t)%20&amp;=&amp;%20\sigma(W_{f}%20x_c(t)%20+%20b_{f})%20\\\\%20o(t)%20&amp;=&amp;%20\sigma(W_{o}%20x_c(t)%20+%20b_{o})" alt=""></p>
+<p>Suppose we have a loss <code>l(t)</code> that we wish to minimize at every time step <code>t</code> that depends on the hidden layer <code>h</code> and the label <code>y</code> at the current time via a loss function <code>f</code>:</p>
+<p><img src="http://latex.codecogs.com/png.latex?l(t)%20=%20f(h(t),%20y(t))" alt=""></p>
+<p>where <code>f</code> can be any differentiable loss function, such as the Euclidean loss:</p>
+<p><img src="http://latex.codecogs.com/png.latex?l(t)%20=%20f(h(t),%20y(t))%20=%20\|%20h(t)%20-%20y(t)%20\|^2" alt=""></p>
+<p>Our ultimate goal in this case is to use gradient descent to minimize the loss <code>L</code> over an entire sequence of length <code>T</code>：</p>
+<p><img src="http://latex.codecogs.com/png.latex?L%20=%20\sum_{t=1}^{T}%20l(t)" alt=""></p>
+<p>Let’s work through the algebra of computing the loss gradient:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{dL}{dw}" alt=""></p>
+<p>where <code>w</code> is a scalar parameter of the model (for example it may be an entry in the matrix <code>W_gx</code>). Since the loss <code>l(t) = f(h(t),y(t))</code> only depends on the values of the hidden layer <code>h(t)</code> and the label <code>y(t)</code>, we have by the chain rule:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{dL}{dw}%20=%20\sum_{t%20=%201}^{T}%20\sum_{i%20=%201}^{M}%20\frac{dL}{dh_i(t)}\frac{dh_i(t)}{dw}" alt=""></p>
+<p>where <code>h_i(t)</code> is the scalar corresponding to the <code>i’th</code> memory cell’s hidden output and <code>M</code> is the total number of memory cells. Since the network propagates information forwards in time, changing <code>h_i(t)</code> will have no effect on the loss prior to time <code>t</code>, which allows us to write:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{dL}{dh_i(t)}%20=%20\sum_{s=1}^T%20\frac{dl(s)}{dh_i(t)}%20=%20\sum_{s=t}^T%20\frac{dl(s)}{dh_i(t)}" alt=""></p>
+<p>For notational convenience we introduce the variable <code>L(t)</code> that represents the cumulative loss from step tonwards:</p>
+<p><img src="http://latex.codecogs.com/png.latex?L(t)%20=%20\sum_{s=t}^{s=T}%20l(s)" alt=""></p>
+<p>such that <code>L(1)</code> is the loss for the entire sequence. This allows us to rewrite the above equation as:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{dL}{dh_i(t)}%20=%20\sum_{s=t}^T%20\frac{dl(s)}{dh_i(t)}%20=%20\frac{dL(t)}{dh_i(t)}" alt=""></p>
+<p>With this in mind, we can rewrite our gradient calculation as:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{dL}{dw}%20=%20\sum_{t%20=%201}^{T}%20\sum_{i%20=%201}^{M}%20\frac{dL(t)}{dh_i(t)}\frac{dh_i(t)}{dw}" alt=""></p>
+<p>Make sure you understand this last equation. The computation of <code>dh_i(t) / dw</code> follows directly follows from the forward propagation equations presented earlier. We now show how to compute <code>dL(t) / dh_i(t)</code> which is where the so called <strong><em>backpropagation through time</em></strong> comes into play.</p>
+<blockquote>
+<h1 id="Backpropagation-through-time-BPTT"><a href="#Backpropagation-through-time-BPTT" class="headerlink" title="Backpropagation through time (BPTT)"></a>Backpropagation through time (BPTT)</h1></blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-113aeedc747a3628.gif?imageMogr2/auto-orient/strip" alt="Back Propagation Through Time"></p>
+<p>This variable <code>L(t)</code> allows us to express the following recursion:</p>
+<p><img src="http://latex.codecogs.com/png.latex?L(t)%20=%20\begin{cases}%20l(t)%20+%20L(t+1)%20&amp;%20\text{if}%20\,%20t%20%3C%20T%20\\%20l(t)%20&amp;%20\text{if}%20\,%20t%20=%20T%20\end{cases}" alt=""></p>
+<p>Hence, given activation <code>h(t)</code> of an LSTM node at time <code>t</code>, we have that:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{dL(t)}{dh(t)}%20=%20\frac{dl(t)}{dh(t)}%20+%20\frac{dL(t+1)}{dh(t)}" alt=""></p>
+<p>Now, we know where the first term on the right hand side <code>dl(t) / dh(t)</code> comes from: it’s simply the elementwise derivative of the loss <code>l(t)</code> with respect to the activations <code>h(t)</code> at time <code>t</code>. The second term <code>dL(t+1) / dh(t)</code> is where the recurrent nature of LSTM’s shows up. It shows that the we need the <em>next</em> node’s derivative information in order to compute the current <em>current</em> node’s derivative information. Since we will ultimately need to compute <code>dL(t) / dh(t)</code> for all <code>t = 1, 2, ... , T</code>, we start by computing</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{dL(T)}{dh(T)}%20=%20\frac{dl(T)}{dh(T)}" alt=""></p>
+<p>and work our way backwards through the network. Hence the term <em>backpropagation through time</em>. With these intuitions in place, we jump into the code.</p>
+<blockquote>
+<h1 id="Code-Talk-is-cheap-Show-me-the-code"><a href="#Code-Talk-is-cheap-Show-me-the-code" class="headerlink" title="Code (Talk is cheap, Show me the code)"></a>Code (Talk is cheap, Show me the code)</h1></blockquote>
+<p>We now present the code that performs the backprop pass through a single node at time <code>1 &lt;= t &lt;= T</code>. The code takes as input:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-98208ee1ecaa495f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>And computes:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-28f4a30188b7dd3e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>whose values will need to be propagated backwards in time. The code also adds derivatives to:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-8c47979fe8d86be1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>since recall that we must sum the derivatives from each time step:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{dL}{dw}%20=%20\sum_{t%20=%201}^{T}%20\sum_{i%20=%201}^{M}%20\frac{dL(t)}{dh_i(t)}\frac{dh_i(t)}{dw}" alt=""></p>
+<p>Also, note that we use:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-34424089b87efa6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>where we recall that <code>X_c(t) = [x(t), h(t-1)]</code>. Without any further due, the code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">top_diff_is</span><span class="params">(self, top_diff_h, top_diff_s)</span>:</span></div><div class="line">    <span class="comment"># notice that top_diff_s is carried along the constant error carousel</span></div><div class="line">    ds = self.state.o * top_diff_h + top_diff_s</div><div class="line">    do = self.state.s * top_diff_h</div><div class="line">    di = self.state.g * ds</div><div class="line">    dg = self.state.i * ds</div><div class="line">    df = self.s_prev * ds</div><div class="line"></div><div class="line">    <span class="comment"># diffs w.r.t. vector inside sigma / tanh function</span></div><div class="line">    di_input = (<span class="number">1.</span> - self.state.i) * self.state.i * di</div><div class="line">    df_input = (<span class="number">1.</span> - self.state.f) * self.state.f * df</div><div class="line">    do_input = (<span class="number">1.</span> - self.state.o) * self.state.o * do</div><div class="line">    dg_input = (<span class="number">1.</span> - self.state.g ** <span class="number">2</span>) * dg</div><div class="line"></div><div class="line">    <span class="comment"># diffs w.r.t. inputs</span></div><div class="line">    self.param.wi_diff += np.outer(di_input, self.xc)</div><div class="line">    self.param.wf_diff += np.outer(df_input, self.xc)</div><div class="line">    self.param.wo_diff += np.outer(do_input, self.xc)</div><div class="line">    self.param.wg_diff += np.outer(dg_input, self.xc)</div><div class="line">    self.param.bi_diff += di_input</div><div class="line">    self.param.bf_diff += df_input</div><div class="line">    self.param.bo_diff += do_input</div><div class="line">    self.param.bg_diff += dg_input</div><div class="line"></div><div class="line">    <span class="comment"># compute bottom diff</span></div><div class="line">    dxc = np.zeros_like(self.xc)</div><div class="line">    dxc += np.dot(self.param.wi.T, di_input)</div><div class="line">    dxc += np.dot(self.param.wf.T, df_input)</div><div class="line">    dxc += np.dot(self.param.wo.T, do_input)</div><div class="line">    dxc += np.dot(self.param.wg.T, dg_input)</div><div class="line"></div><div class="line">    <span class="comment"># save bottom diffs</span></div><div class="line">    self.state.bottom_diff_s = ds * self.state.f</div><div class="line">    self.state.bottom_diff_x = dxc[:self.param.x_dim]</div><div class="line">    self.state.bottom_diff_h = dxc[self.param.x_dim:]</div></pre></td></tr></table></figure>
+<blockquote>
+<h1 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h1></blockquote>
+<p>The forward propagation equations show that modifying <code>s(t)</code> affects the loss <code>L(t)</code> by directly changing the values of <code>h(t)</code> as well as <code>h(t+1)</code>. However, modifying <code>s(t)</code> affects <code>L(t+1)</code> only by modifying <code>h(t+1)</code>. Therefore, by the chain rule:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\\\frac{dL(t)}{ds_i(t)}%20=%20\frac{dL(t)}{dh_i(t)}%20\frac{dh_i(t)}{ds_i(t)}%20+%20\frac{dL(t)}{dh_i(t+1)}%20\frac{dh_i(t+1)}{ds_i(t)}%20\\\\\\=%20\frac{dL(t)}{dh_i(t)}%20\frac{dh_i(t)}{ds_i(t)}%20+%20\frac{dL(t+1)}{dh_i(t+1)}%20\frac{dh_i(t+1)}{ds_i(t)}%20\\\\\\=%20\frac{dL(t)}{dh_i(t)}%20\frac{dh_i(t)}{ds_i(t)}%20+%20\frac{dL(t+1)}{ds_i(t)}%20\\\\\\%20=%20\frac{dL(t)}{dh_i(t)}%20\frac{dh_i(t)}{ds_i(t)}%20+%20[\texttt{top\_diff\_s}]_i%20\\" alt=""></p>
+<p>Since the forward propagation equations state:</p>
+<p><img src="http://latex.codecogs.com/png.latex?h(t)%20=%20s(t)%20*%20o(t)" alt=""></p>
+<p>we get that:</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{dL(t)}{dh_i(t)}%20*%20\frac{dh_i(t)}{ds_i(t)}%20=%20o_i(t)%20*%20[\texttt{top\_diff\_h}]_i" alt=""></p>
+<p>Putting all this together we have:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ds = self.state.o * top_diff_h + top_diff_s</div></pre></td></tr></table></figure>
+<p>The rest of the equations should be straightforward to derive, please let me know if anything is unclear.</p>
+<hr>
+<blockquote>
+<h1 id="Test-LSTM-Network"><a href="#Test-LSTM-Network" class="headerlink" title="Test  LSTM Network"></a>Test  LSTM Network</h1></blockquote>
+<p>此 <a href="https://github.com/Hzwcode/lstm" target="_blank" rel="external">代码</a> 其是通过自己实现 lstm 网络来逼近一个序列，y_list = [-0.5, 0.2, 0.1, -0.5]，测试结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line">cur iter:  0</div><div class="line">y_pred[0] : 0.041349</div><div class="line">y_pred[1] : 0.069304</div><div class="line">y_pred[2] : 0.116993</div><div class="line">y_pred[3] : 0.165624</div><div class="line">loss:  0.753483886253</div><div class="line">cur iter:  1</div><div class="line">y_pred[0] : -0.223297</div><div class="line">y_pred[1] : -0.323066</div><div class="line">y_pred[2] : -0.394514</div><div class="line">y_pred[3] : -0.433984</div><div class="line">loss:  0.599065083953</div><div class="line">cur iter:  2</div><div class="line">y_pred[0] : -0.140715</div><div class="line">y_pred[1] : -0.181836</div><div class="line">y_pred[2] : -0.219436</div><div class="line">y_pred[3] : -0.238904</div><div class="line">loss:  0.445095565699</div><div class="line">cur iter:  3</div><div class="line">y_pred[0] : -0.138010</div><div class="line">y_pred[1] : -0.166091</div><div class="line">y_pred[2] : -0.203394</div><div class="line">y_pred[3] : -0.233627</div><div class="line">loss:  0.428061605701</div><div class="line">cur iter:  4</div><div class="line">y_pred[0] : -0.139986</div><div class="line">y_pred[1] : -0.157368</div><div class="line">y_pred[2] : -0.195655</div><div class="line">y_pred[3] : -0.237612</div><div class="line">loss:  0.413581711096</div><div class="line">cur iter:  5</div><div class="line">y_pred[0] : -0.144410</div><div class="line">y_pred[1] : -0.151859</div><div class="line">y_pred[2] : -0.191676</div><div class="line">y_pred[3] : -0.246137</div><div class="line">loss:  0.399770442382</div><div class="line">cur iter:  6</div><div class="line">y_pred[0] : -0.150306</div><div class="line">y_pred[1] : -0.147921</div><div class="line">y_pred[2] : -0.189501</div><div class="line">y_pred[3] : -0.257119</div><div class="line">loss:  0.386136380384</div><div class="line">cur iter:  7</div><div class="line">y_pred[0] : -0.157119</div><div class="line">y_pred[1] : -0.144659</div><div class="line">y_pred[2] : -0.188067</div><div class="line">y_pred[3] : -0.269322</div><div class="line">loss:  0.372552465753</div><div class="line">cur iter:  8</div><div class="line">y_pred[0] : -0.164490</div><div class="line">y_pred[1] : -0.141537</div><div class="line">y_pred[2] : -0.186737</div><div class="line">y_pred[3] : -0.281914</div><div class="line">loss:  0.358993892096</div><div class="line">cur iter:  9</div><div class="line">y_pred[0] : -0.172187</div><div class="line">y_pred[1] : -0.138216</div><div class="line">y_pred[2] : -0.185125</div><div class="line">y_pred[3] : -0.294326</div><div class="line">loss:  0.345449256686</div><div class="line">cur iter:  10</div><div class="line">y_pred[0] : -0.180071</div><div class="line">y_pred[1] : -0.134484</div><div class="line">y_pred[2] : -0.183013</div><div class="line">y_pred[3] : -0.306198</div><div class="line">loss:  0.331888922037</div><div class="line"></div><div class="line">……</div><div class="line"></div><div class="line">cur iter:  97</div><div class="line">y_pred[0] : -0.500351</div><div class="line">y_pred[1] : 0.201185</div><div class="line">y_pred[2] : 0.099026</div><div class="line">y_pred[3] : -0.499154</div><div class="line">loss:  3.1926009167e-06</div><div class="line">cur iter:  98</div><div class="line">y_pred[0] : -0.500342</div><div class="line">y_pred[1] : 0.201122</div><div class="line">y_pred[2] : 0.099075</div><div class="line">y_pred[3] : -0.499190</div><div class="line">loss:  2.88684626031e-06</div><div class="line">cur iter:  99</div><div class="line">y_pred[0] : -0.500331</div><div class="line">y_pred[1] : 0.201063</div><div class="line">y_pred[2] : 0.099122</div><div class="line">y_pred[3] : -0.499226</div><div class="line">loss:  2.61076360677e-06</div></pre></td></tr></table></figure>
+<p>可以看出迭代100轮，最后Loss在不断收敛，并且逐渐逼近了预期序列：y_list = [-0.5, 0.2, 0.1, -0.5]。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="http://www.jianshu.com/p/408ab8177a53" target="_blank" rel="external">深度学习 — 反向传播(BP)理论推导 (zhwhong)</a></li>
+<li><a href="http://nicodjimenez.github.io/2014/08/08/lstm.html" target="_blank" rel="external">Nico’s Blog：Simple LSTM</a></li>
+<li><a href="https://github.com/Hzwcode/lstm" target="_blank" rel="external">Github仓库：https://github.com/Hzwcode/lstm</a></li>
+<li><a href="http://www.wildml.com/2015/10/recurrent-neural-networks-tutorial-part-3-backpropagation-through-time-and-vanishing-gradients/" target="_blank" rel="external">RECURRENT NEURAL NETWORKS TUTORIAL, PART 3 – BACKPROPAGATION THROUGH TIME AND VANISHING GRADIENTS</a></li>
+<li><a href="http://www.jianshu.com/p/c930d61e1f16" target="_blank" rel="external">[福利] 深入理解 RNNs &amp; LSTM 网络学习资料</a></li>
+<li><a href="http://www.jianshu.com/p/c7e3f417641c" target="_blank" rel="external">关于简书中如何编辑Latex数学公式</a></li>
+</ul>
+<hr>
+<p>(转载请联系作者并注明出处，谢谢！)</p>
+]]></content>
+      
+        <categories>
+            
+            <category> machine learning </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+        </tags>
+        
     </entry>
-
     
     <entry>
       <title><![CDATA[深度学习 — 反向传播(BP)理论推导]]></title>
-      <url>%2F2017%2F02%2F24%2FBackpropagation-principle%2F</url>
-      <content type="text"><![CDATA[关于简书中如何编辑Latex数学公式 [RNN] Simple LSTM代码实现 &amp; BPTT理论推导 【知识预备】： UFLDL教程 - 反向传导算法 首先我们不讲数学，先上图解，看完图不懂再看后面： “BP” Math Principle======================================================================Example：下面看一个简单的三层神经网络模型，一层输入层，一层隐藏层，一层输出层。 注：定义输入分别为x1, x2（对应图中的i1，i2），期望输出为y1，y2，假设logistic函数采用sigmoid函数: 易知： 下面开始正式分析(纯手打！！！)。 ====================================================================== 前向传播首先分析神经元h1： 同理可得神经元h2： 对输出层神经元重复这个过程，使用隐藏层神经元的输出作为输入。这样就能给出o1，o2的输入输出： 现在开始统计所有误差，如下： ====================================================================== 反向传播【输出层】对于w5，想知道其改变对总误差有多少影响，于是求Jtotal对w5的偏导数，如下： 分别求每一项： 于是有Jtotal对w5的偏导数： 据此更新权重w5，有： 同理可以更新参数w6，w7，w8。在有新权重导入隐藏层神经元（即，当继续下面的反向传播算法时，使用原始权重，而不是更新的权重）之后，执行神经网络中的实际更新。 【隐藏层】 对于w1，想知道其改变对总误差有多少影响，于是求Jtotal对w1的偏导数，如下： 分别求每一项： 于是有Jtotal对w1的偏导数： 据此更新w1，有： 同理可以更新参数w2，w3，w4。 ====================================================================== 应用实例假设对于上述简单三层网络模型，按如下方式初始化权重和偏置： 根据上述推导的公式：由 得到：input(h1) = 0.15 * 0.05 + 0.20 * 0.10 + 0.35 = 0.3775output(h1) = f(input(h1)) = 1 / (1 + e^(-input(h1))) = 1 / (1 + e^-0.3775) = 0.593269992 同样得到：input(h2) = 0.25 * 0.05 + 0.30 * 0.10 + 0.35 = 0.3925output(h2) = f(input(h2)) = 1 / (1 + e^(-input(h2))) = 1 / (1 + e^-0.3925) = 0.596884378 对输出层神经元重复这个过程，使用隐藏层神经元的输出作为输入。这样就能给出o1的输出：input(o1) = w5 * output(h1) + w6 * (output(h2)) + b2 = 0.40 * 0.593269992 + 0.45 * 0.596884378 + 0.60 = 1.105905967output(o1) = f(input(o1)) = 1 / (1 + e^-1.105905967) = 0.75136507 同理output(o2) = 0.772928465 开始统计所有误差，求代价函数：Jo1 = 1/2 * (0.75136507 - 0.01)^2 = 0.298371109Jo2 = 1/2 * (0.772928465 - 0.99)^2 = 0.023560026 综合所述，可以得到总误差为：Jtotal = Jo1 + Jo2 = 0.321931135 然后反向传播，根据公式 求出 Jtotal对w5的偏导数为:a = (0.75136507 - 0.01)*0.75136507*(1-0.75136507)*0.593269992 = 0.082167041 为了减少误差，然后从当前的权重减去这个值（可选择乘以一个学习率，比如设置为0.5），得：w5+ = w5 - eta * a = 0.40 - 0.5 * 0.082167041 = 0.35891648 同理可以求出：w6+ = 0.408666186w7+ = 0.511301270w8+ = 0.561370121 对于隐藏层，更新w1，求Jtotal对w1的偏导数： 偏导数为：b = (tmp1 + tmp2) * tmp3 tmp1 = (0.75136507 - 0.01) * [0.75136507 * (1 - 0.75136507)] * 0.40 = 0.74136507 * 0.186815602 * 0.40 = 0.055399425tmp2 = -0.019049119tmp3 = 0.593269992 * (1 - 0.593269992) * 0.05 = 0.012065035 于是b = 0.000438568 更新权重w1为：w1+ = w1 - eta * b = 0.15 - 0.5 * 0.000438568 = 0.149780716 同样可以求得：w2+ = 0.19956143w3+ = 0.24975114w4+ = 0.29950229 最后，更新了所有的权重！ 当最初前馈传播时输入为0.05和0.1，网络上的误差是0.298371109。 在第一轮反向传播之后，总误差现在下降到0.291027924。 它可能看起来不太多，但是在重复此过程10,000次之后。例如，错误倾斜到0.000035085。在这一点上，当前馈输入为0.05和0.1时，两个输出神经元产生0.015912196（相对于目标为0.01）和0.984065734（相对于目标为0.99），已经很接近了O(∩_∩)O~~ Reference https://zhuanlan.zhihu.com/p/23270674 Principles of training multi-layer neural network using backpropagation [RNN] Simple LSTM代码实现 &amp; BPTT理论推导 简书中如何编辑Latex数学公式 (转载请注明出处： 深度学习 — 反向传播(BP)理论推导(zhwhong))]]></content>
+      <url>https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><ul>
+<li><a href="http://www.jianshu.com/p/c7e3f417641c" target="_blank" rel="external">关于简书中如何编辑Latex数学公式</a></li>
+<li><a href="http://www.jianshu.com/p/2aca6e8ac7c8" target="_blank" rel="external">[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</a></li>
+</ul>
+<hr>
+<p>【知识预备】： <a href="http://deeplearning.stanford.edu/wiki/index.php/%E5%8F%8D%E5%90%91%E4%BC%A0%E5%AF%BC%E7%AE%97%E6%B3%95" target="_blank" rel="external">UFLDL教程 - 反向传导算法</a></p>
+<p>首先我们不讲数学，先上图解，看完图不懂再看后面：</p>
+<a id="more"></a>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-be0f5712599bf47b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-190148f7a5f6d59a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<hr>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-9c0e2a3e41e50184.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-67d7988a4783c6a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-6c9b26999076e229.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-25ed873c3fd53595.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-2af819d45509d1e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-40c7e1c9c6f8cd66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<hr>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-73012c1bbefe6fd4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-d95cd8caa246cfd5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-7b7e599bf97627ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-ef5d956b6c35c904.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-e801483bf206b984.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-74eacee144d4ac4b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<hr>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-7ad6f7e9368f4c91.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-6cb99673d9ba0fa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-7420efdf411bbf82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-ce90b252f0901bc6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-d830f54f90ba8f24.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-84cef5edf507cd73.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<hr>
+<h1 id="“BP”-Math-Principle"><a href="#“BP”-Math-Principle" class="headerlink" title="“BP” Math Principle"></a>“BP” Math Principle</h1><p>======================================================================<br><strong>Example</strong>：下面看一个简单的三层神经网络模型，一层输入层，一层隐藏层，一层输出层。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-4a6d84a2e3f81c87.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>注：定义输入分别为x1, x2（对应图中的i1，i2），期望输出为y1，y2，假设logistic函数采用sigmoid函数:</p>
+<p><img src="http://latex.codecogs.com/png.latex?y%20=%20f(x)=sigmoid(x)%20=\frac{1}{1%20+%20e^{-x}}" alt=""></p>
+<p>易知：<br><img src="http://latex.codecogs.com/png.latex?f%27(x)%20=%20f(x)%20*%20(1%20-%20f(x))" alt=""></p>
+<p>下面开始正式分析(纯手打！！！)。</p>
+<p>======================================================================</p>
+<h1 id="前向传播"><a href="#前向传播" class="headerlink" title="前向传播"></a><strong>前向传播</strong></h1><p>首先分析神经元h1： </p>
+<p><img src="http://latex.codecogs.com/png.latex?input_{(h1)}%20=%20w1%20*%20x1%20+%20w2%20*%20x2%20+%20b1" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?output_{(h1)}%20=%20f(input_{(h1)})%20=%20\frac{1}{1%20+%20e^{-(w1*x1+w2*x2+b1)}}" alt=""></p>
+<p>同理可得神经元h2：<br><img src="http://latex.codecogs.com/png.latex?input_{(h2)}%20=%20w3%20*%20x1%20+%20w4%20*%20x2%20+%20b1" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?output_{(h2)}%20=%20f(input_{(h2)})%20=%20\frac{1}{1%20+%20e^{-(w3*x1+w4*x2+b1)}}" alt=""></p>
+<p>对输出层神经元重复这个过程，使用隐藏层神经元的输出作为输入。这样就能给出o1，o2的输入输出：<br><img src="http://latex.codecogs.com/png.latex?input_{(o1)}%20=%20w5%20*%20output_{(h1)}%20+%20w6%20*%20output_{(h2)}%20+%20b2" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?output_{(o1)}%20=%20f(input_{(o1)})" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?input_{(o2)}%20=%20w7%20*%20output_{(h1)}%20+%20w8%20*%20output_{(h2)}%20+%20b2" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?output_{(o2)}%20=%20f(input_{(o2)})" alt=""></p>
+<p>现在开始统计所有误差，如下：<br><img src="http://latex.codecogs.com/png.latex?J_{total}%20=%20\sum%20\frac{1}{2}(output%20-%20target)^2%20=%20J_{o1}+J_{o2}" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?J_{o1}%20=%20\frac{1}{2}(output(o1)-y1)^2" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?J_{o2}%20=%20\frac{1}{2}(output(o2)-y2)^2" alt=""></p>
+<p>======================================================================</p>
+<h1 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a><strong>反向传播</strong></h1><h2 id="【输出层】"><a href="#【输出层】" class="headerlink" title="【输出层】"></a><strong>【输出层】</strong></h2><p>对于w5，想知道其改变对总误差有多少影响，于是求Jtotal对w5的偏导数，如下：<br><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{total}}{\partial%20w5}=\frac{\partial%20J_{total}}{\partial%20output_{(o1)}}*\frac{\partial%20output_{(o1)}}{\partial%20input_{(o1)}}*\frac{\partial%20input_{(o1)}}{\partial%20w5}" alt=""></p>
+<p>分别求每一项：<br><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{total}}{\partial%20output_{(o1)}}=\frac{\partial%20J_{o1}}{\partial%20output_{(o1)}}=output_{(o1)}-y_1" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20output_{(o1)}}{\partial%20input_{(o1)}}%20=%20f%27(input_{(o1)})=output_{(o1)}*(1%20-%20output_{(o1)})" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20input_{(o1)}}{\partial%20w5}=\frac{\partial%20(w5%20*%20output_{(h1)}%20+%20w6%20*%20output_{(h2)}%20+%20b2)}{\partial%20w5}=output_{(h1)}" alt=""></p>
+<p>于是有Jtotal对w5的偏导数：<br><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{total}}{\partial%20w5}=(output_{(o1)}-y1)*[output_{(o1)}*(1%20-%20output_{(o1)})]*output_{(h1)}" alt=""></p>
+<p>据此更新权重w5，有：<br><img src="http://latex.codecogs.com/png.latex?w5^+%20=%20w5%20-%20\eta*\frac{\partial%20J_{total}}{\partial%20w5}" alt=""></p>
+<p>同理可以更新参数w6，w7，w8。<br>在有新权重导入隐藏层神经元（即，当继续下面的反向传播算法时，使用原始权重，而不是更新的权重）之后，执行神经网络中的实际更新。</p>
+<h2 id="【隐藏层】"><a href="#【隐藏层】" class="headerlink" title="【隐藏层】"></a><strong>【隐藏层】</strong></h2><p><img src="http://upload-images.jianshu.io/upload_images/145616-4f4ed88c60ee15e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>对于w1，想知道其改变对总误差有多少影响，于是求Jtotal对w1的偏导数，如下：<br><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{total}}{\partial%20w1}=\frac{\partial%20J_{total}}{\partial%20output_{(h1)}}*\frac{\partial%20output_{(h1)}}{\partial%20input_{(h1)}}*\frac{\partial%20input_{(h1)}}{\partial%20w1}" alt=""></p>
+<p>分别求每一项：</p>
+<hr>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{total}}{\partial%20output_{(h1)}}=\frac{\partial%20J_{o1}}{\partial%20output_{(h1)}}+\frac{\partial%20J_{o2}}{\partial%20output_{(h1)}}" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{o1}}{\partial%20output_{(h1)}}=\frac{\partial%20J_{o1}}{\partial%20output_{(o1)}}*\frac{\partial%20output_{(o1)}}{\partial%20input_{(o1)}}*\frac{\partial%20input_{(o1)}}{\partial%20output_{(h1)}}" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?=(output_{(o1)}-y1)*[output_{(o1)}*(1%20-%20output_{(o1)})]*w5" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{o2}}{\partial%20output_{(h1)}}=\frac{\partial%20J_{o2}}{\partial%20output_{(o2)}}*\frac{\partial%20output_{(o2)}}{\partial%20input_{(o2)}}*\frac{\partial%20input_{(o2)}}{\partial%20output_{(h1)}}" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?=(output_{(o2)}-y2)*[output_{(o2)}*(1%20-%20output_{(o2)})]*w7" alt=""></p>
+<hr>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20output_{(h1)}}{\partial%20input_{(h1)}}%20=%20f%27(input_{(h1)})=output_{(h1)}*(1%20-%20output_{(h1)})" alt=""></p>
+<hr>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20input_{(h1)}}{\partial%20w1}=\frac{\partial%20(w1%20*%20x1%20+%20w2%20*%20x2%20+%20b1)}{\partial%20w1}=x1" alt=""></p>
+<p>于是有Jtotal对w1的偏导数：</p>
+<p><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{total}}{\partial%20w1}=\{(output_{(o1)}-y1)*[output_{(o1)}*(1%20-%20output_{(o1)})]*w5" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?+%20(output_{(o2)}-y2)*[output_{(o2)}*(1%20-%20output_{(o2)})]*w7\}*" alt=""></p>
+<p><img src="http://latex.codecogs.com/png.latex?[output_{(h1)}*(1%20-%20output_{(h1)})]*x1" alt=""></p>
+<p>据此更新w1，有：</p>
+<p><img src="http://latex.codecogs.com/png.latex?w1^+%20=%20w1%20-%20\eta*\frac{\partial%20J_{total}}{\partial%20w1}" alt=""></p>
+<p>同理可以更新参数w2，w3，w4。</p>
+<p>======================================================================</p>
+<h1 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a><strong>应用实例</strong></h1><p>假设对于上述简单三层网络模型，按如下方式初始化权重和偏置：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-c8c0d034ff7a0c4f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>根据上述推导的公式：<br>由</p>
+<p><img src="http://latex.codecogs.com/png.latex?input_{(h1)}%20=%20w1%20*%20x1%20+%20w2%20*%20x2%20+%20b1" alt=""></p>
+<p>得到：<br>input(h1) = 0.15 * 0.05 + 0.20 * 0.10 + 0.35 = 0.3775<br>output(h1) = f(input(h1)) = 1 / (1 + e^(-input(h1))) = 1 / (1 + e^-0.3775) = 0.593269992</p>
+<p>同样得到：<br>input(h2) = 0.25 * 0.05 + 0.30 * 0.10 + 0.35 = 0.3925<br>output(h2) = f(input(h2)) = 1 / (1 + e^(-input(h2))) = 1 / (1 + e^-0.3925) = 0.596884378</p>
+<p>对输出层神经元重复这个过程，使用隐藏层神经元的输出作为输入。这样就能给出o1的输出：<br>input(o1) = w5 * output(h1) + w6 * (output(h2)) + b2 = 0.40 * 0.593269992 + 0.45 * 0.596884378 + 0.60 = 1.105905967<br>output(o1) = f(input(o1)) = 1 / (1 + e^-1.105905967) = 0.75136507</p>
+<p>同理output(o2) = 0.772928465</p>
+<p>开始统计所有误差，求代价函数：<br>Jo1 = 1/2 * (0.75136507 - 0.01)^2 = 0.298371109<br>Jo2 = 1/2 * (0.772928465 - 0.99)^2 = 0.023560026</p>
+<p><strong>综合所述</strong>，可以得到总误差为：Jtotal = Jo1 + Jo2 = 0.321931135</p>
+<p>然后反向传播，根据公式<br><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{total}}{\partial%20w5}=(output_{(o1)}-y1)*[output_{(o1)}*(1%20-%20output_{(o1)})]*output_{(h1)}" alt=""></p>
+<p>求出 Jtotal对w5的偏导数为:<br>a = (0.75136507 - 0.01)*0.75136507*(1-0.75136507)*0.593269992 = 0.082167041</p>
+<p>为了减少误差，然后从当前的权重减去这个值（可选择乘以一个学习率，比如设置为0.5），得：<br>w5+ = w5 - eta * a = 0.40 - 0.5 * 0.082167041 = 0.35891648</p>
+<p>同理可以求出：<br>w6+ = 0.408666186<br>w7+ = 0.511301270<br>w8+ = 0.561370121</p>
+<p>对于隐藏层，更新w1，求Jtotal对w1的偏导数：<br><img src="http://latex.codecogs.com/png.latex?\frac{\partial%20J_{total}}{\partial%20w1}=\{(output_{(o1)}-y1)*[output_{(o1)}*(1%20-%20output_{(o1)})]*w5" alt=""><br><img src="http://latex.codecogs.com/png.latex?+%20(output_{(o2)}-y2)*[output_{(o2)}*(1%20-%20output_{(o2)})]*w7\}*" alt=""><br><img src="http://latex.codecogs.com/png.latex?[output_{(h1)}*(1%20-%20output_{(h1)})]*x1" alt=""></p>
+<p>偏导数为：<br>b = (tmp1 + tmp2) * tmp3</p>
+<p>tmp1 = (0.75136507 - 0.01) * [0.75136507 * (1 - 0.75136507)] * 0.40 = 0.74136507 * 0.186815602 * 0.40 = 0.055399425<br>tmp2 = -0.019049119<br>tmp3 = 0.593269992 * (1 - 0.593269992) * 0.05 = 0.012065035</p>
+<p>于是b = 0.000438568</p>
+<p>更新权重w1为：<br>w1+ = w1 - eta * b = 0.15 - 0.5 * 0.000438568 = 0.149780716</p>
+<p>同样可以求得：<br>w2+ = 0.19956143<br>w3+ = 0.24975114<br>w4+ = 0.29950229</p>
+<p>最后，更新了所有的权重！ 当最初前馈传播时输入为0.05和0.1，网络上的误差是0.298371109。 在第一轮反向传播之后，总误差现在下降到0.291027924。 它可能看起来不太多，但是在重复此过程10,000次之后。例如，错误倾斜到0.000035085。<br>在这一点上，当前馈输入为0.05和0.1时，两个输出神经元产生0.015912196（相对于目标为0.01）和0.984065734（相对于目标为0.99），已经很接近了O(∩_∩)O~~</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/23270674" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/23270674</a></li>
+<li><a href="http://galaxy.agh.edu.pl/~vlsi/AI/backp_t_en/backprop.html" target="_blank" rel="external">Principles of training multi-layer neural network using backpropagation</a></li>
+<li><a href="http://www.jianshu.com/p/2aca6e8ac7c8" target="_blank" rel="external">[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</a></li>
+<li><a href="http://www.jianshu.com/p/c7e3f417641c" target="_blank" rel="external">简书中如何编辑Latex数学公式</a></li>
+</ul>
+<hr>
+<p>(转载请联系作者并注明出处，谢谢！)</p>
+]]></content>
+      
+        <categories>
+            
+            <category> machine learning </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+        </tags>
+        
     </entry>
-
     
     <entry>
       <title><![CDATA[[Detection] CNN 之 "物体检测" 篇]]></title>
-      <url>%2F2017%2F02%2F24%2FDetection-CNN%2F</url>
-      <content type="text"><![CDATA[Index RCNN Fast RCNN Faster RCNN R-FCN YOLO SSD NMS xywh VS xyxy RCNNRich feature hierarchies for accurate object detection and semantic segmentation 早期，使用窗口扫描进行物体识别，计算量大。 RCNN去掉窗口扫描，用聚类方式，对图像进行分割分组，得到多个侯选框的层次组。 原始图片通过Selective Search提取候选框，约有2k个 侯选框缩放成固定大小 经过CNN 经两个全连接后，分类 拓展阅读：基于R-CNN的物体检测-CVPR 2014 Fast RCNNFast R-CNN RCNN中有CNN重复计算，Fast RCNN则去掉重复计算，并微调选框位置。 整图经过CNN，得到特征图 提取域候选框 把候选框投影到特征图上，Pooling采样成固定大小 经两个全连接后，分类与微调选框位置 Faster RCNNFaster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks 提取候选框运行在CPU上，耗时2s，效率低下。Faster RCNN使用CNN来预测候选框。 整图经过CNN，得到特征图 经过核为 3×3×256 的卷积，每个点上预测k个anchor box是否是物体，并微调anchor box的位置 提取出物体框后，采用Fast RCNN同样的方式，进行分类 选框与分类共用一个CNN网络 anchor box的设置应比较好的覆盖到不同大小区域，如下图: 一张1000×600的图片，大概可以得到20k个anchor box(60×40×9)。 R-FCNR-FCN: Object Detection via Region-based Fully Convolutional Networks 论文翻译详见：[译] 基于R-FCN的物体检测 (zhwhong) RCNN系列(RCNN、Fast RCNN、Faster RCNN)中，网络由两个子CNN构成。在图片分类中，只需一个CNN，效率非常高。所以物体检测是不是也可以只用一个CNN？ 图片分类需要兼容形变，而物体检测需要利用形变，如何平衡？ R-FCN利用在CNN的最后进行位置相关的特征pooling来解决以上两个问题。 经普通CNN后，做有 k^2(C+1) 个 channel 的卷积，生成位置相关的特征(position-sensitive score maps)。 C 表示分类数，加 1 表示背景，k 表示后续要pooling 的大小，所以生成 k^2 倍的channel，以应对后面的空间pooling。 普通CNN后，还有一个RPN(Region Proposal Network)，生成候选框。 假设一个候选框大小为 w×h，将它投影在位置相关的特征上，并采用average-pooling的方式生成一个 k×k×k^2(C+1) 的块(与Fast RCNN一样)，再采用空间相关的pooling(k×k平面上每一个点取channel上对应的部分数据)，生成 k×k×(C+1)的块，最后再做average-pooling生成 C+1 的块，最后做softmax生成分类概率。 类似的，RPN也可以采用空间pooling的结构，生成一个channel为 4k^2的特征层。 空间pooling的具体操作可以参考下面。 训练与SSD相似，训练时拿来做lost计算的点取一个常数，如128。 除去正点，剩下的所有使用概率最高的负点。 YOLOYou Only Look Once: Unified, Real-Time Object Detection Faster RCNN需要对20k个anchor box进行判断是否是物体，然后再进行物体识别，分成了两步。 YOLO则把物体框的选择与识别进行了结合，一步输出，即变成”You Only Look Once”。 把原始图片缩放成448×448大小 运行单个CNN 计算物体中心是否落入单元格、物体的位置、物体的类别 模型如下: 把缩放成统一大小的图片分割成S×S的单元格 每个单元格输出B个矩形框(冗余设计)，包含框的位置信息(x, y, w, h)与物体的Confidence 每个单元格再输出C个类别的条件概率P(Class∣Object) 最终输出层应有S×S×(B∗5+C)个单元 x, y 是每个单元格的相对位置 w, h 是整图的相对大小 Conficence定义如下: 在原论文中，S = 7，B = 2，C = 20，所以输出的单元数为7×7×30。 代价函数： 其中 λ_coord=5，λ_noobj=0.5。一般，w与 h 不是在 [0,1]上的均匀分布，偏小，所以开方。 注: 开方的解释是我自己的估计，可能不对。 SSDSSD: Single Shot MultiBox Detector YOLO在 7×7 的框架下识别物体，遇到大量小物体时，难以处理。SSD则在不同层级的feature map下进行识别，能够覆盖更多范围。 假设在 m 层 feature map 上进行识别，则第 k 层的基本比例为 比如 s_min=0.2，s_max=0.95，表示整张图片识别物体所占比最小 0.2，最大 0.95。 在基本比例上，再取多个长宽比，令 a={1, 2, 3, 1/2, 1/3}，长宽分别为 Match策略上，取ground truth与以上生成的格子重叠率大于0.5的。 SSD vs YOLO 位置采用Smooth L1 Regression，分类采用Softmax。代价函数为： x 表示类别输出，c 表示目标分类，l 表示位置输出，g 表示目标位置, α是比例常数，可取1。训练过程中负点远多于正点，所以只取负点中，概率最大的几个，数量与正点成 3:1 。 NMS以上方法，同一物体可能有多个预测值。可用NMS(Non-maximum suppression，非极大值抑制)来去重。 如上图所示，一共有6个识别为人的框，每一个框有一个置信率。现在需要消除多余的: 按置信率排序: 0.95, 0.9, 0.9, 0.8, 0.7, 0.7 取最大0.95的框为一个物体框 剩余5个框中，去掉与0.95框重叠率大于0.6(可以另行设置)，则保留0.9, 0.8, 0.7三个框 重复上面的步骤，直到没有框了，0.9为一个框 选出来的为: 0.95, 0.9 两个矩形的重叠率计算方式如下: xywh VS xyxy系列论文中，位置都用 (x,y,w,h)来表示，没有用左上角、右下角 (x,y,x,y) 来表示。初衷是当 (w,h)正确时，(x,y) 一点错，会导致整个框就不准了。在初步的实际实验中，(x,y,x,y) 效果要差一些。 背后的逻辑，物体位置用 (x,y,w,h) 来学习比较容易。(x,y) 只需要位置相关的加权就能计算出来；(w,h) 就更简单了，直接特征值相加即可。 原文链接：Detection 参考：[译] 基于R-FCN的物体检测 (zhwhong) (转载请注明出处：[Detection] CNN 之 “物体检测” 篇 (zhwhong))]]></content>
+      <url>https://Hzwcode.github.io/2017/02/24/Detection-CNN/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h1><ul>
+<li><a href="http://arxiv.org/abs/1311.2524" target="_blank" rel="external">RCNN</a> </li>
+<li><a href="http://arxiv.org/abs/1504.08083" target="_blank" rel="external">Fast RCNN</a> </li>
+<li><a href="http://arxiv.org/abs/1506.01497" target="_blank" rel="external">Faster RCNN</a> </li>
+<li><a href="http://arxiv.org/pdf/1605.06409v1.pdf" target="_blank" rel="external">R-FCN</a></li>
+<li><a href="http://arxiv.org/abs/1506.02640" target="_blank" rel="external">YOLO</a> </li>
+<li><a href="http://www.cs.unc.edu/~wliu/papers/ssd.pdf" target="_blank" rel="external">SSD</a> </li>
+<li>NMS</li>
+<li>xywh VS xyxy</li>
+</ul>
+<hr>
+<a id="more"></a>
+<h1 id="RCNN"><a href="#RCNN" class="headerlink" title="RCNN"></a>RCNN</h1><p><a href="http://arxiv.org/abs/1311.2524" target="_blank" rel="external">Rich feature hierarchies for accurate object detection and semantic segmentation</a> </p>
+<p>早期，使用窗口扫描进行物体识别，计算量大。 RCNN去掉窗口扫描，用聚类方式，对图像进行分割分组，得到多个侯选框的层次组。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-f4c5c9a89c842dcb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ul>
+<li>原始图片通过Selective Search提取候选框，约有2k个</li>
+<li>侯选框缩放成固定大小</li>
+<li>经过CNN</li>
+<li>经两个全连接后，分类</li>
+</ul>
+<blockquote>
+<p>拓展阅读：<a href="http://blog.csdn.net/hjimce/article/details/50187029" target="_blank" rel="external">基于R-CNN的物体检测-CVPR 2014</a></p>
+</blockquote>
+<h1 id="Fast-RCNN"><a href="#Fast-RCNN" class="headerlink" title="Fast RCNN"></a>Fast RCNN</h1><p><a href="http://arxiv.org/abs/1504.08083" target="_blank" rel="external">Fast R-CNN</a> </p>
+<p>RCNN中有CNN重复计算，Fast RCNN则去掉重复计算，并微调选框位置。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-1d610559358abecf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ul>
+<li>整图经过CNN，得到特征图</li>
+<li>提取域候选框</li>
+<li>把候选框投影到特征图上，Pooling采样成固定大小</li>
+<li>经两个全连接后，分类与微调选框位置</li>
+</ul>
+<h1 id="Faster-RCNN"><a href="#Faster-RCNN" class="headerlink" title="Faster RCNN"></a>Faster RCNN</h1><p><a href="http://arxiv.org/abs/1506.01497" target="_blank" rel="external">Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks</a> </p>
+<p>提取候选框运行在CPU上，耗时2s，效率低下。<br>Faster RCNN使用CNN来预测候选框。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-8b71602ad793eed9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ul>
+<li>整图经过CNN，得到特征图</li>
+<li>经过核为 3×3×256 的卷积，每个点上预测k个anchor box是否是物体，并微调anchor box的位置</li>
+<li>提取出物体框后，采用Fast RCNN同样的方式，进行分类</li>
+<li>选框与分类共用一个CNN网络</li>
+</ul>
+<p>anchor box的设置应比较好的覆盖到不同大小区域，如下图:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-833ff24cf66a7fd6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>一张1000×600的图片，大概可以得到20k个anchor box(60×40×9)。</p>
+<h1 id="R-FCN"><a href="#R-FCN" class="headerlink" title="R-FCN"></a>R-FCN</h1><p><a href="http://arxiv.org/pdf/1605.06409v1.pdf" target="_blank" rel="external">R-FCN: Object Detection via Region-based Fully Convolutional Networks</a> </p>
+<blockquote>
+<p>论文翻译详见：<a href="http://www.jianshu.com/p/db1b74770e52" target="_blank" rel="external">[译] 基于R-FCN的物体检测 (zhwhong)</a></p>
+</blockquote>
+<p>RCNN系列(RCNN、Fast RCNN、Faster RCNN)中，网络由两个子CNN构成。在图片分类中，只需一个CNN，效率非常高。所以物体检测是不是也可以只用一个CNN？ </p>
+<p>图片分类需要兼容形变，而物体检测需要利用形变，如何平衡？ </p>
+<p>R-FCN利用在CNN的最后进行位置相关的特征pooling来解决以上两个问题。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-8eb1556488b4fdc2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>经普通CNN后，做有 k^2(C+1) 个 channel 的卷积，生成位置相关的特征(position-sensitive score maps)。</p>
+<p>C 表示分类数，加 1 表示背景，k 表示后续要pooling 的大小，所以生成 k^2 倍的channel，以应对后面的空间pooling。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-0bcb1e46be5e24c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>普通CNN后，还有一个RPN(Region Proposal Network)，生成候选框。</p>
+<p>假设一个候选框大小为 w×h，将它投影在位置相关的特征上，并采用average-pooling的方式生成一个 k×k×k^2(C+1) 的块(与Fast RCNN一样)，再采用空间相关的pooling(k×k平面上每一个点取channel上对应的部分数据)，生成 k×k×(C+1)的块，最后再做average-pooling生成 C+1 的块，最后做softmax生成分类概率。</p>
+<p>类似的，RPN也可以采用空间pooling的结构，生成一个channel为 4k^2的特征层。</p>
+<p>空间pooling的具体操作可以参考下面。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-4411b2baa05764f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>训练与SSD相似，训练时拿来做lost计算的点取一个常数，如128。 除去正点，剩下的所有使用概率最高的负点。</p>
+<h1 id="YOLO"><a href="#YOLO" class="headerlink" title="YOLO"></a>YOLO</h1><p><a href="http://arxiv.org/abs/1506.02640" target="_blank" rel="external">You Only Look Once: Unified, Real-Time Object Detection</a> </p>
+<p>Faster RCNN需要对20k个anchor box进行判断是否是物体，然后再进行物体识别，分成了两步。 YOLO则把物体框的选择与识别进行了结合，一步输出，即变成”You Only Look Once”。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-881c58173e5fab4b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ul>
+<li>把原始图片缩放成448×448大小</li>
+<li>运行单个CNN</li>
+<li>计算物体中心是否落入单元格、物体的位置、物体的类别</li>
+</ul>
+<p>模型如下:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-148936c1f19644a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ul>
+<li>把缩放成统一大小的图片分割成S×S的单元格</li>
+<li>每个单元格输出B个矩形框(冗余设计)，包含框的位置信息(x, y, w, h)与物体的Confidence</li>
+<li>每个单元格再输出C个类别的条件概率P(Class∣Object)</li>
+<li>最终输出层应有S×S×(B∗5+C)个单元</li>
+<li>x, y 是每个单元格的相对位置</li>
+<li>w, h 是整图的相对大小</li>
+</ul>
+<p>Conficence定义如下:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-772c5abc28591971.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>在原论文中，S = 7，B = 2，C = 20，所以输出的单元数为7×7×30。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-a8d08b9a46de7f9f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>代价函数：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-7f2b9e54c3730d5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>其中 <code>λ_coord=5</code>，<code>λ_noobj=0.5</code>。<br>一般，w与 h 不是在 [0,1]上的均匀分布，偏小，所以开方。</p>
+<p><strong>注: 开方的解释是我自己的估计，可能不对。</strong></p>
+<h1 id="SSD"><a href="#SSD" class="headerlink" title="SSD"></a>SSD</h1><p><a href="http://www.cs.unc.edu/~wliu/papers/ssd.pdf" target="_blank" rel="external">SSD: Single Shot MultiBox Detector</a> </p>
+<p>YOLO在 7×7 的框架下识别物体，遇到大量小物体时，难以处理。<br>SSD则在不同层级的feature map下进行识别，能够覆盖更多范围。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-f481d203b810dba3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>假设在 m 层 feature map 上进行识别，则第 k 层的基本比例为</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-e1ea76b11f39c48a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>比如 s_min=0.2，s_max=0.95，表示整张图片识别物体所占比最小 0.2，最大 0.95。</p>
+<p>在基本比例上，再取多个长宽比，令 a={1, 2, 3, 1/2, 1/3}，长宽分别为</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-d79012d45d6f57a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>Match策略上，取ground truth与以上生成的格子重叠率大于0.5的。</p>
+<h1 id="SSD-vs-YOLO"><a href="#SSD-vs-YOLO" class="headerlink" title="SSD vs YOLO"></a>SSD vs YOLO</h1><p><img src="http://upload-images.jianshu.io/upload_images/145616-70f2fd38db66b76e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>位置采用Smooth L1 Regression，分类采用Softmax。<br>代价函数为：</p>
+<p><img src="http://latex.codecogs.com/png.latex?L%20=%20L_{conf}(x,%20c)%20+%20\alpha%20\cdot%20L_{loc}(c,%20l,%20g))" alt=""></p>
+<p>x  表示类别输出，c 表示目标分类，l 表示位置输出，g 表示目标位置, α是比例常数，可取1。<br>训练过程中负点远多于正点，所以只取负点中，概率最大的几个，数量与正点成 3:1 。</p>
+<h1 id="NMS"><a href="#NMS" class="headerlink" title="NMS"></a>NMS</h1><p>以上方法，同一物体可能有多个预测值。<br>可用NMS(Non-maximum suppression，非极大值抑制)来去重。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-ba89e4a3fde65974.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>如上图所示，一共有6个识别为人的框，每一个框有一个置信率。<br>现在需要消除多余的:</p>
+<ul>
+<li>按置信率排序: 0.95, 0.9, 0.9, 0.8, 0.7, 0.7</li>
+<li>取最大0.95的框为一个物体框</li>
+<li>剩余5个框中，去掉与0.95框重叠率大于0.6(可以另行设置)，则保留0.9, 0.8, 0.7三个框</li>
+<li>重复上面的步骤，直到没有框了，0.9为一个框</li>
+<li>选出来的为: 0.95, 0.9</li>
+</ul>
+<p>两个矩形的重叠率计算方式如下:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-59ba4b17d2cc2538.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h1 id="xywh-VS-xyxy"><a href="#xywh-VS-xyxy" class="headerlink" title="xywh VS xyxy"></a>xywh VS xyxy</h1><p>系列论文中，位置都用 (x,y,w,h)来表示，没有用左上角、右下角 (x,y,x,y) 来表示。<br>初衷是当 (w,h)正确时，(x,y) 一点错，会导致整个框就不准了。<br>在初步的实际实验中，(x,y,x,y) 效果要差一些。</p>
+<p>背后的逻辑，物体位置用 (x,y,w,h) 来学习比较容易。<br>(x,y) 只需要位置相关的加权就能计算出来；<br>(w,h) 就更简单了，直接特征值相加即可。</p>
+<hr>
+<ul>
+<li>原文链接：<a href="http://www.cosmosshadow.com/ml/%E5%BA%94%E7%94%A8/2015/12/07/%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B.html" target="_blank" rel="external">Detection</a></li>
+<li>参考：<a href="http://www.jianshu.com/p/db1b74770e52" target="_blank" rel="external">[译] 基于R-FCN的物体检测 (zhwhong)</a></li>
+</ul>
+<p>(转载请联系作者并注明出处，谢谢！)</p>
+]]></content>
+      
+        <categories>
+            
+            <category> machine learning </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+            <tag> Knowledge </tag>
+            
+        </tags>
+        
     </entry>
-
     
     <entry>
       <title><![CDATA[[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition(附翻译，作业)]]></title>
-      <url>%2F2017%2F02%2F24%2FConvolutional-Neural-Networks-for-Visual-Recognition-CS231n%2F</url>
-      <content type="text"><![CDATA[CS231n课程：面向视觉识别的卷积神经网络 课程官网：CS231n: Convolutional Neural Networks for Visual Recognition Github：https://github.com/cs231n/cs231n.github.io | http://cs231n.github.io/ 教学安排及大纲：Schedule and Syllabus 课程视频：Youtube上查看Andrej Karpathy创建的播放列表，或者网易云课堂 课程pdf及视频下载：百度网盘下载，密码是4efx 授课 (Stanford Vision Lab) Fei-Fei Li (Associate Professor, Stanford University) Andrej Karpathy | Github | Blog | Twitter Justin Johnson | Github 课程原文 &amp; 作业 &amp; 中文翻译笔记 知乎专栏：智能单元 作者：杜客 (在此对作者表示特别感谢！) 贺完结！CS231n官方笔记授权翻译总集篇发布 获得授权翻译斯坦福CS231n课程笔记系列 CS231n课程笔记翻译：Python Numpy教程 | 课程原文 CS231n课程笔记翻译：图像分类笔记（上） | 课程原文 CS231n课程笔记翻译：图像分类笔记（下） CS231n课程笔记翻译：线性分类笔记（上） | 课程原文 CS231n课程笔记翻译：线性分类笔记（中） CS231n课程笔记翻译：线性分类笔记（下） 知友智靖远关于CS231n课程字幕翻译的倡议 CS231n课程笔记翻译：最优化笔记（上） | 课程原文 CS231n课程笔记翻译：最优化笔记（下） CS231n课程笔记翻译：反向传播笔记 | 课程原文 斯坦福CS231n课程作业 # 1 简介 | 课程原文 CS231n课程笔记翻译：神经网络笔记 1（上） | 课程原文 CS231n课程笔记翻译：神经网络笔记 1（下） CS231n课程笔记翻译：神经网络笔记 2 | 课程原文 CS231n课程笔记翻译：神经网络笔记 3（上） | 课程原文 CS231n课程笔记翻译：神经网络笔记 3（下） 斯坦福CS231n课程作业 # 2 简介 | 课程原文 CS231n课程笔记翻译：卷积神经网络笔记 | 课程原文 斯坦福CS231n课程作业 # 3 简介 | 课程原文 Andrej Karpathy的回信和Quora活动邀请 知行合一码作业，深度学习真入门 【附录 - Assignment】： [简书] CS231n (winter 2016) : Assignment1 [简书] CS231n (winter 2016) : Assignment2 [简书] CS231n (winter 2016) : Assignment3（更新中） [Github] CS231n作业 参考1 | 参考2 …… (再次感谢智能单元-知乎专栏，以及知乎作者@杜客和相关朋友@ShiqingFan，@猴子，@堃堃，@李艺颖等为CS231n课程翻译工作做出的贡献，辛苦了！) 其他课程整理： [斯坦福CS224d课程整理] Natural Language Processing with Deep Learning @ zhwhong [斯坦福CS229课程整理] Machine Learning Autumn 2016 @ zhwhong [coursera 机器学习课程] Machine Learning by Andrew Ng @ zhwhong]]></content>
+      <url>https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><blockquote>
+<h1 id="CS231n课程：面向视觉识别的卷积神经网络"><a href="#CS231n课程：面向视觉识别的卷积神经网络" class="headerlink" title="CS231n课程：面向视觉识别的卷积神经网络"></a>CS231n课程：面向视觉识别的卷积神经网络</h1></blockquote>
+<ul>
+<li>课程官网：<a href="http://cs231n.stanford.edu/" target="_blank" rel="external">CS231n: Convolutional Neural Networks for Visual Recognition</a></li>
+<li>Github：<a href="https://github.com/cs231n/cs231n.github.io" target="_blank" rel="external">https://github.com/cs231n/cs231n.github.io</a> | <a href="http://cs231n.github.io/" target="_blank" rel="external">http://cs231n.github.io/</a></li>
+<li>教学安排及大纲：<a href="http://vision.stanford.edu/teaching/cs231n/syllabus.html" target="_blank" rel="external">Schedule and Syllabus</a></li>
+<li>课程视频：Youtube上查看<a href="https://link.zhihu.com/?target=https%3A//www.youtube.com/channel/UCPk8m_r6fkUSYmvgCBwq-sw" target="_blank" rel="external">Andrej Karpathy</a>创建的<a href="https://link.zhihu.com/?target=https%3A//www.youtube.com/playlist%3Flist%3DPLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC" target="_blank" rel="external">播放列表</a>，或者<a href="http://study.163.com/course/introduction/1003223001.htm#/courseDetail" target="_blank" rel="external">网易云课堂</a></li>
+<li>课程pdf及视频下载：<a href="https://pan.baidu.com/s/1eRHH4L8" target="_blank" rel="external">百度网盘下载</a>，密码是4efx</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-a0eeadfcd667b7bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<a id="more"></a>
+<blockquote>
+<h1 id="授课-Stanford-Vision-Lab"><a href="#授课-Stanford-Vision-Lab" class="headerlink" title="授课 (Stanford Vision Lab)"></a>授课 (<a href="http://vision.stanford.edu/index.html" target="_blank" rel="external">Stanford Vision Lab</a>)</h1></blockquote>
+<ul>
+<li><a href="http://vision.stanford.edu/feifeili/" target="_blank" rel="external">Fei-Fei Li</a> (Associate Professor, Stanford University)</li>
+<li><a href="http://cs.stanford.edu/people/karpathy/" target="_blank" rel="external">Andrej Karpathy</a> | <a href="https://github.com/karpathy" target="_blank" rel="external">Github</a> | <a href="http://karpathy.github.io/" target="_blank" rel="external">Blog</a> | <a href="https://twitter.com/karpathy" target="_blank" rel="external">Twitter</a></li>
+<li><a href="http://cs.stanford.edu/people/jcjohns/" target="_blank" rel="external">Justin Johnson</a> | <a href="https://github.com/jcjohnson" target="_blank" rel="external">Github</a></li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-df9eb2f6ea9512fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Course Instructors and Teaching Assistants"></p>
+<blockquote>
+<h1 id="课程原文-amp-作业-amp-中文翻译笔记"><a href="#课程原文-amp-作业-amp-中文翻译笔记" class="headerlink" title="课程原文 &amp; 作业 &amp; 中文翻译笔记"></a>课程原文 &amp; 作业 &amp; 中文翻译笔记</h1><ul>
+<li>知乎专栏：<a href="https://zhuanlan.zhihu.com/intelligentunit" target="_blank" rel="external"><strong>智能单元</strong></a></li>
+<li>作者：<a href="https://www.zhihu.com/people/du-ke/answers" target="_blank" rel="external"><strong>杜客</strong></a> (在此对作者表示特别感谢！)</li>
+</ul>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-3b415a85af702e04.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="翻译得到Karpathy许可"></p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/21930884?refer=intelligentunit" target="_blank" rel="external">贺完结！CS231n官方笔记授权翻译总集篇发布</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/20870307?refer=intelligentunit" target="_blank" rel="external">获得授权翻译斯坦福CS231n课程笔记系列</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/20878530?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：Python Numpy教程</a> | <a href="http://cs231n.github.io/python-numpy-tutorial/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/20894041?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：图像分类笔记（上）</a> | <a href="http://cs231n.github.io/classification/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/20900216?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：图像分类笔记（下）</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/20918580?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：线性分类笔记（上）</a> | <a href="http://cs231n.github.io/linear-classify/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/20945670?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：线性分类笔记（中）</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21102293?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：线性分类笔记（下）</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21354230?refer=intelligentunit" target="_blank" rel="external">知友智靖远关于CS231n课程字幕翻译的倡议 </a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21360434?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：最优化笔记（上）</a> | <a href="http://cs231n.github.io/optimization-1/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21387326?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：最优化笔记（下）</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21407711?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：反向传播笔记 </a> | <a href="http://cs231n.github.io/optimization-2/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21441838?refer=intelligentunit" target="_blank" rel="external">斯坦福CS231n课程作业 # 1 简介 </a> | <a href="http://cs231n.github.io/assignments2016/assignment1/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21462488?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：神经网络笔记 1（上）</a> | <a href="http://cs231n.github.io/neural-networks-1/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21513367?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：神经网络笔记 1（下）</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21560667?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：神经网络笔记 2 </a> | <a href="http://cs231n.github.io/neural-networks-2/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21741716?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：神经网络笔记 3（上）</a> | <a href="http://cs231n.github.io/neural-networks-3/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21798784?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：神经网络笔记 3（下）</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21941485?refer=intelligentunit" target="_blank" rel="external">斯坦福CS231n课程作业 # 2 简介 </a> | <a href="http://cs231n.github.io/assignments2016/assignment2/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/22038289?refer=intelligentunit" target="_blank" rel="external">CS231n课程笔记翻译：卷积神经网络笔记 </a> | <a href="http://cs231n.github.io/convolutional-networks/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21946525?refer=intelligentunit" target="_blank" rel="external">斯坦福CS231n课程作业 # 3 简介 </a> | <a href="http://cs231n.github.io/assignments2016/assignment3/" target="_blank" rel="external">课程原文</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/22282421?refer=intelligentunit" target="_blank" rel="external">Andrej Karpathy的回信和Quora活动邀请</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/22232836?refer=intelligentunit" target="_blank" rel="external">知行合一码作业，深度学习真入门 </a></li>
+</ul>
+<p><strong>【附录 - Assignment】：</strong></p>
+<ul>
+<li>[简书] <a href="http://www.jianshu.com/p/004c99623104" target="_blank" rel="external">CS231n (winter 2016) : Assignment1</a></li>
+<li>[简书] <a href="http://www.jianshu.com/p/9c4396653324" target="_blank" rel="external">CS231n (winter 2016) : Assignment2</a></li>
+<li>[简书] <a href="http://www.jianshu.com/p/e46b1aa48886" target="_blank" rel="external">CS231n (winter 2016) : Assignment3（更新中）</a></li>
+<li>[Github] CS231n作业<a href="https://github.com/MyHumbleSelf/cs231n" target="_blank" rel="external"> 参考1</a> | <a href="https://github.com/dengfy/cs231n" target="_blank" rel="external">参考2</a> ……</li>
+</ul>
+<hr>
+<p>(再次感谢<a href="https://zhuanlan.zhihu.com/intelligentunit" target="_blank" rel="external">智能单元-知乎专栏</a>，以及知乎作者<a href="https://www.zhihu.com/people/du-ke/answers" target="_blank" rel="external">@杜客</a>和相关朋友<a href="https://www.zhihu.com/people/584f06e4ed2edc6007e4793179e7cdc1" target="_blank" rel="external">@ShiqingFan</a>，<a href="https://www.zhihu.com/people/hmonkey" target="_blank" rel="external">@猴子</a>，<a href="https://www.zhihu.com/people/e7fcc05b0cf8a90a3e676d0206f888c9" target="_blank" rel="external">@堃堃</a>，<a href="https://www.zhihu.com/people/f11e78650e8185db2b013af42fd9a481" target="_blank" rel="external">@李艺颖</a>等为CS231n课程翻译工作做出的贡献，辛苦了！)</p>
+<hr>
+<p><strong>其他课程整理：</strong></p>
+<ul>
+<li><a href="http://www.jianshu.com/p/062d2bbbef93" target="_blank" rel="external">[斯坦福CS224d课程整理] Natural Language Processing with Deep Learning</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
+<li><a href="http://www.jianshu.com/p/0a6ef31ff77a" target="_blank" rel="external">[斯坦福CS229课程整理] Machine Learning Autumn 2016</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
+<li><a href="http://www.jianshu.com/p/c68d0df13e0b" target="_blank" rel="external">[coursera 机器学习课程] Machine Learning by Andrew Ng</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> machine learning </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+            <tag> Knowledge </tag>
+            
+        </tags>
+        
     </entry>
-
     
     <entry>
       <title><![CDATA[[Linux] Ubuntu下超好看扁平主题 : Flatabulous]]></title>
-      <url>%2F2017%2F02%2F24%2FLinux-Ubuntu_Flatabulous%2F</url>
-      <content type="text"><![CDATA[使用ubuntu的小伙伴们，不知道你们对ubuntu自带主题有什么看法，反正我个人不太喜欢，个人比较喜欢扁平化的风格。下面给大家推荐一个我长期使用的扁平化风格的主题－Flatabulous 。先看一下我的桌面(个人比较偏向单色调，不要在意这些细节啦)： 那么Flatabulous到底是什么呢？ “This is a Flat theme for Ubuntu and other debian based Linux Systems. This is based on the Ultra-Flat theme. Special thanks to @steftrikia and Satyajit Sahoo for the original work.”哈哈，不卖关子了，它其实就是一个超级好看的扁平化Ubuntu主题。 下面就开始说说怎么安装它吧~ [ 安装 ]Step 1 安装 Unity Tweak Tool要安装这个主题，首先要安装Unity Tweak Tool或者Ubuntu Tweak Tool。安装Unity Tweak Tool可以很简单地执行如下命令：1$ sudo apt-get install unity-tweak-tool 安装Ubuntu Tweak Tool可以使用如下命令：123$ sudo add-apt-repository ppa:tualatrix/ppa $ sudo apt-get update$ sudo apt-get install ubuntu-tweak 或者跑到它们的网站下载.deb文件(推荐)，打开Ubuntu软件中心安装或者使用命令dpkg -i(推荐)安装。 注：If you are on Ubuntu 16.04 or higher, run the commands below to install Ubuntu Tweak: 1234$ wget -q -O - http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add -$ sudo sh -c &apos;echo &quot;deb http://archive.getdeb.net/ubuntu xenial-getdeb apps&quot; &gt;&gt; /etc/apt/sources.list.d/getdeb.list&apos;$ sudo apt-get update$ sudo apt-get install ubuntu-tweak 安装完毕后，我们可以就搜到Ubuntu Tweak这款软件了，如下图： Step 2 安装Flatabulous主题方式1：Using the .deb file for Debian, Ubuntu and derivatives (Recommended)下载.deb文件，点击这里，下载后，打开Ubuntu软件中心或者使用命令dpkg -i（推荐）安装。 方式2：Using the noobslab PPA123$ sudo add-apt-repository ppa:noobslab/themes$ sudo apt-get update$ sudo apt-get install flatabulous-theme 方式3：下载Flatabulous源码下载主题源码，点击这里，或者使用git克隆下来，Github仓库地址： https://github.com/anmoljagetia/Flatabulous如果下载的是zip文件，先将其解压，然后移动到/usr/share/themes/下。如果是git clone下来的，直接执行下如下命令： 1$ sudo mv Flatabulous /usr/share/themes/ Step 3 Tweak配置我们打开Ubuntu Tweak，选择调整-&gt;主题，如下： 然后，配置GTK主题和窗口主题，选择Flatabulous，如下： 你们可以模仿我的配置，不过此时还有一个问题，就是你发现图标主题没有Ultra-Flat选项，这个icon需要额外下载，原生的Tweak里面并没有。对于图标，我使用的是ultra-flat-icons主题。有蓝色（推荐），橙色和薄荷绿颜色可用。要安装它，你可以运行下面的命令：123$ sudo add-apt-repository ppa:noobslab/icons$ sudo apt-get update$ sudo apt-get install ultra-flat-icons 或者你也可以运行sudo apt-get install ultra-flat-icons-orange或者 sudo apt-get install ultra-flat-icons-green。根据你自己喜欢的颜色选择，我推荐的是扁平图标，但是你也可以看看Numix和Flattr。 图标安装好后，再打开Ubuntu Tweak，选择 调整-&gt;主题，选择图标主题为Ultra-Flat。 安装完以后，只需要在theme进行相应的配置，然后换一个自己喜欢的桌面壁纸，我们就能看到超级好看的ubuntu啦。如果不行，重启计算机，应该就可以了。重启之后你的计算机看起来差不多是这样的： [ 部分效果图截图 ]文件管理 Theme with Sublime Text 3 and JavaScript Code 系统设置 Posters Terminal [ Reference ] Flatabulous：超级好看的Ubuntu 扁平主题 Github -&gt; Flatabulous (转载请注明原作者及出处, 谢谢！)]]></content>
+      <url>https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu-Flatabulous/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p><img src="http://upload-images.jianshu.io/upload_images/145616-909d61913233d890.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Flatabulous"></p>
+<a id="more"></a>
+<p>使用ubuntu的小伙伴们，不知道你们对ubuntu自带主题有什么看法，反正我个人不太喜欢，个人比较喜欢扁平化的风格。<br>下面给大家推荐一个我长期使用的扁平化风格的主题－<a href="https://github.com/anmoljagetia/Flatabulous" target="_blank" rel="external">Flatabulous</a> 。<br>先看一下我的桌面(个人比较偏向单色调，不要在意这些细节啦)：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-1564d71f915f7cef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="My Desktop"></p>
+<p>那么<strong>Flatabulous</strong>到底是什么呢？<br>　　“This is a Flat theme for Ubuntu and other debian based Linux Systems. This is based on the Ultra-Flat theme. Special thanks to @steftrikia and Satyajit Sahoo for the original work.”<br>哈哈，不卖关子了，它其实就是一个超级好看的扁平化Ubuntu主题。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-e639fe182b0b743b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>下面就开始说说怎么安装它吧~</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="[ 安装 ]"></a>[ 安装 ]</h1><h2 id="Step-1-安装-Unity-Tweak-Tool"><a href="#Step-1-安装-Unity-Tweak-Tool" class="headerlink" title="Step 1　安装 Unity Tweak Tool"></a>Step 1　安装 Unity Tweak Tool</h2><p>要安装这个主题，首先要安装<a href="https://launchpad.net/unity-tweak-tool" target="_blank" rel="external">Unity Tweak Tool</a>或者<a href="https://github.com/tualatrix/ubuntu-tweak" target="_blank" rel="external">Ubuntu Tweak Tool</a>。<br>安装Unity Tweak Tool可以很简单地执行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install unity-tweak-tool</div></pre></td></tr></table></figure></p>
+<p>安装Ubuntu Tweak Tool可以使用如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo add-apt-repository ppa:tualatrix/ppa  </div><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install ubuntu-tweak</div></pre></td></tr></table></figure></p>
+<p>或者跑到它们的网站下载.deb文件(推荐)，打开Ubuntu软件中心安装或者使用命令<code>dpkg -i</code>(推荐)安装。</p>
+<p>注：If you are on Ubuntu 16.04 or higher, run the commands below to install Ubuntu Tweak:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ wget -q -O - http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add -</div><div class="line">$ sudo sh -c &apos;echo &quot;deb http://archive.getdeb.net/ubuntu xenial-getdeb apps&quot; &gt;&gt; /etc/apt/sources.list.d/getdeb.list&apos;</div><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install ubuntu-tweak</div></pre></td></tr></table></figure>
+<p>安装完毕后，我们可以就搜到Ubuntu Tweak这款软件了，如下图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-c073230df8a73b8b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="Step-2-安装Flatabulous主题"><a href="#Step-2-安装Flatabulous主题" class="headerlink" title="Step 2　安装Flatabulous主题"></a>Step 2　安装Flatabulous主题</h2><h3 id="方式1：Using-the-deb-file-for-Debian-Ubuntu-and-derivatives-Recommended"><a href="#方式1：Using-the-deb-file-for-Debian-Ubuntu-and-derivatives-Recommended" class="headerlink" title="方式1：Using the .deb file for Debian, Ubuntu and derivatives (Recommended)"></a>方式1：Using the .deb file for Debian, Ubuntu and derivatives (Recommended)</h3><p>下载.deb文件，点击<a href="https://github.com/anmoljagetia/Flatabulous/releases" target="_blank" rel="external">这里</a>，下载后，打开Ubuntu软件中心或者使用命令<code>dpkg -i</code>（推荐）安装。</p>
+<h3 id="方式2：Using-the-noobslab-PPA"><a href="#方式2：Using-the-noobslab-PPA" class="headerlink" title="方式2：Using the noobslab PPA"></a>方式2：Using the noobslab PPA</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo add-apt-repository ppa:noobslab/themes</div><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install flatabulous-theme</div></pre></td></tr></table></figure>
+<h3 id="方式3：下载Flatabulous源码"><a href="#方式3：下载Flatabulous源码" class="headerlink" title="方式3：下载Flatabulous源码"></a>方式3：下载Flatabulous源码</h3><p>下载主题源码，点击<a href="https://github.com/anmoljagetia/Flatabulous/archive/master.zip" target="_blank" rel="external">这里</a>，或者使用git克隆下来，Github仓库地址： <a href="https://github.com/anmoljagetia/Flatabulous" target="_blank" rel="external">https://github.com/anmoljagetia/Flatabulous</a><br>如果下载的是zip文件，先将其解压，然后移动到/usr/share/themes/下。如果是git clone下来的，直接执行下如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo mv Flatabulous /usr/share/themes/</div></pre></td></tr></table></figure>
+<h2 id="Step-3-Tweak配置"><a href="#Step-3-Tweak配置" class="headerlink" title="Step 3　Tweak配置"></a>Step 3　Tweak配置</h2><p>我们打开Ubuntu Tweak，选择<strong>调整-&gt;主题</strong>，如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-c937f438f034d8bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>然后，配置GTK主题和窗口主题，选择Flatabulous，如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-1e90b53fc9d14f68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>你们可以模仿我的配置，不过此时还有一个问题，就是你发现图标主题没有<code>Ultra-Flat</code>选项，这个<code>icon</code>需要额外下载，原生的<code>Tweak</code>里面并没有。<br>对于图标，我使用的是ultra-flat-icons主题。有蓝色（推荐），橙色和薄荷绿颜色可用。要安装它，你可以运行下面的命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo add-apt-repository ppa:noobslab/icons</div><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install ultra-flat-icons</div></pre></td></tr></table></figure></p>
+<p>或者你也可以运行<code>sudo apt-get install ultra-flat-icons-orange</code>或者 <code>sudo apt-get install ultra-flat-icons-green</code>。<br>根据你自己喜欢的颜色选择，我推荐的是扁平图标，但是你也可以看看<strong>Numix</strong>和<strong>Flattr</strong>。</p>
+<p>图标安装好后，再打开Ubuntu Tweak，选择 <code>调整-&gt;主题</code>，选择图标主题为<code>Ultra-Flat</code>。</p>
+<p>安装完以后，只需要在theme进行相应的配置，然后换一个自己喜欢的桌面壁纸，我们就能看到超级好看的ubuntu啦。如果不行，重启计算机，应该就可以了。重启之后你的计算机看起来差不多是这样的：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-a9408b3132214304.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="扁平化图标"></p>
+<h1 id="部分效果图截图"><a href="#部分效果图截图" class="headerlink" title="[ 部分效果图截图 ]"></a>[ 部分效果图截图 ]</h1><h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2><p><img src="http://upload-images.jianshu.io/upload_images/145616-63d8986b44433f99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="Theme-with-Sublime-Text-3-and-JavaScript-Code"><a href="#Theme-with-Sublime-Text-3-and-JavaScript-Code" class="headerlink" title="Theme with Sublime Text 3 and JavaScript Code"></a>Theme with Sublime Text 3 and JavaScript Code</h2><p><img src="http://upload-images.jianshu.io/upload_images/145616-ac6eca94b5b50a2e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="系统设置"><a href="#系统设置" class="headerlink" title="系统设置"></a>系统设置</h2><p><img src="http://upload-images.jianshu.io/upload_images/145616-b0e714419dcd6433.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="Posters"><a href="#Posters" class="headerlink" title="Posters"></a>Posters</h2><p><img src="http://upload-images.jianshu.io/upload_images/145616-9c99a2b56e70c30f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-0e6a006a57adb9d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="Terminal"><a href="#Terminal" class="headerlink" title="Terminal"></a>Terminal</h2><p><img src="http://upload-images.jianshu.io/upload_images/145616-421d8c2880c84c62.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="[ Reference ]"></a>[ Reference ]</h1><ul>
+<li><a href="http://www.xulukun.cn/flatabulous-ubuntu.html" target="_blank" rel="external">Flatabulous：超级好看的Ubuntu 扁平主题</a></li>
+<li><a href="https://github.com/anmoljagetia/Flatabulous" target="_blank" rel="external">Github -&gt; Flatabulous</a></li>
+</ul>
+<p>(转载请注明原作者及出处, 谢谢！)</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Linux </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> theme </tag>
+            
+        </tags>
+        
     </entry>
-
     
     <entry>
       <title><![CDATA[Machine Learning Materials]]></title>
-      <url>%2F2017%2F02%2F23%2FMachine-Learning-Materials%2F</url>
-      <content type="text"><![CDATA[Awesome系列 Awesome Machine Learning Awesome Deep Learning Awesome TensorFlow Awesome TensorFlow Implementations Awesome Torch Awesome Computer Vision Awesome Deep Vision Awesome RNN Awesome NLP Awesome AI Awesome Deep Learning Papers Awesome 2vec Deep Learning [Book] Neural Networks and Deep Learning 中文翻译(不完整): 神经网络与深度学习 第五章中文翻译: [译] 第五章 深度神经网络为何很难训练 [Book] Deep Learning - MIT Press [Book] Pattern Recognition and Machine Learning (Bishop) | 豆瓣 | PRML &amp; DL笔记 | GitBook [Course] Deep Learning - Udacity [Course] Machine Learning by Andrew Ng - Coursera | 课程资料整理 @ zhwhong [Course] Convolutional Neural Networks for Visual Recognition(CS231n) | 课程资料整理 @ zhwhong [Course] Deep Learning for Natural Language Processing(CS224d) | 课程资料整理 @ zhwhong [View] Top Deep Learning Projects on Github [View] Deep Learning for NLP resources [View] 资源 | 深度学习资料大全：从基础到各种网络模型 [View] Paper | DL相关论文中文翻译 [View] 深度学习新星：GAN的基本原理、应用和走向 [View] 推荐 | 九本不容错过的深度学习和神经网络书籍 [View] Github好东西传送门 –&gt; 深度学习入门与综述资料 Frameworks TensorFlow (by google) MXNet Torch (by Facebook) [Caffe (by UC Berkley)(http://caffe.berkeleyvision.org/) [Deeplearning4j(http://deeplearning4j.org) Brainstorm Theano、Chainer、Marvin、Neon、ConvNetJS TensorFlow 官方文档 TensorFlow Tutorial TensorFlow 官方文档中文版 TensorFlow Whitepaper [译] TensorFlow白皮书 [API] API Document 入门教程 [教程] Learning TensorFlow TensorFlow-Tutorials @ github (推荐) Awesome-TensorFlow (推荐) TensorFlow-Examples @ github tensorflow_tutorials @ github 分布式教程 Distributed TensorFlow官方文档 distributed-tensorflow-example @ github (推荐) DistributedTensorFlowSample @ github Parameter Server Paper (Model) CNN Nets LeNet AlexNet OverFeat NIN GoogLeNet Inception-V1 Inception-V2 Inception-V3 Inception-V4 Inception-ResNet-v2 ResNet 50 ResNet 101 ResNet 152 VGG 16 VGG 19 (注：图片来自 Github : TensorFlow-Slim image classification library) 额外参考： [ILSVRC] 基于OverFeat的图像分类、定位、检测 [卷积神经网络-进化史] 从LeNet到AlexNet [透析] 卷积神经网络CNN究竟是怎样一步一步工作的？ GoogLenet中，1X1卷积核到底有什么作用呢？ 深度学习 — 反向传播(BP)理论推导 无痛的机器学习第一季目录 - 知乎 Object Detection R-CNN Fast R-CNN Faster R-CNN FCN R-FCN YOLO SSD 额外参考： [Detection] CNN 之 “物体检测” 篇 计算机视觉中 RNN 应用于目标检测 Machine Learning 硬件投入调研 RNN &amp; LSTM [福利] 深入理解 RNNs &amp; LSTM 网络学习资料 @ zhwhong [RNN] Simple LSTM代码实现 &amp; BPTT理论推导 @ zhwhong 计算机视觉中 RNN 应用于目标检测 @ zhwhong [推荐] Understanding LSTM Networks @ colah | 理解LSTM网络[简书] @ Not_GOD The Unreasonable Effectiveness of Recurrent Neural Networks @ Andrej Karpathy LSTM Networks for Sentiment Analysis (theano官网LSTM教程+代码) Recurrent Neural Networks Tutorial @ WILDML Anyone Can Learn To Code an LSTM-RNN in Python (Part 1: RNN) @ iamtrask Stanford 机器学习课程整理 [coursera 机器学习课程] Machine Learning by Andrew Ng @ zhwhong [斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition（附翻译，下载） @ zhwhong [斯坦福CS224d课程整理] Natural Language Processing with Deep Learning @ zhwhong [斯坦福CS229课程整理] Machine Learning Autumn 2016 @ zhwhong ( 个人整理，未经允许禁止转载，授权转载请注明作者出处：Machine Learning 学习资料 (zhwhong) ，谢谢！)]]></content>
+      <url>https://Hzwcode.github.io/2017/02/23/Machine-Learning-Materials/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p><img src="http://upload-images.jianshu.io/upload_images/145616-02a9d0afdcfb7047.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<hr>
+<blockquote>
+<h1 id="Awesome系列"><a href="#Awesome系列" class="headerlink" title="Awesome系列　"></a>Awesome系列　</h1></blockquote>
+<ul>
+<li><a href="https://github.com/josephmisiti/awesome-machine-learning" target="_blank" rel="external"><strong>Awesome Machine Learning</strong></a></li>
+<li><a href="https://github.com/ChristosChristofidis/awesome-deep-learning" target="_blank" rel="external"><strong>Awesome Deep Learning</strong></a></li>
+<li><a href="https://github.com/jtoy/awesome-tensorflow" target="_blank" rel="external"><strong>Awesome TensorFlow</strong></a><a id="more"></a></li>
+<li><a href="https://github.com/TensorFlowKR/awesome_tensorflow_implementations" target="_blank" rel="external">Awesome TensorFlow Implementations</a></li>
+<li><a href="https://github.com/carpedm20/awesome-torch" target="_blank" rel="external">Awesome Torch</a></li>
+<li><a href="https://github.com/jbhuang0604/awesome-computer-vision" target="_blank" rel="external">Awesome Computer Vision</a></li>
+<li><a href="https://github.com/kjw0612/awesome-deep-vision" target="_blank" rel="external">Awesome Deep Vision</a></li>
+<li><a href="https://github.com/kjw0612/awesome-rnn" target="_blank" rel="external">Awesome RNN</a></li>
+<li><a href="https://github.com/keonkim/awesome-nlp" target="_blank" rel="external">Awesome NLP</a></li>
+<li><a href="https://github.com/owainlewis/awesome-artificial-intelligence" target="_blank" rel="external">Awesome AI</a></li>
+<li><a href="https://github.com/terryum/awesome-deep-learning-papers" target="_blank" rel="external">Awesome Deep Learning Papers</a></li>
+<li><a href="https://github.com/MaxwellRebo/awesome-2vec" target="_blank" rel="external">Awesome 2vec</a></li>
+</ul>
+<blockquote>
+<h1 id="Deep-Learning"><a href="#Deep-Learning" class="headerlink" title="Deep Learning"></a>Deep Learning</h1></blockquote>
+<ul>
+<li>[Book] <a href="http://neuralnetworksanddeeplearning.com/chap1.html" target="_blank" rel="external"><strong>Neural Networks and Deep Learning</strong></a> 中文翻译(不完整): <a href="https://www.gitbook.com/book/hit-scir/neural-networks-and-deep-learning-zh_cn/details" target="_blank" rel="external">神经网络与深度学习</a> 第五章中文翻译: <a href="http://www.jianshu.com/p/917f71b06499" target="_blank" rel="external">[译] 第五章 深度神经网络为何很难训练</a></li>
+<li>[Book] <a href="http://www.deeplearningbook.org/" target="_blank" rel="external">Deep Learning - MIT Press</a></li>
+<li>[Book] <a href="http://www.springer.com/gb/book/9780387310732" target="_blank" rel="external">Pattern Recognition and Machine Learning</a> (Bishop) | <a href="https://book.douban.com/subject/2061116/" target="_blank" rel="external">豆瓣</a> | <a href="http://nbviewer.jupyter.org/github/lijin-THU/notes-machine-learning/blob/master/ReadMe.ipynb" target="_blank" rel="external">PRML &amp; DL笔记</a> | <a href="https://www.gitbook.com/book/mqshen/prml/details" target="_blank" rel="external">GitBook</a></li>
+<li>[Course] <a href="https://cn.udacity.com/course/deep-learning--ud730/" target="_blank" rel="external"><strong>Deep Learning - Udacity</strong></a></li>
+<li>[Course] <a href="https://www.coursera.org/learn/machine-learning" target="_blank" rel="external"><strong>Machine Learning by Andrew Ng - Coursera</strong></a> | <a href="http://www.jianshu.com/p/c68d0df13e0b" target="_blank" rel="external"><strong>课程资料整理</strong></a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
+<li>[Course] <a href="http://cs231n.stanford.edu/" target="_blank" rel="external"><strong>Convolutional Neural Networks for Visual Recognition(CS231n)</strong></a> | <a href="http://www.jianshu.com/p/182baeb82c71" target="_blank" rel="external"><strong>课程资料整理</strong></a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
+<li>[Course] <a href="http://cs224d.stanford.edu/" target="_blank" rel="external">Deep Learning for Natural Language Processing(CS224d)</a> | <a href="http://www.jianshu.com/p/062d2bbbef93" target="_blank" rel="external">课程资料整理</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
+<li>[View] <a href="https://github.com/aymericdamien/TopDeepLearning" target="_blank" rel="external">Top Deep Learning Projects on Github</a></li>
+<li>[View] <a href="https://github.com/andrewt3000/DL4NLP/blob/master/README.md" target="_blank" rel="external">Deep Learning for NLP resources</a></li>
+<li>[View] <a href="http://www.jianshu.com/p/6752a8845d01" target="_blank" rel="external">资源 | 深度学习资料大全：从基础到各种网络模型</a></li>
+<li>[View] <a href="http://www.jianshu.com/nb/8413272" target="_blank" rel="external">Paper | DL相关论文中文翻译</a></li>
+<li>[View] <a href="http://www.jianshu.com/p/80bd4d4c2992" target="_blank" rel="external">深度学习新星：GAN的基本原理、应用和走向</a></li>
+<li>[View] <a href="http://www.jianshu.com/p/c20917a91472" target="_blank" rel="external">推荐 | 九本不容错过的深度学习和神经网络书籍</a></li>
+<li>[View] <a href="https://github.com/memect/hao" target="_blank" rel="external">Github好东西传送门</a> –&gt; <a href="https://github.com/memect/hao/blob/master/awesome/deep-learning-introduction.md" target="_blank" rel="external">深度学习入门与综述资料</a></li>
+</ul>
+<blockquote>
+<h1 id="Frameworks"><a href="#Frameworks" class="headerlink" title="Frameworks"></a>Frameworks</h1></blockquote>
+<ul>
+<li><a href="https://www.tensorflow.org/" target="_blank" rel="external">TensorFlow (by google)</a></li>
+<li><a href="https://github.com/dmlc/mxnet" target="_blank" rel="external">MXNet</a></li>
+<li><a href="http://torch.ch/" target="_blank" rel="external">Torch (by Facebook)</a></li>
+<li>[Caffe (by UC Berkley)(<a href="http://caffe.berkeleyvision.org/" target="_blank" rel="external">http://caffe.berkeleyvision.org/</a>)</li>
+<li>[Deeplearning4j(<a href="http://deeplearning4j.org/" target="_blank" rel="external">http://deeplearning4j.org</a>)</li>
+<li>Brainstorm</li>
+<li>Theano、Chainer、Marvin、Neon、ConvNetJS</li>
+</ul>
+<blockquote>
+<h1 id="TensorFlow"><a href="#TensorFlow" class="headerlink" title="TensorFlow"></a>TensorFlow</h1></blockquote>
+<ul>
+<li>官方文档</li>
+<li><a href="https://www.tensorflow.org/tutorials" target="_blank" rel="external">TensorFlow Tutorial</a></li>
+<li><a href="http://wiki.jikexueyuan.com/project/tensorflow-zh/" target="_blank" rel="external">TensorFlow 官方文档中文版</a></li>
+<li><a href="http://download.tensorflow.org/paper/whitepaper2015.pdf" target="_blank" rel="external">TensorFlow Whitepaper</a></li>
+<li><a href="http://www.jianshu.com/p/65dc64e4c81f" target="_blank" rel="external">[译] TensorFlow白皮书</a></li>
+<li>[API] <a href="https://www.tensorflow.org/versions/r0.8/api_docs/index.html" target="_blank" rel="external">API Document</a></li>
+</ul>
+<blockquote>
+<h1 id="入门教程"><a href="#入门教程" class="headerlink" title="入门教程"></a>入门教程</h1></blockquote>
+<ul>
+<li>[教程] <a href="http://learningtensorflow.com/index.html" target="_blank" rel="external">Learning TensorFlow</a></li>
+<li><a href="https://github.com/nlintz/TensorFlow-Tutorials" target="_blank" rel="external">TensorFlow-Tutorials @ github</a> (推荐)</li>
+<li><a href="https://github.com/jtoy/awesome-tensorflow" target="_blank" rel="external">Awesome-TensorFlow</a> (推荐)</li>
+<li><a href="https://github.com/aymericdamien/TensorFlow-Examples" target="_blank" rel="external">TensorFlow-Examples @ github</a></li>
+<li><a href="https://github.com/pkmital/tensorflow_tutorials" target="_blank" rel="external">tensorflow_tutorials @ github</a></li>
+</ul>
+<blockquote>
+<h1 id="分布式教程"><a href="#分布式教程" class="headerlink" title="分布式教程"></a>分布式教程</h1></blockquote>
+<ul>
+<li><a href="https://www.tensorflow.org/versions/r0.8/how_tos/distributed/index.html#distributed-tensorflow" target="_blank" rel="external">Distributed TensorFlow官方文档</a></li>
+<li><a href="https://github.com/ischlag/distributed-tensorflow-example" target="_blank" rel="external">distributed-tensorflow-example @ github</a> (推荐)</li>
+<li><a href="https://github.com/ashitani/DistributedTensorFlowSample" target="_blank" rel="external">DistributedTensorFlowSample @ github</a></li>
+<li><a href="http://parameterserver.org/" target="_blank" rel="external">Parameter Server</a></li>
+</ul>
+<blockquote>
+<h1 id="Paper-Model"><a href="#Paper-Model" class="headerlink" title="Paper (Model)"></a>Paper (Model)</h1></blockquote>
+<h2 id="CNN-Nets"><a href="#CNN-Nets" class="headerlink" title="CNN Nets"></a>CNN Nets</h2><ul>
+<li><a href="http://yann.lecun.com/exdb/lenet/" target="_blank" rel="external">LeNet</a></li>
+<li><a href="http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf" target="_blank" rel="external">AlexNet</a></li>
+<li><a href="https://arxiv.org/abs/1312.6229v4" target="_blank" rel="external">OverFeat</a></li>
+<li><a href="https://arxiv.org/abs/1312.4400v3" target="_blank" rel="external">NIN</a></li>
+<li><a href="http://www.cs.unc.edu/~wliu/papers/GoogLeNet.pdf" target="_blank" rel="external">GoogLeNet</a></li>
+<li><a href="https://arxiv.org/abs/1409.4842v1" target="_blank" rel="external">Inception-V1</a></li>
+<li><a href="https://arxiv.org/abs/1502.03167" target="_blank" rel="external">Inception-V2</a></li>
+<li><a href="http://arxiv.org/abs/1512.00567" target="_blank" rel="external">Inception-V3</a></li>
+<li><a href="https://arxiv.org/abs/1602.07261" target="_blank" rel="external">Inception-V4</a></li>
+<li><a href="http://arxiv.org/abs/1602.07261" target="_blank" rel="external">Inception-ResNet-v2</a></li>
+<li><a href="https://arxiv.org/abs/1512.03385" target="_blank" rel="external">ResNet 50</a></li>
+<li><a href="https://arxiv.org/abs/1512.03385" target="_blank" rel="external">ResNet 101</a></li>
+<li><a href="https://arxiv.org/abs/1512.03385" target="_blank" rel="external">ResNet 152</a></li>
+<li><a href="http://arxiv.org/abs/1409.1556.pdf" target="_blank" rel="external">VGG 16</a></li>
+<li><a href="http://arxiv.org/abs/1409.1556.pdf" target="_blank" rel="external">VGG 19</a></li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/145616-131a561dcbe74aba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>(注：图片来自 <a href="https://github.com/tensorflow/models/tree/master/slim#Pretrained" target="_blank" rel="external">Github : TensorFlow-Slim image classification library</a>)</p>
+<p>额外参考：</p>
+<ul>
+<li><a href="http://www.jianshu.com/p/6d441e208547" target="_blank" rel="external">[ILSVRC] 基于OverFeat的图像分类、定位、检测</a></li>
+<li><a href="http://www.jianshu.com/p/7975f179ec49" target="_blank" rel="external">[卷积神经网络-进化史] 从LeNet到AlexNet</a></li>
+<li><a href="http://www.jianshu.com/p/fe428f0b32c1" target="_blank" rel="external">[透析] 卷积神经网络CNN究竟是怎样一步一步工作的？</a></li>
+<li><a href="http://www.jianshu.com/p/ba51f8c6e348" target="_blank" rel="external">GoogLenet中，1X1卷积核到底有什么作用呢？</a></li>
+<li><a href="http://www.jianshu.com/p/408ab8177a53" target="_blank" rel="external">深度学习 — 反向传播(BP)理论推导</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/22464594?refer=hsmyy" target="_blank" rel="external">无痛的机器学习第一季目录 - 知乎</a></li>
+</ul>
+<h2 id="Object-Detection"><a href="#Object-Detection" class="headerlink" title="Object Detection"></a>Object Detection</h2><ul>
+<li><a href="https://arxiv.org/abs/1311.2524" target="_blank" rel="external">R-CNN</a></li>
+<li><a href="https://arxiv.org/abs/1504.08083" target="_blank" rel="external">Fast R-CNN</a></li>
+<li><a href="https://arxiv.org/abs/1506.01497v3" target="_blank" rel="external">Faster R-CNN</a></li>
+<li><a href="https://arxiv.org/abs/1411.4038" target="_blank" rel="external">FCN</a></li>
+<li><a href="https://arxiv.org/abs/1605.06409v2" target="_blank" rel="external">R-FCN</a></li>
+<li><a href="https://arxiv.org/abs/1506.02640v5" target="_blank" rel="external">YOLO</a></li>
+<li><a href="https://arxiv.org/abs/1512.02325" target="_blank" rel="external">SSD</a></li>
+</ul>
+<p>额外参考：</p>
+<ul>
+<li><a href="http://www.jianshu.com/p/067f6a989d31" target="_blank" rel="external">[Detection] CNN 之 “物体检测” 篇</a></li>
+<li><a href="http://www.jianshu.com/p/7e52daaba512" target="_blank" rel="external">计算机视觉中 RNN 应用于目标检测</a></li>
+<li><a href="http://www.jianshu.com/p/4ce0aba4e3c2" target="_blank" rel="external">Machine Learning 硬件投入调研</a></li>
+</ul>
+<h2 id="RNN-amp-LSTM"><a href="#RNN-amp-LSTM" class="headerlink" title="RNN &amp; LSTM"></a>RNN &amp; LSTM</h2><ul>
+<li><a href="http://www.jianshu.com/p/c930d61e1f16" target="_blank" rel="external">[福利] 深入理解 RNNs &amp; LSTM 网络学习资料</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
+<li><a href="http://www.jianshu.com/p/2aca6e8ac7c8" target="_blank" rel="external">[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
+<li><a href="http://www.jianshu.com/p/7e52daaba512" target="_blank" rel="external">计算机视觉中 RNN 应用于目标检测</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
+<li>[推荐] <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="external"><strong>Understanding LSTM Networks</strong></a> @ <a href="http://colah.github.io/" target="_blank" rel="external">colah</a> | <a href="http://www.jianshu.com/p/9dc9f41f0b29" target="_blank" rel="external"><strong>理解LSTM网络</strong></a>[简书] @ <a href="http://www.jianshu.com/u/696dc6c6f01c" target="_blank" rel="external">Not_GOD</a></li>
+<li><a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/" target="_blank" rel="external">The Unreasonable Effectiveness of Recurrent Neural Networks</a> @ <a href="http://cs.stanford.edu/people/karpathy/" target="_blank" rel="external">Andrej Karpathy</a></li>
+<li><a href="http://deeplearning.net/tutorial/lstm.html" target="_blank" rel="external">LSTM Networks for Sentiment Analysis</a> (theano官网LSTM教程+代码)</li>
+<li><a href="http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-1-introduction-to-rnns/" target="_blank" rel="external">Recurrent Neural Networks Tutorial</a> @ <a href="http://www.wildml.com/" target="_blank" rel="external">WILDML</a></li>
+<li><a href="http://iamtrask.github.io/2015/11/15/anyone-can-code-lstm/" target="_blank" rel="external">Anyone Can Learn To Code an LSTM-RNN in Python (Part 1: RNN)</a> @ <a href="https://twitter.com/iamtrask" target="_blank" rel="external">iamtrask</a></li>
+</ul>
+<hr>
+<blockquote>
+<h1 id="Stanford-机器学习课程整理"><a href="#Stanford-机器学习课程整理" class="headerlink" title="Stanford 机器学习课程整理"></a>Stanford 机器学习课程整理</h1></blockquote>
+<ul>
+<li><a href="http://www.jianshu.com/p/c68d0df13e0b" target="_blank" rel="external">[coursera 机器学习课程] Machine Learning by Andrew Ng</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
+<li><a href="http://www.jianshu.com/p/182baeb82c71" target="_blank" rel="external">[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition（附翻译，下载）</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
+<li><a href="http://www.jianshu.com/p/062d2bbbef93" target="_blank" rel="external">[斯坦福CS224d课程整理] Natural Language Processing with Deep Learning</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
+<li><a href="http://www.jianshu.com/p/0a6ef31ff77a" target="_blank" rel="external">[斯坦福CS229课程整理] Machine Learning Autumn 2016</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
+</ul>
+<hr>
+<p>( 个人整理，未经允许禁止转载，授权转载请注明作者及出处，谢谢！)</p>
+]]></content>
+      
+        <categories>
+            
+            <category> machine learning </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+            <tag> Knowledge </tag>
+            
+        </tags>
+        
     </entry>
-
     
     <entry>
       <title><![CDATA[Welcome to Hexo]]></title>
-      <url>%2F2017%2F02%2F23%2Fhello-world%2F</url>
-      <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      <url>https://Hzwcode.github.io/2017/02/23/hello-world/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<a id="more"></a>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> tool </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> github </tag>
+            
+        </tags>
+        
     </entry>
-
     
   
   

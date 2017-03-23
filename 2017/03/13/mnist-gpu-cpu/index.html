@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="zhwhong" />
+
+
+
+<meta name="description" content="一、GPU服务器服务器 IP ：172.xx.xx.98 （4块NVIDIA TITAN X GPU，32 CPU核心）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GPU和CPU服务器测试mnist手写数字集">
+<meta property="og:url" content="https://Hzwcode.github.io/2017/03/13/mnist-gpu-cpu/index.html">
+<meta property="og:site_name" content="Zhiwei's Blog">
+<meta property="og:description" content="一、GPU服务器服务器 IP ：172.xx.xx.98 （4块NVIDIA TITAN X GPU，32 CPU核心）">
+<meta property="og:image" content="https://Hzwcode.github.io/logistic_gpu_1.png">
+<meta property="og:image" content="https://Hzwcode.github.io/logistic_gpu_2.png">
+<meta property="og:image" content="https://Hzwcode.github.io/logistic_cpu_1.png">
+<meta property="og:image" content="https://Hzwcode.github.io/logistic_cpu_2.png">
+<meta property="og:image" content="https://Hzwcode.github.io/conv_gpu_1.png">
+<meta property="og:image" content="https://Hzwcode.github.io/conv_gpu_2.png">
+<meta property="og:image" content="https://Hzwcode.github.io/conv_cpu_1.png">
+<meta property="og:image" content="https://Hzwcode.github.io/conv_cpu_2.png">
+<meta property="og:image" content="https://Hzwcode.github.io/lstm_gpu_1.png">
+<meta property="og:image" content="https://Hzwcode.github.io/lstm_gpu_2.png">
+<meta property="og:image" content="https://Hzwcode.github.io/lstm_cpu_1.png">
+<meta property="og:image" content="https://Hzwcode.github.io/lstm_cpu_2.png">
+<meta property="og:updated_time" content="2017-03-21T06:09:09.065Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GPU和CPU服务器测试mnist手写数字集">
+<meta name="twitter:description" content="一、GPU服务器服务器 IP ：172.xx.xx.98 （4块NVIDIA TITAN X GPU，32 CPU核心）">
+<meta name="twitter:image" content="https://Hzwcode.github.io/logistic_gpu_1.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Zhiwei&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>GPU和CPU服务器测试mnist手写数字集 | Zhiwei&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?c28078cddac47e3f37d968d55b8b4e4f";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">zhwhong</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Stay Hungry Stay Foolish | 常葆求知若饥 常存虚怀若愚</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa Email" href="mailto:hongzhiwei886@gmail.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="http://weibo.com/zhwhong?refer_flag=1001030102_&is_all=1" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="//github.com/Hzwcode" title="GitHub"></a>
+                            
+                                <a class="fa Coding" href="https://coding.net/u/Hzw" title="Coding"></a>
+                            
+                                <a class="fa Facebook" href="https://www.facebook.com/profile.php?id=100008115764524" title="Facebook"></a>
+                            
+                                <a class="fa 简书" href="http://www.jianshu.com/u/38cd2a8c425e" title="简书"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/zhwhong/activities" title="知乎"></a>
+                            
+                                <a class="fa 豆瓣" href="https://www.douban.com/people/zhwhong/" title="豆瓣"></a>
+                            
+                                <a class="fa 网易云音乐" href="http://music.163.com/#/user/home?id=49576672" title="网易云音乐"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNU/">GNU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Knowledge/">Knowledge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Makefile/">Makefile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Network/">Neural Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpu/">gpu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/music/">music</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/theme/">theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://scholar.google.com/">Google scholar</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://csrankings.org/?nsukey=eDYw1JlrTACtiYA%2BUn%2FlPzeKi7tH23c2yYScMmTD1d4O%2FM5MSONsPUiIwGeKGX5bfZSEDyKi0rIQS80brHuAVnx%2FJhlnzTuzAvY9ePyy5tnxNaVWdu3owBicjNIFvxJG9HFXi1kAsN0U2%2BLeGLXA3HBznVmKhbu1Vw6UBjQ%2FqqwQ95bobndqgpqO8OtwePuV">CS Rankings (beta)</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://karpathy.github.io/2016/09/07/phd/">A Survival Guide to a PhD - karpathy</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://zhuanlan.zhihu.com/p/25099638">博士这五年 - 李沐</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://arxiv.org/">arXiv.org</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.arxiv-sanity.com/">Arxiv Sanity Preserver</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">一只 Deep Learning, Data Mining, Bioinformatics 的CS小菜鸟(*´∇｀*), 欢迎分享知识。喜欢音乐、影视、阅读，爱好乒乓球、健身、户外，喜欢捣腾电脑blabla (●’◡’●)</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">zhwhong</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">zhwhong</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Stay Hungry Stay Foolish | 常葆求知若饥 常存虚怀若愚</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa Email" target="_blank" href="mailto:hongzhiwei886@gmail.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/zhwhong?refer_flag=1001030102_&is_all=1" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="//github.com/Hzwcode" title="GitHub"></a>
+                            
+                                <a class="fa Coding" target="_blank" href="https://coding.net/u/Hzw" title="Coding"></a>
+                            
+                                <a class="fa Facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100008115764524" title="Facebook"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="http://www.jianshu.com/u/38cd2a8c425e" title="简书"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/zhwhong/activities" title="知乎"></a>
+                            
+                                <a class="fa 豆瓣" target="_blank" href="https://www.douban.com/people/zhwhong/" title="豆瓣"></a>
+                            
+                                <a class="fa 网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=49576672" title="网易云音乐"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-mnist-gpu-cpu" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/13/mnist-gpu-cpu/" class="article-date">
+      <time datetime="2017-03-13T10:22:15.000Z" itemprop="datePublished">2017-03-13</time>
+</a>
+
+ 
+    <a href="/2017/03/13/mnist-gpu-cpu/#comments" title="查看评论">
+        <i class="fa fa-comments-o" aria-hidden="true"></i>
+        <span class="count-comment"></span>
+        
+            <span class="ds-thread-count" ></span>
+        
+        
+    </a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      GPU和CPU服务器测试mnist手写数字集
+    </h1>
+  
+
+        
+                <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1,636字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">9分</span>
+      </span>
+    </span>
+
+    <!-- <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+        <span class="post-meta-item-text">  阅读量: </span>
+        <span id="busuanzi_value_page_pv"></span>次
+      </span>
+    </span> -->
+
+        
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+          <br>
+          <br>
+        
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/machine-learning/">machine learning<span class="article-category-count">7</span></a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gpu/">gpu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <script src="/assets/js/APlayer.min.js"> </script><h1 id="一、GPU服务器"><a href="#一、GPU服务器" class="headerlink" title="一、GPU服务器"></a>一、GPU服务器</h1><p>服务器 IP ：<code>172.xx.xx.98</code> （4块NVIDIA <strong>TITAN X</strong> GPU，<strong>32</strong> CPU核心）</p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">zhwhong@news-ai:~$ nvidia-smi</div><div class="line">Mon Mar 13 14:30:39 2017       </div><div class="line">+-----------------------------------------------------------------------------+</div><div class="line">| NVIDIA-SMI 367.48                 Driver Version: 367.48                    |</div><div class="line">|-------------------------------+----------------------+----------------------+</div><div class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</div><div class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</div><div class="line">|===============================+======================+======================|</div><div class="line">|   0  GeForce GTX TIT...  Off  | 0000:01:00.0     Off |                  N/A |</div><div class="line">| 22%   53C    P0    69W / 250W |      0MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   1  GeForce GTX TIT...  Off  | 0000:02:00.0     Off |                  N/A |</div><div class="line">| 22%   57C    P0    72W / 250W |      0MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   2  GeForce GTX TIT...  Off  | 0000:82:00.0     Off |                  N/A |</div><div class="line">| 22%   57C    P0    73W / 250W |      0MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   3  GeForce GTX TIT...  Off  | 0000:83:00.0     Off |                  N/A |</div><div class="line">|  0%   53C    P0    60W / 250W |      0MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line"></div><div class="line">+-----------------------------------------------------------------------------+</div><div class="line">| Processes:                                                       GPU Memory |</div><div class="line">|  GPU       PID  Type  Process name                               Usage      |</div><div class="line">|=============================================================================|</div><div class="line">|  No running processes found                                                 |</div><div class="line">+-----------------------------------------------------------------------------+</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">zhwhong@news-ai:~$ lscpu</div><div class="line">Architecture:          x86_64</div><div class="line">CPU op-mode(s):        32-bit, 64-bit</div><div class="line">Byte Order:            Little Endian</div><div class="line">CPU(s):                32</div><div class="line">On-line CPU(s) list:   0-31</div><div class="line">Thread(s) per core:    2</div><div class="line">Core(s) per socket:    8</div><div class="line">Socket(s):             2</div><div class="line">NUMA node(s):          2</div><div class="line">Vendor ID:             GenuineIntel</div><div class="line">CPU family:            6</div><div class="line">Model:                 63</div><div class="line">Stepping:              2</div><div class="line">CPU MHz:               1201.218</div><div class="line">BogoMIPS:              4800.94</div><div class="line">Virtualization:        VT-x</div><div class="line">L1d cache:             32K</div><div class="line">L1i cache:             32K</div><div class="line">L2 cache:              256K</div><div class="line">L3 cache:              20480K</div><div class="line">NUMA node0 CPU(s):     0-7,16-23</div><div class="line">NUMA node1 CPU(s):     8-15,24-31</div></pre></td></tr></table></figure>
+<p>使用 <code>cat /proc/cpuinfo</code>  命令可以查看每一个cpu核详细信息.</p>
+<h1 id="二、CPU服务器"><a href="#二、CPU服务器" class="headerlink" title="二、CPU服务器"></a>二、CPU服务器</h1><p>服务器 IP ：<code>113.xx.xxx.196</code> （纯CPU服务器，<strong>128核</strong>）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">mye@ubuntu:~$ lscpu</div><div class="line">Architecture:          x86_64</div><div class="line">CPU op-mode(s):        32-bit, 64-bit</div><div class="line">Byte Order:            Little Endian</div><div class="line">CPU(s):                128</div><div class="line">On-line CPU(s) list:   0-127</div><div class="line">Thread(s) per core:    1</div><div class="line">Core(s) per socket:    16</div><div class="line">Socket(s):             8</div><div class="line">NUMA node(s):          8</div><div class="line">Vendor ID:             GenuineIntel</div><div class="line">CPU family:            6</div><div class="line">Model:                 63</div><div class="line">Stepping:              4</div><div class="line">CPU MHz:               1200.031</div><div class="line">BogoMIPS:              4396.82</div><div class="line">Virtualization:        VT-x</div><div class="line">L1d cache:             32K</div><div class="line">L1i cache:             32K</div><div class="line">L2 cache:              256K</div><div class="line">L3 cache:              40960K</div><div class="line">NUMA node0 CPU(s):     0-15</div><div class="line">NUMA node1 CPU(s):     16-31</div><div class="line">NUMA node2 CPU(s):     32-47</div><div class="line">NUMA node3 CPU(s):     48-63</div><div class="line">NUMA node4 CPU(s):     64-79</div><div class="line">NUMA node5 CPU(s):     80-95</div><div class="line">NUMA node6 CPU(s):     96-111</div><div class="line">NUMA node7 CPU(s):     112-127</div></pre></td></tr></table></figure>
+<p>使用 <code>cat /proc/cpuinfo</code>  命令可以查看每一个cpu核详细信息.</p>
+<h1 id="三、mnist测试"><a href="#三、mnist测试" class="headerlink" title="三、mnist测试"></a>三、mnist测试</h1><ul>
+<li>测试代码： <a href="https://github.com/Hzwcode/awesome-deep-learning/tree/master/TensorFlow-Tutorials" target="_blank" rel="external"><strong>zhwhong/awesome-deep-learning/TensorFlow-Tutorials</strong></a></li>
+</ul>
+<h2 id="1-逻辑回归logistic测试"><a href="#1-逻辑回归logistic测试" class="headerlink" title="(1)逻辑回归logistic测试"></a>(1)逻辑回归logistic测试</h2><p>Example: <a href="https://github.com/Hzwcode/awesome-deep-learning/blob/master/TensorFlow-Tutorials/02_logistic_regression.py" target="_blank" rel="external"><strong>02_logistic_regression.py</strong></a></p>
+<p>测试结果：</p>
+<h3 id="a-batch-size-128"><a href="#a-batch-size-128" class="headerlink" title="a.batch_size : 128"></a>a.batch_size : 128</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">—</th>
+<th style="text-align:center">GPU</th>
+<th style="text-align:center">CPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">top信息</td>
+<td style="text-align:center">%CPU：244.2</td>
+<td style="text-align:center">%CPU：472</td>
+</tr>
+<tr>
+<td style="text-align:center">nvidia-smi信息</td>
+<td style="text-align:center">20%左右</td>
+<td style="text-align:center">无</td>
+</tr>
+<tr>
+<td style="text-align:center">mnist运行结果</td>
+<td style="text-align:center">(99, 0.9234, <br> datetime.timedelta(0, 68, 913616)) <br> <strong>统计：68s/100轮</strong></td>
+<td style="text-align:center">(99, 0.92330000000000001, <br> datetime.timedelta(0, 101, 424780)) <br> <strong>统计：101s/100轮</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-batch-size-256"><a href="#b-batch-size-256" class="headerlink" title="b.batch_size : 256"></a>b.batch_size : 256</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">—</th>
+<th style="text-align:center">GPU</th>
+<th style="text-align:center">CPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">top信息</td>
+<td style="text-align:center">%CPU：214.1</td>
+<td style="text-align:center">%CPU：781.1</td>
+</tr>
+<tr>
+<td style="text-align:center">nvidia-smi信息</td>
+<td style="text-align:center">24%左右</td>
+<td style="text-align:center">无</td>
+</tr>
+<tr>
+<td style="text-align:center">mnist运行结果</td>
+<td style="text-align:center">(99, 0.92290000000000005, datetime.timedelta(0, 45, 724627)) <br> <strong>统计：45s/100轮</strong></td>
+<td style="text-align:center">(99, 0.92300000000000004, <br> datetime.timedelta(0, 79, 207202)) <br> <strong>统计：79s/100轮</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="c-batch-size-512"><a href="#c-batch-size-512" class="headerlink" title="c.batch_size : 512"></a>c.batch_size : 512</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">—</th>
+<th style="text-align:center">GPU</th>
+<th style="text-align:center">CPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">top信息</td>
+<td style="text-align:center">%CPU：203.2</td>
+<td style="text-align:center">%CPU：1031</td>
+</tr>
+<tr>
+<td style="text-align:center">nvidia-smi信息</td>
+<td style="text-align:center">29%左右</td>
+<td style="text-align:center">无</td>
+</tr>
+<tr>
+<td style="text-align:center">mnist运行结果</td>
+<td style="text-align:center">(99, 0.92000000000000004, datetime.timedelta(0, 30, 479467)) <br> <strong>统计：30s/100轮</strong></td>
+<td style="text-align:center">(99, 0.92010000000000003,  <br> datetime.timedelta(0, 66, 738092)) <br> <strong>统计：66秒/100轮</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>GPU运行结果：</strong></p>
+<p><img src="logistic_gpu_1.png" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">zhwhong@news-ai:~/MNIST_test$ nvidia-smi</div><div class="line">Mon Mar 13 15:13:32 2017       </div><div class="line">+-----------------------------------------------------------------------------+</div><div class="line">| NVIDIA-SMI 367.48                 Driver Version: 367.48                    |</div><div class="line">|-------------------------------+----------------------+----------------------+</div><div class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</div><div class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</div><div class="line">|===============================+======================+======================|</div><div class="line">|   0  GeForce GTX TIT...  Off  | 0000:01:00.0     Off |                  N/A |</div><div class="line">| 22%   57C    P2    70W / 250W |  11664MiB / 12206MiB |     29%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   1  GeForce GTX TIT...  Off  | 0000:02:00.0     Off |                  N/A |</div><div class="line">| 22%   58C    P2    71W / 250W |  11603MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   2  GeForce GTX TIT...  Off  | 0000:82:00.0     Off |                  N/A |</div><div class="line">| 22%   57C    P2    71W / 250W |  11603MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   3  GeForce GTX TIT...  Off  | 0000:83:00.0     Off |                  N/A |</div><div class="line">| 22%   55C    P2    75W / 250W |  11601MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line"></div><div class="line">+-----------------------------------------------------------------------------+</div><div class="line">| Processes:                                                       GPU Memory |</div><div class="line">|  GPU       PID  Type  Process name                               Usage      |</div><div class="line">|=============================================================================|</div><div class="line">|    0     28564    C   python                                       11660MiB |</div><div class="line">|    1     28564    C   python                                       11599MiB |</div><div class="line">|    2     28564    C   python                                       11599MiB |</div><div class="line">|    3     28564    C   python                                       11597MiB |</div><div class="line">+-----------------------------------------------------------------------------+</div></pre></td></tr></table></figure>
+<p><img src="logistic_gpu_2.png" alt=""></p>
+<p><strong>CPU运行结果：</strong></p>
+<p><img src="logistic_cpu_1.png" alt=""></p>
+<p><img src="logistic_cpu_2.png" alt=""></p>
+<h2 id="2-卷积神经网络conv测试"><a href="#2-卷积神经网络conv测试" class="headerlink" title="(2)卷积神经网络conv测试"></a>(2)卷积神经网络conv测试</h2><p>Example : <a href="https://github.com/Hzwcode/awesome-deep-learning/blob/master/TensorFlow-Tutorials/05_convolutional_net.py" target="_blank" rel="external"><strong>05_convolutional_net.py</strong></a></p>
+<p>测试结果：</p>
+<h3 id="a-batch-size-128-1"><a href="#a-batch-size-128-1" class="headerlink" title="a.batch_size : 128"></a>a.batch_size : 128</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">—</th>
+<th style="text-align:left">GPU</th>
+<th style="text-align:left">CPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">top信息</td>
+<td style="text-align:left">%CPU：141.9</td>
+<td style="text-align:left">%CPU：5224.3</td>
+</tr>
+<tr>
+<td style="text-align:center">nvidia-smi信息</td>
+<td style="text-align:left">75%左右</td>
+<td style="text-align:left">无</td>
+</tr>
+<tr>
+<td style="text-align:center">mnist运行结果</td>
+<td style="text-align:left">(0, 0.93359375, 4, 230888) <br> (1, 0.984375, 7, 929353) <br> (2, 0.97265625, 11, 635471) <br> (3, 0.98828125, 15, 310449) <br> (4, 0.9921875, 19, 3371) <br> (5, 0.98828125, 22, 720680) <br> (6, 1.0, 26, 384165) <br> (7, 0.99609375, 30, 88245) <br> …… <br> (99, 0.9921875, 370, 693523) <br> <strong>平均：3.7s/轮</strong></td>
+<td style="text-align:left">(0, 0.95703125,  54, 907580) <br> (1, 0.98046875, 111, 935452) <br> (2, 0.98828125, 169, 417860) <br> (3, 0.98046875, 227, 60819) <br> (4, 0.9921875, 284, 513000) <br> (5, 0.98828125, 342, 273721) <br> (6, 0.9921875, 399, 981951) <br> (7, 0.984375, 458, 23667) <br> (8, 0.99609375, 516, 282659) <br> …… <br> <strong>平均：57s/轮</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-batch-size-256-1"><a href="#b-batch-size-256-1" class="headerlink" title="b.batch_size : 256"></a>b.batch_size : 256</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">—</th>
+<th style="text-align:left">GPU</th>
+<th style="text-align:left">CPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">top信息</td>
+<td style="text-align:left">%CPU：114.4</td>
+<td style="text-align:left">%CPU：5746</td>
+</tr>
+<tr>
+<td style="text-align:center">nvidia-smi信息</td>
+<td style="text-align:left">82%左右</td>
+<td style="text-align:left">无</td>
+</tr>
+<tr>
+<td style="text-align:center">mnist运行结果</td>
+<td style="text-align:left">(0, 0.6796875, 3, 563670) <br> (1, 0.9609375, 6, 565172) <br> (2, 0.96875, 9, 520787) <br> (3, 0.98828125, 12, 552352) <br> (4, 0.9921875, 15, 509898) <br> (5, 0.984375, 18, 508712) <br> (6, 0.9921875, 21, 465722) <br> …… <br> (99, 1.0, 301, 239776) <br> <strong>平均：3s/轮</strong></td>
+<td style="text-align:left">(0, 0.69921875, 37, 712726) <br> (1, 0.97265625, 75, 387519) <br> (2, 0.984375, 113, 36748) <br> (3, 0.98828125, 150, 694555) <br> (4, 0.98828125, 188, 393595) <br> (5, 0.984375, 225, 962947) <br> (6, 0.98046875, 263, 551988) <br> (7, 0.9921875, 301, 107670) <br> …… <br> <strong>平均：37s/轮</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="c-batch-size-512-1"><a href="#c-batch-size-512-1" class="headerlink" title="c.batch_size : 512"></a>c.batch_size : 512</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">—</th>
+<th style="text-align:left">GPU</th>
+<th style="text-align:left">CPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">top信息</td>
+<td style="text-align:left">%CPU：98.5</td>
+<td style="text-align:left">%CPU：5994</td>
+</tr>
+<tr>
+<td style="text-align:center">nvidia-smi信息</td>
+<td style="text-align:left">90%左右</td>
+<td style="text-align:left">无</td>
+</tr>
+<tr>
+<td style="text-align:center">mnist运行结果</td>
+<td style="text-align:left">(0, 0.09375, 3, 358815) <br> (1, 0.52734375, 5, 918648) <br> (2, 0.91796875, 8, 488475) <br> (3, 0.9296875, 11, 35129) <br> (4, 0.98046875, 13, 605235) <br> (5, 0.96875, 16, 148614) <br> (6, 0.984375, 18, 715051) <br> (7, 0.9765625, 21, 281468) <br> (8, 0.9921875, 23, 854374) <br> …… <br> (99, 1.0, 263, 28433) <br> <strong>平均：2.63s/轮</strong></td>
+<td style="text-align:left">(0, 0.08203125, 31, 125486) <br> (1, 0.796875, 62, 543181) <br> (2, 0.91015625, 94, 522874) <br> (3, 0.9609375, 126, 946088) <br> (4, 0.96484375, 159, 929706) <br> (5, 0.95703125, 193, 230872) <br> (6, 0.9921875, 226, 695604) <br> (7, 0.98828125, 260, 43828) <br> (8, 0.9921875, 293, 214191) <br> (9, 0.99609375, 326, 797200) <br> …… <br> <strong>平均：32.6s/轮</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>GPU运行结果：</strong></p>
+<p><img src="conv_gpu_1.png" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">zhwhong@news-ai:~/MNIST_test$ nvidia-smi</div><div class="line">Mon Mar 13 15:44:49 2017       </div><div class="line">+-----------------------------------------------------------------------------+</div><div class="line">| NVIDIA-SMI 367.48                 Driver Version: 367.48                    |</div><div class="line">|-------------------------------+----------------------+----------------------+</div><div class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</div><div class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</div><div class="line">|===============================+======================+======================|</div><div class="line">|   0  GeForce GTX TIT...  Off  | 0000:01:00.0     Off |                  N/A |</div><div class="line">| 27%   70C    P2   192W / 250W |  11713MiB / 12206MiB |     90%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   1  GeForce GTX TIT...  Off  | 0000:02:00.0     Off |                  N/A |</div><div class="line">| 22%   53C    P2    70W / 250W |  11603MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   2  GeForce GTX TIT...  Off  | 0000:82:00.0     Off |                  N/A |</div><div class="line">| 22%   45C    P2    69W / 250W |  11627MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   3  GeForce GTX TIT...  Off  | 0000:83:00.0     Off |                  N/A |</div><div class="line">| 22%   52C    P5    22W / 250W |  11601MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line"></div><div class="line">+-----------------------------------------------------------------------------+</div><div class="line">| Processes:                                                       GPU Memory |</div><div class="line">|  GPU       PID  Type  Process name                               Usage      |</div><div class="line">|=============================================================================|</div><div class="line">|    0      9587    C   python                                       11709MiB |</div><div class="line">|    1      9587    C   python                                       11599MiB |</div><div class="line">|    2      1552    C   python                                         506MiB |</div><div class="line">|    2      9587    C   python                                       11117MiB |</div><div class="line">|    3      9587    C   python                                       11597MiB |</div><div class="line">+-----------------------------------------------------------------------------+</div></pre></td></tr></table></figure>
+<p><img src="conv_gpu_2.png" alt=""></p>
+<p><strong>CPU运行结果：</strong></p>
+<p><img src="conv_cpu_1.png" alt=""></p>
+<p><img src="conv_cpu_2.png" alt=""></p>
+<h2 id="3-循环神经网络lstm测试"><a href="#3-循环神经网络lstm测试" class="headerlink" title="(3)循环神经网络lstm测试"></a>(3)循环神经网络lstm测试</h2><p>Example : <a href="https://github.com/Hzwcode/awesome-deep-learning/blob/master/TensorFlow-Tutorials/07_lstm.py" target="_blank" rel="external"><strong>07_lstm.py</strong></a></p>
+<p>测试结果：</p>
+<h3 id="batch-size-512"><a href="#batch-size-512" class="headerlink" title="batch_size : 512"></a>batch_size : 512</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">—</th>
+<th style="text-align:left">GPU</th>
+<th style="text-align:left">CPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">top信息</td>
+<td style="text-align:left">%CPU：123.4</td>
+<td style="text-align:left">%CPU：818.4</td>
+</tr>
+<tr>
+<td style="text-align:center">nvidia-smi信息</td>
+<td style="text-align:left">40%左右</td>
+<td style="text-align:left">无</td>
+</tr>
+<tr>
+<td style="text-align:center">mnist运行结果</td>
+<td style="text-align:left">(0, 0.26953125, 2, 390310) <br> (1, 0.37890625, 4, 420676) <br> (2, 0.68359375, 6, 385682) <br> (3, 0.7421875, 8, 494356) <br> (4, 0.7890625, 10, 649750) <br> (5, 0.84375, 12, 547186) <br> (6, 0.83203125, 14, 657817) <br> (7, 0.8671875, 16, 743615) <br> (8, 0.87109375, 18, 737803) <br> …… <br> …… <br> (99, 0.96875, 202, 633241) <br> <strong>平均：2.02s/轮</strong></td>
+<td style="text-align:left">(0, 0.2265625, 10, 367446) <br> (1, 0.3984375, 20, 716101) <br> (2, 0.61328125, 31, 403893) <br> (3, 0.734375, 42, 7851) <br> (4, 0.75, 52, 698565) <br> (5, 0.78515625, 63, 61517) <br> (6, 0.84765625, 73, 529780) <br> (7, 0.84765625, 84, 130221) <br> (8, 0.8828125, 94, 898270) <br> (9, 0.90234375, 105, 455608) <br> …… <br> (99, 0.98046875, 995, 356187) <br> <strong>平均：9.95s/轮</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>GPU运行结果：</strong></p>
+<p><img src="lstm_gpu_1.png" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">zhwhong@news-ai:~/MNIST_test$ nvidia-smi</div><div class="line">Mon Mar 13 16:05:19 2017       </div><div class="line">+-----------------------------------------------------------------------------+</div><div class="line">| NVIDIA-SMI 367.48                 Driver Version: 367.48                    |</div><div class="line">|-------------------------------+----------------------+----------------------+</div><div class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</div><div class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</div><div class="line">|===============================+======================+======================|</div><div class="line">|   0  GeForce GTX TIT...  Off  | 0000:01:00.0     Off |                  N/A |</div><div class="line">| 22%   61C    P2    90W / 250W |    185MiB / 12206MiB |     40%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   1  GeForce GTX TIT...  Off  | 0000:02:00.0     Off |                  N/A |</div><div class="line">| 22%   55C    P5    20W / 250W |    109MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   2  GeForce GTX TIT...  Off  | 0000:82:00.0     Off |                  N/A |</div><div class="line">| 22%   55C    P5    56W / 250W |    109MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line">|   3  GeForce GTX TIT...  Off  | 0000:83:00.0     Off |                  N/A |</div><div class="line">| 22%   54C    P5    21W / 250W |    109MiB / 12206MiB |      0%      Default |</div><div class="line">+-------------------------------+----------------------+----------------------+</div><div class="line"></div><div class="line">+-----------------------------------------------------------------------------+</div><div class="line">| Processes:                                                       GPU Memory |</div><div class="line">|  GPU       PID  Type  Process name                               Usage      |</div><div class="line">|=============================================================================|</div><div class="line">|    0     17988    C   python                                         183MiB |</div><div class="line">|    1     17988    C   python                                         107MiB |</div><div class="line">|    2     17988    C   python                                         107MiB |</div><div class="line">|    3     17988    C   python                                         107MiB |</div><div class="line">+-----------------------------------------------------------------------------+</div></pre></td></tr></table></figure>
+<p><img src="lstm_gpu_2.png" alt=""></p>
+<p><strong>CPU运行结果：</strong></p>
+<p><img src="lstm_cpu_1.png" alt=""></p>
+<p><img src="lstm_cpu_2.png" alt=""></p>
+<hr>
+<p>注：关于训练中每个epoch时间统计，可以使用python <code>datetime</code> 模块，使用<code>datetime.datetime.now()</code> 获取系统时间。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/03/13/mnist-gpu-cpu/">GPU和CPU服务器测试mnist手写数字集</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">zhwhong</a></p>
+        <p><span>发布时间:</span>2017-03-13, 18:22:15</p>
+        <p><span>最后更新:</span>2017-03-21, 14:09:09</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/03/13/mnist-gpu-cpu/" title="GPU和CPU服务器测试mnist手写数字集">https://Hzwcode.github.io/2017/03/13/mnist-gpu-cpu/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://Hzwcode.github.io/2017/03/13/mnist-gpu-cpu/　　作者: zhwhong" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/03/20/Introduction-to-debugging-neural-networks/">
+                    [译] Introduction to debugging neural networks
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/03/11/GNU-make/">
+                    GNU MAKE命令
+                </a>
+            </div>
+        
+    </nav>
+
+  
+  
+	
+    <div style="padding: 0; margin: 20px auto; width: 90%; text-align: center;">
+      <br>
+      <div>哎呦，不行了，要睡觉了，赏我 e(=2.72) 元咖啡钱吧，您的支持将鼓励我继续创作！</div>
+      <br>
+      <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+        <div class="btn btn-pay">打赏支持</div>
+      </button>
+      <br>
+      <br>
+      <div id="QR" style="display: none;">
+        
+          <div id="wechat" style="display: inline-block;">
+            <img id="wechat_qr" src="/images/wechat-reward-image.jpg" alt="zhwhong WeChat Pay"/>
+            <p>微信打赏</p>
+          </div>
+        
+        
+          <div id="alipay" style="display: inline-block">
+            <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="zhwhong Alipay"/>
+            <p>支付宝打赏</p>
+          </div>
+        
+        <br>
+        <br>
+      </div>
+    </div>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、GPU服务器"><span class="toc-text">一、GPU服务器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、CPU服务器"><span class="toc-text">二、CPU服务器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、mnist测试"><span class="toc-text">三、mnist测试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-逻辑回归logistic测试"><span class="toc-text">(1)逻辑回归logistic测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a-batch-size-128"><span class="toc-text">a.batch_size : 128</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#b-batch-size-256"><span class="toc-text">b.batch_size : 256</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c-batch-size-512"><span class="toc-text">c.batch_size : 512</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-卷积神经网络conv测试"><span class="toc-text">(2)卷积神经网络conv测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a-batch-size-128-1"><span class="toc-text">a.batch_size : 128</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#b-batch-size-256-1"><span class="toc-text">b.batch_size : 256</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c-batch-size-512-1"><span class="toc-text">c.batch_size : 512</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-循环神经网络lstm测试"><span class="toc-text">(3)循环神经网络lstm测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#batch-size-512"><span class="toc-text">batch_size : 512</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"true"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <!-- <a href="#" class="fa fa-facebook bds_fbook" data-cmd="fbook" title="分享到Facebook"></a> -->
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"GPU和CPU服务器测试mnist手写数字集　| Zhiwei's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/03/13/mnist-gpu-cpu/" data-title="GPU和CPU服务器测试mnist手写数字集" data-url="https://Hzwcode.github.io/2017/03/13/mnist-gpu-cpu/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"zhwhong"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//hzwcode.github.io/resources/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+            // Add comment count
+            $(function(){
+                var jsonUrl = "http://api.duoshuo.com/threads/counts.jsonp?short_name=zhwhong&threads=2017/03/13/mnist-gpu-cpu/&callback=?";
+                $.getJSON(jsonUrl, function(result){
+                    $.each(result.response, function(i, field){
+                        var value = field.comments;
+                        if (value > 0) {
+                            $(".count-comment").text(value);
+                            return;
+                        }
+                    })
+                })
+            })
+        
+    </script>
+    
+    <aside class="comment-bar">
+        <a href="javascript:void(0);">
+            <i class="fa fa-commenting-o animated infinite pulse"></i>
+            <i class="fa fa-spinner fa-pulse"></i>
+            <span class="count-comment"></span>
+        </a>
+    </aside>
+    <script>
+        var $commentBar = $("#comments aside.comment-bar");
+        var load$hide = function(){
+            $commentBar.find("a > i").toggle();
+            loadComment();
+            $commentBar.fadeOut(800);
+        }
+        $commentBar.click(function(){
+            load$hide();
+        })
+        $commentBar.children("a").hover(function(){
+            load$hide();
+        })
+        if (window.location.hash === "#comments") {
+            load$hide();
+        }
+    </script>
+
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/03/20/Introduction-to-debugging-neural-networks/" title="上一篇: [译] Introduction to debugging neural networks">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/03/11/GNU-make/" title="下一篇: GNU MAKE命令">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/23/deal-with-hexo-article-top-problem/">解决Hexo博客文章置顶问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/Introduction-to-debugging-neural-networks/">[译] Introduction to debugging neural networks</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/13/mnist-gpu-cpu/">GPU和CPU服务器测试mnist手写数字集</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/GNU-make/">GNU MAKE命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/26/music-test/">Blog Music Test</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Backpropagation-through-time-BPTT/">[RNN] Simple LSTM代码实现 & BPTT理论推导</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Backpropagation-principle/">深度学习 — 反向传播(BP)理论推导</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Detection-CNN/">[Detection] CNN 之 "物体检测" 篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/">[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition(附翻译，作业)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Linux-Ubuntu-Flatabulous/">[Linux] Ubuntu下超好看扁平主题 : Flatabulous</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/23/Machine-Learning-Materials/">Machine Learning Materials</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/23/hello-world/">Welcome to Hexo</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i>
+                2017 zhwhong
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+                <span>| </span>
+                <span class="post-count">博客全站共14.9k字</span>
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+             post: ".article-entry a[href], .copyright a[href]", 
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) 我藏好了哦~ " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

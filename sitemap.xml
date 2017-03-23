@@ -2,16 +2,93 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://Hzwcode.github.io/2017/03/23/deal-with-hexo-article-top-problem/</loc>
+    
+    <lastmod>2017-03-23T09:18:01.769Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/</loc>
+    
+    <lastmod>2017-03-23T09:06:30.523Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://Hzwcode.github.io/2017/02/24/Detection-CNN/</loc>
+    
+    <lastmod>2017-03-23T09:05:28.628Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://Hzwcode.github.io/2017/02/23/Machine-Learning-Materials/</loc>
+    
+    <lastmod>2017-03-23T09:04:38.797Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/</loc>
+    
+    <lastmod>2017-03-23T09:03:34.530Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://Hzwcode.github.io/about/index.html</loc>
     
-    <lastmod>2017-02-26T11:00:01.969Z</lastmod>
+    <lastmod>2017-03-23T04:30:41.684Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://Hzwcode.github.io/categories/index.html</loc>
+    
+    <lastmod>2017-03-23T04:30:36.860Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://Hzwcode.github.io/tags/index.html</loc>
+    
+    <lastmod>2017-03-23T04:30:24.872Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://Hzwcode.github.io/2017/03/11/GNU-make/</loc>
+    
+    <lastmod>2017-03-21T07:13:40.415Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://Hzwcode.github.io/2017/03/13/mnist-gpu-cpu/</loc>
+    
+    <lastmod>2017-03-21T06:09:09.065Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://Hzwcode.github.io/2017/02/26/music-test/</loc>
     
-    <lastmod>2017-02-26T09:17:07.171Z</lastmod>
+    <lastmod>2017-03-21T06:07:54.810Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://Hzwcode.github.io/2017/03/20/Introduction-to-debugging-neural-networks/</loc>
+    
+    <lastmod>2017-03-21T06:05:32.059Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://Hzwcode.github.io/baidu_verify_oijbNgAFgE.html</loc>
+    
+    <lastmod>2017-03-21T02:37:53.991Z</lastmod>
     
   </url>
   
@@ -23,41 +100,6 @@
   </url>
   
   <url>
-    <loc>https://Hzwcode.github.io/categories/index.html</loc>
-    
-    <lastmod>2017-02-25T16:48:13.624Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://Hzwcode.github.io/tags/index.html</loc>
-    
-    <lastmod>2017-02-25T16:48:07.608Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/</loc>
-    
-    <lastmod>2017-02-24T10:29:56.164Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/</loc>
-    
-    <lastmod>2017-02-24T10:29:27.824Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://Hzwcode.github.io/2017/02/24/Detection-CNN/</loc>
-    
-    <lastmod>2017-02-24T10:28:50.432Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/</loc>
     
     <lastmod>2017-02-24T10:13:29.414Z</lastmod>
@@ -65,14 +107,7 @@
   </url>
   
   <url>
-    <loc>https://Hzwcode.github.io/2017/02/23/Machine-Learning-Materials/</loc>
-    
-    <lastmod>2017-02-24T09:32:12.839Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu_Flatabulous/</loc>
+    <loc>https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu-Flatabulous/</loc>
     
     <lastmod>2017-02-24T09:30:50.030Z</lastmod>
     
