@@ -1,4 +1,4 @@
-<% if (theme.donate.on) { %>
+<% if (theme.donate.on && !post.close_donate) { %>
     <div style="padding: 0; margin: 20px auto; width: 90%; text-align: center;">
       <br>
       <div><%=theme.donate.reward_comment%></div>
