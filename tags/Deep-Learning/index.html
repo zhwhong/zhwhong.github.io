@@ -14,16 +14,11 @@
 <meta name="author" content="zhwhong" />
 
 
-     
-        <meta name="baidu-site-verification" content="oijbNgAFgE" />
-    
-    
-
 
 <meta name="description" content="常葆求知若饥 常存虚怀若愚">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Zhiwei's Blog">
-<meta property="og:url" content="https://Hzwcode.github.io/page/2/index.html">
+<meta property="og:url" content="https://Hzwcode.github.io/tags/Deep-Learning/index.html">
 <meta property="og:site_name" content="Zhiwei's Blog">
 <meta property="og:description" content="常葆求知若饥 常存虚怀若愚">
 <meta name="twitter:card" content="summary">
@@ -56,13 +51,11 @@
 <link rel="stylesheet" href="/css/style.css">
 
 
-    <style> .article { opacity: 0;} </style>
-
 
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Zhiwei&#39;s Blog</title>
+<title>Tag: Deep Learning | Zhiwei&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -71,10 +64,10 @@
     var yiliaConfig = {
         fancybox: true,
         animate: true,
-        isHome: true,
+        isHome: false,
         isPost: false,
         isArchive: false,
-        isTag: false,
+        isTag: true,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
@@ -321,684 +314,206 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-Backpropagation-through-time-BPTT" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2017/02/24/Backpropagation-through-time-BPTT/" class="article-date">
-      <time datetime="2017-02-24T10:26:58.000Z" itemprop="datePublished">2017-02-24</time>
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2017/03/20/Introduction-to-debugging-neural-networks/" class="archive-article-date">
+      <time datetime="2017-03-19T16:08:22.000Z" itemprop="datePublished">03-20</time>
 </a>
 
- 
-    <a href="/2017/02/24/Backpropagation-through-time-BPTT/#comments" title="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-            <span class="ds-thread-count"  data-thread-key="2017/02/24/Backpropagation-through-time-BPTT/" ></span>
-        
-        
-    </a>
 
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
+        </div>
+         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/24/Backpropagation-through-time-BPTT/">[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</a>
+      <a class="archive-article-title" href="/2017/03/20/Introduction-to-debugging-neural-networks/">[译] Introduction to debugging neural networks</a>
     </h1>
   
 
-        
-                <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1,533字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">9分</span>
-      </span>
-    </span>
-
-    <!-- <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-        <span class="post-meta-item-text">  阅读量: </span>
-        <span id="busuanzi_value_page_pv"></span>次
-      </span>
-    </span> -->
-
-        
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+        <div class="article-info info-on-archive">
           
-              <ul>
-<li>参考：<a href="http://nicodjimenez.github.io/2014/08/08/lstm.html">Nico’s Blog - Simple LSTM</a></li>
-<li>Github代码：<a href="https://github.com/Hzwcode/lstm">https://github.com/Hzwcode/lstm</a></li>
-</ul>
-<hr>
-<p>前面我们介绍过CNN中普通的<a href="https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/">BP反向传播算法的推导</a>，但是在RNN（比如<a href="https://en.wikipedia.org/wiki/Long_short-term_memory">LSTM</a>）中，反向传播被称作<a href="https://en.wikipedia.org/wiki/Backpropagation_through_time">BPTT</a>（Back Propagation Through Time），它是和时间序列有关的。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
     <div class="article-category tagcloud">
     <a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning<span class="article-category-count">7</span></a>
     </div>
 
 
-      
+          
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LSTM/">LSTM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RNN/">RNN</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Debug/">Debug</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Neural-Network/">Neural Network</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a href="/2017/02/24/Backpropagation-through-time-BPTT/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
-  
-  
 </article>
-
-
-
-
-
-
-
-
-
-
   
-    <article id="post-Backpropagation-principle" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/02/24/Backpropagation-principle/" class="article-date">
-      <time datetime="2017-02-24T10:23:35.000Z" itemprop="datePublished">2017-02-24</time>
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2017/03/13/mnist-gpu-cpu/" class="archive-article-date">
+      <time datetime="2017-03-13T10:22:15.000Z" itemprop="datePublished">03-13</time>
 </a>
 
- 
-    <a href="/2017/02/24/Backpropagation-principle/#comments" title="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-            <span class="ds-thread-count"  data-thread-key="2017/02/24/Backpropagation-principle/" ></span>
-        
-        
-    </a>
 
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
+        </div>
+         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/24/Backpropagation-principle/">深度学习 — 反向传播(BP)理论推导</a>
+      <a class="archive-article-title" href="/2017/03/13/mnist-gpu-cpu/">GPU和CPU服务器测试mnist手写数字集</a>
     </h1>
   
 
-        
-                <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1,010字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">4分</span>
-      </span>
-    </span>
-
-    <!-- <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-        <span class="post-meta-item-text">  阅读量: </span>
-        <span id="busuanzi_value_page_pv"></span>次
-      </span>
-    </span> -->
-
-        
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+        <div class="article-info info-on-archive">
           
-              <ul>
-<li><a href="https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/">[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</a></li>
-</ul>
-<hr>
-<p>【知识预备】： <a href="http://deeplearning.stanford.edu/wiki/index.php/%E5%8F%8D%E5%90%91%E4%BC%A0%E5%AF%BC%E7%AE%97%E6%B3%95">UFLDL教程 - 反向传导算法</a></p>
-<p>首先我们不讲数学，先上图解，看完图不懂再看后面：</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
     <div class="article-category tagcloud">
     <a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning<span class="article-category-count">7</span></a>
     </div>
 
 
-      
+          
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GPU/">GPU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow/">TensorFlow</a></li></ul>
+    </div>
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2017/02/24/Backpropagation-principle/" class="archive-article-date">
+      <time datetime="2017-02-24T10:23:35.000Z" itemprop="datePublished">02-24</time>
+</a>
+
+
+        </div>
+         
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/02/24/Backpropagation-principle/">深度学习 — 反向传播(BP)理论推导</a>
+    </h1>
+  
+
+        <div class="article-info info-on-archive">
+          
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning<span class="article-category-count">7</span></a>
+    </div>
+
+
+          
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a href="/2017/02/24/Backpropagation-principle/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
-  
-  
 </article>
-
-
-
-
-
-
-
-
-
-
   
-    <article id="post-Detection-CNN" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/02/24/Detection-CNN/" class="article-date">
-      <time datetime="2017-02-24T10:20:50.000Z" itemprop="datePublished">2017-02-24</time>
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/" class="archive-article-date">
+      <time datetime="2017-02-24T09:27:52.000Z" itemprop="datePublished">02-24</time>
 </a>
 
- 
-    <a href="/2017/02/24/Detection-CNN/#comments" title="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-            <span class="ds-thread-count"  data-thread-key="2017/02/24/Detection-CNN/" ></span>
-        
-        
-    </a>
 
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
+        </div>
+         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/24/Detection-CNN/">[Detection] CNN 之 &quot;物体检测&quot; 篇</a>
+      <a class="archive-article-title" href="/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/">[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition(附翻译，作业)</a>
     </h1>
   
 
-        
-                <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1,654字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">7分</span>
-      </span>
-    </span>
-
-    <!-- <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-        <span class="post-meta-item-text">  阅读量: </span>
-        <span id="busuanzi_value_page_pv"></span>次
-      </span>
-    </span> -->
-
-        
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+        <div class="article-info info-on-archive">
           
-              <h1 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h1><ul>
-<li><a href="http://arxiv.org/abs/1311.2524">RCNN</a> </li>
-<li><a href="http://arxiv.org/abs/1504.08083">Fast RCNN</a> </li>
-<li><a href="http://arxiv.org/abs/1506.01497">Faster RCNN</a> </li>
-<li><a href="http://arxiv.org/pdf/1605.06409v1.pdf">R-FCN</a></li>
-<li><a href="http://arxiv.org/abs/1506.02640">YOLO</a> </li>
-<li><a href="http://www.cs.unc.edu/~wliu/papers/ssd.pdf">SSD</a> </li>
-<li>NMS</li>
-<li>xywh VS xyxy</li>
-</ul>
-<hr>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
     <div class="article-category tagcloud">
     <a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning<span class="article-category-count">7</span></a>
     </div>
 
 
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Object-Detection/">Object Detection</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2017/02/24/Detection-CNN/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Convolutional-Neural-Networks-for-Visual-Recognition-CS231n" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/" class="article-date">
-      <time datetime="2017-02-24T09:27:52.000Z" itemprop="datePublished">2017-02-24</time>
-</a>
-
- 
-    <a href="/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/#comments" title="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-            <span class="ds-thread-count"  data-thread-key="2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/" ></span>
-        
-        
-    </a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/">[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition(附翻译，作业)</a>
-    </h1>
-  
-
-        
-                <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">640字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
-      </span>
-    </span>
-
-    <!-- <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-        <span class="post-meta-item-text">  阅读量: </span>
-        <span id="busuanzi_value_page_pv"></span>次
-      </span>
-    </span> -->
-
-        
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
           
-              <blockquote>
-<h1 id="CS231n课程：面向视觉识别的卷积神经网络"><a href="#CS231n课程：面向视觉识别的卷积神经网络" class="headerlink" title="CS231n课程：面向视觉识别的卷积神经网络"></a>CS231n课程：面向视觉识别的卷积神经网络</h1></blockquote>
-<ul>
-<li>课程官网：<a href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual Recognition</a></li>
-<li>Github：<a href="https://github.com/cs231n/cs231n.github.io">https://github.com/cs231n/cs231n.github.io</a> | <a href="http://cs231n.github.io/">http://cs231n.github.io/</a></li>
-<li>教学安排及大纲：<a href="http://vision.stanford.edu/teaching/cs231n/syllabus.html">Schedule and Syllabus</a></li>
-<li>课程视频：Youtube上查看<a href="https://link.zhihu.com/?target=https%3A//www.youtube.com/channel/UCPk8m_r6fkUSYmvgCBwq-sw">Andrej Karpathy</a>创建的<a href="https://link.zhihu.com/?target=https%3A//www.youtube.com/playlist%3Flist%3DPLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC">播放列表</a>，或者<a href="http://study.163.com/course/introduction/1003223001.htm#/courseDetail">网易云课堂</a></li>
-<li>课程pdf及视频下载：<a href="https://pan.baidu.com/s/1eRHH4L8">百度网盘下载</a>，密码是4efx</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/145616-a0eeadfcd667b7bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning<span class="article-category-count">7</span></a>
-    </div>
-
-
-      
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a href="/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
-  
-  
 </article>
-
-
-
-
-
-
-
-
-
-
   
-    <article id="post-Linux-Ubuntu-Flatabulous" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/02/24/Linux-Ubuntu-Flatabulous/" class="article-date">
-      <time datetime="2017-02-24T08:12:16.000Z" itemprop="datePublished">2017-02-24</time>
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2017/02/23/Machine-Learning-Materials/" class="archive-article-date">
+      <time datetime="2017-02-23T08:57:14.000Z" itemprop="datePublished">02-23</time>
 </a>
 
- 
-    <a href="/2017/02/24/Linux-Ubuntu-Flatabulous/#comments" title="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-            <span class="ds-thread-count"  data-thread-key="2017/02/24/Linux-Ubuntu-Flatabulous/" ></span>
-        
-        
-    </a>
 
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
+        </div>
+         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/24/Linux-Ubuntu-Flatabulous/">[Linux] Ubuntu下超好看扁平主题 : Flatabulous</a>
+      <a class="archive-article-title" href="/2017/02/23/Machine-Learning-Materials/">Machine Learning Materials</a>
     </h1>
   
 
-        
-                <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">902字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">4分</span>
-      </span>
-    </span>
-
-    <!-- <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-        <span class="post-meta-item-text">  阅读量: </span>
-        <span id="busuanzi_value_page_pv"></span>次
-      </span>
-    </span> -->
-
-        
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+        <div class="article-info info-on-archive">
           
-              <p><img src="http://upload-images.jianshu.io/upload_images/145616-909d61913233d890.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Flatabulous"></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux<span class="article-category-count">2</span></a>
+    <a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning<span class="article-category-count">7</span></a>
     </div>
 
 
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Theme/">Theme</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2017/02/24/Linux-Ubuntu-Flatabulous/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/02/23/hello-world/" class="article-date">
-      <time datetime="2017-02-23T06:00:00.000Z" itemprop="datePublished">2017-02-23</time>
-</a>
-
- 
-    <a href="/2017/02/23/hello-world/#comments" title="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-            <span class="ds-thread-count"  data-thread-key="2017/02/23/hello-world/" ></span>
-        
-        
-    </a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/23/hello-world/">Welcome to Hexo</a>
-    </h1>
-  
-
-        
-                <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">78字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">0分</span>
-      </span>
-    </span>
-
-    <!-- <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-        <span class="post-meta-item-text">  阅读量: </span>
-        <span id="busuanzi_value_page_pv"></span>次
-      </span>
-    </span> -->
-
-        
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
           
-              <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Tool/">Tool<span class="article-category-count">3</span></a>
-    </div>
-
-
-      
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LSTM/">LSTM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RNN/">RNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow/">TensorFlow</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a href="/2017/02/23/hello-world/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
-  
-  
 </article>
-
-
-
-
-
-
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
+    </div></section>
   
+
+    
+
 </div>
       <footer id="footer">
     <div class="outer">
@@ -1057,31 +572,6 @@
         })
     </script>
 
-
-    
-        <script>
-            if ($(".left-col").is(":visible")) {
-                var duoshuoQuery = {short_name:"zhwhong"};
-                (function() {
-                    var d = document, s = d.createElement('script');
-                    s.src = 'https://hzwcode.github.io/resources/embed.js';
-                    s.async = true; s.charset = 'UTF-8';
-                    (d.head || d.body).appendChild(s);
-                })();
-
-                $(document).ready(function(){
-                    var $duoshuoCount = $(".ds-thread-count");
-                    $duoshuoCount.bind("DOMNodeInserted", function(e) {
-                        var num = $(this).text().replace(/[^0-9]/ig,"");
-                        $(this).siblings(".count-comment").text(num);
-                        $(this).remove();
-                    })
-                })
-            }
-        </script>
-    
-
-    
 
 
 

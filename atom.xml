@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Hzwcode.github.io/"/>
-  <updated>2017-03-23T09:18:01.769Z</updated>
+  <updated>2017-03-24T07:26:02.528Z</updated>
   <id>https://Hzwcode.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://Hzwcode.github.io/2017/03/23/deal-with-hexo-article-top-problem/"/>
     <id>https://Hzwcode.github.io/2017/03/23/deal-with-hexo-article-top-problem/</id>
     <published>2017-03-23T09:07:29.000Z</published>
-    <updated>2017-03-23T09:18:01.769Z</updated>
+    <updated>2017-03-24T07:26:02.528Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>Hexo默认只提供了按发布日期的排序，只好网上找了些资料修改。</p>
 <p>原理：在Hexo生成首页HTML时，将top值高的文章排在前面，达到置顶功能。</p>
@@ -33,7 +33,9 @@
 <p>修改完成后，只需要在front-matter中设置需要置顶文章的top值，将会根据top值大小来选择置顶顺序top值越大越靠前。需要注意的是，这个文件不是主题的一部分，也不是Git管理的，备份的时候比较容易忽略。</p>
 <p>以下是最终的generator.js内容</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> pagination = <span class="built_in">require</span>(<span class="string">'hexo-pagination'</span>);</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">locals</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> config = <span class="keyword">this</span>.config;</div><div class="line">  <span class="keyword">var</span> posts = locals.posts.sort(config.index_generator.order_by);</div><div class="line"></div><div class="line">  posts.data = posts.data.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span>(a.top &amp;&amp; b.top) &#123;</div><div class="line">          <span class="keyword">if</span>(a.top == b.top) <span class="keyword">return</span> b.date - a.date;</div><div class="line">          <span class="keyword">else</span> <span class="keyword">return</span> b.top - a.top;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">else</span> <span class="keyword">if</span>(a.top &amp;&amp; !b.top) &#123;</div><div class="line">          <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">else</span> <span class="keyword">if</span>(!a.top &amp;&amp; b.top) &#123;</div><div class="line">          <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">else</span> <span class="keyword">return</span> b.date - a.date;</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  <span class="keyword">var</span> paginationDir = config.pagination_dir || <span class="string">'page'</span>;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> pagination(<span class="string">''</span>, posts, &#123;</div><div class="line">    <span class="attr">perPage</span>: config.index_generator.per_page,</div><div class="line">    <span class="attr">layout</span>: [<span class="string">'index'</span>, <span class="string">'archive'</span>],</div><div class="line">    <span class="attr">format</span>: paginationDir + <span class="string">'/%d/'</span>,</div><div class="line">    <span class="attr">data</span>: &#123;</div><div class="line">      <span class="attr">__index</span>: <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>Reference：<a href="http://www.netcan666.com/2015/11/22/%E8%A7%A3%E5%86%B3Hexo%E7%BD%AE%E9%A1%B6%E9%97%AE%E9%A2%98/" target="_blank" rel="external">解决Hexo置顶问题</a></p>
+<ul>
+<li>Reference：<a href="http://www.netcan666.com/2015/11/22/%E8%A7%A3%E5%86%B3Hexo%E7%BD%AE%E9%A1%B6%E9%97%AE%E9%A2%98/" target="_blank" rel="external">解决Hexo置顶问题</a></li>
+</ul>
 ]]></content>
     
     <summary type="html">
@@ -44,10 +46,10 @@
     
     </summary>
     
-      <category term="tool" scheme="https://Hzwcode.github.io/categories/tool/"/>
+      <category term="Tool" scheme="https://Hzwcode.github.io/categories/Tool/"/>
     
     
-      <category term="hexo" scheme="https://Hzwcode.github.io/tags/hexo/"/>
+      <category term="Hexo" scheme="https://Hzwcode.github.io/tags/Hexo/"/>
     
   </entry>
   
@@ -56,7 +58,7 @@
     <link href="https://Hzwcode.github.io/2017/03/20/Introduction-to-debugging-neural-networks/"/>
     <id>https://Hzwcode.github.io/2017/03/20/Introduction-to-debugging-neural-networks/</id>
     <published>2017-03-19T16:08:22.000Z</published>
-    <updated>2017-03-21T06:05:32.059Z</updated>
+    <updated>2017-03-24T07:14:24.253Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><ul>
 <li>本文译自：<a href="http://russellsstewart.com/" target="_blank" rel="external">Russell Stewart’s Blog</a> -&gt; <a href="http://russellsstewart.com/blog/0" target="_blank" rel="external">Introduction to debugging neural networks</a></li>
@@ -96,12 +98,14 @@
     
     </summary>
     
-      <category term="machine learning" scheme="https://Hzwcode.github.io/categories/machine-learning/"/>
+      <category term="Machine Learning" scheme="https://Hzwcode.github.io/categories/Machine-Learning/"/>
     
     
-      <category term="Machine Learning" scheme="https://Hzwcode.github.io/tags/Machine-Learning/"/>
+      <category term="Deep Learning" scheme="https://Hzwcode.github.io/tags/Deep-Learning/"/>
     
       <category term="Neural Network" scheme="https://Hzwcode.github.io/tags/Neural-Network/"/>
+    
+      <category term="Debug" scheme="https://Hzwcode.github.io/tags/Debug/"/>
     
   </entry>
   
@@ -110,7 +114,7 @@
     <link href="https://Hzwcode.github.io/2017/03/13/mnist-gpu-cpu/"/>
     <id>https://Hzwcode.github.io/2017/03/13/mnist-gpu-cpu/</id>
     <published>2017-03-13T10:22:15.000Z</published>
-    <updated>2017-03-21T06:09:09.065Z</updated>
+    <updated>2017-03-24T07:19:51.927Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="一、GPU服务器"><a href="#一、GPU服务器" class="headerlink" title="一、GPU服务器"></a>一、GPU服务器</h1><p>服务器 IP ：<code>172.xx.xx.98</code> （4块NVIDIA <strong>TITAN X</strong> GPU，<strong>32</strong> CPU核心）</p>
 <a id="more"></a>
@@ -342,14 +346,14 @@
     
     </summary>
     
-      <category term="machine learning" scheme="https://Hzwcode.github.io/categories/machine-learning/"/>
+      <category term="Machine Learning" scheme="https://Hzwcode.github.io/categories/Machine-Learning/"/>
     
     
-      <category term="Machine Learning" scheme="https://Hzwcode.github.io/tags/Machine-Learning/"/>
+      <category term="Deep Learning" scheme="https://Hzwcode.github.io/tags/Deep-Learning/"/>
     
-      <category term="gpu" scheme="https://Hzwcode.github.io/tags/gpu/"/>
+      <category term="TensorFlow" scheme="https://Hzwcode.github.io/tags/TensorFlow/"/>
     
-      <category term="tensorflow" scheme="https://Hzwcode.github.io/tags/tensorflow/"/>
+      <category term="GPU" scheme="https://Hzwcode.github.io/tags/GPU/"/>
     
   </entry>
   
@@ -358,7 +362,7 @@
     <link href="https://Hzwcode.github.io/2017/03/11/GNU-make/"/>
     <id>https://Hzwcode.github.io/2017/03/11/GNU-make/</id>
     <published>2017-03-10T17:07:07.000Z</published>
-    <updated>2017-03-21T07:13:40.415Z</updated>
+    <updated>2017-03-24T07:19:24.519Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>代码变成可执行文件，叫做<a href="http://www.ruanyifeng.com/blog/2014/11/compiler.html" target="_blank" rel="external">编译</a>（compile）；先编译这个，还是先编译那个（即编译的安排），叫做<a href="https://en.wikipedia.org/wiki/Software_build" target="_blank" rel="external">构建</a>（build）。</p>
 <p><a href="https://en.wikipedia.org/wiki/Make_%28software%29" target="_blank" rel="external">Make</a>是最常用的构建工具，诞生于1977年，主要用于C语言的项目。但是实际上 ，任何只要某个文件有变化，就要重新构建的项目，都可以用Make构建。</p>
@@ -515,8 +519,6 @@
       <category term="Linux" scheme="https://Hzwcode.github.io/categories/Linux/"/>
     
     
-      <category term="Linux" scheme="https://Hzwcode.github.io/tags/Linux/"/>
-    
       <category term="GNU" scheme="https://Hzwcode.github.io/tags/GNU/"/>
     
       <category term="Makefile" scheme="https://Hzwcode.github.io/tags/Makefile/"/>
@@ -528,7 +530,7 @@
     <link href="https://Hzwcode.github.io/2017/02/26/music-test/"/>
     <id>https://Hzwcode.github.io/2017/02/26/music-test/</id>
     <published>2017-02-26T08:56:23.000Z</published>
-    <updated>2017-03-21T06:07:54.810Z</updated>
+    <updated>2017-03-24T07:16:55.105Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><center><br><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=38592976&auto=0&height=66"></iframe><br></center>
 
@@ -627,12 +629,12 @@
     
     </summary>
     
-      <category term="tool" scheme="https://Hzwcode.github.io/categories/tool/"/>
+      <category term="Tool" scheme="https://Hzwcode.github.io/categories/Tool/"/>
     
     
-      <category term="hexo" scheme="https://Hzwcode.github.io/tags/hexo/"/>
+      <category term="Hexo" scheme="https://Hzwcode.github.io/tags/Hexo/"/>
     
-      <category term="music" scheme="https://Hzwcode.github.io/tags/music/"/>
+      <category term="Music" scheme="https://Hzwcode.github.io/tags/Music/"/>
     
   </entry>
   
@@ -641,14 +643,14 @@
     <link href="https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/"/>
     <id>https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/</id>
     <published>2017-02-24T10:26:58.000Z</published>
-    <updated>2017-03-23T09:03:34.530Z</updated>
+    <updated>2017-03-24T07:27:48.114Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><ul>
 <li>参考：<a href="http://nicodjimenez.github.io/2014/08/08/lstm.html" target="_blank" rel="external">Nico’s Blog - Simple LSTM</a></li>
 <li>Github代码：<a href="https://github.com/Hzwcode/lstm" target="_blank" rel="external">https://github.com/Hzwcode/lstm</a></li>
 </ul>
 <hr>
-<p>前面我们介绍过CNN中普通的<a href="http://www.jianshu.com/p/408ab8177a53" target="_blank" rel="external">BP反向传播算法的推导</a>，但是在RNN（比如<a href="https://en.wikipedia.org/wiki/Long_short-term_memory" target="_blank" rel="external">LSTM</a>）中，反向传播被称作<a href="https://en.wikipedia.org/wiki/Backpropagation_through_time" target="_blank" rel="external">BPTT</a>（Back Propagation Through Time），它是和时间序列有关的。</p>
+<p>前面我们介绍过CNN中普通的<a href="https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/">BP反向传播算法的推导</a>，但是在RNN（比如<a href="https://en.wikipedia.org/wiki/Long_short-term_memory" target="_blank" rel="external">LSTM</a>）中，反向传播被称作<a href="https://en.wikipedia.org/wiki/Backpropagation_through_time" target="_blank" rel="external">BPTT</a>（Back Propagation Through Time），它是和时间序列有关的。</p>
 <a id="more"></a>
 <p><img src="http://upload-images.jianshu.io/upload_images/145616-113aeedc747a3628.gif?imageMogr2/auto-orient/strip" alt="Back Propagation Through Time"></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/145616-4ae3ab8b8426cdcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
@@ -745,14 +747,18 @@
 &lt;li&gt;Github代码：&lt;a href=&quot;https://github.com/Hzwcode/lstm&quot;&gt;https://github.com/Hzwcode/lstm&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;前面我们介绍过CNN中普通的&lt;a href=&quot;http://www.jianshu.com/p/408ab8177a53&quot;&gt;BP反向传播算法的推导&lt;/a&gt;，但是在RNN（比如&lt;a href=&quot;https://en.wikipedia.org/wiki/Long_short-term_memory&quot;&gt;LSTM&lt;/a&gt;）中，反向传播被称作&lt;a href=&quot;https://en.wikipedia.org/wiki/Backpropagation_through_time&quot;&gt;BPTT&lt;/a&gt;（Back Propagation Through Time），它是和时间序列有关的。&lt;/p&gt;
+&lt;p&gt;前面我们介绍过CNN中普通的&lt;a href=&quot;https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/&quot;&gt;BP反向传播算法的推导&lt;/a&gt;，但是在RNN（比如&lt;a href=&quot;https://en.wikipedia.org/wiki/Long_short-term_memory&quot;&gt;LSTM&lt;/a&gt;）中，反向传播被称作&lt;a href=&quot;https://en.wikipedia.org/wiki/Backpropagation_through_time&quot;&gt;BPTT&lt;/a&gt;（Back Propagation Through Time），它是和时间序列有关的。&lt;/p&gt;
     
     </summary>
     
-      <category term="machine learning" scheme="https://Hzwcode.github.io/categories/machine-learning/"/>
+      <category term="Machine Learning" scheme="https://Hzwcode.github.io/categories/Machine-Learning/"/>
     
     
-      <category term="Machine Learning" scheme="https://Hzwcode.github.io/tags/Machine-Learning/"/>
+      <category term="Algorithm" scheme="https://Hzwcode.github.io/tags/Algorithm/"/>
+    
+      <category term="RNN" scheme="https://Hzwcode.github.io/tags/RNN/"/>
+    
+      <category term="LSTM" scheme="https://Hzwcode.github.io/tags/LSTM/"/>
     
   </entry>
   
@@ -761,11 +767,10 @@
     <link href="https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/"/>
     <id>https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/</id>
     <published>2017-02-24T10:23:35.000Z</published>
-    <updated>2017-03-23T09:06:30.523Z</updated>
+    <updated>2017-03-24T07:26:49.605Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><ul>
-<li><a href="http://www.jianshu.com/p/c7e3f417641c" target="_blank" rel="external">关于简书中如何编辑Latex数学公式</a></li>
-<li><a href="http://www.jianshu.com/p/2aca6e8ac7c8" target="_blank" rel="external">[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</a></li>
+<li><a href="https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/">[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</a></li>
 </ul>
 <hr>
 <p>【知识预备】： <a href="http://deeplearning.stanford.edu/wiki/index.php/%E5%8F%8D%E5%90%91%E4%BC%A0%E5%AF%BC%E7%AE%97%E6%B3%95" target="_blank" rel="external">UFLDL教程 - 反向传导算法</a></p>
@@ -877,8 +882,7 @@
     <summary type="html">
     
       &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/c7e3f417641c&quot;&gt;关于简书中如何编辑Latex数学公式&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/2aca6e8ac7c8&quot;&gt;[RNN] Simple LSTM代码实现 &amp;amp; BPTT理论推导&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/&quot;&gt;[RNN] Simple LSTM代码实现 &amp;amp; BPTT理论推导&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;p&gt;【知识预备】： &lt;a href=&quot;http://deeplearning.stanford.edu/wiki/index.php/%E5%8F%8D%E5%90%91%E4%BC%A0%E5%AF%BC%E7%AE%97%E6%B3%95&quot;&gt;UFLDL教程 - 反向传导算法&lt;/a&gt;&lt;/p&gt;
@@ -886,10 +890,12 @@
     
     </summary>
     
-      <category term="machine learning" scheme="https://Hzwcode.github.io/categories/machine-learning/"/>
+      <category term="Machine Learning" scheme="https://Hzwcode.github.io/categories/Machine-Learning/"/>
     
     
-      <category term="Machine Learning" scheme="https://Hzwcode.github.io/tags/Machine-Learning/"/>
+      <category term="Deep Learning" scheme="https://Hzwcode.github.io/tags/Deep-Learning/"/>
+    
+      <category term="Algorithm" scheme="https://Hzwcode.github.io/tags/Algorithm/"/>
     
   </entry>
   
@@ -898,7 +904,7 @@
     <link href="https://Hzwcode.github.io/2017/02/24/Detection-CNN/"/>
     <id>https://Hzwcode.github.io/2017/02/24/Detection-CNN/</id>
     <published>2017-02-24T10:20:50.000Z</published>
-    <updated>2017-03-23T09:05:28.628Z</updated>
+    <updated>2017-03-24T07:18:38.712Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h1><ul>
 <li><a href="http://arxiv.org/abs/1311.2524" target="_blank" rel="external">RCNN</a> </li>
@@ -1039,12 +1045,10 @@
     
     </summary>
     
-      <category term="machine learning" scheme="https://Hzwcode.github.io/categories/machine-learning/"/>
+      <category term="Machine Learning" scheme="https://Hzwcode.github.io/categories/Machine-Learning/"/>
     
     
-      <category term="Machine Learning" scheme="https://Hzwcode.github.io/tags/Machine-Learning/"/>
-    
-      <category term="Knowledge" scheme="https://Hzwcode.github.io/tags/Knowledge/"/>
+      <category term="Object Detection" scheme="https://Hzwcode.github.io/tags/Object-Detection/"/>
     
   </entry>
   
@@ -1053,7 +1057,7 @@
     <link href="https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/"/>
     <id>https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/</id>
     <published>2017-02-24T09:27:52.000Z</published>
-    <updated>2017-02-24T10:13:29.414Z</updated>
+    <updated>2017-03-24T07:21:34.261Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><blockquote>
 <h1 id="CS231n课程：面向视觉识别的卷积神经网络"><a href="#CS231n课程：面向视觉识别的卷积神经网络" class="headerlink" title="CS231n课程：面向视觉识别的卷积神经网络"></a>CS231n课程：面向视觉识别的卷积神经网络</h1></blockquote>
@@ -1139,12 +1143,14 @@
     
     </summary>
     
-      <category term="machine learning" scheme="https://Hzwcode.github.io/categories/machine-learning/"/>
+      <category term="Machine Learning" scheme="https://Hzwcode.github.io/categories/Machine-Learning/"/>
     
     
-      <category term="Machine Learning" scheme="https://Hzwcode.github.io/tags/Machine-Learning/"/>
+      <category term="Deep Learning" scheme="https://Hzwcode.github.io/tags/Deep-Learning/"/>
     
-      <category term="Knowledge" scheme="https://Hzwcode.github.io/tags/Knowledge/"/>
+      <category term="CNN" scheme="https://Hzwcode.github.io/tags/CNN/"/>
+    
+      <category term="Computer Vision" scheme="https://Hzwcode.github.io/tags/Computer-Vision/"/>
     
   </entry>
   
@@ -1153,7 +1159,7 @@
     <link href="https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu-Flatabulous/"/>
     <id>https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu-Flatabulous/</id>
     <published>2017-02-24T08:12:16.000Z</published>
-    <updated>2017-02-24T09:30:50.030Z</updated>
+    <updated>2017-03-24T07:20:32.962Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p><img src="http://upload-images.jianshu.io/upload_images/145616-909d61913233d890.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Flatabulous"></p>
 <a id="more"></a>
@@ -1204,11 +1210,9 @@
       <category term="Linux" scheme="https://Hzwcode.github.io/categories/Linux/"/>
     
     
-      <category term="Linux" scheme="https://Hzwcode.github.io/tags/Linux/"/>
+      <category term="Ubuntu" scheme="https://Hzwcode.github.io/tags/Ubuntu/"/>
     
-      <category term="ubuntu" scheme="https://Hzwcode.github.io/tags/ubuntu/"/>
-    
-      <category term="theme" scheme="https://Hzwcode.github.io/tags/theme/"/>
+      <category term="Theme" scheme="https://Hzwcode.github.io/tags/Theme/"/>
     
   </entry>
   
@@ -1217,7 +1221,7 @@
     <link href="https://Hzwcode.github.io/2017/02/23/Machine-Learning-Materials/"/>
     <id>https://Hzwcode.github.io/2017/02/23/Machine-Learning-Materials/</id>
     <published>2017-02-23T08:57:14.000Z</published>
-    <updated>2017-03-23T09:04:38.797Z</updated>
+    <updated>2017-03-24T07:20:22.018Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p><img src="http://upload-images.jianshu.io/upload_images/145616-02a9d0afdcfb7047.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <hr>
@@ -1226,7 +1230,7 @@
 <ul>
 <li><a href="https://github.com/josephmisiti/awesome-machine-learning" target="_blank" rel="external"><strong>Awesome Machine Learning</strong></a></li>
 <li><a href="https://github.com/ChristosChristofidis/awesome-deep-learning" target="_blank" rel="external"><strong>Awesome Deep Learning</strong></a></li>
-<li><a href="https://github.com/jtoy/awesome-tensorflow" target="_blank" rel="external"><strong>Awesome TensorFlow</strong></a><a id="more"></a></li>
+<li><a href="https://github.com/jtoy/awesome-tensorflow" target="_blank" rel="external"><strong>Awesome TensorFlow</strong></a></li>
 <li><a href="https://github.com/TensorFlowKR/awesome_tensorflow_implementations" target="_blank" rel="external">Awesome TensorFlow Implementations</a></li>
 <li><a href="https://github.com/carpedm20/awesome-torch" target="_blank" rel="external">Awesome Torch</a></li>
 <li><a href="https://github.com/jbhuang0604/awesome-computer-vision" target="_blank" rel="external">Awesome Computer Vision</a></li>
@@ -1363,23 +1367,24 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/145616-02a9d0afdcfb7047.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;h1 id=&quot;Awesome系列&quot;&gt;&lt;a href=&quot;#Awesome系列&quot; class=&quot;headerlink&quot; title=&quot;Awesome系列　&quot;&gt;&lt;/a&gt;Awesome系列　&lt;/h1&gt;&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/josephmisiti/awesome-machine-learning&quot;&gt;&lt;strong&gt;Awesome Machine Learning&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/ChristosChristofidis/awesome-deep-learning&quot;&gt;&lt;strong&gt;Awesome Deep Learning&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/jtoy/awesome-tensorflow&quot;&gt;&lt;strong&gt;Awesome TensorFlow&lt;/strong&gt;&lt;/a&gt;
+      本篇文章整理、归纳了自己学习Deep Learning方面的一些资料，包括GitHub Awesome，DL框架如TensorFlow，分布式教程，卷积神经网络CNN，物体检测Paper，循环神经网络RNN、LSTM等，以及斯坦福CS231n计算机视觉识别和Coursera Andrew Ng机器学习等相关课程整理。
     
     </summary>
     
-      <category term="machine learning" scheme="https://Hzwcode.github.io/categories/machine-learning/"/>
+      <category term="Machine Learning" scheme="https://Hzwcode.github.io/categories/Machine-Learning/"/>
     
     
-      <category term="Machine Learning" scheme="https://Hzwcode.github.io/tags/Machine-Learning/"/>
+      <category term="Deep Learning" scheme="https://Hzwcode.github.io/tags/Deep-Learning/"/>
     
-      <category term="Knowledge" scheme="https://Hzwcode.github.io/tags/Knowledge/"/>
+      <category term="RNN" scheme="https://Hzwcode.github.io/tags/RNN/"/>
+    
+      <category term="LSTM" scheme="https://Hzwcode.github.io/tags/LSTM/"/>
+    
+      <category term="CNN" scheme="https://Hzwcode.github.io/tags/CNN/"/>
+    
+      <category term="Object Detection" scheme="https://Hzwcode.github.io/tags/Object-Detection/"/>
+    
+      <category term="TensorFlow" scheme="https://Hzwcode.github.io/tags/TensorFlow/"/>
     
   </entry>
   
@@ -1388,7 +1393,7 @@
     <link href="https://Hzwcode.github.io/2017/02/23/hello-world/"/>
     <id>https://Hzwcode.github.io/2017/02/23/hello-world/</id>
     <published>2017-02-23T06:00:00.000Z</published>
-    <updated>2017-02-24T08:17:40.871Z</updated>
+    <updated>2017-03-24T07:17:24.621Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
@@ -1410,12 +1415,10 @@
     
     </summary>
     
-      <category term="tool" scheme="https://Hzwcode.github.io/categories/tool/"/>
+      <category term="Tool" scheme="https://Hzwcode.github.io/categories/Tool/"/>
     
     
-      <category term="hexo" scheme="https://Hzwcode.github.io/tags/hexo/"/>
-    
-      <category term="github" scheme="https://Hzwcode.github.io/tags/github/"/>
+      <category term="Hexo" scheme="https://Hzwcode.github.io/tags/Hexo/"/>
     
   </entry>
   
