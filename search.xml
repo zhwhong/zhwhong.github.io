@@ -4,6 +4,88 @@
   
     
     <entry>
+      <title><![CDATA[那些深度学习与计算机视觉之路上的大佬们]]></title>
+      <url>https://Hzwcode.github.io/2017/03/24/AI-DL-CV-org-and-person/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>　　本文整理、归纳了自己学习Deep Learning，Computer Vision方向看到的相关研究机构以及各位大佬们的信息。打算从事这个行业或者刚入门的朋友可以多关注、多了解一些CV的具体应用。搞研究的朋友也可以从中了解到很多牛人的研究动态、招生情况等。</p>
+<p>　　有句话说得好，“<code>Sharing changes the world!</code>”，知识只有分享才能产生更大的价值，希望能对朋友们有所帮助。</p>
+<a id="more"></a>
+<h2 id="研究机构"><a href="#研究机构" class="headerlink" title="研究机构"></a>研究机构</h2><ul>
+<li><a href="https://research.google.com/index.html" target="_blank" rel="external">Google Research</a></li>
+<li><a href="https://plus.google.com/+ResearchatGoogle" target="_blank" rel="external">Research at Google - Google+</a></li>
+</ul>
+<p><img src="google_research.png" alt="Google Research"></p>
+<ul>
+<li><a href="https://research.facebook.com/ai" target="_blank" rel="external">Facebook AI Research</a></li>
+</ul>
+<p><img src="FAIR.png" alt="Facebook AI Research"></p>
+<ul>
+<li><a href="https://www.microsoft.com/en-us/research/?from=http%3A%2F%2Fresearch.microsoft.com%2Fen-us%2Fdefault.aspx" target="_blank" rel="external">Microsoft Research – Emerging Technology, Computer, and Software Research</a></li>
+<li><a href="https://www.microsoft.com/en-us/research/group/visual-computing/?from=http%3A%2F%2Fresearch.microsoft.com%2Fen-us%2Fgroups%2Fvc%2F" target="_blank" rel="external">Visual Computing - Microsoft Research</a></li>
+<li><a href="http://www.msra.cn/zh-cn/default.aspx" target="_blank" rel="external">微软亚洲研究院 - 梦想绽放，共创未来</a></li>
+</ul>
+<p><img src="MSAI.png" alt="MSAI"></p>
+<ul>
+<li><a href="http://www.cvpapers.com/" target="_blank" rel="external">CVPapers - Computer Vision Resource</a></li>
+</ul>
+<p><img src="CVpapers.png" alt="CVpapers"></p>
+<ul>
+<li><a href="http://vision.stanford.edu/research.html" target="_blank" rel="external">Stanford Vision Lab; Prof. Fei-Fei Li</a></li>
+</ul>
+<p><img src="Stanford_CV.png" alt="Stanford Vision Lab"></p>
+<ul>
+<li><a href="http://www.cs.cmu.edu/afs/cs/project/cil/ftp/html/vision.html" target="_blank" rel="external">CMU - The Computer Vision Homepage</a></li>
+</ul>
+<p><img src="CMU_CV.png" alt="CMU Computer Vision"></p>
+<ul>
+<li><a href="https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/" target="_blank" rel="external">UCB - UC Berkeley Computer Vision Group</a></li>
+</ul>
+<p><img src="UCB_CV.png" alt="UC Berkeley Computer Vision Group"></p>
+<h2 id="大佬们"><a href="#大佬们" class="headerlink" title="大佬们"></a>大佬们</h2><ul>
+<li><a href="http://yann.lecun.com/" target="_blank" rel="external">Yann LeCun - New York University | Facebook AI Research Director</a></li>
+<li><a href="http://www.iro.umontreal.ca/~bengioy/yoshua_en/" target="_blank" rel="external">Yoshua Bengio - Department of Computer Science and Operations Research</a></li>
+<li><a href="http://www.cs.toronto.edu/~kriz/" target="_blank" rel="external">Alex Krizhevsky - Currently working at Google</a></li>
+<li><a href="http://www.cs.toronto.edu/~hinton/" target="_blank" rel="external">Geoffrey Hinton - Google Engineering Fellow &amp; University of Toronto Professor</a></li>
+<li><a href="http://www.cs.toronto.edu/~ilya/" target="_blank" rel="external">Ilya Sutskever - Co-founder and Research Director of OpenAI</a></li>
+<li><a href="http://www.iangoodfellow.com/" target="_blank" rel="external">Ian Goodfellow - Staff Research Scientist at Google Brain</a> | <a href="https://github.com/goodfeli" target="_blank" rel="external">goodfeli-github)</a> | <a href="http://dblp.uni-trier.de/pers/hd/g/Goodfellow:Ian_J=" target="_blank" rel="external">dblp: Ian J. Goodfellow</a></li>
+<li><a href="http://www.andrewng.org/" target="_blank" rel="external">Andrew Ng - Baidu VP &amp; Chief Scientist(pre),Coursera Co-Chairman &amp; Co-Founder,Adjunct Professor at Stanford University</a></li>
+<li><a href="https://research.google.com/pubs/jeff.html" target="_blank" rel="external">Jeffrey Dean - Google Senior Fellow in the Research Group</a></li>
+<li><a href="http://vision.stanford.edu/feifeili/" target="_blank" rel="external">Fei-Fei Li Ph.D. - Associate Professor, Stanford University</a></li>
+<li><a href="http://cs.stanford.edu/people/karpathy/" target="_blank" rel="external">Andrej Karpathy - Research Scientist at OpenAI</a> | <a href="http://karpathy.github.io/" target="_blank" rel="external">Blog</a> | <a href="https://github.com/karpathy" target="_blank" rel="external">karpathy-github</a></li>
+<li><a href="http://cs.stanford.edu/people/jcjohns/" target="_blank" rel="external">Justin Johnson</a> | <a href="https://github.com/jcjohnson" target="_blank" rel="external">jcjohnson-github</a></li>
+<li><a href="http://colah.github.io/about.html" target="_blank" rel="external">Christopher Olah - Research Scientist at Google Brain</a> | <a href="http://colah.github.io/" target="_blank" rel="external">colah’s blog</a> | <a href="http://colah.github.io/cv.pdf" target="_blank" rel="external">Chris Olah CV</a> | <a href="https://github.com/colah/" target="_blank" rel="external">colah-github</a></li>
+<li><a href="http://kaiminghe.com/" target="_blank" rel="external">Kaiming He - Facebook AI Research, Lead Researcher at MSRA pre.</a></li>
+<li><a href="http://www.rossgirshick.info/" target="_blank" rel="external">Ross Girshick (rbg) - Facebook AI Research</a></li>
+<li><a href="http://pdollar.github.io/" target="_blank" rel="external">Piotr Dollár  - Facebook AI Research</a> | <a href="https://github.com/pdollar" target="_blank" rel="external">pdollar-github</a></li>
+<li><a href="https://people.eecs.berkeley.edu/~gkioxari/" target="_blank" rel="external">Georgia Gkioxari - UC Berkeley</a> | <a href="https://github.com/gkioxari/" target="_blank" rel="external">gkioxari-github</a></li>
+<li><a href="http://people.csail.mit.edu/bzhou/" target="_blank" rel="external">Bolei Zhou - MIT</a></li>
+<li><a href="http://www.ee.cuhk.edu.hk/~xgwang/" target="_blank" rel="external">Xiaogang Wang - Associate Professor of Electronic Engineering, the Chinese University of Hong Kong</a></li>
+<li><a href="http://deeplearning.csail.mit.edu/" target="_blank" rel="external">CVPR’17 Tutorial on Deep Learning for Objects and Scenes</a></li>
+</ul>
+<p>(持续更新中……)</p>
+<h2 id="More-Reference"><a href="#More-Reference" class="headerlink" title="More Reference"></a>More Reference</h2><ul>
+<li><a href="http://blog.csdn.net/adong76/article/details/42491401" target="_blank" rel="external">计算机视觉领域的一些牛人博客，超有实力的研究机构</a></li>
+<li><a href="https://github.com/Hzwcode/awesome-deep-learning" target="_blank" rel="external">Awesome Deep Learning -&gt; Researchers 100人</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Machine Learning </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Deep Learning </tag>
+            
+            <tag> Computer Vision </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[解决Hexo博客文章置顶问题]]></title>
       <url>https://Hzwcode.github.io/2017/03/23/deal-with-hexo-article-top-problem/</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>Hexo默认只提供了按发布日期的排序，只好网上找了些资料修改。</p>
@@ -1080,9 +1162,9 @@
             
             <tag> Deep Learning </tag>
             
-            <tag> CNN </tag>
-            
             <tag> Computer Vision </tag>
+            
+            <tag> CNN </tag>
             
         </tags>
         
@@ -1304,15 +1386,15 @@
             
             <tag> Deep Learning </tag>
             
-            <tag> RNN </tag>
-            
-            <tag> LSTM </tag>
-            
             <tag> CNN </tag>
             
             <tag> Object Detection </tag>
             
             <tag> TensorFlow </tag>
+            
+            <tag> RNN </tag>
+            
+            <tag> LSTM </tag>
             
         </tags>
         

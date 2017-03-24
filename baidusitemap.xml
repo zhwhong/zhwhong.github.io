@@ -4,6 +4,58 @@
 
     
   <url>
+    <loc>https://Hzwcode.github.io/2017/03/24/AI-DL-CV-org-and-person/</loc>
+    <lastmod>2017-03-24T09:06:26.415Z</lastmod>
+    <data>
+        <display>
+        <title>那些深度学习与计算机视觉之路上的大佬们</title>
+        <pubTime>2017-03-24T07:48:24.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+        <tag>Computer Vision</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://Hzwcode.github.io/2017/02/23/Machine-Learning-Materials/</loc>
+    <lastmod>2017-03-24T08:28:56.028Z</lastmod>
+    <data>
+        <display>
+        <title>Machine Learning Materials</title>
+        <pubTime>2017-02-23T08:57:14.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+        <tag>CNN</tag>
+         
+        <tag>Object Detection</tag>
+         
+        <tag>TensorFlow</tag>
+         
+        <tag>RNN</tag>
+         
+        <tag>LSTM</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/</loc>
     <lastmod>2017-03-24T07:27:48.114Z</lastmod>
     <data>
@@ -79,9 +131,9 @@
         
         <tag>Deep Learning</tag>
          
-        <tag>CNN</tag>
-         
         <tag>Computer Vision</tag>
+         
+        <tag>CNN</tag>
          
          
            
@@ -109,36 +161,6 @@
            
              
               <breadCrumb title="Linux" url="https://Hzwcode.github.io/categories/Linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://Hzwcode.github.io/2017/02/23/Machine-Learning-Materials/</loc>
-    <lastmod>2017-03-24T07:20:22.018Z</lastmod>
-    <data>
-        <display>
-        <title>Machine Learning Materials</title>
-        <pubTime>2017-02-23T08:57:14.000Z</pubTime>
-        
-        <tag>Deep Learning</tag>
-         
-        <tag>RNN</tag>
-         
-        <tag>LSTM</tag>
-         
-        <tag>CNN</tag>
-         
-        <tag>Object Detection</tag>
-         
-        <tag>TensorFlow</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
           
         </display>
     </data>
