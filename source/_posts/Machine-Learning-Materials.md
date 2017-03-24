@@ -3,7 +3,7 @@ title: Machine Learning Materials
 date: 2017-02-23 16:57:14
 tags: [Deep Learning, TensorFlow, CNN, RNN, LSTM, Object Detection]
 categories: Machine Learning
-top: 1
+top: 2
 description: "本篇文章整理、归纳了自己学习Deep Learning方面的一些资料，包括GitHub Awesome，DL框架如TensorFlow，分布式教程，卷积神经网络CNN，物体检测Paper，循环神经网络RNN、LSTM等，以及斯坦福CS231n计算机视觉识别和Coursera Andrew Ng机器学习等相关课程整理。"
 ---
 
