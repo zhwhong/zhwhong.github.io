@@ -4,8 +4,76 @@
 
     
   <url>
+    <loc>https://Hzwcode.github.io/2017/02/24/Detection-CNN/</loc>
+    <lastmod>2017-03-24T16:29:16.076Z</lastmod>
+    <data>
+        <display>
+        <title>[Detection] 深度学习之 "物体检测" 方法梳理</title>
+        <pubTime>2017-02-24T10:20:50.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+        <tag>Object Detection</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu-Flatabulous/</loc>
+    <lastmod>2017-03-24T16:24:30.647Z</lastmod>
+    <data>
+        <display>
+        <title>[Linux] Ubuntu下超好看扁平主题 : Flatabulous</title>
+        <pubTime>2017-02-24T08:12:16.000Z</pubTime>
+        
+        <tag>Ubuntu</tag>
+         
+        <tag>Theme</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux" url="https://Hzwcode.github.io/categories/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/</loc>
+    <lastmod>2017-03-24T16:19:50.974Z</lastmod>
+    <data>
+        <display>
+        <title>[RNN] Simple LSTM代码实现 & BPTT理论推导</title>
+        <pubTime>2017-02-24T10:26:58.000Z</pubTime>
+        
+        <tag>Algorithm</tag>
+         
+        <tag>RNN</tag>
+         
+        <tag>LSTM</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://Hzwcode.github.io/2017/03/24/AI-DL-CV-org-and-person/</loc>
-    <lastmod>2017-03-24T09:06:26.415Z</lastmod>
+    <lastmod>2017-03-24T16:16:57.318Z</lastmod>
     <data>
         <display>
         <title>那些深度学习与计算机视觉之路上的大佬们</title>
@@ -26,8 +94,32 @@
 
     
   <url>
+    <loc>https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/</loc>
+    <lastmod>2017-03-24T13:25:11.791Z</lastmod>
+    <data>
+        <display>
+        <title>[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition(附翻译，作业)</title>
+        <pubTime>2017-02-24T09:27:52.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+        <tag>Computer Vision</tag>
+         
+        <tag>CNN</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://Hzwcode.github.io/2017/02/23/Machine-Learning-Materials/</loc>
-    <lastmod>2017-03-24T08:28:56.028Z</lastmod>
+    <lastmod>2017-03-24T13:23:42.390Z</lastmod>
     <data>
         <display>
         <title>Machine Learning Materials</title>
@@ -44,30 +136,6 @@
         <tag>Object Detection</tag>
          
         <tag>TensorFlow</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/</loc>
-    <lastmod>2017-03-24T07:27:48.114Z</lastmod>
-    <data>
-        <display>
-        <title>[RNN] Simple LSTM代码实现 & BPTT理论推导</title>
-        <pubTime>2017-02-24T10:26:58.000Z</pubTime>
-        
-        <tag>RNN</tag>
-         
-        <tag>LSTM</tag>
-         
-        <tag>Algorithm</tag>
          
          
            
@@ -122,52 +190,6 @@
 
     
   <url>
-    <loc>https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/</loc>
-    <lastmod>2017-03-24T07:21:34.261Z</lastmod>
-    <data>
-        <display>
-        <title>[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition(附翻译，作业)</title>
-        <pubTime>2017-02-24T09:27:52.000Z</pubTime>
-        
-        <tag>Deep Learning</tag>
-         
-        <tag>Computer Vision</tag>
-         
-        <tag>CNN</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu-Flatabulous/</loc>
-    <lastmod>2017-03-24T07:20:32.962Z</lastmod>
-    <data>
-        <display>
-        <title>[Linux] Ubuntu下超好看扁平主题 : Flatabulous</title>
-        <pubTime>2017-02-24T08:12:16.000Z</pubTime>
-        
-        <tag>Ubuntu</tag>
-         
-        <tag>Theme</tag>
-         
-         
-           
-             
-              <breadCrumb title="Linux" url="https://Hzwcode.github.io/categories/Linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://Hzwcode.github.io/2017/03/13/mnist-gpu-cpu/</loc>
     <lastmod>2017-03-24T07:19:51.927Z</lastmod>
     <data>
@@ -207,26 +229,6 @@
            
              
               <breadCrumb title="Linux" url="https://Hzwcode.github.io/categories/Linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://Hzwcode.github.io/2017/02/24/Detection-CNN/</loc>
-    <lastmod>2017-03-24T07:18:38.712Z</lastmod>
-    <data>
-        <display>
-        <title>[Detection] CNN 之 "物体检测" 篇</title>
-        <pubTime>2017-02-24T10:20:50.000Z</pubTime>
-        
-        <tag>Object Detection</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
           
         </display>
     </data>

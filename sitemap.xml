@@ -2,23 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://Hzwcode.github.io/2017/03/24/AI-DL-CV-org-and-person/</loc>
+    <loc>https://Hzwcode.github.io/2017/02/24/Detection-CNN/</loc>
     
-    <lastmod>2017-03-24T09:06:26.415Z</lastmod>
+    <lastmod>2017-03-24T16:29:16.076Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://Hzwcode.github.io/2017/02/23/Machine-Learning-Materials/</loc>
+    <loc>https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu-Flatabulous/</loc>
     
-    <lastmod>2017-03-24T08:28:56.028Z</lastmod>
+    <lastmod>2017-03-24T16:24:30.647Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/</loc>
     
-    <lastmod>2017-03-24T07:27:48.114Z</lastmod>
+    <lastmod>2017-03-24T16:19:50.974Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://Hzwcode.github.io/2017/03/24/AI-DL-CV-org-and-person/</loc>
+    
+    <lastmod>2017-03-24T16:16:57.318Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/</loc>
+    
+    <lastmod>2017-03-24T13:25:11.791Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://Hzwcode.github.io/2017/02/23/Machine-Learning-Materials/</loc>
+    
+    <lastmod>2017-03-24T13:23:42.390Z</lastmod>
     
   </url>
   
@@ -37,20 +58,6 @@
   </url>
   
   <url>
-    <loc>https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/</loc>
-    
-    <lastmod>2017-03-24T07:21:34.261Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu-Flatabulous/</loc>
-    
-    <lastmod>2017-03-24T07:20:32.962Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://Hzwcode.github.io/2017/03/13/mnist-gpu-cpu/</loc>
     
     <lastmod>2017-03-24T07:19:51.927Z</lastmod>
@@ -61,13 +68,6 @@
     <loc>https://Hzwcode.github.io/2017/03/11/GNU-make/</loc>
     
     <lastmod>2017-03-24T07:19:24.519Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://Hzwcode.github.io/2017/02/24/Detection-CNN/</loc>
-    
-    <lastmod>2017-03-24T07:18:38.712Z</lastmod>
     
   </url>
   
