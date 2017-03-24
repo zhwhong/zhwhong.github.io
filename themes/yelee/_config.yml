@@ -175,7 +175,7 @@ jquery_ui: true
 # Max width of right cloumn | 限制右侧内容的宽带
 limit_article_width:
   on: true
-  max_width: 77 # em
+  max_width: 70 # em
 
 # >>> Small features | 小功能设置 <<<
 
