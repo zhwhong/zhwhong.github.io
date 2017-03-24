@@ -13,9 +13,9 @@ categories: Machine Learning
 - 课程视频：Youtube上查看[Andrej Karpathy](https://link.zhihu.com/?target=https%3A//www.youtube.com/channel/UCPk8m_r6fkUSYmvgCBwq-sw)创建的[播放列表](https://link.zhihu.com/?target=https%3A//www.youtube.com/playlist%3Flist%3DPLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC)，或者[网易云课堂](http://study.163.com/course/introduction/1003223001.htm#/courseDetail)
 - 课程pdf及视频下载：[百度网盘下载](https://pan.baidu.com/s/1eRHH4L8)，密码是4efx
 
-![](http://upload-images.jianshu.io/upload_images/145616-a0eeadfcd667b7bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
 <!--more-->
+
+![](http://upload-images.jianshu.io/upload_images/145616-a0eeadfcd667b7bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 > # 授课 ([Stanford Vision Lab](http://vision.stanford.edu/index.html))
 

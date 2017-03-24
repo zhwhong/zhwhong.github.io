@@ -214,7 +214,7 @@ The rest of the equations should be straightforward to derive, please let me kno
 
 此 [代码](https://github.com/Hzwcode/lstm) 其是通过自己实现 lstm 网络来逼近一个序列，y_list = [-0.5, 0.2, 0.1, -0.5]，测试结果如下：
 
-```
+```bash
 cur iter:  0
 y_pred[0] : 0.041349
 y_pred[1] : 0.069304

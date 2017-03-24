@@ -7,11 +7,11 @@ top: 2
 description: "本篇文章整理、归纳了自己学习Deep Learning方面的一些资料，包括GitHub Awesome，DL框架如TensorFlow，分布式教程，卷积神经网络CNN，物体检测Paper，循环神经网络RNN、LSTM等，以及斯坦福CS231n计算机视觉识别和Coursera Andrew Ng机器学习等相关课程整理。"
 ---
 
-![](http://upload-images.jianshu.io/upload_images/145616-02a9d0afdcfb7047.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![Machine Learning](machine_learning_materials.png)
 
 ---
 
-> # Awesome系列　
+> ## Awesome系列　
 
 - [**Awesome Machine Learning**](https://github.com/josephmisiti/awesome-machine-learning)
 - [**Awesome Deep Learning**](https://github.com/ChristosChristofidis/awesome-deep-learning)
@@ -27,7 +27,7 @@ description: "本篇文章整理、归纳了自己学习Deep Learning方面的�
 - [Awesome 2vec](https://github.com/MaxwellRebo/awesome-2vec)
 
 
-> # Deep Learning
+> ## Deep Learning
 
 - [Book] [**Neural Networks and Deep Learning**](http://neuralnetworksanddeeplearning.com/chap1.html) 中文翻译(不完整): [神经网络与深度学习](https://www.gitbook.com/book/hit-scir/neural-networks-and-deep-learning-zh_cn/details) 第五章中文翻译: [[译] 第五章 深度神经网络为何很难训练](http://www.jianshu.com/p/917f71b06499)
 - [Book] [Deep Learning - MIT Press](http://www.deeplearningbook.org/)
@@ -44,7 +44,7 @@ description: "本篇文章整理、归纳了自己学习Deep Learning方面的�
 - [View] [推荐 | 九本不容错过的深度学习和神经网络书籍](http://www.jianshu.com/p/c20917a91472)
 - [View] [Github好东西传送门](https://github.com/memect/hao) --> [深度学习入门与综述资料](https://github.com/memect/hao/blob/master/awesome/deep-learning-introduction.md)
 
-> # Frameworks
+> ## Frameworks
 
 - [TensorFlow (by google)](https://www.tensorflow.org/)
 - [MXNet](https://github.com/dmlc/mxnet)
@@ -54,7 +54,7 @@ description: "本篇文章整理、归纳了自己学习Deep Learning方面的�
 - Brainstorm
 - Theano、Chainer、Marvin、Neon、ConvNetJS
 
-> # TensorFlow
+> ## TensorFlow
 
 - 官方文档
 - [TensorFlow Tutorial](https://www.tensorflow.org/tutorials)
@@ -63,7 +63,7 @@ description: "本篇文章整理、归纳了自己学习Deep Learning方面的�
 - [[译] TensorFlow白皮书](http://www.jianshu.com/p/65dc64e4c81f)
 - [API] [API Document](https://www.tensorflow.org/versions/r0.8/api_docs/index.html)
 
-> # 入门教程
+> ## 入门教程
 
 - [教程] [Learning TensorFlow](http://learningtensorflow.com/index.html)
 - [TensorFlow-Tutorials @ github](https://github.com/nlintz/TensorFlow-Tutorials) (推荐)
@@ -71,16 +71,16 @@ description: "本篇文章整理、归纳了自己学习Deep Learning方面的�
 - [TensorFlow-Examples @ github](https://github.com/aymericdamien/TensorFlow-Examples)
 - [tensorflow_tutorials @ github](https://github.com/pkmital/tensorflow_tutorials)
 
-> # 分布式教程
+> ## 分布式教程
 
 - [Distributed TensorFlow官方文档](https://www.tensorflow.org/versions/r0.8/how_tos/distributed/index.html#distributed-tensorflow)
 - [distributed-tensorflow-example @ github](https://github.com/ischlag/distributed-tensorflow-example) (推荐)
 - [DistributedTensorFlowSample @ github](https://github.com/ashitani/DistributedTensorFlowSample)
 - [Parameter Server](http://parameterserver.org/)
 
-> # Paper (Model)
+> ## Paper (Model)
 
-## CNN Nets
+### CNN Nets
 
 - [LeNet](http://yann.lecun.com/exdb/lenet/)
 - [AlexNet](http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf)
@@ -111,7 +111,7 @@ description: "本篇文章整理、归纳了自己学习Deep Learning方面的�
 - [深度学习 — 反向传播(BP)理论推导](http://www.jianshu.com/p/408ab8177a53)
 - [无痛的机器学习第一季目录 - 知乎](https://zhuanlan.zhihu.com/p/22464594?refer=hsmyy)
 
-## Object Detection
+### Object Detection
 
 - [R-CNN](https://arxiv.org/abs/1311.2524)
 - [Fast R-CNN](https://arxiv.org/abs/1504.08083)
@@ -126,7 +126,7 @@ description: "本篇文章整理、归纳了自己学习Deep Learning方面的�
 - [计算机视觉中 RNN 应用于目标检测](http://www.jianshu.com/p/7e52daaba512)
 - [Machine Learning 硬件投入调研](http://www.jianshu.com/p/4ce0aba4e3c2)
 
-## RNN & LSTM
+### RNN & LSTM
 
 - [[福利] 深入理解 RNNs & LSTM 网络学习资料](http://www.jianshu.com/p/c930d61e1f16) @ [zhwhong](http://www.jianshu.com/u/38cd2a8c425e)
 - [[RNN] Simple LSTM代码实现 & BPTT理论推导](http://www.jianshu.com/p/2aca6e8ac7c8) @ [zhwhong](http://www.jianshu.com/u/38cd2a8c425e)
@@ -137,10 +137,7 @@ description: "本篇文章整理、归纳了自己学习Deep Learning方面的�
 - [Recurrent Neural Networks Tutorial](http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-1-introduction-to-rnns/) @ [WILDML](http://www.wildml.com/)
 - [Anyone Can Learn To Code an LSTM-RNN in Python (Part 1: RNN)](http://iamtrask.github.io/2015/11/15/anyone-can-code-lstm/) @ [iamtrask](https://twitter.com/iamtrask)
 
-
----
-
-> # Stanford 机器学习课程整理
+> ## Stanford 机器学习课程整理
 
 - [[coursera 机器学习课程] Machine Learning by Andrew Ng](http://www.jianshu.com/p/c68d0df13e0b) @ [zhwhong](http://www.jianshu.com/u/38cd2a8c425e)
 - [[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition（附翻译，下载）](http://www.jianshu.com/p/182baeb82c71) @ [zhwhong](http://www.jianshu.com/u/38cd2a8c425e)
