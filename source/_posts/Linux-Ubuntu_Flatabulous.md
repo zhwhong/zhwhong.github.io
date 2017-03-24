@@ -1,7 +1,7 @@
 ---
 title: '[Linux] Ubuntu下超好看扁平主题 : Flatabulous'
 date: 2017-02-24 16:12:16
-tags: [Linux, ubuntu, theme]
+tags: [Ubuntu, Theme]
 categories: Linux
 ---
 

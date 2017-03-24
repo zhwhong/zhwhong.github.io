@@ -1,7 +1,7 @@
 ---
 title: GNU MAKE命令
 date: 2017-03-11 01:07:07
-tags: [Linux,GNU,Makefile]
+tags: [GNU, Makefile]
 categories: Linux
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: Blog Music Test
 date: 2017-02-26 16:56:23
-tags: [hexo, music]
-categories: tool
+tags: [Hexo, Music]
+categories: Tool
 ---
 
 <center>

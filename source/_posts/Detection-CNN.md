@@ -1,8 +1,8 @@
 ---
 title: '[Detection] CNN 之 "物体检测" 篇'
 date: 2017-02-24 18:20:50
-tags: [Machine Learning, Knowledge]
-categories: machine learning
+tags: [Object Detection]
+categories: Machine Learning
 ---
 
 # Index

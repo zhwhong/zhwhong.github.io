@@ -1,9 +1,10 @@
 ---
 title: Machine Learning Materials
 date: 2017-02-23 16:57:14
-tags: [Machine Learning, Knowledge]
-categories: machine learning
+tags: [Deep Learning, TensorFlow, CNN, RNN, LSTM, Object Detection]
+categories: Machine Learning
 top: 1
+description: "本篇文章整理、归纳了自己学习Deep Learning方面的一些资料，包括GitHub Awesome，DL框架如TensorFlow，分布式教程，卷积神经网络CNN，物体检测Paper，循环神经网络RNN、LSTM等，以及斯坦福CS231n计算机视觉识别和Coursera Andrew Ng机器学习等相关课程整理。"
 ---
 
 ![](http://upload-images.jianshu.io/upload_images/145616-02a9d0afdcfb7047.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -15,7 +16,6 @@ top: 1
 - [**Awesome Machine Learning**](https://github.com/josephmisiti/awesome-machine-learning)
 - [**Awesome Deep Learning**](https://github.com/ChristosChristofidis/awesome-deep-learning)
 - [**Awesome TensorFlow**](https://github.com/jtoy/awesome-tensorflow)
-<!--more-->
 - [Awesome TensorFlow Implementations](https://github.com/TensorFlowKR/awesome_tensorflow_implementations)
 - [Awesome Torch](https://github.com/carpedm20/awesome-torch)
 - [Awesome Computer Vision](https://github.com/jbhuang0604/awesome-computer-vision)

@@ -1,8 +1,8 @@
 ---
 title: "[译] Introduction to debugging neural networks"
 date: 2017-03-20 00:08:22
-tags: [Machine Learning, Neural Network]
-categories: machine learning
+tags: [Deep Learning, Neural Network, Debug]
+categories: Machine Learning
 ---
 
 - 本文译自：[Russell Stewart's Blog](http://russellsstewart.com/) -> [Introduction to debugging neural networks](http://russellsstewart.com/blog/0)

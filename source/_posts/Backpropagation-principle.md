@@ -1,13 +1,12 @@
 ---
 title: '深度学习 — 反向传播(BP)理论推导'
 date: 2017-02-24 18:23:35
-tags: [Machine Learning]
-categories: machine learning
+tags: [Deep Learning, Algorithm]
+categories: Machine Learning
 mathjax: true
 ---
 
-- [关于简书中如何编辑Latex数学公式](http://www.jianshu.com/p/c7e3f417641c)
-- [[RNN] Simple LSTM代码实现 & BPTT理论推导](http://www.jianshu.com/p/2aca6e8ac7c8)
+- [[RNN] Simple LSTM代码实现 & BPTT理论推导](https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/)
 
 ---
 

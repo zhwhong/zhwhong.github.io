@@ -89,7 +89,11 @@ preload_comment: true
 
 　　博客创建于2017年02月23日，最近觉得自身的缺点还是蛮多的，对知识掌握的也不够牢固，所以想搭建一个自己的博客，积攒知识，巩固知识，提升自身的能力。之前记载东西主要在[简书](http://www.jianshu.com/u/38cd2a8c425e)，简书写文学类文章很方便，自己也很喜欢，但有些东西不是很方便，然后这年头，程序猿不搞个自己的主页还不好意思出来混，所以说干就干。
 
-　　博客采用 [Hexo](https://hexo.io/zh-cn/) + Git 搭建，使用 [Next](http://theme-next.iissnan.com/) | [Yelee](https://github.com/MOxFIVE/hexo-theme-yelee) 主题，项目托管在 Github - [zhwhong's blog](https://github.com/Hzwcode/Hzwcode.github.io)，使用Travis CI自动化部署，忙碌了几天完成了博客的雏形。后期需要做的还很多，继续加油～
+　　博客采用 [Hexo](https://hexo.io/zh-cn/) 框架搭建，使用过 [Next](http://theme-next.iissnan.com/) | [Yelee](https://github.com/MOxFIVE/hexo-theme-yelee) 主题，目前在用为Yelee。博客采用[Travis CI](https://travis-ci.com/)自动化部署，项目托管在 Github - [zhwhong's blog](https://github.com/Hzwcode/Hzwcode.github.io)。主分支master存放Blog内容，blog-source分支备份博客源码。
+
+<div class="github-widget" data-repo="Hzwcode/Hzwcode.github.io"></div>
+
+忙碌了几天完成了博客的雏形，后期需要做的还很多，继续加油～
 
 ---
 
@@ -105,10 +109,10 @@ preload_comment: true
 > [Hexo Themes](https://hexo.io/themes/) & [GitHub-hexo_Themes](https://github.com/hexojs/hexo/wiki/Themes)
 > [Next 主题中文文档](http://theme-next.iissnan.com/) & [GitHub-hexo_theme_next](https://github.com/iissnan/hexo-theme-next)
 > [Yelee — 简而不减 Hexo 双栏博客主题](http://moxfive.coding.me/yelee/)
-> [Hexo 博客补丁](http://frankorz.com/2016/09/30/Hexo-patch/)
 > [手把手教从零开始在GitHub上使用Hexo搭建博客教程-知乎](https://zhuanlan.zhihu.com/z-hexo)
 > [Fontawesome.io/cheatsheet/图标](http://fontawesome.io/cheatsheet/)
 > [多说样式折腾记录 — 添加 UA 浏览器标识、旋转头像等](http://moxfive.xyz/2015/09/29/duoshuo-style/#参考资料)
+> [Hexo 博客补丁](http://frankorz.com/2016/09/30/Hexo-patch/)
 
 ---
 

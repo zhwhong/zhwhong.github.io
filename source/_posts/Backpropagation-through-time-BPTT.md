@@ -1,8 +1,8 @@
 ---
 title: '[RNN] Simple LSTM代码实现 & BPTT理论推导'
 date: 2017-02-24 18:26:58
-tags: [Machine Learning]
-categories: machine learning
+tags: [RNN, LSTM, Algorithm]
+categories: Machine Learning
 mathjax: true
 ---
 
@@ -11,7 +11,7 @@ mathjax: true
 
 ---
 
-前面我们介绍过CNN中普通的[BP反向传播算法的推导](http://www.jianshu.com/p/408ab8177a53)，但是在RNN（比如[LSTM](https://en.wikipedia.org/wiki/Long_short-term_memory)）中，反向传播被称作[BPTT](https://en.wikipedia.org/wiki/Backpropagation_through_time)（Back Propagation Through Time），它是和时间序列有关的。
+前面我们介绍过CNN中普通的[BP反向传播算法的推导](https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/)，但是在RNN（比如[LSTM](https://en.wikipedia.org/wiki/Long_short-term_memory)）中，反向传播被称作[BPTT](https://en.wikipedia.org/wiki/Backpropagation_through_time)（Back Propagation Through Time），它是和时间序列有关的。
 
 <!--more-->
 

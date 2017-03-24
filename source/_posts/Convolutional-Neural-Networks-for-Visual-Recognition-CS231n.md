@@ -1,8 +1,8 @@
 ---
 title: '[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition(附翻译，作业)'
 date: 2017-02-24 17:27:52
-tags: [Machine Learning, Knowledge]
-categories: machine learning
+tags: [Deep Learning, CNN, Computer Vision]
+categories: Machine Learning
 ---
 
 > # CS231n课程：面向视觉识别的卷积神经网络

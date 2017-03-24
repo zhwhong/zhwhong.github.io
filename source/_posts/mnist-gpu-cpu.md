@@ -1,8 +1,8 @@
 ---
 title: GPU和CPU服务器测试mnist手写数字集
 date: 2017-03-13 18:22:15
-tags: [Machine Learning, gpu, tensorflow]
-categories: machine learning
+tags: [Deep Learning, GPU, TensorFlow]
+categories: Machine Learning
 ---
 
 # 一、GPU服务器
