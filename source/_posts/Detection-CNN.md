@@ -1,7 +1,7 @@
 ---
 title: '[Detection] 深度学习之 "物体检测" 方法梳理'
 date: 2017-02-24 18:20:50
-tags: [Object Detection]
+tags: [Deep Learning, Object Detection]
 categories: Machine Learning
 mathjax: true
 ---
@@ -382,8 +382,12 @@ Match策略上，取ground truth与以上生成的格子重叠率大于0.5的。
 位置采用Smooth L1 Regression，分类采用Softmax。 
 代价函数为：
 
-![][01]
-[01]:http://latex.codecogs.com/png.latex?L%20=%20L_{conf}(x,%20c)%20+%20\alpha%20\cdot%20L_{loc}(c,%20l,%20g))
+<!-- ![][01]
+[01]:http://latex.codecogs.com/png.latex?L%20=%20L_{conf}(x,%20c)%20+%20\alpha%20\cdot%20L_{loc}(c,%20l,%20g)) -->
+
+$$
+L = L\_{conf}(x, c) + \alpha \cdot L\_{loc}(c, l, g)
+$$
 
 x  表示类别输出，c 表示目标分类，l 表示位置输出，g 表示目标位置, α是比例常数，可取1。
 训练过程中负点远多于正点，所以只取负点中，概率最大的几个，数量与正点成 3:1 。

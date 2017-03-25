@@ -316,6 +316,6 @@ CDN:
   jquery_ui_css: //cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css
   pace_js: //cdn.bootcss.com/pace/1.0.2/pace.min.js
   clipboard: //cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js
-  mathjax: //cdn.bootcss.com/mathjax/2.6.1/MathJax.js
-  # mathjax: //cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+  # mathjax: //cdn.bootcss.com/mathjax/2.6.1/MathJax.js
+  mathjax: //cdn.mathjax.org/mathjax/latest/MathJax.js
   scrollreveal: //cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js
