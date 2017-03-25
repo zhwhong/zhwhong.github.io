@@ -798,11 +798,11 @@
         
         <tags>
             
-            <tag> Algorithm </tag>
-            
             <tag> RNN </tag>
             
             <tag> LSTM </tag>
+            
+            <tag> Algorithm </tag>
             
         </tags>
         
@@ -1309,9 +1309,9 @@
             
             <tag> Deep Learning </tag>
             
-            <tag> Computer Vision </tag>
-            
             <tag> CNN </tag>
+            
+            <tag> Computer Vision </tag>
             
         </tags>
         
@@ -1319,7 +1319,7 @@
     
     <entry>
       <title><![CDATA[[Linux] Ubuntu下超好看扁平主题 : Flatabulous]]></title>
-      <url>https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu-Flatabulous/</url>
+      <url>https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu_Flatabulous/</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p><img src="http://upload-images.jianshu.io/upload_images/145616-909d61913233d890.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Flatabulous"></p>
 <a id="more"></a>
 <p>使用ubuntu的小伙伴们，不知道你们对ubuntu自带主题有什么看法，反正我个人不太喜欢，个人比较喜欢扁平化的风格。<br>下面给大家推荐一个我长期使用的扁平化风格的主题－<a href="https://github.com/anmoljagetia/Flatabulous" target="_blank" rel="external">Flatabulous</a> 。<br>先看一下我的桌面(个人比较偏向单色调，不要在意这些细节啦)：</p>
@@ -1521,15 +1521,15 @@
             
             <tag> Deep Learning </tag>
             
+            <tag> TensorFlow </tag>
+            
+            <tag> CNN </tag>
+            
             <tag> RNN </tag>
             
             <tag> LSTM </tag>
             
-            <tag> CNN </tag>
-            
             <tag> Object Detection </tag>
-            
-            <tag> TensorFlow </tag>
             
         </tags>
         

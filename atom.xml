@@ -836,11 +836,11 @@
       <category term="Machine Learning" scheme="https://Hzwcode.github.io/categories/Machine-Learning/"/>
     
     
-      <category term="Algorithm" scheme="https://Hzwcode.github.io/tags/Algorithm/"/>
-    
       <category term="RNN" scheme="https://Hzwcode.github.io/tags/RNN/"/>
     
       <category term="LSTM" scheme="https://Hzwcode.github.io/tags/LSTM/"/>
+    
+      <category term="Algorithm" scheme="https://Hzwcode.github.io/tags/Algorithm/"/>
     
   </entry>
   
@@ -1366,16 +1366,16 @@
     
       <category term="Deep Learning" scheme="https://Hzwcode.github.io/tags/Deep-Learning/"/>
     
-      <category term="Computer Vision" scheme="https://Hzwcode.github.io/tags/Computer-Vision/"/>
-    
       <category term="CNN" scheme="https://Hzwcode.github.io/tags/CNN/"/>
+    
+      <category term="Computer Vision" scheme="https://Hzwcode.github.io/tags/Computer-Vision/"/>
     
   </entry>
   
   <entry>
     <title>[Linux] Ubuntu下超好看扁平主题 : Flatabulous</title>
-    <link href="https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu-Flatabulous/"/>
-    <id>https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu-Flatabulous/</id>
+    <link href="https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu_Flatabulous/"/>
+    <id>https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu_Flatabulous/</id>
     <published>2017-02-24T08:12:16.000Z</published>
     <updated>2017-03-24T16:24:30.647Z</updated>
     
@@ -1582,15 +1582,15 @@
     
       <category term="Deep Learning" scheme="https://Hzwcode.github.io/tags/Deep-Learning/"/>
     
+      <category term="TensorFlow" scheme="https://Hzwcode.github.io/tags/TensorFlow/"/>
+    
+      <category term="CNN" scheme="https://Hzwcode.github.io/tags/CNN/"/>
+    
       <category term="RNN" scheme="https://Hzwcode.github.io/tags/RNN/"/>
     
       <category term="LSTM" scheme="https://Hzwcode.github.io/tags/LSTM/"/>
     
-      <category term="CNN" scheme="https://Hzwcode.github.io/tags/CNN/"/>
-    
       <category term="Object Detection" scheme="https://Hzwcode.github.io/tags/Object-Detection/"/>
-    
-      <category term="TensorFlow" scheme="https://Hzwcode.github.io/tags/TensorFlow/"/>
     
   </entry>
   

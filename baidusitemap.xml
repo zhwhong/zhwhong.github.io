@@ -105,15 +105,15 @@
         
         <tag>Deep Learning</tag>
          
+        <tag>TensorFlow</tag>
+         
+        <tag>CNN</tag>
+         
         <tag>RNN</tag>
          
         <tag>LSTM</tag>
          
-        <tag>CNN</tag>
-         
         <tag>Object Detection</tag>
-         
-        <tag>TensorFlow</tag>
          
          
            
@@ -148,7 +148,7 @@
 
     
   <url>
-    <loc>https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu-Flatabulous/</loc>
+    <loc>https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu_Flatabulous/</loc>
     <lastmod>2017-03-24T16:24:30.647Z</lastmod>
     <data>
         <display>
@@ -177,11 +177,11 @@
         <title>[RNN] Simple LSTM代码实现 & BPTT理论推导</title>
         <pubTime>2017-02-24T10:26:58.000Z</pubTime>
         
-        <tag>Algorithm</tag>
-         
         <tag>RNN</tag>
          
         <tag>LSTM</tag>
+         
+        <tag>Algorithm</tag>
          
          
            
@@ -203,9 +203,9 @@
         
         <tag>Deep Learning</tag>
          
-        <tag>Computer Vision</tag>
-         
         <tag>CNN</tag>
+         
+        <tag>Computer Vision</tag>
          
          
            
