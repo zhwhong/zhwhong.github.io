@@ -3,7 +3,8 @@ title: '[Detection] 深度学习之 "物体检测" 方法梳理'
 date: 2017-02-24 18:20:50
 tags: [Deep Learning, Object Detection]
 categories: Machine Learning
-mathjax: true
+top: 1
+description: "本文主要关于物体检测模型梳理 RCNN，SPP-Net，Fast RCNN，Faster RCNN，R-FCN，YOLO，YOLO2，SSD，NMS等"
 ---
 
 ## Index

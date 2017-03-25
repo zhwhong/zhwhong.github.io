@@ -3,6 +3,7 @@ title: "[译] Introduction to debugging neural networks"
 date: 2017-03-20 00:08:22
 tags: [Deep Learning, Neural Network, Debug]
 categories: Machine Learning
+description: "本文译自Russell Stewart的博客文章《Introduction to debugging neural networks》，主要针对神经网络的初学者，给出一些调试网络的经验方法，学会如何根据错误来发现问题所在。比如如何处理参数NaN问题，当神经网络不再学习的时候该怎么办，如何调整网络的超参数等。"
 ---
 
 - 本文译自：[Russell Stewart's Blog](http://russellsstewart.com/) -> [Introduction to debugging neural networks](http://russellsstewart.com/blog/0)

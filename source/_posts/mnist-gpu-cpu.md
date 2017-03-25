@@ -3,6 +3,7 @@ title: GPU和CPU服务器测试mnist手写数字集
 date: 2017-03-13 18:22:15
 tags: [Deep Learning, GPU, TensorFlow]
 categories: Machine Learning
+description: "本文主要通过tensorflow环境测试mnist手写数字集，来衡量GPU服务器与CPU服务器跑深度学习网络时的差异，了解不同网络模型，不同batch数对GPU和CPU占用率的影响，以及当GPU服务器跑满时顶的上多少台CPU服务器等。"
 ---
 
 # 一、GPU服务器
