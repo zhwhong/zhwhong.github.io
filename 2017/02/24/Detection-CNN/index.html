@@ -15,30 +15,12 @@
 
 
 
-<meta name="description" content="Index
-RCNN 
-SPP-Net
-Fast RCNN 
-Faster RCNN 
-R-FCN
-YOLO 
-YOLO2
-SSD 
-NMS">
+<meta name="description" content="本文主要关于物体检测模型梳理 RCNN，SPP-Net，Fast RCNN，Faster RCNN，R-FCN，YOLO，YOLO2，SSD，NMS等">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Detection] 深度学习之 "物体检测" 方法梳理">
 <meta property="og:url" content="https://Hzwcode.github.io/2017/02/24/Detection-CNN/index.html">
 <meta property="og:site_name" content="Zhiwei's Blog">
-<meta property="og:description" content="Index
-RCNN 
-SPP-Net
-Fast RCNN 
-Faster RCNN 
-R-FCN
-YOLO 
-YOLO2
-SSD 
-NMS">
+<meta property="og:description" content="本文主要关于物体检测模型梳理 RCNN，SPP-Net，Fast RCNN，Faster RCNN，R-FCN，YOLO，YOLO2，SSD，NMS等">
 <meta property="og:image" content="https://Hzwcode.github.io/RCNN.png">
 <meta property="og:image" content="https://Hzwcode.github.io/SPP_net_1.png">
 <meta property="og:image" content="https://Hzwcode.github.io/SPP_net_2.png">
@@ -65,22 +47,12 @@ NMS">
 <meta property="og:image" content="https://Hzwcode.github.io/SSD_2.png">
 <meta property="og:image" content="https://Hzwcode.github.io/SSD_3.png">
 <meta property="og:image" content="https://Hzwcode.github.io/SSD_VS_YOLO.png">
-<meta property="og:image" content="http://latex.codecogs.com/png.latex?L%20=%20L_{conf}(x,%20c)%20+%20\alpha%20\cdot%20L_{loc}(c,%20l,%20g))">
 <meta property="og:image" content="https://Hzwcode.github.io/NMS.png">
 <meta property="og:image" content="https://Hzwcode.github.io/NMS_2.png">
-<meta property="og:updated_time" content="2017-03-24T16:29:16.076Z">
+<meta property="og:updated_time" content="2017-03-25T07:41:33.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Detection] 深度学习之 "物体检测" 方法梳理">
-<meta name="twitter:description" content="Index
-RCNN 
-SPP-Net
-Fast RCNN 
-Faster RCNN 
-R-FCN
-YOLO 
-YOLO2
-SSD 
-NMS">
+<meta name="twitter:description" content="本文主要关于物体检测模型梳理 RCNN，SPP-Net，Fast RCNN，Faster RCNN，R-FCN，YOLO，YOLO2，SSD，NMS等">
 <meta name="twitter:image" content="https://Hzwcode.github.io/RCNN.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
@@ -408,7 +380,7 @@ NMS">
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">10,638字</span>
+        <span class="post-count">10,650字</span>
       </span>
     </span>
 
@@ -678,7 +650,9 @@ NMS">
 <p>Match策略上，取ground truth与以上生成的格子重叠率大于0.5的。</p>
 <h2 id="9-SSD-vs-YOLO"><a href="#9-SSD-vs-YOLO" class="headerlink" title="9. SSD vs YOLO"></a>9. SSD vs YOLO</h2><p><img src="SSD_VS_YOLO.png" alt=""></p>
 <p>位置采用Smooth L1 Regression，分类采用Softmax。<br>代价函数为：</p>
-<p><img src="http://latex.codecogs.com/png.latex?L%20=%20L_{conf}(x,%20c)%20+%20\alpha%20\cdot%20L_{loc}(c,%20l,%20g))" alt=""></p>
+<!-- ![][01]
+[01]:http://latex.codecogs.com/png.latex?L%20=%20L_{conf}(x,%20c)%20+%20\alpha%20\cdot%20L_{loc}(c,%20l,%20g)) -->
+<p>$$<br>L = L_{conf}(x, c) + \alpha \cdot L_{loc}(c, l, g)<br>$$</p>
 <p>x  表示类别输出，c 表示目标分类，l 表示位置输出，g 表示目标位置, α是比例常数，可取1。<br>训练过程中负点远多于正点，所以只取负点中，概率最大的几个，数量与正点成 3:1 。</p>
 <h2 id="10-NMS"><a href="#10-NMS" class="headerlink" title="10. NMS"></a>10. NMS</h2><blockquote>
 <p>论文出处：<a href="http://ieeexplore.ieee.org/abstract/document/1699659/" target="_blank" rel="external">Efficient Non-Maximum Suppression</a><br>发表于：<a href="http://ieeexplore.ieee.org/xpl/mostRecentIssue.jsp?punumber=11159" target="_blank" rel="external">Pattern Recognition, 2006. ICPR 2006. 18th International Conference on</a></p>
@@ -727,7 +701,7 @@ NMS">
         <p><span>本文标题:</span><a href="/2017/02/24/Detection-CNN/">[Detection] 深度学习之 &quot;物体检测&quot; 方法梳理</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">zhwhong</a></p>
         <p><span>发布时间:</span>2017-02-24, 18:20:50</p>
-        <p><span>最后更新:</span>2017-03-25, 00:29:16</p>
+        <p><span>最后更新:</span>2017-03-25, 15:41:33</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/02/24/Detection-CNN/" title="[Detection] 深度学习之 &quot;物体检测&quot; 方法梳理">https://Hzwcode.github.io/2017/02/24/Detection-CNN/</a>
             <span class="copy-path" data-clipboard-text="原文: https://Hzwcode.github.io/2017/02/24/Detection-CNN/　　作者: zhwhong" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -1009,7 +983,7 @@ MathJax.Hub.Queue(function() {
 });
 </script>
 
-<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
 

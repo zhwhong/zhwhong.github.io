@@ -4,8 +4,86 @@
 
     
   <url>
+    <loc>https://Hzwcode.github.io/2017/03/13/mnist-gpu-cpu/</loc>
+    <lastmod>2017-03-25T07:51:43.263Z</lastmod>
+    <data>
+        <display>
+        <title>GPU和CPU服务器测试mnist手写数字集</title>
+        <pubTime>2017-03-13T10:22:15.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+        <tag>TensorFlow</tag>
+         
+        <tag>GPU</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://Hzwcode.github.io/2017/03/20/Introduction-to-debugging-neural-networks/</loc>
+    <lastmod>2017-03-25T07:48:00.346Z</lastmod>
+    <data>
+        <display>
+        <title>[译] Introduction to debugging neural networks</title>
+        <pubTime>2017-03-19T16:08:22.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+        <tag>Neural Network</tag>
+         
+        <tag>Debug</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://Hzwcode.github.io/2017/02/23/Machine-Learning-Materials/</loc>
+    <lastmod>2017-03-25T07:43:23.111Z</lastmod>
+    <data>
+        <display>
+        <title>Machine Learning Materials</title>
+        <pubTime>2017-02-23T08:57:14.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+        <tag>RNN</tag>
+         
+        <tag>LSTM</tag>
+         
+        <tag>CNN</tag>
+         
+        <tag>Object Detection</tag>
+         
+        <tag>TensorFlow</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://Hzwcode.github.io/2017/02/24/Detection-CNN/</loc>
-    <lastmod>2017-03-24T16:29:16.076Z</lastmod>
+    <lastmod>2017-03-25T07:41:33.790Z</lastmod>
     <data>
         <display>
         <title>[Detection] 深度学习之 "物体检测" 方法梳理</title>
@@ -19,6 +97,50 @@
            
              
               <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://Hzwcode.github.io/2017/03/24/AI-DL-CV-org-and-person/</loc>
+    <lastmod>2017-03-25T07:36:58.233Z</lastmod>
+    <data>
+        <display>
+        <title>那些深度学习与计算机视觉之路上的大佬们</title>
+        <pubTime>2017-03-24T07:48:24.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+        <tag>Computer Vision</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://Hzwcode.github.io/2017/02/26/music-test/</loc>
+    <lastmod>2017-03-25T07:26:12.746Z</lastmod>
+    <data>
+        <display>
+        <title>Blog Music Test</title>
+        <pubTime>2017-02-26T08:56:23.000Z</pubTime>
+        
+        <tag>Hexo</tag>
+         
+        <tag>Music</tag>
+         
+         
+           
+             
+              <breadCrumb title="Tool" url="https://Hzwcode.github.io/categories/Tool/"/>
           
         </display>
     </data>
@@ -72,28 +194,6 @@
 
     
   <url>
-    <loc>https://Hzwcode.github.io/2017/03/24/AI-DL-CV-org-and-person/</loc>
-    <lastmod>2017-03-24T16:16:57.318Z</lastmod>
-    <data>
-        <display>
-        <title>那些深度学习与计算机视觉之路上的大佬们</title>
-        <pubTime>2017-03-24T07:48:24.000Z</pubTime>
-        
-        <tag>Deep Learning</tag>
-         
-        <tag>Computer Vision</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/</loc>
     <lastmod>2017-03-24T13:25:11.791Z</lastmod>
     <data>
@@ -106,36 +206,6 @@
         <tag>Computer Vision</tag>
          
         <tag>CNN</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://Hzwcode.github.io/2017/02/23/Machine-Learning-Materials/</loc>
-    <lastmod>2017-03-24T13:23:42.390Z</lastmod>
-    <data>
-        <display>
-        <title>Machine Learning Materials</title>
-        <pubTime>2017-02-23T08:57:14.000Z</pubTime>
-        
-        <tag>Deep Learning</tag>
-         
-        <tag>RNN</tag>
-         
-        <tag>LSTM</tag>
-         
-        <tag>CNN</tag>
-         
-        <tag>Object Detection</tag>
-         
-        <tag>TensorFlow</tag>
          
          
            
@@ -190,30 +260,6 @@
 
     
   <url>
-    <loc>https://Hzwcode.github.io/2017/03/13/mnist-gpu-cpu/</loc>
-    <lastmod>2017-03-24T07:19:51.927Z</lastmod>
-    <data>
-        <display>
-        <title>GPU和CPU服务器测试mnist手写数字集</title>
-        <pubTime>2017-03-13T10:22:15.000Z</pubTime>
-        
-        <tag>Deep Learning</tag>
-         
-        <tag>TensorFlow</tag>
-         
-        <tag>GPU</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://Hzwcode.github.io/2017/03/11/GNU-make/</loc>
     <lastmod>2017-03-24T07:19:24.519Z</lastmod>
     <data>
@@ -249,52 +295,6 @@
            
              
               <breadCrumb title="Tool" url="https://Hzwcode.github.io/categories/Tool/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://Hzwcode.github.io/2017/02/26/music-test/</loc>
-    <lastmod>2017-03-24T07:16:55.105Z</lastmod>
-    <data>
-        <display>
-        <title>Blog Music Test</title>
-        <pubTime>2017-02-26T08:56:23.000Z</pubTime>
-        
-        <tag>Hexo</tag>
-         
-        <tag>Music</tag>
-         
-         
-           
-             
-              <breadCrumb title="Tool" url="https://Hzwcode.github.io/categories/Tool/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://Hzwcode.github.io/2017/03/20/Introduction-to-debugging-neural-networks/</loc>
-    <lastmod>2017-03-24T07:14:24.253Z</lastmod>
-    <data>
-        <display>
-        <title>[译] Introduction to debugging neural networks</title>
-        <pubTime>2017-03-19T16:08:22.000Z</pubTime>
-        
-        <tag>Deep Learning</tag>
-         
-        <tag>Neural Network</tag>
-         
-        <tag>Debug</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
           
         </display>
     </data>

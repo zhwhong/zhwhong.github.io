@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Hzwcode.github.io/"/>
-  <updated>2017-03-24T16:16:57.318Z</updated>
+  <updated>2017-03-25T07:36:58.233Z</updated>
   <id>https://Hzwcode.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://Hzwcode.github.io/2017/03/24/AI-DL-CV-org-and-person/"/>
     <id>https://Hzwcode.github.io/2017/03/24/AI-DL-CV-org-and-person/</id>
     <published>2017-03-24T07:48:24.000Z</published>
-    <updated>2017-03-24T16:16:57.318Z</updated>
+    <updated>2017-03-25T07:36:58.233Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>本文整理、归纳了自己学习Deep Learning，Computer Vision方向看到的相关研究机构以及各位大佬们的信息。打算从事这个行业或者刚入门的朋友可以多关注、多了解一些CV的具体应用。搞研究的朋友也可以从中了解到很多牛人的研究动态、招生情况等。</p>
 <p>有句话说得好，“<code>Sharing changes the world!</code>”，知识只有分享才能产生更大的价值，希望能对朋友们有所帮助。</p>
@@ -143,7 +143,7 @@
     <link href="https://Hzwcode.github.io/2017/03/20/Introduction-to-debugging-neural-networks/"/>
     <id>https://Hzwcode.github.io/2017/03/20/Introduction-to-debugging-neural-networks/</id>
     <published>2017-03-19T16:08:22.000Z</published>
-    <updated>2017-03-24T07:14:24.253Z</updated>
+    <updated>2017-03-25T07:48:00.346Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><ul>
 <li>本文译自：<a href="http://russellsstewart.com/" target="_blank" rel="external">Russell Stewart’s Blog</a> -&gt; <a href="http://russellsstewart.com/blog/0" target="_blank" rel="external">Introduction to debugging neural networks</a></li>
@@ -176,10 +176,7 @@
     
     <summary type="html">
     
-      &lt;ul&gt;
-&lt;li&gt;本文译自：&lt;a href=&quot;http://russellsstewart.com/&quot;&gt;Russell Stewart’s Blog&lt;/a&gt; -&amp;gt; &lt;a href=&quot;http://russellsstewart.com/blog/0&quot;&gt;Introduction to debugging neural networks&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/145616-1b69d26b7f4bb783.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;neural network&quot;&gt;&lt;/p&gt;
+      本文译自Russell Stewart的博客文章《Introduction to debugging neural networks》，主要针对神经网络的初学者，给出一些调试网络的经验方法，学会如何根据错误来发现问题所在。比如如何处理参数NaN问题，当神经网络不再学习的时候该怎么办，如何调整网络的超参数等。
     
     </summary>
     
@@ -199,7 +196,7 @@
     <link href="https://Hzwcode.github.io/2017/03/13/mnist-gpu-cpu/"/>
     <id>https://Hzwcode.github.io/2017/03/13/mnist-gpu-cpu/</id>
     <published>2017-03-13T10:22:15.000Z</published>
-    <updated>2017-03-24T07:19:51.927Z</updated>
+    <updated>2017-03-25T07:51:43.263Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="一、GPU服务器"><a href="#一、GPU服务器" class="headerlink" title="一、GPU服务器"></a>一、GPU服务器</h1><p>服务器 IP ：<code>172.xx.xx.98</code> （4块NVIDIA <strong>TITAN X</strong> GPU，<strong>32</strong> CPU核心）</p>
 <a id="more"></a>
@@ -427,7 +424,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;一、GPU服务器&quot;&gt;&lt;a href=&quot;#一、GPU服务器&quot; class=&quot;headerlink&quot; title=&quot;一、GPU服务器&quot;&gt;&lt;/a&gt;一、GPU服务器&lt;/h1&gt;&lt;p&gt;服务器 IP ：&lt;code&gt;172.xx.xx.98&lt;/code&gt; （4块NVIDIA &lt;strong&gt;TITAN X&lt;/strong&gt; GPU，&lt;strong&gt;32&lt;/strong&gt; CPU核心）&lt;/p&gt;
+      本文主要通过tensorflow环境测试mnist手写数字集，来衡量GPU服务器与CPU服务器跑深度学习网络时的差异，了解不同网络模型，不同batch数对GPU和CPU占用率的影响，以及当GPU服务器跑满时顶的上多少台CPU服务器等。
     
     </summary>
     
@@ -615,7 +612,7 @@
     <link href="https://Hzwcode.github.io/2017/02/26/music-test/"/>
     <id>https://Hzwcode.github.io/2017/02/26/music-test/</id>
     <published>2017-02-26T08:56:23.000Z</published>
-    <updated>2017-03-24T07:16:55.105Z</updated>
+    <updated>2017-03-25T07:26:12.746Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><center><br><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=38592976&auto=0&height=66"></iframe><br></center>
 
@@ -989,7 +986,7 @@
     <link href="https://Hzwcode.github.io/2017/02/24/Detection-CNN/"/>
     <id>https://Hzwcode.github.io/2017/02/24/Detection-CNN/</id>
     <published>2017-02-24T10:20:50.000Z</published>
-    <updated>2017-03-24T16:29:16.076Z</updated>
+    <updated>2017-03-25T07:41:33.790Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h2 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ul>
 <li><a href="http://arxiv.org/abs/1311.2524" target="_blank" rel="external">RCNN</a> </li>
@@ -1213,7 +1210,9 @@
 <p>Match策略上，取ground truth与以上生成的格子重叠率大于0.5的。</p>
 <h2 id="9-SSD-vs-YOLO"><a href="#9-SSD-vs-YOLO" class="headerlink" title="9. SSD vs YOLO"></a>9. SSD vs YOLO</h2><p><img src="SSD_VS_YOLO.png" alt=""></p>
 <p>位置采用Smooth L1 Regression，分类采用Softmax。<br>代价函数为：</p>
-<p><img src="http://latex.codecogs.com/png.latex?L%20=%20L_{conf}(x,%20c)%20+%20\alpha%20\cdot%20L_{loc}(c,%20l,%20g))" alt=""></p>
+<!-- ![][01]
+[01]:http://latex.codecogs.com/png.latex?L%20=%20L_{conf}(x,%20c)%20+%20\alpha%20\cdot%20L_{loc}(c,%20l,%20g)) -->
+<p>$$<br>L = L_{conf}(x, c) + \alpha \cdot L_{loc}(c, l, g)<br>$$</p>
 <p>x  表示类别输出，c 表示目标分类，l 表示位置输出，g 表示目标位置, α是比例常数，可取1。<br>训练过程中负点远多于正点，所以只取负点中，概率最大的几个，数量与正点成 3:1 。</p>
 <h2 id="10-NMS"><a href="#10-NMS" class="headerlink" title="10. NMS"></a>10. NMS</h2><blockquote>
 <p>论文出处：<a href="http://ieeexplore.ieee.org/abstract/document/1699659/" target="_blank" rel="external">Efficient Non-Maximum Suppression</a><br>发表于：<a href="http://ieeexplore.ieee.org/xpl/mostRecentIssue.jsp?punumber=11159" target="_blank" rel="external">Pattern Recognition, 2006. ICPR 2006. 18th International Conference on</a></p>
@@ -1255,17 +1254,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Index&quot;&gt;&lt;a href=&quot;#Index&quot; class=&quot;headerlink&quot; title=&quot;Index&quot;&gt;&lt;/a&gt;Index&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://arxiv.org/abs/1311.2524&quot;&gt;RCNN&lt;/a&gt; &lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1406.4729&quot;&gt;SPP-Net&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://arxiv.org/abs/1504.08083&quot;&gt;Fast RCNN&lt;/a&gt; &lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://arxiv.org/abs/1506.01497&quot;&gt;Faster RCNN&lt;/a&gt; &lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://arxiv.org/pdf/1605.06409v1.pdf&quot;&gt;R-FCN&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://arxiv.org/abs/1506.02640&quot;&gt;YOLO&lt;/a&gt; &lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1612.08242&quot;&gt;YOLO2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.cs.unc.edu/~wliu/papers/ssd.pdf&quot;&gt;SSD&lt;/a&gt; &lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://ieeexplore.ieee.org/abstract/document/1699659/&quot;&gt;NMS&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+      本文主要关于物体检测模型梳理 RCNN，SPP-Net，Fast RCNN，Faster RCNN，R-FCN，YOLO，YOLO2，SSD，NMS等
     
     </summary>
     
@@ -1451,13 +1440,11 @@
     <link href="https://Hzwcode.github.io/2017/02/23/Machine-Learning-Materials/"/>
     <id>https://Hzwcode.github.io/2017/02/23/Machine-Learning-Materials/</id>
     <published>2017-02-23T08:57:14.000Z</published>
-    <updated>2017-03-24T13:23:42.390Z</updated>
+    <updated>2017-03-25T07:43:23.111Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p><img src="machine_learning_materials.png" alt="Machine Learning"></p>
 <hr>
-<blockquote>
-<h2 id="Awesome系列"><a href="#Awesome系列" class="headerlink" title="Awesome系列　"></a>Awesome系列　</h2></blockquote>
-<ul>
+<h2 id="Awesome系列"><a href="#Awesome系列" class="headerlink" title="Awesome系列　"></a>Awesome系列　</h2><ul>
 <li><a href="https://github.com/josephmisiti/awesome-machine-learning" target="_blank" rel="external"><strong>Awesome Machine Learning</strong></a></li>
 <li><a href="https://github.com/ChristosChristofidis/awesome-deep-learning" target="_blank" rel="external"><strong>Awesome Deep Learning</strong></a></li>
 <li><a href="https://github.com/jtoy/awesome-tensorflow" target="_blank" rel="external"><strong>Awesome TensorFlow</strong></a></li>
@@ -1471,9 +1458,7 @@
 <li><a href="https://github.com/terryum/awesome-deep-learning-papers" target="_blank" rel="external">Awesome Deep Learning Papers</a></li>
 <li><a href="https://github.com/MaxwellRebo/awesome-2vec" target="_blank" rel="external">Awesome 2vec</a></li>
 </ul>
-<blockquote>
-<h2 id="Deep-Learning"><a href="#Deep-Learning" class="headerlink" title="Deep Learning"></a>Deep Learning</h2></blockquote>
-<ul>
+<h2 id="Deep-Learning"><a href="#Deep-Learning" class="headerlink" title="Deep Learning"></a>Deep Learning</h2><ul>
 <li>[Book] <a href="http://neuralnetworksanddeeplearning.com/chap1.html" target="_blank" rel="external"><strong>Neural Networks and Deep Learning</strong></a> 中文翻译(不完整): <a href="https://www.gitbook.com/book/hit-scir/neural-networks-and-deep-learning-zh_cn/details" target="_blank" rel="external">神经网络与深度学习</a> 第五章中文翻译: <a href="http://www.jianshu.com/p/917f71b06499" target="_blank" rel="external">[译] 第五章 深度神经网络为何很难训练</a></li>
 <li>[Book] <a href="http://www.deeplearningbook.org/" target="_blank" rel="external">Deep Learning - MIT Press</a></li>
 <li>[Book] <a href="http://www.springer.com/gb/book/9780387310732" target="_blank" rel="external">Pattern Recognition and Machine Learning</a> (Bishop) | <a href="https://book.douban.com/subject/2061116/" target="_blank" rel="external">豆瓣</a> | <a href="http://nbviewer.jupyter.org/github/lijin-THU/notes-machine-learning/blob/master/ReadMe.ipynb" target="_blank" rel="external">PRML &amp; DL笔记</a> | <a href="https://www.gitbook.com/book/mqshen/prml/details" target="_blank" rel="external">GitBook</a></li>
@@ -1489,9 +1474,7 @@
 <li>[View] <a href="http://www.jianshu.com/p/c20917a91472" target="_blank" rel="external">推荐 | 九本不容错过的深度学习和神经网络书籍</a></li>
 <li>[View] <a href="https://github.com/memect/hao" target="_blank" rel="external">Github好东西传送门</a> –&gt; <a href="https://github.com/memect/hao/blob/master/awesome/deep-learning-introduction.md" target="_blank" rel="external">深度学习入门与综述资料</a></li>
 </ul>
-<blockquote>
-<h2 id="Frameworks"><a href="#Frameworks" class="headerlink" title="Frameworks"></a>Frameworks</h2></blockquote>
-<ul>
+<h2 id="Frameworks"><a href="#Frameworks" class="headerlink" title="Frameworks"></a>Frameworks</h2><ul>
 <li><a href="https://www.tensorflow.org/" target="_blank" rel="external">TensorFlow (by google)</a></li>
 <li><a href="https://github.com/dmlc/mxnet" target="_blank" rel="external">MXNet</a></li>
 <li><a href="http://torch.ch/" target="_blank" rel="external">Torch (by Facebook)</a></li>
@@ -1500,9 +1483,7 @@
 <li>Brainstorm</li>
 <li>Theano、Chainer、Marvin、Neon、ConvNetJS</li>
 </ul>
-<blockquote>
-<h2 id="TensorFlow"><a href="#TensorFlow" class="headerlink" title="TensorFlow"></a>TensorFlow</h2></blockquote>
-<ul>
+<h2 id="TensorFlow"><a href="#TensorFlow" class="headerlink" title="TensorFlow"></a>TensorFlow</h2><ul>
 <li>官方文档</li>
 <li><a href="https://www.tensorflow.org/tutorials" target="_blank" rel="external">TensorFlow Tutorial</a></li>
 <li><a href="http://wiki.jikexueyuan.com/project/tensorflow-zh/" target="_blank" rel="external">TensorFlow 官方文档中文版</a></li>
@@ -1510,26 +1491,20 @@
 <li><a href="http://www.jianshu.com/p/65dc64e4c81f" target="_blank" rel="external">[译] TensorFlow白皮书</a></li>
 <li>[API] <a href="https://www.tensorflow.org/versions/r0.8/api_docs/index.html" target="_blank" rel="external">API Document</a></li>
 </ul>
-<blockquote>
-<h2 id="入门教程"><a href="#入门教程" class="headerlink" title="入门教程"></a>入门教程</h2></blockquote>
-<ul>
+<h2 id="入门教程"><a href="#入门教程" class="headerlink" title="入门教程"></a>入门教程</h2><ul>
 <li>[教程] <a href="http://learningtensorflow.com/index.html" target="_blank" rel="external">Learning TensorFlow</a></li>
 <li><a href="https://github.com/nlintz/TensorFlow-Tutorials" target="_blank" rel="external">TensorFlow-Tutorials @ github</a> (推荐)</li>
 <li><a href="https://github.com/jtoy/awesome-tensorflow" target="_blank" rel="external">Awesome-TensorFlow</a> (推荐)</li>
 <li><a href="https://github.com/aymericdamien/TensorFlow-Examples" target="_blank" rel="external">TensorFlow-Examples @ github</a></li>
 <li><a href="https://github.com/pkmital/tensorflow_tutorials" target="_blank" rel="external">tensorflow_tutorials @ github</a></li>
 </ul>
-<blockquote>
-<h2 id="分布式教程"><a href="#分布式教程" class="headerlink" title="分布式教程"></a>分布式教程</h2></blockquote>
-<ul>
+<h2 id="分布式教程"><a href="#分布式教程" class="headerlink" title="分布式教程"></a>分布式教程</h2><ul>
 <li><a href="https://www.tensorflow.org/versions/r0.8/how_tos/distributed/index.html#distributed-tensorflow" target="_blank" rel="external">Distributed TensorFlow官方文档</a></li>
 <li><a href="https://github.com/ischlag/distributed-tensorflow-example" target="_blank" rel="external">distributed-tensorflow-example @ github</a> (推荐)</li>
 <li><a href="https://github.com/ashitani/DistributedTensorFlowSample" target="_blank" rel="external">DistributedTensorFlowSample @ github</a></li>
 <li><a href="http://parameterserver.org/" target="_blank" rel="external">Parameter Server</a></li>
 </ul>
-<blockquote>
-<h2 id="Paper-Model"><a href="#Paper-Model" class="headerlink" title="Paper (Model)"></a>Paper (Model)</h2></blockquote>
-<h3 id="CNN-Nets"><a href="#CNN-Nets" class="headerlink" title="CNN Nets"></a>CNN Nets</h3><ul>
+<h2 id="Paper-Model"><a href="#Paper-Model" class="headerlink" title="Paper (Model)"></a>Paper (Model)</h2><h3 id="CNN-Nets"><a href="#CNN-Nets" class="headerlink" title="CNN Nets"></a>CNN Nets</h3><ul>
 <li><a href="http://yann.lecun.com/exdb/lenet/" target="_blank" rel="external">LeNet</a></li>
 <li><a href="http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf" target="_blank" rel="external">AlexNet</a></li>
 <li><a href="https://arxiv.org/abs/1312.6229v4" target="_blank" rel="external">OverFeat</a></li>
@@ -1582,9 +1557,7 @@
 <li><a href="http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-1-introduction-to-rnns/" target="_blank" rel="external">Recurrent Neural Networks Tutorial</a> @ <a href="http://www.wildml.com/" target="_blank" rel="external">WILDML</a></li>
 <li><a href="http://iamtrask.github.io/2015/11/15/anyone-can-code-lstm/" target="_blank" rel="external">Anyone Can Learn To Code an LSTM-RNN in Python (Part 1: RNN)</a> @ <a href="https://twitter.com/iamtrask" target="_blank" rel="external">iamtrask</a></li>
 </ul>
-<blockquote>
-<h2 id="Stanford-机器学习课程整理"><a href="#Stanford-机器学习课程整理" class="headerlink" title="Stanford 机器学习课程整理"></a>Stanford 机器学习课程整理</h2></blockquote>
-<ul>
+<h2 id="Stanford-机器学习课程整理"><a href="#Stanford-机器学习课程整理" class="headerlink" title="Stanford 机器学习课程整理"></a>Stanford 机器学习课程整理</h2><ul>
 <li><a href="http://www.jianshu.com/p/c68d0df13e0b" target="_blank" rel="external">[coursera 机器学习课程] Machine Learning by Andrew Ng</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
 <li><a href="http://www.jianshu.com/p/182baeb82c71" target="_blank" rel="external">[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition（附翻译，下载）</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
 <li><a href="http://www.jianshu.com/p/062d2bbbef93" target="_blank" rel="external">[斯坦福CS224d课程整理] Natural Language Processing with Deep Learning</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
