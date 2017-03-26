@@ -110,6 +110,11 @@ youyan:
   # id 中填写你的友言用户数字ID，注册后进入后台管理即可查看
   # 友言服务在 Web 环境下运行，普通本地环境无法查看，请部署后在线上测试。
 
+changyan:
+  # on: true
+  appid: # cysUJIsDc
+  appkey: # prod_f3b45651c40acb065b603bb0c1ae489b
+
 
 # >>> Style Customisation 样式自定义 <<<
 
@@ -117,7 +122,7 @@ youyan:
 ## "5": show images form bg-1.jpg to bg-5.jpg in `/yelee/source/background/`
 ## "5": 显示`/yelee/source/background/`文件夹中 bg-1.jpg 到 bg-5.jpg 这5张图片
 ## "0": white-gray background | 淳朴灰白背景
-background_image: 5
+background_image: 10
 
 # Base Font Size | 字号调节
 base_font_size: 18  #px, 16 - 24

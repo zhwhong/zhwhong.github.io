@@ -3,6 +3,7 @@ title: 关于我 & 留言板
 date: 2017-02-24 10:45:04
 no_word_count: true
 preload_comment: true
+fancybox: false
 ---
 
 <style type="text/css">
