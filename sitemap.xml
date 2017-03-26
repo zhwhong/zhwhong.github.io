@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://Hzwcode.github.io/categories/index.html</loc>
+    
+    <lastmod>2017-03-26T15:22:15.426Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://Hzwcode.github.io/about/index.html</loc>
+    
+    <lastmod>2017-03-26T15:21:41.084Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://Hzwcode.github.io/2017/03/24/AI-DL-CV-org-and-person/</loc>
     
     <lastmod>2017-03-25T16:04:21.066Z</lastmod>
@@ -93,23 +107,9 @@
   </url>
   
   <url>
-    <loc>https://Hzwcode.github.io/about/index.html</loc>
-    
-    <lastmod>2017-03-24T06:54:40.005Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://Hzwcode.github.io/tags/index.html</loc>
     
     <lastmod>2017-03-23T16:15:57.726Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://Hzwcode.github.io/categories/index.html</loc>
-    
-    <lastmod>2017-03-23T16:15:46.346Z</lastmod>
     
   </url>
   
