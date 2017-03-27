@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://zhwhong.ml/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/</loc>
-    <lastmod>2017-03-27T14:40:47.551Z</lastmod>
+    <lastmod>2017-03-27T15:13:22.800Z</lastmod>
     <data>
         <display>
         <title>LIDC-IDRI肺结节公开数据集Dicom和XML标注详解</title>
@@ -153,9 +153,9 @@
         
         <tag>Deep Learning</tag>
          
-        <tag>CNN</tag>
-         
         <tag>TensorFlow</tag>
+         
+        <tag>CNN</tag>
          
         <tag>RNN</tag>
          
