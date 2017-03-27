@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://Hzwcode.github.io/categories/index.html</loc>
+    <loc>https://Hzwcode.github.io/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/</loc>
     
-    <lastmod>2017-03-26T15:22:15.426Z</lastmod>
+    <lastmod>2017-03-27T14:40:47.551Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://Hzwcode.github.io/2017/03/11/GNU-make/</loc>
+    
+    <lastmod>2017-03-27T13:23:04.918Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://Hzwcode.github.io/about/index.html</loc>
     
-    <lastmod>2017-03-26T15:21:41.084Z</lastmod>
+    <lastmod>2017-03-27T12:17:01.493Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://Hzwcode.github.io/categories/index.html</loc>
+    
+    <lastmod>2017-03-26T15:22:15.426Z</lastmod>
     
   </url>
   
@@ -89,20 +103,6 @@
     <loc>https://Hzwcode.github.io/2017/03/23/deal-with-hexo-article-top-problem/</loc>
     
     <lastmod>2017-03-24T07:26:02.528Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://Hzwcode.github.io/2017/03/11/GNU-make/</loc>
-    
-    <lastmod>2017-03-24T07:19:24.519Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://Hzwcode.github.io/2017/02/23/hello-world/</loc>
-    
-    <lastmod>2017-03-24T07:17:24.621Z</lastmod>
     
   </url>
   

@@ -3,6 +3,52 @@
 
 
     
+  <url>
+    <loc>https://Hzwcode.github.io/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/</loc>
+    <lastmod>2017-03-27T14:40:47.551Z</lastmod>
+    <data>
+        <display>
+        <title>LIDC-IDRI肺结节公开数据集Dicom和XML标注详解</title>
+        <pubTime>2017-03-27T13:32:54.000Z</pubTime>
+        
+        <tag>LIDC</tag>
+         
+        <tag>Dicom</tag>
+         
+        <tag>Xml</tag>
+         
+         
+           
+             
+              <breadCrumb title="Medical Image" url="https://Hzwcode.github.io/categories/Medical-Image/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://Hzwcode.github.io/2017/03/11/GNU-make/</loc>
+    <lastmod>2017-03-27T13:23:04.918Z</lastmod>
+    <data>
+        <display>
+        <title>GNU MAKE命令</title>
+        <pubTime>2017-03-10T17:07:07.000Z</pubTime>
+        
+        <tag>GNU</tag>
+         
+        <tag>Makefile</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux" url="https://Hzwcode.github.io/categories/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
     
   <url>
@@ -105,15 +151,15 @@
         <title>Machine Learning Materials</title>
         <pubTime>2017-02-23T08:57:14.000Z</pubTime>
         
+        <tag>RNN</tag>
+         
+        <tag>LSTM</tag>
+         
         <tag>Deep Learning</tag>
          
         <tag>TensorFlow</tag>
          
         <tag>CNN</tag>
-         
-        <tag>RNN</tag>
-         
-        <tag>LSTM</tag>
          
         <tag>Object Detection</tag>
          
@@ -227,9 +273,9 @@
         <title>深度学习 — 反向传播(BP)理论推导</title>
         <pubTime>2017-02-24T10:23:35.000Z</pubTime>
         
-        <tag>Deep Learning</tag>
-         
         <tag>Algorithm</tag>
+         
+        <tag>Deep Learning</tag>
          
          
            
@@ -248,48 +294,6 @@
         <display>
         <title>解决Hexo博客文章置顶问题</title>
         <pubTime>2017-03-23T09:07:29.000Z</pubTime>
-        
-        <tag>Hexo</tag>
-         
-         
-           
-             
-              <breadCrumb title="Tool" url="https://Hzwcode.github.io/categories/Tool/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://Hzwcode.github.io/2017/03/11/GNU-make/</loc>
-    <lastmod>2017-03-24T07:19:24.519Z</lastmod>
-    <data>
-        <display>
-        <title>GNU MAKE命令</title>
-        <pubTime>2017-03-10T17:07:07.000Z</pubTime>
-        
-        <tag>GNU</tag>
-         
-        <tag>Makefile</tag>
-         
-         
-           
-             
-              <breadCrumb title="Linux" url="https://Hzwcode.github.io/categories/Linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://Hzwcode.github.io/2017/02/23/hello-world/</loc>
-    <lastmod>2017-03-24T07:17:24.621Z</lastmod>
-    <data>
-        <display>
-        <title>Welcome to Hexo</title>
-        <pubTime>2017-02-23T06:00:00.000Z</pubTime>
         
         <tag>Hexo</tag>
          

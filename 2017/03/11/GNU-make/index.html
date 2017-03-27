@@ -16,22 +16,19 @@
 
 
 <meta name="description" content="代码变成可执行文件，叫做编译（compile）；先编译这个，还是先编译那个（即编译的安排），叫做构建（build）。
-Make是最常用的构建工具，诞生于1977年，主要用于C语言的项目。但是实际上 ，任何只要某个文件有变化，就要重新构建的项目，都可以用Make构建。
-本文介绍Make命令的用法，从简单的讲起，不需要任何基础，只要会使用命令行，就能看懂。我的参考资料主要是Isaac Schluete">
+Make是最常用的构建工具，诞生于1977年，主要用于C语言的项目。但是实际上 ，任何只要某个文件有变化，就要重新构建的项目，都可以用Make构建。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GNU MAKE命令">
 <meta property="og:url" content="https://Hzwcode.github.io/2017/03/11/GNU-make/index.html">
 <meta property="og:site_name" content="Zhiwei's Blog">
 <meta property="og:description" content="代码变成可执行文件，叫做编译（compile）；先编译这个，还是先编译那个（即编译的安排），叫做构建（build）。
-Make是最常用的构建工具，诞生于1977年，主要用于C语言的项目。但是实际上 ，任何只要某个文件有变化，就要重新构建的项目，都可以用Make构建。
-本文介绍Make命令的用法，从简单的讲起，不需要任何基础，只要会使用命令行，就能看懂。我的参考资料主要是Isaac Schluete">
+Make是最常用的构建工具，诞生于1977年，主要用于C语言的项目。但是实际上 ，任何只要某个文件有变化，就要重新构建的项目，都可以用Make构建。">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-176a6bf4d5dca196.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-03-24T07:19:24.519Z">
+<meta property="og:updated_time" content="2017-03-27T13:23:04.918Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GNU MAKE命令">
 <meta name="twitter:description" content="代码变成可执行文件，叫做编译（compile）；先编译这个，还是先编译那个（即编译的安排），叫做构建（build）。
-Make是最常用的构建工具，诞生于1977年，主要用于C语言的项目。但是实际上 ，任何只要某个文件有变化，就要重新构建的项目，都可以用Make构建。
-本文介绍Make命令的用法，从简单的讲起，不需要任何基础，只要会使用命令行，就能看懂。我的参考资料主要是Isaac Schluete">
+Make是最常用的构建工具，诞生于1977年，主要用于C语言的项目。但是实际上 ，任何只要某个文件有变化，就要重新构建的项目，都可以用Make构建。">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/145616-176a6bf4d5dca196.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
@@ -186,7 +183,7 @@ Make是最常用的构建工具，诞生于1977年，主要用于C语言的项�
                         
                             <li><a href="/">主页</a></li>
                         
-                            <li><a href="/archives/">所有文章</a></li>
+                            <li><a href="/archives/">文章归档</a></li>
                         
                             <li><a href="/tags/">分类标签</a></li>
                         
@@ -201,11 +198,9 @@ Make是最常用的构建工具，诞生于1977年，主要用于C语言的项�
                             
                                 <a class="fa Email" href="mailto:hongzhiwei886@gmail.com" title="Email"></a>
                             
-                                <a class="fa 新浪微博" href="http://weibo.com/zhwhong?refer_flag=1001030102_&is_all=1" title="新浪微博"></a>
+                                <a class="fa 新浪微博" href="http://weibo.com/zhwhong" title="新浪微博"></a>
                             
                                 <a class="fa GitHub" href="//github.com/Hzwcode" title="GitHub"></a>
-                            
-                                <a class="fa Coding" href="https://coding.net/u/Hzw" title="Coding"></a>
                             
                                 <a class="fa Facebook" href="https://www.facebook.com/profile.php?id=100008115764524" title="Facebook"></a>
                             
@@ -224,7 +219,7 @@ Make是最常用的构建工具，诞生于1977年，主要用于C语言的项�
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debug/">Debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNU/">GNU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPU/">GPU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSTM/">LSTM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Makefile/">Makefile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Music/">Music</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Network/">Neural Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Detection/">Object Detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/">RNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/">TensorFlow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Theme/">Theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debug/">Debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dicom/">Dicom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNU/">GNU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPU/">GPU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LIDC/">LIDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSTM/">LSTM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Makefile/">Makefile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Music/">Music</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Network/">Neural Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Detection/">Object Detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/">RNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/">TensorFlow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Theme/">Theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xml/">Xml</a></li></ul>
                     </div>
                 </section>
                 
@@ -283,7 +278,7 @@ Make是最常用的构建工具，诞生于1977年，主要用于C语言的项�
                 
                     <li><a href="/">主页</a></li>
                 
-                    <li><a href="/archives/">所有文章</a></li>
+                    <li><a href="/archives/">文章归档</a></li>
                 
                     <li><a href="/tags/">分类标签</a></li>
                 
@@ -299,11 +294,9 @@ Make是最常用的构建工具，诞生于1977年，主要用于C语言的项�
                             
                                 <a class="fa Email" target="_blank" href="mailto:hongzhiwei886@gmail.com" title="Email"></a>
                             
-                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/zhwhong?refer_flag=1001030102_&is_all=1" title="新浪微博"></a>
+                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/zhwhong" title="新浪微博"></a>
                             
                                 <a class="fa GitHub" target="_blank" href="//github.com/Hzwcode" title="GitHub"></a>
-                            
-                                <a class="fa Coding" target="_blank" href="https://coding.net/u/Hzw" title="Coding"></a>
                             
                                 <a class="fa Facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100008115764524" title="Facebook"></a>
                             
@@ -409,8 +402,8 @@ Make是最常用的构建工具，诞生于1977年，主要用于C语言的项�
           
         <script src="/assets/js/APlayer.min.js"> </script><p>代码变成可执行文件，叫做<a href="http://www.ruanyifeng.com/blog/2014/11/compiler.html" target="_blank" rel="external">编译</a>（compile）；先编译这个，还是先编译那个（即编译的安排），叫做<a href="https://en.wikipedia.org/wiki/Software_build" target="_blank" rel="external">构建</a>（build）。</p>
 <p><a href="https://en.wikipedia.org/wiki/Make_%28software%29" target="_blank" rel="external">Make</a>是最常用的构建工具，诞生于1977年，主要用于C语言的项目。但是实际上 ，任何只要某个文件有变化，就要重新构建的项目，都可以用Make构建。</p>
-<p>本文介绍Make命令的用法，从简单的讲起，不需要任何基础，只要会使用命令行，就能看懂。我的参考资料主要是Isaac Schlueter的<a href="https://gist.github.com/isaacs/62a2d1825d04437c6f08" target="_blank" rel="external">《Makefile文件教程》</a>和<a href="https://www.gnu.org/software/make/manual/make.html" target="_blank" rel="external">《GNU Make手册》</a>。</p>
 <a id="more"></a>
+<p>本文介绍Make命令的用法，从简单的讲起，不需要任何基础，只要会使用命令行，就能看懂。我的参考资料主要是Isaac Schlueter的<a href="https://gist.github.com/isaacs/62a2d1825d04437c6f08" target="_blank" rel="external">《Makefile文件教程》</a>和<a href="https://www.gnu.org/software/make/manual/make.html" target="_blank" rel="external">《GNU Make手册》</a>。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/145616-176a6bf4d5dca196.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>（题图：摄于博兹贾阿达岛，土耳其，2013年7月）</p>
 <h2 id="一、Make的概念"><a href="#一、Make的概念" class="headerlink" title="一、Make的概念"></a>一、Make的概念</h2><p>Make这个词，英语的意思是”制作”。Make命令直接用了这个意思，就是要做出某个文件。比如，要做出文件a.txt，就可以执行下面的命令。</p>
@@ -560,7 +553,7 @@ Make是最常用的构建工具，诞生于1977年，主要用于C语言的项�
         <p><span>本文标题:</span><a href="/2017/03/11/GNU-make/">GNU MAKE命令</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">zhwhong</a></p>
         <p><span>发布时间:</span>2017-03-11, 01:07:07</p>
-        <p><span>最后更新:</span>2017-03-24, 15:19:24</p>
+        <p><span>最后更新:</span>2017-03-27, 21:23:04</p>
 
         
             <p>
@@ -764,7 +757,7 @@ Make是最常用的构建工具，诞生于1977年，主要用于C语言的项�
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/24/AI-DL-CV-org-and-person/">那些深度学习与计算机视觉之路上的大佬们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/23/deal-with-hexo-article-top-problem/">解决Hexo博客文章置顶问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/Introduction-to-debugging-neural-networks/">[译] Introduction to debugging neural networks</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/13/mnist-gpu-cpu/">GPU和CPU服务器测试mnist手写数字集</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/GNU-make/">GNU MAKE命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/26/music-test/">Blog Music Test</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Backpropagation-through-time-BPTT/">[RNN] Simple LSTM代码实现 & BPTT理论推导</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Backpropagation-principle/">深度学习 — 反向传播(BP)理论推导</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Detection-CNN/">[Detection] 深度学习之 "物体检测" 方法梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/">[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition(附翻译，作业)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Linux-Ubuntu_Flatabulous/">[Linux] Ubuntu下超好看扁平主题 : Flatabulous</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/23/Machine-Learning-Materials/">Machine Learning Materials</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/23/hello-world/">Welcome to Hexo</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/">LIDC-IDRI肺结节公开数据集Dicom和XML标注详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/24/AI-DL-CV-org-and-person/">那些深度学习与计算机视觉之路上的大佬们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/23/deal-with-hexo-article-top-problem/">解决Hexo博客文章置顶问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/Introduction-to-debugging-neural-networks/">[译] Introduction to debugging neural networks</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/13/mnist-gpu-cpu/">GPU和CPU服务器测试mnist手写数字集</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/GNU-make/">GNU MAKE命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/26/music-test/">Blog Music Test</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Backpropagation-through-time-BPTT/">[RNN] Simple LSTM代码实现 & BPTT理论推导</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Backpropagation-principle/">深度学习 — 反向传播(BP)理论推导</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Detection-CNN/">[Detection] 深度学习之 "物体检测" 方法梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/">[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition(附翻译，作业)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Linux-Ubuntu_Flatabulous/">[Linux] Ubuntu下超好看扁平主题 : Flatabulous</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/23/Machine-Learning-Materials/">Machine Learning Materials</a></li></ul>
 
 
 
@@ -803,7 +796,7 @@ Make是最常用的构建工具，诞生于1977年，主要用于C语言的项�
                     </span>
                 
                 <span>| </span>
-                <span class="post-count">博客全站共24.3k字</span>
+                <span class="post-count">博客全站共27.8k字</span>
             </div>
         
     </div>
