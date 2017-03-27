@@ -4,9 +4,9 @@
   <subtitle>Stay Hungry Stay Foolish | 常葆求知若饥 常存虚怀若愚</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://Hzwcode.github.io/"/>
+  <link href="http://zhwhong.ml/"/>
   <updated>2017-03-27T14:40:47.551Z</updated>
-  <id>https://Hzwcode.github.io/</id>
+  <id>http://zhwhong.ml/</id>
   
   <author>
     <name>zhwhong</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>LIDC-IDRI肺结节公开数据集Dicom和XML标注详解</title>
-    <link href="https://Hzwcode.github.io/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/"/>
-    <id>https://Hzwcode.github.io/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/</id>
+    <link href="http://zhwhong.ml/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/"/>
+    <id>http://zhwhong.ml/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/</id>
     <published>2017-03-27T13:32:54.000Z</published>
     <updated>2017-03-27T14:40:47.551Z</updated>
     
@@ -170,21 +170,21 @@
     
     </summary>
     
-      <category term="Medical Image" scheme="https://Hzwcode.github.io/categories/Medical-Image/"/>
+      <category term="Medical Image" scheme="http://zhwhong.ml/categories/Medical-Image/"/>
     
     
-      <category term="LIDC" scheme="https://Hzwcode.github.io/tags/LIDC/"/>
+      <category term="LIDC" scheme="http://zhwhong.ml/tags/LIDC/"/>
     
-      <category term="Dicom" scheme="https://Hzwcode.github.io/tags/Dicom/"/>
+      <category term="Dicom" scheme="http://zhwhong.ml/tags/Dicom/"/>
     
-      <category term="Xml" scheme="https://Hzwcode.github.io/tags/Xml/"/>
+      <category term="Xml" scheme="http://zhwhong.ml/tags/Xml/"/>
     
   </entry>
   
   <entry>
     <title>那些深度学习与计算机视觉之路上的大佬们</title>
-    <link href="https://Hzwcode.github.io/2017/03/24/AI-DL-CV-org-and-person/"/>
-    <id>https://Hzwcode.github.io/2017/03/24/AI-DL-CV-org-and-person/</id>
+    <link href="http://zhwhong.ml/2017/03/24/AI-DL-CV-org-and-person/"/>
+    <id>http://zhwhong.ml/2017/03/24/AI-DL-CV-org-and-person/</id>
     <published>2017-03-24T07:48:24.000Z</published>
     <updated>2017-03-25T16:04:21.066Z</updated>
     
@@ -257,19 +257,19 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://zhwhong.ml/categories/Machine-Learning/"/>
     
     
-      <category term="Deep Learning" scheme="https://Hzwcode.github.io/tags/Deep-Learning/"/>
+      <category term="Deep Learning" scheme="http://zhwhong.ml/tags/Deep-Learning/"/>
     
-      <category term="Computer Vision" scheme="https://Hzwcode.github.io/tags/Computer-Vision/"/>
+      <category term="Computer Vision" scheme="http://zhwhong.ml/tags/Computer-Vision/"/>
     
   </entry>
   
   <entry>
     <title>解决Hexo博客文章置顶问题</title>
-    <link href="https://Hzwcode.github.io/2017/03/23/deal-with-hexo-article-top-problem/"/>
-    <id>https://Hzwcode.github.io/2017/03/23/deal-with-hexo-article-top-problem/</id>
+    <link href="http://zhwhong.ml/2017/03/23/deal-with-hexo-article-top-problem/"/>
+    <id>http://zhwhong.ml/2017/03/23/deal-with-hexo-article-top-problem/</id>
     <published>2017-03-23T09:07:29.000Z</published>
     <updated>2017-03-24T07:26:02.528Z</updated>
     
@@ -297,17 +297,17 @@
     
     </summary>
     
-      <category term="Tool" scheme="https://Hzwcode.github.io/categories/Tool/"/>
+      <category term="Tool" scheme="http://zhwhong.ml/categories/Tool/"/>
     
     
-      <category term="Hexo" scheme="https://Hzwcode.github.io/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://zhwhong.ml/tags/Hexo/"/>
     
   </entry>
   
   <entry>
     <title>[译] Introduction to debugging neural networks</title>
-    <link href="https://Hzwcode.github.io/2017/03/20/Introduction-to-debugging-neural-networks/"/>
-    <id>https://Hzwcode.github.io/2017/03/20/Introduction-to-debugging-neural-networks/</id>
+    <link href="http://zhwhong.ml/2017/03/20/Introduction-to-debugging-neural-networks/"/>
+    <id>http://zhwhong.ml/2017/03/20/Introduction-to-debugging-neural-networks/</id>
     <published>2017-03-19T16:08:22.000Z</published>
     <updated>2017-03-25T07:48:00.346Z</updated>
     
@@ -346,21 +346,21 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://zhwhong.ml/categories/Machine-Learning/"/>
     
     
-      <category term="Deep Learning" scheme="https://Hzwcode.github.io/tags/Deep-Learning/"/>
+      <category term="Deep Learning" scheme="http://zhwhong.ml/tags/Deep-Learning/"/>
     
-      <category term="Neural Network" scheme="https://Hzwcode.github.io/tags/Neural-Network/"/>
+      <category term="Neural Network" scheme="http://zhwhong.ml/tags/Neural-Network/"/>
     
-      <category term="Debug" scheme="https://Hzwcode.github.io/tags/Debug/"/>
+      <category term="Debug" scheme="http://zhwhong.ml/tags/Debug/"/>
     
   </entry>
   
   <entry>
     <title>GPU和CPU服务器测试mnist手写数字集</title>
-    <link href="https://Hzwcode.github.io/2017/03/13/mnist-gpu-cpu/"/>
-    <id>https://Hzwcode.github.io/2017/03/13/mnist-gpu-cpu/</id>
+    <link href="http://zhwhong.ml/2017/03/13/mnist-gpu-cpu/"/>
+    <id>http://zhwhong.ml/2017/03/13/mnist-gpu-cpu/</id>
     <published>2017-03-13T10:22:15.000Z</published>
     <updated>2017-03-25T07:51:43.263Z</updated>
     
@@ -594,21 +594,21 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://zhwhong.ml/categories/Machine-Learning/"/>
     
     
-      <category term="Deep Learning" scheme="https://Hzwcode.github.io/tags/Deep-Learning/"/>
+      <category term="Deep Learning" scheme="http://zhwhong.ml/tags/Deep-Learning/"/>
     
-      <category term="TensorFlow" scheme="https://Hzwcode.github.io/tags/TensorFlow/"/>
+      <category term="TensorFlow" scheme="http://zhwhong.ml/tags/TensorFlow/"/>
     
-      <category term="GPU" scheme="https://Hzwcode.github.io/tags/GPU/"/>
+      <category term="GPU" scheme="http://zhwhong.ml/tags/GPU/"/>
     
   </entry>
   
   <entry>
     <title>GNU MAKE命令</title>
-    <link href="https://Hzwcode.github.io/2017/03/11/GNU-make/"/>
-    <id>https://Hzwcode.github.io/2017/03/11/GNU-make/</id>
+    <link href="http://zhwhong.ml/2017/03/11/GNU-make/"/>
+    <id>http://zhwhong.ml/2017/03/11/GNU-make/</id>
     <published>2017-03-10T17:07:07.000Z</published>
     <updated>2017-03-27T13:23:04.918Z</updated>
     
@@ -763,19 +763,19 @@
     
     </summary>
     
-      <category term="Linux" scheme="https://Hzwcode.github.io/categories/Linux/"/>
+      <category term="Linux" scheme="http://zhwhong.ml/categories/Linux/"/>
     
     
-      <category term="GNU" scheme="https://Hzwcode.github.io/tags/GNU/"/>
+      <category term="GNU" scheme="http://zhwhong.ml/tags/GNU/"/>
     
-      <category term="Makefile" scheme="https://Hzwcode.github.io/tags/Makefile/"/>
+      <category term="Makefile" scheme="http://zhwhong.ml/tags/Makefile/"/>
     
   </entry>
   
   <entry>
     <title>Blog Music Test</title>
-    <link href="https://Hzwcode.github.io/2017/02/26/music-test/"/>
-    <id>https://Hzwcode.github.io/2017/02/26/music-test/</id>
+    <link href="http://zhwhong.ml/2017/02/26/music-test/"/>
+    <id>http://zhwhong.ml/2017/02/26/music-test/</id>
     <published>2017-02-26T08:56:23.000Z</published>
     <updated>2017-03-25T07:26:12.746Z</updated>
     
@@ -876,19 +876,19 @@
     
     </summary>
     
-      <category term="Tool" scheme="https://Hzwcode.github.io/categories/Tool/"/>
+      <category term="Tool" scheme="http://zhwhong.ml/categories/Tool/"/>
     
     
-      <category term="Hexo" scheme="https://Hzwcode.github.io/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://zhwhong.ml/tags/Hexo/"/>
     
-      <category term="Music" scheme="https://Hzwcode.github.io/tags/Music/"/>
+      <category term="Music" scheme="http://zhwhong.ml/tags/Music/"/>
     
   </entry>
   
   <entry>
     <title>[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</title>
-    <link href="https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/"/>
-    <id>https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/</id>
+    <link href="http://zhwhong.ml/2017/02/24/Backpropagation-through-time-BPTT/"/>
+    <id>http://zhwhong.ml/2017/02/24/Backpropagation-through-time-BPTT/</id>
     <published>2017-02-24T10:26:58.000Z</published>
     <updated>2017-03-24T16:19:50.974Z</updated>
     
@@ -897,7 +897,7 @@
 <li>Github代码：<a href="https://github.com/Hzwcode/lstm" target="_blank" rel="external">https://github.com/Hzwcode/lstm</a></li>
 </ul>
 <hr>
-<p>前面我们介绍过CNN中普通的<a href="https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/">BP反向传播算法的推导</a>，但是在RNN（比如<a href="https://en.wikipedia.org/wiki/Long_short-term_memory" target="_blank" rel="external">LSTM</a>）中，反向传播被称作<a href="https://en.wikipedia.org/wiki/Backpropagation_through_time" target="_blank" rel="external">BPTT</a>（Back Propagation Through Time），它是和时间序列有关的。</p>
+<p>前面我们介绍过CNN中普通的<a href="https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/" target="_blank" rel="external">BP反向传播算法的推导</a>，但是在RNN（比如<a href="https://en.wikipedia.org/wiki/Long_short-term_memory" target="_blank" rel="external">LSTM</a>）中，反向传播被称作<a href="https://en.wikipedia.org/wiki/Backpropagation_through_time" target="_blank" rel="external">BPTT</a>（Back Propagation Through Time），它是和时间序列有关的。</p>
 <a id="more"></a>
 <p><img src="http://upload-images.jianshu.io/upload_images/145616-113aeedc747a3628.gif?imageMogr2/auto-orient/strip" alt="Back Propagation Through Time"></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/145616-4ae3ab8b8426cdcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
@@ -998,26 +998,26 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://zhwhong.ml/categories/Machine-Learning/"/>
     
     
-      <category term="RNN" scheme="https://Hzwcode.github.io/tags/RNN/"/>
+      <category term="RNN" scheme="http://zhwhong.ml/tags/RNN/"/>
     
-      <category term="LSTM" scheme="https://Hzwcode.github.io/tags/LSTM/"/>
+      <category term="LSTM" scheme="http://zhwhong.ml/tags/LSTM/"/>
     
-      <category term="Algorithm" scheme="https://Hzwcode.github.io/tags/Algorithm/"/>
+      <category term="Algorithm" scheme="http://zhwhong.ml/tags/Algorithm/"/>
     
   </entry>
   
   <entry>
     <title>深度学习 — 反向传播(BP)理论推导</title>
-    <link href="https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/"/>
-    <id>https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/</id>
+    <link href="http://zhwhong.ml/2017/02/24/Backpropagation-principle/"/>
+    <id>http://zhwhong.ml/2017/02/24/Backpropagation-principle/</id>
     <published>2017-02-24T10:23:35.000Z</published>
     <updated>2017-03-24T07:26:49.605Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><ul>
-<li><a href="https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/">[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</a></li>
+<li><a href="https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/" target="_blank" rel="external">[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</a></li>
 </ul>
 <hr>
 <p>【知识预备】： <a href="http://deeplearning.stanford.edu/wiki/index.php/%E5%8F%8D%E5%90%91%E4%BC%A0%E5%AF%BC%E7%AE%97%E6%B3%95" target="_blank" rel="external">UFLDL教程 - 反向传导算法</a></p>
@@ -1137,19 +1137,19 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://zhwhong.ml/categories/Machine-Learning/"/>
     
     
-      <category term="Algorithm" scheme="https://Hzwcode.github.io/tags/Algorithm/"/>
+      <category term="Deep Learning" scheme="http://zhwhong.ml/tags/Deep-Learning/"/>
     
-      <category term="Deep Learning" scheme="https://Hzwcode.github.io/tags/Deep-Learning/"/>
+      <category term="Algorithm" scheme="http://zhwhong.ml/tags/Algorithm/"/>
     
   </entry>
   
   <entry>
     <title>[Detection] 深度学习之 &quot;物体检测&quot; 方法梳理</title>
-    <link href="https://Hzwcode.github.io/2017/02/24/Detection-CNN/"/>
-    <id>https://Hzwcode.github.io/2017/02/24/Detection-CNN/</id>
+    <link href="http://zhwhong.ml/2017/02/24/Detection-CNN/"/>
+    <id>http://zhwhong.ml/2017/02/24/Detection-CNN/</id>
     <published>2017-02-24T10:20:50.000Z</published>
     <updated>2017-03-25T16:00:40.709Z</updated>
     
@@ -1427,19 +1427,19 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://zhwhong.ml/categories/Machine-Learning/"/>
     
     
-      <category term="Deep Learning" scheme="https://Hzwcode.github.io/tags/Deep-Learning/"/>
+      <category term="Deep Learning" scheme="http://zhwhong.ml/tags/Deep-Learning/"/>
     
-      <category term="Object Detection" scheme="https://Hzwcode.github.io/tags/Object-Detection/"/>
+      <category term="Object Detection" scheme="http://zhwhong.ml/tags/Object-Detection/"/>
     
   </entry>
   
   <entry>
     <title>[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition(附翻译，作业)</title>
-    <link href="https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/"/>
-    <id>https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/</id>
+    <link href="http://zhwhong.ml/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/"/>
+    <id>http://zhwhong.ml/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/</id>
     <published>2017-02-24T09:27:52.000Z</published>
     <updated>2017-03-24T13:25:11.791Z</updated>
     
@@ -1526,21 +1526,21 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://zhwhong.ml/categories/Machine-Learning/"/>
     
     
-      <category term="Deep Learning" scheme="https://Hzwcode.github.io/tags/Deep-Learning/"/>
+      <category term="Deep Learning" scheme="http://zhwhong.ml/tags/Deep-Learning/"/>
     
-      <category term="CNN" scheme="https://Hzwcode.github.io/tags/CNN/"/>
+      <category term="CNN" scheme="http://zhwhong.ml/tags/CNN/"/>
     
-      <category term="Computer Vision" scheme="https://Hzwcode.github.io/tags/Computer-Vision/"/>
+      <category term="Computer Vision" scheme="http://zhwhong.ml/tags/Computer-Vision/"/>
     
   </entry>
   
   <entry>
     <title>[Linux] Ubuntu下超好看扁平主题 : Flatabulous</title>
-    <link href="https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu_Flatabulous/"/>
-    <id>https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu_Flatabulous/</id>
+    <link href="http://zhwhong.ml/2017/02/24/Linux-Ubuntu_Flatabulous/"/>
+    <id>http://zhwhong.ml/2017/02/24/Linux-Ubuntu_Flatabulous/</id>
     <published>2017-02-24T08:12:16.000Z</published>
     <updated>2017-03-24T16:24:30.647Z</updated>
     
@@ -1595,19 +1595,19 @@
     
     </summary>
     
-      <category term="Linux" scheme="https://Hzwcode.github.io/categories/Linux/"/>
+      <category term="Linux" scheme="http://zhwhong.ml/categories/Linux/"/>
     
     
-      <category term="Ubuntu" scheme="https://Hzwcode.github.io/tags/Ubuntu/"/>
+      <category term="Ubuntu" scheme="http://zhwhong.ml/tags/Ubuntu/"/>
     
-      <category term="Theme" scheme="https://Hzwcode.github.io/tags/Theme/"/>
+      <category term="Theme" scheme="http://zhwhong.ml/tags/Theme/"/>
     
   </entry>
   
   <entry>
     <title>Machine Learning Materials</title>
-    <link href="https://Hzwcode.github.io/2017/02/23/Machine-Learning-Materials/"/>
-    <id>https://Hzwcode.github.io/2017/02/23/Machine-Learning-Materials/</id>
+    <link href="http://zhwhong.ml/2017/02/23/Machine-Learning-Materials/"/>
+    <id>http://zhwhong.ml/2017/02/23/Machine-Learning-Materials/</id>
     <published>2017-02-23T08:57:14.000Z</published>
     <updated>2017-03-25T07:43:23.111Z</updated>
     
@@ -1742,20 +1742,20 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://zhwhong.ml/categories/Machine-Learning/"/>
     
     
-      <category term="RNN" scheme="https://Hzwcode.github.io/tags/RNN/"/>
+      <category term="Deep Learning" scheme="http://zhwhong.ml/tags/Deep-Learning/"/>
     
-      <category term="LSTM" scheme="https://Hzwcode.github.io/tags/LSTM/"/>
+      <category term="CNN" scheme="http://zhwhong.ml/tags/CNN/"/>
     
-      <category term="Deep Learning" scheme="https://Hzwcode.github.io/tags/Deep-Learning/"/>
+      <category term="TensorFlow" scheme="http://zhwhong.ml/tags/TensorFlow/"/>
     
-      <category term="TensorFlow" scheme="https://Hzwcode.github.io/tags/TensorFlow/"/>
+      <category term="RNN" scheme="http://zhwhong.ml/tags/RNN/"/>
     
-      <category term="CNN" scheme="https://Hzwcode.github.io/tags/CNN/"/>
+      <category term="LSTM" scheme="http://zhwhong.ml/tags/LSTM/"/>
     
-      <category term="Object Detection" scheme="https://Hzwcode.github.io/tags/Object-Detection/"/>
+      <category term="Object Detection" scheme="http://zhwhong.ml/tags/Object-Detection/"/>
     
   </entry>
   

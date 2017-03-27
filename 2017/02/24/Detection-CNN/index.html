@@ -18,42 +18,42 @@
 <meta name="description" content="本文主要关于物体检测模型梳理 RCNN，SPP-Net，Fast RCNN，Faster RCNN，R-FCN，YOLO，YOLO2，SSD，NMS等">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Detection] 深度学习之 "物体检测" 方法梳理">
-<meta property="og:url" content="https://Hzwcode.github.io/2017/02/24/Detection-CNN/index.html">
+<meta property="og:url" content="http://zhwhong.ml/2017/02/24/Detection-CNN/index.html">
 <meta property="og:site_name" content="Zhiwei's Blog">
 <meta property="og:description" content="本文主要关于物体检测模型梳理 RCNN，SPP-Net，Fast RCNN，Faster RCNN，R-FCN，YOLO，YOLO2，SSD，NMS等">
-<meta property="og:image" content="https://Hzwcode.github.io/RCNN.png">
-<meta property="og:image" content="https://Hzwcode.github.io/SPP_net_1.png">
-<meta property="og:image" content="https://Hzwcode.github.io/SPP_net_2.png">
-<meta property="og:image" content="https://Hzwcode.github.io/SPP_net_3.png">
-<meta property="og:image" content="https://Hzwcode.github.io/Fast_RCNN.png">
-<meta property="og:image" content="https://Hzwcode.github.io/Faster_RCNN_1.png">
-<meta property="og:image" content="https://Hzwcode.github.io/Faster_RCNN_2.png">
-<meta property="og:image" content="https://Hzwcode.github.io/Faster_RCNN_3.png">
-<meta property="og:image" content="https://Hzwcode.github.io/Faster_RCNN_4.png">
-<meta property="og:image" content="https://Hzwcode.github.io/Faster_RCNN_5.png">
-<meta property="og:image" content="https://Hzwcode.github.io/RFCN_1.png">
-<meta property="og:image" content="https://Hzwcode.github.io/RFCN_2.png">
-<meta property="og:image" content="https://Hzwcode.github.io/RFCN_3.png">
-<meta property="og:image" content="https://Hzwcode.github.io/YOLO_1.png">
-<meta property="og:image" content="https://Hzwcode.github.io/YOLO_2.png">
+<meta property="og:image" content="http://zhwhong.ml/RCNN.png">
+<meta property="og:image" content="http://zhwhong.ml/SPP_net_1.png">
+<meta property="og:image" content="http://zhwhong.ml/SPP_net_2.png">
+<meta property="og:image" content="http://zhwhong.ml/SPP_net_3.png">
+<meta property="og:image" content="http://zhwhong.ml/Fast_RCNN.png">
+<meta property="og:image" content="http://zhwhong.ml/Faster_RCNN_1.png">
+<meta property="og:image" content="http://zhwhong.ml/Faster_RCNN_2.png">
+<meta property="og:image" content="http://zhwhong.ml/Faster_RCNN_3.png">
+<meta property="og:image" content="http://zhwhong.ml/Faster_RCNN_4.png">
+<meta property="og:image" content="http://zhwhong.ml/Faster_RCNN_5.png">
+<meta property="og:image" content="http://zhwhong.ml/RFCN_1.png">
+<meta property="og:image" content="http://zhwhong.ml/RFCN_2.png">
+<meta property="og:image" content="http://zhwhong.ml/RFCN_3.png">
+<meta property="og:image" content="http://zhwhong.ml/YOLO_1.png">
+<meta property="og:image" content="http://zhwhong.ml/YOLO_2.png">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-772c5abc28591971.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://Hzwcode.github.io/YOLO_3.png">
-<meta property="og:image" content="https://Hzwcode.github.io/YOLO_Loss.png">
-<meta property="og:image" content="https://Hzwcode.github.io/YOLO_4.png">
-<meta property="og:image" content="https://Hzwcode.github.io/YOLO_5.png">
-<meta property="og:image" content="https://Hzwcode.github.io/YOLO_6.png">
-<meta property="og:image" content="https://Hzwcode.github.io/YOLO_7.png">
-<meta property="og:image" content="https://Hzwcode.github.io/SSD_1.png">
-<meta property="og:image" content="https://Hzwcode.github.io/SSD_2.png">
-<meta property="og:image" content="https://Hzwcode.github.io/SSD_3.png">
-<meta property="og:image" content="https://Hzwcode.github.io/SSD_VS_YOLO.png">
-<meta property="og:image" content="https://Hzwcode.github.io/NMS.png">
-<meta property="og:image" content="https://Hzwcode.github.io/NMS_2.png">
+<meta property="og:image" content="http://zhwhong.ml/YOLO_3.png">
+<meta property="og:image" content="http://zhwhong.ml/YOLO_Loss.png">
+<meta property="og:image" content="http://zhwhong.ml/YOLO_4.png">
+<meta property="og:image" content="http://zhwhong.ml/YOLO_5.png">
+<meta property="og:image" content="http://zhwhong.ml/YOLO_6.png">
+<meta property="og:image" content="http://zhwhong.ml/YOLO_7.png">
+<meta property="og:image" content="http://zhwhong.ml/SSD_1.png">
+<meta property="og:image" content="http://zhwhong.ml/SSD_2.png">
+<meta property="og:image" content="http://zhwhong.ml/SSD_3.png">
+<meta property="og:image" content="http://zhwhong.ml/SSD_VS_YOLO.png">
+<meta property="og:image" content="http://zhwhong.ml/NMS.png">
+<meta property="og:image" content="http://zhwhong.ml/NMS_2.png">
 <meta property="og:updated_time" content="2017-03-25T16:00:40.709Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Detection] 深度学习之 "物体检测" 方法梳理">
 <meta name="twitter:description" content="本文主要关于物体检测模型梳理 RCNN，SPP-Net，Fast RCNN，Faster RCNN，R-FCN，YOLO，YOLO2，SSD，NMS等">
-<meta name="twitter:image" content="https://Hzwcode.github.io/RCNN.png">
+<meta name="twitter:image" content="http://zhwhong.ml/RCNN.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -713,8 +713,8 @@
         
 
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/02/24/Detection-CNN/" title="[Detection] 深度学习之 &quot;物体检测&quot; 方法梳理">https://Hzwcode.github.io/2017/02/24/Detection-CNN/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://Hzwcode.github.io/2017/02/24/Detection-CNN/　　作者: zhwhong" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/02/24/Detection-CNN/" title="[Detection] 深度学习之 &quot;物体检测&quot; 方法梳理">http://zhwhong.ml/2017/02/24/Detection-CNN/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://zhwhong.ml/2017/02/24/Detection-CNN/　　作者: zhwhong" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -829,7 +829,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/24/Detection-CNN/" data-title="[Detection] 深度学习之 &quot;物体检测&quot; 方法梳理" data-url="https://Hzwcode.github.io/2017/02/24/Detection-CNN/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/24/Detection-CNN/" data-title="[Detection] 深度学习之 &quot;物体检测&quot; 方法梳理" data-url="http://zhwhong.ml/2017/02/24/Detection-CNN/"></div>
     <script>
         var duoshuoQuery = {short_name:"zhwhong"};
         var loadComment = function(){

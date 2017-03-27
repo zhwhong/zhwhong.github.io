@@ -4,7 +4,7 @@
 
     
   <url>
-    <loc>https://Hzwcode.github.io/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/</loc>
+    <loc>http://zhwhong.ml/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/</loc>
     <lastmod>2017-03-27T14:40:47.551Z</lastmod>
     <data>
         <display>
@@ -20,7 +20,7 @@
          
            
              
-              <breadCrumb title="Medical Image" url="https://Hzwcode.github.io/categories/Medical-Image/"/>
+              <breadCrumb title="Medical Image" url="http://zhwhong.ml/categories/Medical-Image/"/>
           
         </display>
     </data>
@@ -28,7 +28,7 @@
 
     
   <url>
-    <loc>https://Hzwcode.github.io/2017/03/11/GNU-make/</loc>
+    <loc>http://zhwhong.ml/2017/03/11/GNU-make/</loc>
     <lastmod>2017-03-27T13:23:04.918Z</lastmod>
     <data>
         <display>
@@ -42,7 +42,7 @@
          
            
              
-              <breadCrumb title="Linux" url="https://Hzwcode.github.io/categories/Linux/"/>
+              <breadCrumb title="Linux" url="http://zhwhong.ml/categories/Linux/"/>
           
         </display>
     </data>
@@ -52,7 +52,7 @@
     
     
   <url>
-    <loc>https://Hzwcode.github.io/2017/03/24/AI-DL-CV-org-and-person/</loc>
+    <loc>http://zhwhong.ml/2017/03/24/AI-DL-CV-org-and-person/</loc>
     <lastmod>2017-03-25T16:04:21.066Z</lastmod>
     <data>
         <display>
@@ -66,7 +66,7 @@
          
            
              
-              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
           
         </display>
     </data>
@@ -74,7 +74,7 @@
 
     
   <url>
-    <loc>https://Hzwcode.github.io/2017/02/24/Detection-CNN/</loc>
+    <loc>http://zhwhong.ml/2017/02/24/Detection-CNN/</loc>
     <lastmod>2017-03-25T16:00:40.709Z</lastmod>
     <data>
         <display>
@@ -88,7 +88,7 @@
          
            
              
-              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
           
         </display>
     </data>
@@ -96,7 +96,7 @@
 
     
   <url>
-    <loc>https://Hzwcode.github.io/2017/03/13/mnist-gpu-cpu/</loc>
+    <loc>http://zhwhong.ml/2017/03/13/mnist-gpu-cpu/</loc>
     <lastmod>2017-03-25T07:51:43.263Z</lastmod>
     <data>
         <display>
@@ -112,7 +112,7 @@
          
            
              
-              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
           
         </display>
     </data>
@@ -120,7 +120,7 @@
 
     
   <url>
-    <loc>https://Hzwcode.github.io/2017/03/20/Introduction-to-debugging-neural-networks/</loc>
+    <loc>http://zhwhong.ml/2017/03/20/Introduction-to-debugging-neural-networks/</loc>
     <lastmod>2017-03-25T07:48:00.346Z</lastmod>
     <data>
         <display>
@@ -136,7 +136,7 @@
          
            
              
-              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
           
         </display>
     </data>
@@ -144,29 +144,29 @@
 
     
   <url>
-    <loc>https://Hzwcode.github.io/2017/02/23/Machine-Learning-Materials/</loc>
+    <loc>http://zhwhong.ml/2017/02/23/Machine-Learning-Materials/</loc>
     <lastmod>2017-03-25T07:43:23.111Z</lastmod>
     <data>
         <display>
         <title>Machine Learning Materials</title>
         <pubTime>2017-02-23T08:57:14.000Z</pubTime>
         
-        <tag>RNN</tag>
-         
-        <tag>LSTM</tag>
-         
         <tag>Deep Learning</tag>
+         
+        <tag>CNN</tag>
          
         <tag>TensorFlow</tag>
          
-        <tag>CNN</tag>
+        <tag>RNN</tag>
+         
+        <tag>LSTM</tag>
          
         <tag>Object Detection</tag>
          
          
            
              
-              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
           
         </display>
     </data>
@@ -174,7 +174,7 @@
 
     
   <url>
-    <loc>https://Hzwcode.github.io/2017/02/26/music-test/</loc>
+    <loc>http://zhwhong.ml/2017/02/26/music-test/</loc>
     <lastmod>2017-03-25T07:26:12.746Z</lastmod>
     <data>
         <display>
@@ -188,7 +188,7 @@
          
            
              
-              <breadCrumb title="Tool" url="https://Hzwcode.github.io/categories/Tool/"/>
+              <breadCrumb title="Tool" url="http://zhwhong.ml/categories/Tool/"/>
           
         </display>
     </data>
@@ -196,7 +196,7 @@
 
     
   <url>
-    <loc>https://Hzwcode.github.io/2017/02/24/Linux-Ubuntu_Flatabulous/</loc>
+    <loc>http://zhwhong.ml/2017/02/24/Linux-Ubuntu_Flatabulous/</loc>
     <lastmod>2017-03-24T16:24:30.647Z</lastmod>
     <data>
         <display>
@@ -210,7 +210,7 @@
          
            
              
-              <breadCrumb title="Linux" url="https://Hzwcode.github.io/categories/Linux/"/>
+              <breadCrumb title="Linux" url="http://zhwhong.ml/categories/Linux/"/>
           
         </display>
     </data>
@@ -218,7 +218,7 @@
 
     
   <url>
-    <loc>https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/</loc>
+    <loc>http://zhwhong.ml/2017/02/24/Backpropagation-through-time-BPTT/</loc>
     <lastmod>2017-03-24T16:19:50.974Z</lastmod>
     <data>
         <display>
@@ -234,7 +234,7 @@
          
            
              
-              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
           
         </display>
     </data>
@@ -242,7 +242,7 @@
 
     
   <url>
-    <loc>https://Hzwcode.github.io/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/</loc>
+    <loc>http://zhwhong.ml/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/</loc>
     <lastmod>2017-03-24T13:25:11.791Z</lastmod>
     <data>
         <display>
@@ -258,7 +258,7 @@
          
            
              
-              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
           
         </display>
     </data>
@@ -266,21 +266,21 @@
 
     
   <url>
-    <loc>https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/</loc>
+    <loc>http://zhwhong.ml/2017/02/24/Backpropagation-principle/</loc>
     <lastmod>2017-03-24T07:26:49.605Z</lastmod>
     <data>
         <display>
         <title>深度学习 — 反向传播(BP)理论推导</title>
         <pubTime>2017-02-24T10:23:35.000Z</pubTime>
         
-        <tag>Algorithm</tag>
-         
         <tag>Deep Learning</tag>
+         
+        <tag>Algorithm</tag>
          
          
            
              
-              <breadCrumb title="Machine Learning" url="https://Hzwcode.github.io/categories/Machine-Learning/"/>
+              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
           
         </display>
     </data>
@@ -288,7 +288,7 @@
 
     
   <url>
-    <loc>https://Hzwcode.github.io/2017/03/23/deal-with-hexo-article-top-problem/</loc>
+    <loc>http://zhwhong.ml/2017/03/23/deal-with-hexo-article-top-problem/</loc>
     <lastmod>2017-03-24T07:26:02.528Z</lastmod>
     <data>
         <display>
@@ -300,7 +300,7 @@
          
            
              
-              <breadCrumb title="Tool" url="https://Hzwcode.github.io/categories/Tool/"/>
+              <breadCrumb title="Tool" url="http://zhwhong.ml/categories/Tool/"/>
           
         </display>
     </data>
