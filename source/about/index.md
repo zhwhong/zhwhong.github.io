@@ -79,7 +79,7 @@ fancybox: false
 <div style="clear:both;"></div>
 
 <!-- *   <span class="fa fa-wechat"></span> 微信:  hzw1359434736
-*   <span class="fa fa-weibo"></span> 微博:   [zhwhong_shsf](http://weibo.com/zhwhong?refer_flag=1001030102_&is_all=1)
+*   <span class="fa fa-weibo"></span> 微博:   [zhwhong_shsf](http://weibo.com/zhwhong)
 *   <span class="fa fa-github"></span> Github: [Hzwcode](https://github.com/Hzwcode)
 *   <span class="fa fa-facebook-official"></span> Facebook:  [Zhiwei Hong](https://www.facebook.com/profile.php?id=100008115764524)
 *   <span class="fa fa-book"></span> 简书:  [zhwhong](http://www.jianshu.com/u/38cd2a8c425e)

@@ -8,7 +8,7 @@ Yelee: "3.5"
 ## Tags Cloud Page: `hexo new page tags`
 menu:
   主页: /
-  所有文章: /archives/
+  文章归档: /archives/
   #随笔: /tags/随笔
   分类标签: /tags/
   关于我: /about/
@@ -42,9 +42,9 @@ since: 2017
 subnav:
   RSS: "/atom.xml"
   Email: "mailto:hongzhiwei886@gmail.com"
-  新浪微博: "http://weibo.com/zhwhong?refer_flag=1001030102_&is_all=1"
+  新浪微博: "http://weibo.com/zhwhong"
   GitHub: "//github.com/Hzwcode"
-  Coding: "https://coding.net/u/Hzw"
+  # Coding: "https://coding.net/u/Hzw"
   Facebook: "https://www.facebook.com/profile.php?id=100008115764524"
   简书: "http://www.jianshu.com/u/38cd2a8c425e"
   # Google: "https://plus.google.com/101422785279702510489"
@@ -105,7 +105,7 @@ duoshuo:
 
 youyan:
   #on: true
-  id:
+  id: 2128915
   # 是否开启友言评论，http://www.uyan.cc/index.php
   # id 中填写你的友言用户数字ID，注册后进入后台管理即可查看
   # 友言服务在 Web 环境下运行，普通本地环境无法查看，请部署后在线上测试。
