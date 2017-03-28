@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>http://zhwhong.ml/2017/03/28/neural-network-visualization/</loc>
+    <lastmod>2017-03-28T08:34:43.687Z</lastmod>
+    <data>
+        <display>
+        <title>深度神经网络可视化工具</title>
+        <pubTime>2017-03-28T04:36:46.000Z</pubTime>
+        
+        <tag>TensorFlow</tag>
+         
+        <tag>Neural Network</tag>
+         
+        <tag>Caffe</tag>
+         
+         
+           
+             
+              <breadCrumb title="Tool" url="http://zhwhong.ml/categories/Tool/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zhwhong.ml/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/</loc>
     <lastmod>2017-03-27T15:13:22.800Z</lastmod>
     <data>

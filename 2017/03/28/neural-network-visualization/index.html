@@ -15,19 +15,26 @@
 
 
 
-<meta name="description" content="本篇文章整理、归纳了自己学习Deep Learning方面的一些资料，包括GitHub Awesome，DL框架如TensorFlow，分布式教程，卷积神经网络CNN，物体检测Paper，循环神经网络RNN、LSTM等，以及斯坦福CS231n计算机视觉识别和Coursera Andrew Ng机器学习等相关课程整理。">
+<meta name="description" content="本文主要总结一下神经网络可视化的一些工具，包括tensorflow的tensorboard，支持caffe中prototxt格式网络结构可视化工具Netscope，python的draw_net绘制网络模型，tensorflow的Neural Network Playground，可以直接在浏览器演示的ConvnetJS，word embedding visual inspector的wevi，以">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Machine Learning Materials">
-<meta property="og:url" content="http://zhwhong.ml/2017/02/23/Machine-Learning-Materials/index.html">
+<meta property="og:title" content="深度神经网络可视化工具">
+<meta property="og:url" content="http://zhwhong.ml/2017/03/28/neural-network-visualization/index.html">
 <meta property="og:site_name" content="Zhiwei's Blog">
-<meta property="og:description" content="本篇文章整理、归纳了自己学习Deep Learning方面的一些资料，包括GitHub Awesome，DL框架如TensorFlow，分布式教程，卷积神经网络CNN，物体检测Paper，循环神经网络RNN、LSTM等，以及斯坦福CS231n计算机视觉识别和Coursera Andrew Ng机器学习等相关课程整理。">
-<meta property="og:image" content="http://zhwhong.ml/machine_learning_materials.png">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/145616-131a561dcbe74aba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-03-25T07:43:23.111Z">
+<meta property="og:description" content="本文主要总结一下神经网络可视化的一些工具，包括tensorflow的tensorboard，支持caffe中prototxt格式网络结构可视化工具Netscope，python的draw_net绘制网络模型，tensorflow的Neural Network Playground，可以直接在浏览器演示的ConvnetJS，word embedding visual inspector的wevi，以">
+<meta property="og:image" content="http://zhwhong.ml/mnist_tensorboard.png">
+<meta property="og:image" content="http://zhwhong.ml/graph_vis_animation.gif">
+<meta property="og:image" content="http://zhwhong.ml/Netscope_lenet.png">
+<meta property="og:image" content="http://zhwhong.ml/Netscope_alexnet.png">
+<meta property="og:image" content="http://zhwhong.ml/lenet.png">
+<meta property="og:image" content="http://zhwhong.ml/playground.png">
+<meta property="og:image" content="http://zhwhong.ml/ConvNetJS.png">
+<meta property="og:image" content="http://zhwhong.ml/wevi.png">
+<meta property="og:image" content="http://zhwhong.ml/cnnvis.png">
+<meta property="og:updated_time" content="2017-03-28T08:34:43.687Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Machine Learning Materials">
-<meta name="twitter:description" content="本篇文章整理、归纳了自己学习Deep Learning方面的一些资料，包括GitHub Awesome，DL框架如TensorFlow，分布式教程，卷积神经网络CNN，物体检测Paper，循环神经网络RNN、LSTM等，以及斯坦福CS231n计算机视觉识别和Coursera Andrew Ng机器学习等相关课程整理。">
-<meta name="twitter:image" content="http://zhwhong.ml/machine_learning_materials.png">
+<meta name="twitter:title" content="深度神经网络可视化工具">
+<meta name="twitter:description" content="本文主要总结一下神经网络可视化的一些工具，包括tensorflow的tensorboard，支持caffe中prototxt格式网络结构可视化工具Netscope，python的draw_net绘制网络模型，tensorflow的Neural Network Playground，可以直接在浏览器演示的ConvnetJS，word embedding visual inspector的wevi，以">
+<meta name="twitter:image" content="http://zhwhong.ml/mnist_tensorboard.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -59,7 +66,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Machine Learning Materials | Zhiwei&#39;s Blog</title>
+<title>深度神经网络可视化工具 | Zhiwei&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -312,15 +319,15 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-Machine-Learning-Materials" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-neural-network-visualization" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/02/23/Machine-Learning-Materials/" class="article-date">
-      <time datetime="2017-02-23T08:57:14.000Z" itemprop="datePublished">2017-02-23</time>
+      <a href="/2017/03/28/neural-network-visualization/" class="article-date">
+      <time datetime="2017-03-28T04:36:46.000Z" itemprop="datePublished">2017-03-28</time>
 </a>
 
  
-    <a href="/2017/02/23/Machine-Learning-Materials/#comments" title="查看评论">
+    <a href="/2017/03/28/neural-network-visualization/#comments" title="查看评论">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         <span class="count-comment"></span>
         
@@ -340,7 +347,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Machine Learning Materials
+      深度神经网络可视化工具
     </h1>
   
 
@@ -350,7 +357,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">721字</span>
+        <span class="post-count">1,477字</span>
       </span>
     </span>
 
@@ -359,7 +366,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">3分</span>
+        <span class="post-count">6分</span>
       </span>
     </span>
 </div>
@@ -382,13 +389,13 @@
         
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning<span class="article-category-count">8</span></a>
+    <a class="article-category-link" href="/categories/Tool/">Tool<span class="article-category-count">3</span></a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LSTM/">LSTM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RNN/">RNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow/">TensorFlow</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Caffe/">Caffe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Neural-Network/">Neural Network</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow/">TensorFlow</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -398,129 +405,104 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <script src="/assets/js/APlayer.min.js"> </script><p><img src="machine_learning_materials.png" alt="Machine Learning"></p>
-<hr>
-<h2 id="Awesome系列"><a href="#Awesome系列" class="headerlink" title="Awesome系列　"></a>Awesome系列　</h2><ul>
-<li><a href="https://github.com/josephmisiti/awesome-machine-learning" target="_blank" rel="external"><strong>Awesome Machine Learning</strong></a></li>
-<li><a href="https://github.com/ChristosChristofidis/awesome-deep-learning" target="_blank" rel="external"><strong>Awesome Deep Learning</strong></a></li>
-<li><a href="https://github.com/jtoy/awesome-tensorflow" target="_blank" rel="external"><strong>Awesome TensorFlow</strong></a></li>
-<li><a href="https://github.com/TensorFlowKR/awesome_tensorflow_implementations" target="_blank" rel="external">Awesome TensorFlow Implementations</a></li>
-<li><a href="https://github.com/carpedm20/awesome-torch" target="_blank" rel="external">Awesome Torch</a></li>
-<li><a href="https://github.com/jbhuang0604/awesome-computer-vision" target="_blank" rel="external">Awesome Computer Vision</a></li>
-<li><a href="https://github.com/kjw0612/awesome-deep-vision" target="_blank" rel="external">Awesome Deep Vision</a></li>
-<li><a href="https://github.com/kjw0612/awesome-rnn" target="_blank" rel="external">Awesome RNN</a></li>
-<li><a href="https://github.com/keonkim/awesome-nlp" target="_blank" rel="external">Awesome NLP</a></li>
-<li><a href="https://github.com/owainlewis/awesome-artificial-intelligence" target="_blank" rel="external">Awesome AI</a></li>
-<li><a href="https://github.com/terryum/awesome-deep-learning-papers" target="_blank" rel="external">Awesome Deep Learning Papers</a></li>
-<li><a href="https://github.com/MaxwellRebo/awesome-2vec" target="_blank" rel="external">Awesome 2vec</a></li>
-</ul>
-<h2 id="Deep-Learning"><a href="#Deep-Learning" class="headerlink" title="Deep Learning"></a>Deep Learning</h2><ul>
-<li>[Book] <a href="http://neuralnetworksanddeeplearning.com/chap1.html" target="_blank" rel="external"><strong>Neural Networks and Deep Learning</strong></a> 中文翻译(不完整): <a href="https://www.gitbook.com/book/hit-scir/neural-networks-and-deep-learning-zh_cn/details" target="_blank" rel="external">神经网络与深度学习</a> 第五章中文翻译: <a href="http://www.jianshu.com/p/917f71b06499" target="_blank" rel="external">[译] 第五章 深度神经网络为何很难训练</a></li>
-<li>[Book] <a href="http://www.deeplearningbook.org/" target="_blank" rel="external">Deep Learning - MIT Press</a></li>
-<li>[Book] <a href="http://www.springer.com/gb/book/9780387310732" target="_blank" rel="external">Pattern Recognition and Machine Learning</a> (Bishop) | <a href="https://book.douban.com/subject/2061116/" target="_blank" rel="external">豆瓣</a> | <a href="http://nbviewer.jupyter.org/github/lijin-THU/notes-machine-learning/blob/master/ReadMe.ipynb" target="_blank" rel="external">PRML &amp; DL笔记</a> | <a href="https://www.gitbook.com/book/mqshen/prml/details" target="_blank" rel="external">GitBook</a></li>
-<li>[Course] <a href="https://cn.udacity.com/course/deep-learning--ud730/" target="_blank" rel="external"><strong>Deep Learning - Udacity</strong></a></li>
-<li>[Course] <a href="https://www.coursera.org/learn/machine-learning" target="_blank" rel="external"><strong>Machine Learning by Andrew Ng - Coursera</strong></a> | <a href="http://www.jianshu.com/p/c68d0df13e0b" target="_blank" rel="external"><strong>课程资料整理</strong></a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
-<li>[Course] <a href="http://cs231n.stanford.edu/" target="_blank" rel="external"><strong>Convolutional Neural Networks for Visual Recognition(CS231n)</strong></a> | <a href="http://www.jianshu.com/p/182baeb82c71" target="_blank" rel="external"><strong>课程资料整理</strong></a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
-<li>[Course] <a href="http://cs224d.stanford.edu/" target="_blank" rel="external">Deep Learning for Natural Language Processing(CS224d)</a> | <a href="http://www.jianshu.com/p/062d2bbbef93" target="_blank" rel="external">课程资料整理</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
-<li>[View] <a href="https://github.com/aymericdamien/TopDeepLearning" target="_blank" rel="external">Top Deep Learning Projects on Github</a></li>
-<li>[View] <a href="https://github.com/andrewt3000/DL4NLP/blob/master/README.md" target="_blank" rel="external">Deep Learning for NLP resources</a></li>
-<li>[View] <a href="http://www.jianshu.com/p/6752a8845d01" target="_blank" rel="external">资源 | 深度学习资料大全：从基础到各种网络模型</a></li>
-<li>[View] <a href="http://www.jianshu.com/nb/8413272" target="_blank" rel="external">Paper | DL相关论文中文翻译</a></li>
-<li>[View] <a href="http://www.jianshu.com/p/80bd4d4c2992" target="_blank" rel="external">深度学习新星：GAN的基本原理、应用和走向</a></li>
-<li>[View] <a href="http://www.jianshu.com/p/c20917a91472" target="_blank" rel="external">推荐 | 九本不容错过的深度学习和神经网络书籍</a></li>
-<li>[View] <a href="https://github.com/memect/hao" target="_blank" rel="external">Github好东西传送门</a> –&gt; <a href="https://github.com/memect/hao/blob/master/awesome/deep-learning-introduction.md" target="_blank" rel="external">深度学习入门与综述资料</a></li>
-</ul>
-<h2 id="Frameworks"><a href="#Frameworks" class="headerlink" title="Frameworks"></a>Frameworks</h2><ul>
-<li><a href="https://www.tensorflow.org/" target="_blank" rel="external">TensorFlow (by google)</a></li>
-<li><a href="https://github.com/dmlc/mxnet" target="_blank" rel="external">MXNet</a></li>
-<li><a href="http://torch.ch/" target="_blank" rel="external">Torch (by Facebook)</a></li>
-<li>[Caffe (by UC Berkley)(<a href="http://caffe.berkeleyvision.org/" target="_blank" rel="external">http://caffe.berkeleyvision.org/</a>)</li>
-<li>[Deeplearning4j(<a href="http://deeplearning4j.org/" target="_blank" rel="external">http://deeplearning4j.org</a>)</li>
-<li>Brainstorm</li>
-<li>Theano、Chainer、Marvin、Neon、ConvNetJS</li>
-</ul>
-<h2 id="TensorFlow"><a href="#TensorFlow" class="headerlink" title="TensorFlow"></a>TensorFlow</h2><ul>
-<li>官方文档</li>
-<li><a href="https://www.tensorflow.org/tutorials" target="_blank" rel="external">TensorFlow Tutorial</a></li>
-<li><a href="http://wiki.jikexueyuan.com/project/tensorflow-zh/" target="_blank" rel="external">TensorFlow 官方文档中文版</a></li>
-<li><a href="http://download.tensorflow.org/paper/whitepaper2015.pdf" target="_blank" rel="external">TensorFlow Whitepaper</a></li>
-<li><a href="http://www.jianshu.com/p/65dc64e4c81f" target="_blank" rel="external">[译] TensorFlow白皮书</a></li>
-<li>[API] <a href="https://www.tensorflow.org/versions/r0.8/api_docs/index.html" target="_blank" rel="external">API Document</a></li>
-</ul>
-<h2 id="入门教程"><a href="#入门教程" class="headerlink" title="入门教程"></a>入门教程</h2><ul>
-<li>[教程] <a href="http://learningtensorflow.com/index.html" target="_blank" rel="external">Learning TensorFlow</a></li>
-<li><a href="https://github.com/nlintz/TensorFlow-Tutorials" target="_blank" rel="external">TensorFlow-Tutorials @ github</a> (推荐)</li>
-<li><a href="https://github.com/jtoy/awesome-tensorflow" target="_blank" rel="external">Awesome-TensorFlow</a> (推荐)</li>
-<li><a href="https://github.com/aymericdamien/TensorFlow-Examples" target="_blank" rel="external">TensorFlow-Examples @ github</a></li>
-<li><a href="https://github.com/pkmital/tensorflow_tutorials" target="_blank" rel="external">tensorflow_tutorials @ github</a></li>
-</ul>
-<h2 id="分布式教程"><a href="#分布式教程" class="headerlink" title="分布式教程"></a>分布式教程</h2><ul>
-<li><a href="https://www.tensorflow.org/versions/r0.8/how_tos/distributed/index.html#distributed-tensorflow" target="_blank" rel="external">Distributed TensorFlow官方文档</a></li>
-<li><a href="https://github.com/ischlag/distributed-tensorflow-example" target="_blank" rel="external">distributed-tensorflow-example @ github</a> (推荐)</li>
-<li><a href="https://github.com/ashitani/DistributedTensorFlowSample" target="_blank" rel="external">DistributedTensorFlowSample @ github</a></li>
-<li><a href="http://parameterserver.org/" target="_blank" rel="external">Parameter Server</a></li>
-</ul>
-<h2 id="Paper-Model"><a href="#Paper-Model" class="headerlink" title="Paper (Model)"></a>Paper (Model)</h2><h3 id="CNN-Nets"><a href="#CNN-Nets" class="headerlink" title="CNN Nets"></a>CNN Nets</h3><ul>
-<li><a href="http://yann.lecun.com/exdb/lenet/" target="_blank" rel="external">LeNet</a></li>
-<li><a href="http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf" target="_blank" rel="external">AlexNet</a></li>
-<li><a href="https://arxiv.org/abs/1312.6229v4" target="_blank" rel="external">OverFeat</a></li>
-<li><a href="https://arxiv.org/abs/1312.4400v3" target="_blank" rel="external">NIN</a></li>
-<li><a href="http://www.cs.unc.edu/~wliu/papers/GoogLeNet.pdf" target="_blank" rel="external">GoogLeNet</a></li>
-<li><a href="https://arxiv.org/abs/1409.4842v1" target="_blank" rel="external">Inception-V1</a></li>
-<li><a href="https://arxiv.org/abs/1502.03167" target="_blank" rel="external">Inception-V2</a></li>
-<li><a href="http://arxiv.org/abs/1512.00567" target="_blank" rel="external">Inception-V3</a></li>
-<li><a href="https://arxiv.org/abs/1602.07261" target="_blank" rel="external">Inception-V4</a></li>
-<li><a href="http://arxiv.org/abs/1602.07261" target="_blank" rel="external">Inception-ResNet-v2</a></li>
-<li><a href="https://arxiv.org/abs/1512.03385" target="_blank" rel="external">ResNet 50</a></li>
-<li><a href="https://arxiv.org/abs/1512.03385" target="_blank" rel="external">ResNet 101</a></li>
-<li><a href="https://arxiv.org/abs/1512.03385" target="_blank" rel="external">ResNet 152</a></li>
-<li><a href="http://arxiv.org/abs/1409.1556.pdf" target="_blank" rel="external">VGG 16</a></li>
-<li><a href="http://arxiv.org/abs/1409.1556.pdf" target="_blank" rel="external">VGG 19</a></li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/145616-131a561dcbe74aba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>(注：图片来自 <a href="https://github.com/tensorflow/models/tree/master/slim#Pretrained" target="_blank" rel="external">Github : TensorFlow-Slim image classification library</a>)</p>
-<p>额外参考：</p>
+        <script src="/assets/js/APlayer.min.js"> </script><h2 id="TensorBoard-TensorFlow集成可视化工具"><a href="#TensorBoard-TensorFlow集成可视化工具" class="headerlink" title="TensorBoard:TensorFlow集成可视化工具"></a>TensorBoard:TensorFlow集成可视化工具</h2><blockquote>
+<p>GitHub官方项目：<a href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/tensorboard" target="_blank" rel="external">https://github.com/tensorflow/tensorflow/tree/master/tensorflow/tensorboard</a></p>
+</blockquote>
+<p>TensorBoard 涉及到的运算，通常是在训练庞大的深度神经网络中出现的复杂而又难以理解的运算。</p>
+<p>为了更方便 TensorFlow 程序的理解、调试与优化，Google发布了一套叫做 TensorBoard 的可视化工具。你可以用 TensorBoard 来展现你的 TensorFlow 图像，绘制图像生成的定量指标图以及附加数据。</p>
+<p>当 TensorBoard 设置完成后，它应该是这样子的：</p>
+<p><img src="mnist_tensorboard.png" alt="mnist tensorboard"></p>
+<p>输入下面的指令来启动tensorboard：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tensorboard --logdir=/path/to/<span class="built_in">log</span>-directory</div></pre></td></tr></table></figure>
+<p>这里的参数 logdir 指向 SummaryWriter 序列化数据的存储路径。如果logdir目录的子目录中包含另一次运行时的数据，那么 TensorBoard 会展示所有运行的数据。一旦 TensorBoard 开始运行，你可以通过在浏览器中输入 <strong>localhost:6006</strong> 来查看 TensorBoard。进入 TensorBoard 的界面时，你会在右上角看到导航选项卡，每一个选项卡将展现一组可视化的序列化数据集 。对于你查看的每一个选项卡，如果 TensorBoard 中没有数据与这个选项卡相关的话，则会显示一条提示信息指示你如何序列化相关数据。</p>
+<p>TensorFlow 图表计算强大而又复杂，图表可视化在理解和调试时显得非常有帮助。 下面是一个运作时的可式化例子：</p>
+<p><img src="graph_vis_animation.gif" alt=""></p>
+<p>更多详细内容参考：</p>
 <ul>
-<li><a href="http://www.jianshu.com/p/6d441e208547" target="_blank" rel="external">[ILSVRC] 基于OverFeat的图像分类、定位、检测</a></li>
-<li><a href="http://www.jianshu.com/p/7975f179ec49" target="_blank" rel="external">[卷积神经网络-进化史] 从LeNet到AlexNet</a></li>
-<li><a href="http://www.jianshu.com/p/fe428f0b32c1" target="_blank" rel="external">[透析] 卷积神经网络CNN究竟是怎样一步一步工作的？</a></li>
-<li><a href="http://www.jianshu.com/p/ba51f8c6e348" target="_blank" rel="external">GoogLenet中，1X1卷积核到底有什么作用呢？</a></li>
-<li><a href="http://www.jianshu.com/p/408ab8177a53" target="_blank" rel="external">深度学习 — 反向传播(BP)理论推导</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/22464594?refer=hsmyy" target="_blank" rel="external">无痛的机器学习第一季目录 - 知乎</a></li>
+<li>[TensorFlow中文社区] <a href="http://www.tensorfly.cn/tfdoc/how_tos/summaries_and_tensorboard.html" target="_blank" rel="external">TensorBoard:可视化学习</a></li>
+<li>[TensorFlow中文社区] <a href="http://www.tensorfly.cn/tfdoc/how_tos/graph_viz.html" target="_blank" rel="external">TensorBoard:图表可视化</a></li>
+<li>[极客学院] <a href="http://wiki.jikexueyuan.com/project/tensorflow-zh/how_tos/summaries_and_tensorboard.html" target="_blank" rel="external">TensorBoard:可视化学习</a></li>
 </ul>
-<h3 id="Object-Detection"><a href="#Object-Detection" class="headerlink" title="Object Detection"></a>Object Detection</h3><ul>
-<li><a href="https://arxiv.org/abs/1311.2524" target="_blank" rel="external">R-CNN</a></li>
-<li><a href="https://arxiv.org/abs/1504.08083" target="_blank" rel="external">Fast R-CNN</a></li>
-<li><a href="https://arxiv.org/abs/1506.01497v3" target="_blank" rel="external">Faster R-CNN</a></li>
-<li><a href="https://arxiv.org/abs/1411.4038" target="_blank" rel="external">FCN</a></li>
-<li><a href="https://arxiv.org/abs/1605.06409v2" target="_blank" rel="external">R-FCN</a></li>
-<li><a href="https://arxiv.org/abs/1506.02640v5" target="_blank" rel="external">YOLO</a></li>
-<li><a href="https://arxiv.org/abs/1512.02325" target="_blank" rel="external">SSD</a></li>
-</ul>
-<p>额外参考：</p>
+<h2 id="Netscope-支持Caffe的神经网络结构在线可视化工具"><a href="#Netscope-支持Caffe的神经网络结构在线可视化工具" class="headerlink" title="Netscope:支持Caffe的神经网络结构在线可视化工具"></a>Netscope:支持Caffe的神经网络结构在线可视化工具</h2><blockquote>
+<p>官网：<a href="http://ethereon.github.io/netscope/quickstart.html" target="_blank" rel="external">http://ethereon.github.io/netscope/quickstart.html</a><br>GitHub项目：<a href="https://github.com/ethereon/netscope" target="_blank" rel="external">https://github.com/ethereon/netscope</a></p>
+</blockquote>
+<p><strong>“A web-based tool for visualizing neural network architectures (or technically, any directed acyclic graph). It currently supports Caffe’s prototxt format.”</strong></p>
+<p>Netscope是一个支持prototxt格式描述的神经网络结构的在线可视工具。它可以用来可视化Caffe结构里prototxt格式的网络结构，使用起来也非常简单，打开这个地址 <a href="http://ethereon.github.io/netscope/#/editor" target="_blank" rel="external"><code>http://ethereon.github.io/netscope/#/editor</code></a>，把你的描述神经网络结构的prototxt文件复制到该编辑框里，按shift+enter，就可以直接以图形方式显示网络的结构了。</p>
+<p>比如，以 <strong>mnist的Lenet</strong> 和 <strong>imagenet的AlexNet</strong> 网络结构为例，分别把Caffe中 <a href="https://github.com/BVLC/caffe/blob/master/examples/mnist/lenet_train_test.prototxt" target="_blank" rel="external">caffe/examples/mnist/lenet_train_test.prototxt</a> 和 <a href="https://github.com/BVLC/caffe/blob/master/models/bvlc_alexnet/train_val.prototxt" target="_blank" rel="external">caffe/models/bvlc_alexnet/train_val.prototxt</a> 文件的内容复制到左侧编译框，按shift+enter,立即就可以得到可视化的结构图，具体每层的参数等，如下：</p>
+<p><img src="Netscope_lenet.png" alt="Lenet"></p>
+<p><img src="Netscope_alexnet.png" alt="AlexNet"></p>
+<p>Netscope给出的几个常见CNN网络结构示例：</p>
 <ul>
-<li><a href="http://www.jianshu.com/p/067f6a989d31" target="_blank" rel="external">[Detection] CNN 之 “物体检测” 篇</a></li>
-<li><a href="http://www.jianshu.com/p/7e52daaba512" target="_blank" rel="external">计算机视觉中 RNN 应用于目标检测</a></li>
-<li><a href="http://www.jianshu.com/p/4ce0aba4e3c2" target="_blank" rel="external">Machine Learning 硬件投入调研</a></li>
+<li><a href="http://ethereon.github.io/netscope/#/preset/alexnet" target="_blank" rel="external">AlexNet</a> | Alex Krizhevsky, Ilya Sutskever, Geoffrey Hinton</li>
+<li><a href="http://ethereon.github.io/netscope/#/preset/caffenet" target="_blank" rel="external">CaffeNet</a> | Yangqing Jia, Evan Shelhamer, et. al.</li>
+<li><a href="http://ethereon.github.io/netscope/#/preset/fcn-8s-pascal" target="_blank" rel="external">Fully Convolutional Network — Three Stream</a> | Jonathan Long, Evan Shelhamer, Trevor Darrell</li>
+<li><a href="http://ethereon.github.io/netscope/#/preset/googlenet" target="_blank" rel="external">GoogleNet</a> | Christian Szegedy, et. al.</li>
+<li><a href="http://ethereon.github.io/netscope/#/preset/nin" target="_blank" rel="external">Network in Network</a> | Min Lin, Qiang Chen, Shuicheng Yan</li>
+<li><a href="http://ethereon.github.io/netscope/#/preset/vgg-16" target="_blank" rel="external">VGG 16 Layers</a> | Karen Simonyan, Andrew Zisserman</li>
 </ul>
-<h3 id="RNN-amp-LSTM"><a href="#RNN-amp-LSTM" class="headerlink" title="RNN &amp; LSTM"></a>RNN &amp; LSTM</h3><ul>
-<li><a href="http://www.jianshu.com/p/c930d61e1f16" target="_blank" rel="external">[福利] 深入理解 RNNs &amp; LSTM 网络学习资料</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
-<li><a href="http://www.jianshu.com/p/2aca6e8ac7c8" target="_blank" rel="external">[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
-<li><a href="http://www.jianshu.com/p/7e52daaba512" target="_blank" rel="external">计算机视觉中 RNN 应用于目标检测</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
-<li>[推荐] <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="external"><strong>Understanding LSTM Networks</strong></a> @ <a href="http://colah.github.io/" target="_blank" rel="external">colah</a> | <a href="http://www.jianshu.com/p/9dc9f41f0b29" target="_blank" rel="external"><strong>理解LSTM网络</strong></a>[简书] @ <a href="http://www.jianshu.com/u/696dc6c6f01c" target="_blank" rel="external">Not_GOD</a></li>
-<li><a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/" target="_blank" rel="external">The Unreasonable Effectiveness of Recurrent Neural Networks</a> @ <a href="http://cs.stanford.edu/people/karpathy/" target="_blank" rel="external">Andrej Karpathy</a></li>
-<li><a href="http://deeplearning.net/tutorial/lstm.html" target="_blank" rel="external">LSTM Networks for Sentiment Analysis</a> (theano官网LSTM教程+代码)</li>
-<li><a href="http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-1-introduction-to-rnns/" target="_blank" rel="external">Recurrent Neural Networks Tutorial</a> @ <a href="http://www.wildml.com/" target="_blank" rel="external">WILDML</a></li>
-<li><a href="http://iamtrask.github.io/2015/11/15/anyone-can-code-lstm/" target="_blank" rel="external">Anyone Can Learn To Code an LSTM-RNN in Python (Part 1: RNN)</a> @ <a href="https://twitter.com/iamtrask" target="_blank" rel="external">iamtrask</a></li>
+<p>以上网络的prototxt源文件见：<a href="https://github.com/ethereon/netscope/tree/gh-pages/presets" target="_blank" rel="external">https://github.com/ethereon/netscope/tree/gh-pages/presets</a> 。</p>
+<h2 id="使用-python-draw-net-py绘制网络模型"><a href="#使用-python-draw-net-py绘制网络模型" class="headerlink" title="使用 python/draw_net.py绘制网络模型"></a>使用 python/draw_net.py绘制网络模型</h2><p><strong>python/draw_net.py</strong>，这个文件，就是用来绘制网络模型的，也就是将网络模型由prototxt变成一张图片。</p>
+<p>在绘制之前，需要先安装两个库</p>
+<h3 id="1-安装GraphViz"><a href="#1-安装GraphViz" class="headerlink" title="1.安装ＧraphViz"></a>1.安装ＧraphViz</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install GraphViz</div></pre></td></tr></table></figure>
+<p>注意，这里用的是apt-get来安装，而不是pip。</p>
+<h3 id="2-安装pydot"><a href="#2-安装pydot" class="headerlink" title="2.安装pydot"></a>2.安装pydot</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo pip install pydot</div></pre></td></tr></table></figure>
+<p>用的是pip来安装，而不是apt-get。</p>
+<p>安装好了，就可以调用脚本来绘制图片了。</p>
+<p>draw_net.py执行的时候带三个参数</p>
+<ul>
+<li>第一个参数：网络模型的prototxt文件；</li>
+<li>第二个参数：保存的图片路径及名字；</li>
+<li>第二个参数：- - rankdir = x，x 有四种选项，分别是LR, RL, TB, BT 。用来表示网络的方向，分别是从左到右，从右到左，从上到小，从下到上。默认为LR。</li>
 </ul>
-<h2 id="Stanford-机器学习课程整理"><a href="#Stanford-机器学习课程整理" class="headerlink" title="Stanford 机器学习课程整理"></a>Stanford 机器学习课程整理</h2><ul>
-<li><a href="http://www.jianshu.com/p/c68d0df13e0b" target="_blank" rel="external">[coursera 机器学习课程] Machine Learning by Andrew Ng</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
-<li><a href="http://www.jianshu.com/p/182baeb82c71" target="_blank" rel="external">[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition（附翻译，下载）</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
-<li><a href="http://www.jianshu.com/p/062d2bbbef93" target="_blank" rel="external">[斯坦福CS224d课程整理] Natural Language Processing with Deep Learning</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
-<li><a href="http://www.jianshu.com/p/0a6ef31ff77a" target="_blank" rel="external">[斯坦福CS229课程整理] Machine Learning Autumn 2016</a> @ <a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
+<p>例：绘制Lenet模型</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo python python/draw_net.py examples/mnist/lenet_train_test.prototxt netImage/lenet.png --rankdir=BT</div></pre></td></tr></table></figure>
+<p><img src="lenet.png" alt="Lenet"></p>
+<p>参考阅读：</p>
+<ul>
+<li><a href="http://blog.csdn.net/10km/article/details/52713027" target="_blank" rel="external">Netscope:支持Caffe的神经网络结构在线可视化工具</a></li>
+<li><a href="http://www.cnblogs.com/denny402/p/5106764.html" target="_blank" rel="external">Caffe学习系列(18): 绘制网络模型</a></li>
+<li><a href="http://blog.csdn.net/solomon1558/article/details/53144606" target="_blank" rel="external">Caffe学习系列——工具篇：神经网络模型结构可视化</a></li>
+<li><a href="http://deeplearningongpu.readthedocs.io/en/latest/Stage_3.html" target="_blank" rel="external">深度网络的设计与可视化工具</a></li>
 </ul>
-<hr>
-<p>( 个人整理，未经允许禁止转载，授权转载请注明作者及出处，谢谢！)</p>
+<h2 id="Neural-Network-Playground"><a href="#Neural-Network-Playground" class="headerlink" title="Neural Network Playground"></a>Neural Network Playground</h2><blockquote>
+<p>官网：<a href="http://playground.tensorflow.org" target="_blank" rel="external">http://playground.tensorflow.org</a><br>GitHub项目：<a href="https://github.com/tensorflow/playground" target="_blank" rel="external">https://github.com/tensorflow/playground</a></p>
+</blockquote>
+<p><strong>Deep playground is an interactive visualization of neural networks, written in typescript using d3.js.</strong></p>
+<p>PlayGround是一个图形化用于教学目的的简单神经网络在线演示、实验的平台，非常强大地可视化了神经网络的训练过程。</p>
+<p><img src="playground.png" alt="Neural Network Playground"></p>
+<p>参考阅读：</p>
+<ul>
+<li>[知乎] <a href="https://www.zhihu.com/question/42995089" target="_blank" rel="external">谁能详细讲解一下TensorFlow Playground所展示的神经网络的概念？</a></li>
+<li>[Blog] <a href="http://hp.stuhome.net/index.php/2016/10/15/tensorflow-playground/" target="_blank" rel="external">结合TensorFlow PlayGround的简单神经网络原理解释</a></li>
+</ul>
+<h2 id="ConvnetJS"><a href="#ConvnetJS" class="headerlink" title="ConvnetJS"></a>ConvnetJS</h2><blockquote>
+<p>官网：<a href="http://cs.stanford.edu/people/karpathy/convnetjs/" target="_blank" rel="external">http://cs.stanford.edu/people/karpathy/convnetjs/</a><br>GitHub项目：<a href="https://github.com/karpathy/convnetjs" target="_blank" rel="external">https://github.com/karpathy/convnetjs</a></p>
+</blockquote>
+<p><strong>ConvNetJS is a Javascript library for training Deep Learning models (Neural Networks) entirely in your browser. Open a tab and you’re training. No software requirements, no compilers, no installations, no GPUs, no sweat.</strong></p>
+<p><img src="ConvNetJS.png" alt="ConvNetJS"></p>
+<h3 id="Some-Online-Demos"><a href="#Some-Online-Demos" class="headerlink" title="Some Online Demos"></a>Some Online Demos</h3><ul>
+<li><a href="http://cs.stanford.edu/~karpathy/convnetjs/demo/mnist.html" target="_blank" rel="external">Convolutional Neural Network on MNIST digits</a></li>
+<li><a href="http://cs.stanford.edu/~karpathy/convnetjs/demo/cifar10.html" target="_blank" rel="external">Convolutional Neural Network on CIFAR-10</a></li>
+<li><a href="http://cs.stanford.edu/~karpathy/convnetjs/demo/classify2d.html" target="_blank" rel="external">Toy 2D data</a></li>
+<li><a href="http://cs.stanford.edu/~karpathy/convnetjs/demo/regression.html" target="_blank" rel="external">Toy 1D regression</a></li>
+<li><a href="http://cs.stanford.edu/~karpathy/convnetjs/demo/autoencoder.html" target="_blank" rel="external">Training an Autoencoder on MNIST digits</a></li>
+<li><a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/rldemo.html" target="_blank" rel="external">Deep Q Learning Reinforcement Learning demo</a></li>
+<li><a href="http://cs.stanford.edu/~karpathy/convnetjs/demo/image_regression.html" target="_blank" rel="external">Image Regression (“Painting”)</a></li>
+<li><a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/trainers.html" target="_blank" rel="external">Comparison of SGD/Adagrad/Adadelta on MNIST</a></li>
+</ul>
+<p>更多内容请关注<a href="http://cs.stanford.edu/people/karpathy/convnetjs/" target="_blank" rel="external">官网</a>和GutHub项目<a href="https://github.com/karpathy/convnetjs" target="_blank" rel="external">README</a>。</p>
+<h2 id="wevi"><a href="#wevi" class="headerlink" title="wevi"></a>wevi</h2><blockquote>
+<p>官网：<a href="https://ronxin.github.io/wevi/" target="_blank" rel="external">wevi: word embedding visual inspector</a><br>GitHub项目：<a href="https://github.com/ronxin/wevi" target="_blank" rel="external">https://github.com/ronxin/wevi</a></p>
+</blockquote>
+<p><img src="wevi.png" alt="wevi"></p>
+<p>具体参考：<a href="https://docs.google.com/document/d/1qUH1LvNcp5msoh2FEwTQAUX8KfMq2faGpNv4s4WXhgg/pub" target="_blank" rel="external">wevi: Word Embedding Visual Inspector</a></p>
+<h2 id="CNNVis"><a href="#CNNVis" class="headerlink" title="CNNVis"></a>CNNVis</h2><blockquote>
+<p>文章来源：<a href="https://arxiv.org/abs/1604.07043" target="_blank" rel="external">Towards Better Analysis of Deep Convolutional Neural Networks</a> arxiv.org/abs/1604.07043</p>
+</blockquote>
+<p>具体参见：<a href="https://yq.aliyun.com/articles/64813" target="_blank" rel="external">能帮你更好理解分析深度卷积神经网络，今天要解读的是一款新型可视化工具——CNNVis，看完就能用！</a></p>
+<p><strong>摘要：</strong> 深度卷积神经网络（CNNs）在许多模式识别任务中取得了很大的性能突破， 然而高质量深度模型的发展依赖于大量的尝试，这是由于没有很好的理解深度模型是怎么工作的，在本文中，提出了一个可视化分析系统CNNVis，帮助机器学习专家更好的理解、分析、设计深度卷积神经网络。</p>
+<p><img src="cnnvis.png" alt=""></p>
+<p><strong>（ 未经授权禁止转载，转载请联系作者并注明出处，谢谢！）</strong></p>
 
       
     </div>
@@ -529,23 +511,23 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/02/23/Machine-Learning-Materials/">Machine Learning Materials</a></p>
+        <p><span>本文标题:</span><a href="/2017/03/28/neural-network-visualization/">深度神经网络可视化工具</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">zhwhong</a></p>
-        <p><span>发布时间:</span>2017-02-23, 16:57:14</p>
-        <p><span>最后更新:</span>2017-03-25, 15:43:23</p>
+        <p><span>发布时间:</span>2017-03-28, 12:36:46</p>
+        <p><span>最后更新:</span>2017-03-28, 16:34:43</p>
 
         
             <p>
                 <span>更新历史:</span><i class="fa fa-github"></i>
-                <a href="https://github.com/Hzwcode/Hzwcode.github.io/blame/blog-source/source/_posts/2017-02-23.Machine-Learning-Materials.md" title="顺序查看文章各部分修改记录" target = "_blank">Blame</a>,
-                <a href="https://github.com/Hzwcode/Hzwcode.github.io/commits/blog-source/source/_posts/2017-02-23.Machine-Learning-Materials.md" title="查看文章有关更新记录" target = "_blank">History</a><span class="raw">&nbsp;&nbsp;文本模式:</span><i class="fa fa-file-text-o"></i>
-                <a href="https://raw.githubusercontent.com/Hzwcode/Hzwcode.github.io/blog-source/source/_posts/2017-02-23.Machine-Learning-Materials.md" title="查看 & 下载文章 Markdown 原始文本" target = "_blank"> .md Raw</a>
+                <a href="https://github.com/Hzwcode/Hzwcode.github.io/blame/blog-source/source/_posts/2017-03-28.neural-network-visualization.md" title="顺序查看文章各部分修改记录" target = "_blank">Blame</a>,
+                <a href="https://github.com/Hzwcode/Hzwcode.github.io/commits/blog-source/source/_posts/2017-03-28.neural-network-visualization.md" title="查看文章有关更新记录" target = "_blank">History</a><span class="raw">&nbsp;&nbsp;文本模式:</span><i class="fa fa-file-text-o"></i>
+                <a href="https://raw.githubusercontent.com/Hzwcode/Hzwcode.github.io/blog-source/source/_posts/2017-03-28.neural-network-visualization.md" title="查看 & 下载文章 Markdown 原始文本" target = "_blank"> .md Raw</a>
             </p>
         
 
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/02/23/Machine-Learning-Materials/" title="Machine Learning Materials">http://zhwhong.ml/2017/02/23/Machine-Learning-Materials/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://zhwhong.ml/2017/02/23/Machine-Learning-Materials/　　作者: zhwhong" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/03/28/neural-network-visualization/" title="深度神经网络可视化工具">http://zhwhong.ml/2017/03/28/neural-network-visualization/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://zhwhong.ml/2017/03/28/neural-network-visualization/　　作者: zhwhong" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -557,12 +539,12 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/02/24/Linux-Ubuntu_Flatabulous/">
-                    [Linux] Ubuntu下超好看扁平主题 : Flatabulous
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/">
+                    LIDC-IDRI肺结节公开数据集Dicom和XML标注详解
                 </a>
             </div>
-        
         
     </nav>
 
@@ -604,7 +586,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Awesome系列"><span class="toc-text">Awesome系列　</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deep-Learning"><span class="toc-text">Deep Learning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Frameworks"><span class="toc-text">Frameworks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TensorFlow"><span class="toc-text">TensorFlow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#入门教程"><span class="toc-text">入门教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分布式教程"><span class="toc-text">分布式教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Paper-Model"><span class="toc-text">Paper (Model)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CNN-Nets"><span class="toc-text">CNN Nets</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-Detection"><span class="toc-text">Object Detection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RNN-amp-LSTM"><span class="toc-text">RNN & LSTM</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stanford-机器学习课程整理"><span class="toc-text">Stanford 机器学习课程整理</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TensorBoard-TensorFlow集成可视化工具"><span class="toc-text">TensorBoard:TensorFlow集成可视化工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Netscope-支持Caffe的神经网络结构在线可视化工具"><span class="toc-text">Netscope:支持Caffe的神经网络结构在线可视化工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-python-draw-net-py绘制网络模型"><span class="toc-text">使用 python/draw_net.py绘制网络模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装GraphViz"><span class="toc-text">1.安装ＧraphViz</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-安装pydot"><span class="toc-text">2.安装pydot</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Neural-Network-Playground"><span class="toc-text">Neural Network Playground</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ConvnetJS"><span class="toc-text">ConvnetJS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Some-Online-Demos"><span class="toc-text">Some Online Demos</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#wevi"><span class="toc-text">wevi</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CNNVis"><span class="toc-text">CNNVis</span></a></li></ol>
         
     </div>
     <style>
@@ -641,7 +623,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Machine Learning Materials　| Zhiwei's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"深度神经网络可视化工具　| Zhiwei's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -654,7 +636,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/23/Machine-Learning-Materials/" data-title="Machine Learning Materials" data-url="http://zhwhong.ml/2017/02/23/Machine-Learning-Materials/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/03/28/neural-network-visualization/" data-title="深度神经网络可视化工具" data-url="http://zhwhong.ml/2017/03/28/neural-network-visualization/"></div>
     <script>
         var duoshuoQuery = {short_name:"zhwhong"};
         var loadComment = function(){
@@ -667,7 +649,7 @@
         
             // Add comment count
             $(function(){
-                var jsonUrl = "http://api.duoshuo.com/threads/counts.jsonp?short_name=zhwhong&threads=2017/02/23/Machine-Learning-Materials/&callback=?";
+                var jsonUrl = "http://api.duoshuo.com/threads/counts.jsonp?short_name=zhwhong&threads=2017/03/28/neural-network-visualization/&callback=?";
                 $.getJSON(jsonUrl, function(result){
                     $.each(result.response, function(i, field){
                         var value = field.comments;
@@ -716,15 +698,15 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/02/24/Linux-Ubuntu_Flatabulous/" title="上一篇: [Linux] Ubuntu下超好看扁平主题 : Flatabulous">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/" title="下一篇: LIDC-IDRI肺结节公开数据集Dicom和XML标注详解">
+                <i class="fa fa-angle-right"></i>
+            </a>
         
     </div>
 

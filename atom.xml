@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhwhong.ml/"/>
-  <updated>2017-03-27T15:13:22.800Z</updated>
+  <updated>2017-03-28T08:34:43.687Z</updated>
   <id>http://zhwhong.ml/</id>
   
   <author>
@@ -14,6 +14,130 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>深度神经网络可视化工具</title>
+    <link href="http://zhwhong.ml/2017/03/28/neural-network-visualization/"/>
+    <id>http://zhwhong.ml/2017/03/28/neural-network-visualization/</id>
+    <published>2017-03-28T04:36:46.000Z</published>
+    <updated>2017-03-28T08:34:43.687Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h2 id="TensorBoard-TensorFlow集成可视化工具"><a href="#TensorBoard-TensorFlow集成可视化工具" class="headerlink" title="TensorBoard:TensorFlow集成可视化工具"></a>TensorBoard:TensorFlow集成可视化工具</h2><blockquote>
+<p>GitHub官方项目：<a href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/tensorboard" target="_blank" rel="external">https://github.com/tensorflow/tensorflow/tree/master/tensorflow/tensorboard</a></p>
+</blockquote>
+<p>TensorBoard 涉及到的运算，通常是在训练庞大的深度神经网络中出现的复杂而又难以理解的运算。</p>
+<p>为了更方便 TensorFlow 程序的理解、调试与优化，Google发布了一套叫做 TensorBoard 的可视化工具。你可以用 TensorBoard 来展现你的 TensorFlow 图像，绘制图像生成的定量指标图以及附加数据。</p>
+<p>当 TensorBoard 设置完成后，它应该是这样子的：</p>
+<p><img src="mnist_tensorboard.png" alt="mnist tensorboard"></p>
+<p>输入下面的指令来启动tensorboard：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tensorboard --logdir=/path/to/<span class="built_in">log</span>-directory</div></pre></td></tr></table></figure>
+<p>这里的参数 logdir 指向 SummaryWriter 序列化数据的存储路径。如果logdir目录的子目录中包含另一次运行时的数据，那么 TensorBoard 会展示所有运行的数据。一旦 TensorBoard 开始运行，你可以通过在浏览器中输入 <strong>localhost:6006</strong> 来查看 TensorBoard。进入 TensorBoard 的界面时，你会在右上角看到导航选项卡，每一个选项卡将展现一组可视化的序列化数据集 。对于你查看的每一个选项卡，如果 TensorBoard 中没有数据与这个选项卡相关的话，则会显示一条提示信息指示你如何序列化相关数据。</p>
+<p>TensorFlow 图表计算强大而又复杂，图表可视化在理解和调试时显得非常有帮助。 下面是一个运作时的可式化例子：</p>
+<p><img src="graph_vis_animation.gif" alt=""></p>
+<p>更多详细内容参考：</p>
+<ul>
+<li>[TensorFlow中文社区] <a href="http://www.tensorfly.cn/tfdoc/how_tos/summaries_and_tensorboard.html" target="_blank" rel="external">TensorBoard:可视化学习</a></li>
+<li>[TensorFlow中文社区] <a href="http://www.tensorfly.cn/tfdoc/how_tos/graph_viz.html" target="_blank" rel="external">TensorBoard:图表可视化</a></li>
+<li>[极客学院] <a href="http://wiki.jikexueyuan.com/project/tensorflow-zh/how_tos/summaries_and_tensorboard.html" target="_blank" rel="external">TensorBoard:可视化学习</a></li>
+</ul>
+<h2 id="Netscope-支持Caffe的神经网络结构在线可视化工具"><a href="#Netscope-支持Caffe的神经网络结构在线可视化工具" class="headerlink" title="Netscope:支持Caffe的神经网络结构在线可视化工具"></a>Netscope:支持Caffe的神经网络结构在线可视化工具</h2><blockquote>
+<p>官网：<a href="http://ethereon.github.io/netscope/quickstart.html" target="_blank" rel="external">http://ethereon.github.io/netscope/quickstart.html</a><br>GitHub项目：<a href="https://github.com/ethereon/netscope" target="_blank" rel="external">https://github.com/ethereon/netscope</a></p>
+</blockquote>
+<p><strong>“A web-based tool for visualizing neural network architectures (or technically, any directed acyclic graph). It currently supports Caffe’s prototxt format.”</strong></p>
+<p>Netscope是一个支持prototxt格式描述的神经网络结构的在线可视工具。它可以用来可视化Caffe结构里prototxt格式的网络结构，使用起来也非常简单，打开这个地址 <a href="http://ethereon.github.io/netscope/#/editor" target="_blank" rel="external"><code>http://ethereon.github.io/netscope/#/editor</code></a>，把你的描述神经网络结构的prototxt文件复制到该编辑框里，按shift+enter，就可以直接以图形方式显示网络的结构了。</p>
+<p>比如，以 <strong>mnist的Lenet</strong> 和 <strong>imagenet的AlexNet</strong> 网络结构为例，分别把Caffe中 <a href="https://github.com/BVLC/caffe/blob/master/examples/mnist/lenet_train_test.prototxt" target="_blank" rel="external">caffe/examples/mnist/lenet_train_test.prototxt</a> 和 <a href="https://github.com/BVLC/caffe/blob/master/models/bvlc_alexnet/train_val.prototxt" target="_blank" rel="external">caffe/models/bvlc_alexnet/train_val.prototxt</a> 文件的内容复制到左侧编译框，按shift+enter,立即就可以得到可视化的结构图，具体每层的参数等，如下：</p>
+<p><img src="Netscope_lenet.png" alt="Lenet"></p>
+<p><img src="Netscope_alexnet.png" alt="AlexNet"></p>
+<p>Netscope给出的几个常见CNN网络结构示例：</p>
+<ul>
+<li><a href="http://ethereon.github.io/netscope/#/preset/alexnet" target="_blank" rel="external">AlexNet</a> | Alex Krizhevsky, Ilya Sutskever, Geoffrey Hinton</li>
+<li><a href="http://ethereon.github.io/netscope/#/preset/caffenet" target="_blank" rel="external">CaffeNet</a> | Yangqing Jia, Evan Shelhamer, et. al.</li>
+<li><a href="http://ethereon.github.io/netscope/#/preset/fcn-8s-pascal" target="_blank" rel="external">Fully Convolutional Network — Three Stream</a> | Jonathan Long, Evan Shelhamer, Trevor Darrell</li>
+<li><a href="http://ethereon.github.io/netscope/#/preset/googlenet" target="_blank" rel="external">GoogleNet</a> | Christian Szegedy, et. al.</li>
+<li><a href="http://ethereon.github.io/netscope/#/preset/nin" target="_blank" rel="external">Network in Network</a> | Min Lin, Qiang Chen, Shuicheng Yan</li>
+<li><a href="http://ethereon.github.io/netscope/#/preset/vgg-16" target="_blank" rel="external">VGG 16 Layers</a> | Karen Simonyan, Andrew Zisserman</li>
+</ul>
+<p>以上网络的prototxt源文件见：<a href="https://github.com/ethereon/netscope/tree/gh-pages/presets" target="_blank" rel="external">https://github.com/ethereon/netscope/tree/gh-pages/presets</a> 。</p>
+<h2 id="使用-python-draw-net-py绘制网络模型"><a href="#使用-python-draw-net-py绘制网络模型" class="headerlink" title="使用 python/draw_net.py绘制网络模型"></a>使用 python/draw_net.py绘制网络模型</h2><p><strong>python/draw_net.py</strong>，这个文件，就是用来绘制网络模型的，也就是将网络模型由prototxt变成一张图片。</p>
+<p>在绘制之前，需要先安装两个库</p>
+<h3 id="1-安装GraphViz"><a href="#1-安装GraphViz" class="headerlink" title="1.安装ＧraphViz"></a>1.安装ＧraphViz</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install GraphViz</div></pre></td></tr></table></figure>
+<p>注意，这里用的是apt-get来安装，而不是pip。</p>
+<h3 id="2-安装pydot"><a href="#2-安装pydot" class="headerlink" title="2.安装pydot"></a>2.安装pydot</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo pip install pydot</div></pre></td></tr></table></figure>
+<p>用的是pip来安装，而不是apt-get。</p>
+<p>安装好了，就可以调用脚本来绘制图片了。</p>
+<p>draw_net.py执行的时候带三个参数</p>
+<ul>
+<li>第一个参数：网络模型的prototxt文件；</li>
+<li>第二个参数：保存的图片路径及名字；</li>
+<li>第二个参数：- - rankdir = x，x 有四种选项，分别是LR, RL, TB, BT 。用来表示网络的方向，分别是从左到右，从右到左，从上到小，从下到上。默认为LR。</li>
+</ul>
+<p>例：绘制Lenet模型</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo python python/draw_net.py examples/mnist/lenet_train_test.prototxt netImage/lenet.png --rankdir=BT</div></pre></td></tr></table></figure>
+<p><img src="lenet.png" alt="Lenet"></p>
+<p>参考阅读：</p>
+<ul>
+<li><a href="http://blog.csdn.net/10km/article/details/52713027" target="_blank" rel="external">Netscope:支持Caffe的神经网络结构在线可视化工具</a></li>
+<li><a href="http://www.cnblogs.com/denny402/p/5106764.html" target="_blank" rel="external">Caffe学习系列(18): 绘制网络模型</a></li>
+<li><a href="http://blog.csdn.net/solomon1558/article/details/53144606" target="_blank" rel="external">Caffe学习系列——工具篇：神经网络模型结构可视化</a></li>
+<li><a href="http://deeplearningongpu.readthedocs.io/en/latest/Stage_3.html" target="_blank" rel="external">深度网络的设计与可视化工具</a></li>
+</ul>
+<h2 id="Neural-Network-Playground"><a href="#Neural-Network-Playground" class="headerlink" title="Neural Network Playground"></a>Neural Network Playground</h2><blockquote>
+<p>官网：<a href="http://playground.tensorflow.org" target="_blank" rel="external">http://playground.tensorflow.org</a><br>GitHub项目：<a href="https://github.com/tensorflow/playground" target="_blank" rel="external">https://github.com/tensorflow/playground</a></p>
+</blockquote>
+<p><strong>Deep playground is an interactive visualization of neural networks, written in typescript using d3.js.</strong></p>
+<p>PlayGround是一个图形化用于教学目的的简单神经网络在线演示、实验的平台，非常强大地可视化了神经网络的训练过程。</p>
+<p><img src="playground.png" alt="Neural Network Playground"></p>
+<p>参考阅读：</p>
+<ul>
+<li>[知乎] <a href="https://www.zhihu.com/question/42995089" target="_blank" rel="external">谁能详细讲解一下TensorFlow Playground所展示的神经网络的概念？</a></li>
+<li>[Blog] <a href="http://hp.stuhome.net/index.php/2016/10/15/tensorflow-playground/" target="_blank" rel="external">结合TensorFlow PlayGround的简单神经网络原理解释</a></li>
+</ul>
+<h2 id="ConvnetJS"><a href="#ConvnetJS" class="headerlink" title="ConvnetJS"></a>ConvnetJS</h2><blockquote>
+<p>官网：<a href="http://cs.stanford.edu/people/karpathy/convnetjs/" target="_blank" rel="external">http://cs.stanford.edu/people/karpathy/convnetjs/</a><br>GitHub项目：<a href="https://github.com/karpathy/convnetjs" target="_blank" rel="external">https://github.com/karpathy/convnetjs</a></p>
+</blockquote>
+<p><strong>ConvNetJS is a Javascript library for training Deep Learning models (Neural Networks) entirely in your browser. Open a tab and you’re training. No software requirements, no compilers, no installations, no GPUs, no sweat.</strong></p>
+<p><img src="ConvNetJS.png" alt="ConvNetJS"></p>
+<h3 id="Some-Online-Demos"><a href="#Some-Online-Demos" class="headerlink" title="Some Online Demos"></a>Some Online Demos</h3><ul>
+<li><a href="http://cs.stanford.edu/~karpathy/convnetjs/demo/mnist.html" target="_blank" rel="external">Convolutional Neural Network on MNIST digits</a></li>
+<li><a href="http://cs.stanford.edu/~karpathy/convnetjs/demo/cifar10.html" target="_blank" rel="external">Convolutional Neural Network on CIFAR-10</a></li>
+<li><a href="http://cs.stanford.edu/~karpathy/convnetjs/demo/classify2d.html" target="_blank" rel="external">Toy 2D data</a></li>
+<li><a href="http://cs.stanford.edu/~karpathy/convnetjs/demo/regression.html" target="_blank" rel="external">Toy 1D regression</a></li>
+<li><a href="http://cs.stanford.edu/~karpathy/convnetjs/demo/autoencoder.html" target="_blank" rel="external">Training an Autoencoder on MNIST digits</a></li>
+<li><a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/rldemo.html" target="_blank" rel="external">Deep Q Learning Reinforcement Learning demo</a></li>
+<li><a href="http://cs.stanford.edu/~karpathy/convnetjs/demo/image_regression.html" target="_blank" rel="external">Image Regression (“Painting”)</a></li>
+<li><a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/trainers.html" target="_blank" rel="external">Comparison of SGD/Adagrad/Adadelta on MNIST</a></li>
+</ul>
+<p>更多内容请关注<a href="http://cs.stanford.edu/people/karpathy/convnetjs/" target="_blank" rel="external">官网</a>和GutHub项目<a href="https://github.com/karpathy/convnetjs" target="_blank" rel="external">README</a>。</p>
+<h2 id="wevi"><a href="#wevi" class="headerlink" title="wevi"></a>wevi</h2><blockquote>
+<p>官网：<a href="https://ronxin.github.io/wevi/" target="_blank" rel="external">wevi: word embedding visual inspector</a><br>GitHub项目：<a href="https://github.com/ronxin/wevi" target="_blank" rel="external">https://github.com/ronxin/wevi</a></p>
+</blockquote>
+<p><img src="wevi.png" alt="wevi"></p>
+<p>具体参考：<a href="https://docs.google.com/document/d/1qUH1LvNcp5msoh2FEwTQAUX8KfMq2faGpNv4s4WXhgg/pub" target="_blank" rel="external">wevi: Word Embedding Visual Inspector</a></p>
+<h2 id="CNNVis"><a href="#CNNVis" class="headerlink" title="CNNVis"></a>CNNVis</h2><blockquote>
+<p>文章来源：<a href="https://arxiv.org/abs/1604.07043" target="_blank" rel="external">Towards Better Analysis of Deep Convolutional Neural Networks</a> arxiv.org/abs/1604.07043</p>
+</blockquote>
+<p>具体参见：<a href="https://yq.aliyun.com/articles/64813" target="_blank" rel="external">能帮你更好理解分析深度卷积神经网络，今天要解读的是一款新型可视化工具——CNNVis，看完就能用！</a></p>
+<p><strong>摘要：</strong> 深度卷积神经网络（CNNs）在许多模式识别任务中取得了很大的性能突破， 然而高质量深度模型的发展依赖于大量的尝试，这是由于没有很好的理解深度模型是怎么工作的，在本文中，提出了一个可视化分析系统CNNVis，帮助机器学习专家更好的理解、分析、设计深度卷积神经网络。</p>
+<p><img src="cnnvis.png" alt=""></p>
+<p><strong>（ 未经授权禁止转载，转载请联系作者并注明出处，谢谢！）</strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      本文主要总结一下神经网络可视化的一些工具，包括tensorflow的tensorboard，支持caffe中prototxt格式网络结构可视化工具Netscope，python的draw_net绘制网络模型，tensorflow的Neural Network Playground，可以直接在浏览器演示的ConvnetJS，word embedding visual inspector的wevi，以及Mengchen Liu 等人提出的一个可视化分析系统CNNVis，帮助机器学习专家更好的理解、分析、设计深度卷积神经网络。
+    
+    </summary>
+    
+      <category term="Tool" scheme="http://zhwhong.ml/categories/Tool/"/>
+    
+    
+      <category term="TensorFlow" scheme="http://zhwhong.ml/tags/TensorFlow/"/>
+    
+      <category term="Neural Network" scheme="http://zhwhong.ml/tags/Neural-Network/"/>
+    
+      <category term="Caffe" scheme="http://zhwhong.ml/tags/Caffe/"/>
+    
+  </entry>
   
   <entry>
     <title>LIDC-IDRI肺结节公开数据集Dicom和XML标注详解</title>
