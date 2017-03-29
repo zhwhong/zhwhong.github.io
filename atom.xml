@@ -1882,9 +1882,9 @@
     
       <category term="Deep Learning" scheme="http://zhwhong.ml/tags/Deep-Learning/"/>
     
-      <category term="TensorFlow" scheme="http://zhwhong.ml/tags/TensorFlow/"/>
-    
       <category term="CNN" scheme="http://zhwhong.ml/tags/CNN/"/>
+    
+      <category term="TensorFlow" scheme="http://zhwhong.ml/tags/TensorFlow/"/>
     
       <category term="RNN" scheme="http://zhwhong.ml/tags/RNN/"/>
     
