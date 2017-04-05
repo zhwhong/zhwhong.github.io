@@ -1136,11 +1136,11 @@
       <category term="Machine Learning" scheme="http://zhwhong.ml/categories/Machine-Learning/"/>
     
     
+      <category term="Algorithm" scheme="http://zhwhong.ml/tags/Algorithm/"/>
+    
       <category term="RNN" scheme="http://zhwhong.ml/tags/RNN/"/>
     
       <category term="LSTM" scheme="http://zhwhong.ml/tags/LSTM/"/>
-    
-      <category term="Algorithm" scheme="http://zhwhong.ml/tags/Algorithm/"/>
     
   </entry>
   
@@ -1882,13 +1882,13 @@
     
       <category term="Deep Learning" scheme="http://zhwhong.ml/tags/Deep-Learning/"/>
     
-      <category term="CNN" scheme="http://zhwhong.ml/tags/CNN/"/>
-    
-      <category term="TensorFlow" scheme="http://zhwhong.ml/tags/TensorFlow/"/>
-    
       <category term="RNN" scheme="http://zhwhong.ml/tags/RNN/"/>
     
       <category term="LSTM" scheme="http://zhwhong.ml/tags/LSTM/"/>
+    
+      <category term="TensorFlow" scheme="http://zhwhong.ml/tags/TensorFlow/"/>
+    
+      <category term="CNN" scheme="http://zhwhong.ml/tags/CNN/"/>
     
       <category term="Object Detection" scheme="http://zhwhong.ml/tags/Object-Detection/"/>
     

@@ -3,6 +3,7 @@
 
 
     
+    
   <url>
     <loc>http://zhwhong.ml/2017/03/28/neural-network-visualization/</loc>
     <lastmod>2017-03-28T08:34:43.687Z</lastmod>
@@ -72,7 +73,6 @@
     </data>
     </url>
 
-    
     
     
   <url>
@@ -177,13 +177,13 @@
         
         <tag>Deep Learning</tag>
          
-        <tag>CNN</tag>
-         
-        <tag>TensorFlow</tag>
-         
         <tag>RNN</tag>
          
         <tag>LSTM</tag>
+         
+        <tag>TensorFlow</tag>
+         
+        <tag>CNN</tag>
          
         <tag>Object Detection</tag>
          
@@ -249,11 +249,11 @@
         <title>[RNN] Simple LSTM代码实现 & BPTT理论推导</title>
         <pubTime>2017-02-24T10:26:58.000Z</pubTime>
         
+        <tag>Algorithm</tag>
+         
         <tag>RNN</tag>
          
         <tag>LSTM</tag>
-         
-        <tag>Algorithm</tag>
          
          
            

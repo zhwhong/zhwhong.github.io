@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zhwhong.ml/about/index.html</loc>
+    
+    <lastmod>2017-04-05T04:23:16.761Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://zhwhong.ml/2017/03/28/neural-network-visualization/</loc>
     
     <lastmod>2017-03-28T08:34:43.687Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>http://zhwhong.ml/2017/03/11/GNU-make/</loc>
     
     <lastmod>2017-03-27T13:23:04.918Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhwhong.ml/about/index.html</loc>
-    
-    <lastmod>2017-03-27T12:17:01.493Z</lastmod>
     
   </url>
   
