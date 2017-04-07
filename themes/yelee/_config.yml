@@ -310,6 +310,9 @@ donate:
   wechatpay: /images/wechat-reward-image.jpg
   alipay: /images/alipay-reward-image.jpg
 
+# 鼠标点击是否出现爱心动画
+background_animation: true
+
 CDN:
   jquery: //cdn.bootcss.com/jquery/2.2.4/jquery.min.js
   require: //cdn.bootcss.com/require.js/2.2.0/require.min.js
