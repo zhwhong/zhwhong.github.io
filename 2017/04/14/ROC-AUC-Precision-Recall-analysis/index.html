@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://zhwhong.ml/8.png">
 <meta property="og:image" content="http://zhwhong.ml/9.png">
 <meta property="og:image" content="http://zhwhong.ml/10.png">
-<meta property="og:updated_time" content="2017-04-14T15:25:12.452Z">
+<meta property="og:updated_time" content="2017-04-14T15:46:52.339Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率">
 <meta name="twitter:description" content="在分类任务中，人们总是喜欢基于错误率来衡量分类器任务的成功程度。错误率指的是在所有测试样例中错分的样例比例。实际上，这样的度量错误掩盖了样例如何被分错的事实。在机器学习中，有一个普遍适用的称为混淆矩阵(confusion matrix)的工具，它可以帮助人们更好地了解分类中的错误。">
@@ -458,7 +458,7 @@
 <li><strong>Youden指数</strong>(<a href="http://baike.baidu.com/link?url=ocB5vtVDdo5gYlDxy3xlonrDGQUTZVNv3_uK3FRE30qVYsTeeXPif3fEbQSw2-IZzEoseco7zo-WVEnXM2rngLNp-e2xSej_cUfT6a3afELWFUmvrLtZIKfwMOFNCbKG" target="_blank" rel="external">Youden index</a>)：</li>
 </ul>
 <p>$$ \text{Youden index} = Sensitivity + Specificity - 1 = TPR - FPR $$</p>
-<h2 id="二、ROC曲线"><a href="#二、ROC曲线" class="headerlink" title="二、ROC曲线"></a>二、ROC曲线</h2><p><strong>ROC曲线</strong>：接收者操作特征曲线（<a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic" target="_blank" rel="external">receiver operating characteristic curve</a>），是反映敏感性和特异性连续变量的综合指标，roc曲线上每个点反映着对同一信号刺激的感受性。</p>
+<h2 id="二、ROC曲线"><a href="#二、ROC曲线" class="headerlink" title="二、ROC曲线"></a>二、ROC曲线</h2><p><strong>ROC曲线</strong>：接收者操作特征曲线(<a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic" target="_blank" rel="external">receiver operating characteristic curve</a>)，是反映敏感性和特异性连续变量的综合指标，roc曲线上每个点反映着对同一信号刺激的感受性。</p>
 <p>对于分类器或者说分类算法，评价指标主要有<a href="https://en.wikipedia.org/wiki/Precision_and_recall#Precision" target="_blank" rel="external">precision</a>，<a href="https://en.wikipedia.org/wiki/Precision_and_recall#Recall" target="_blank" rel="external">recall</a>，<a href="https://en.wikipedia.org/wiki/F1_score" target="_blank" rel="external">F1 score</a>等，以及这里要讨论的<a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic" target="_blank" rel="external">ROC</a>和<a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve" target="_blank" rel="external">AUC</a>。下图是一个ROC曲线的示例：</p>
 <p><img src="4.png" alt=""></p>
 <ul>
@@ -487,8 +487,8 @@
 <p><img src="8.png" alt=""></p>
 <p>当我们将threshold设置为1和0时，分别可以得到ROC曲线上的(0,0)和(1,1)两个点。将这些(FPR,TPR)对连接起来，就得到了ROC曲线。当threshold取值越多，ROC曲线越平滑。</p>
 <p>其实，我们并不一定要得到每个测试样本是正样本的概率值，只要得到这个分类器对该测试样本的“评分值”即可（评分值并不一定在(0,1)区间）。评分越高，表示分类器越肯定地认为这个测试样本是正样本，而且同时使用各个评分值作为threshold。我认为将评分值转化为概率更易于理解一些。</p>
-<h2 id="四、AUC"><a href="#四、AUC" class="headerlink" title="四、AUC"></a>四、AUC</h2><h3 id="AUC值的计算"><a href="#AUC值的计算" class="headerlink" title="AUC值的计算"></a>AUC值的计算</h3><p>AUC（<a href="https://en.wikipedia.org/wiki/Area_under_the_curve_(pharmacokinetics" target="_blank" rel="external">Area Under Curve</a>)）被定义为ROC曲线下的面积，显然这个面积的数值不会大于1。又由于ROC曲线一般都处于y=x这条直线的上方，所以AUC的取值范围一般在0.5和1之间。使用AUC值作为评价标准是因为很多时候ROC曲线并不能清晰的说明哪个分类器的效果更好，而作为一个数值，对应AUC更大的分类器效果更好。</p>
-<p>AUC的计算有两种方式，梯形法和ROC AUCH法，都是以逼近法求近似值，具体见<a href="https://zh.wikipedia.org/wiki/ROC%E6%9B%B2%E7%BA%BF#.E8.A8.88.E7.AE.97" target="_blank" rel="external">wikipedia</a>。</p>
+<h2 id="四、AUC"><a href="#四、AUC" class="headerlink" title="四、AUC"></a>四、AUC</h2><h3 id="AUC值的计算"><a href="#AUC值的计算" class="headerlink" title="AUC值的计算"></a>AUC值的计算</h3><p>AUC (<a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve" target="_blank" rel="external">Area Under Curve</a>) 被定义为ROC曲线下的面积，显然这个面积的数值不会大于1。又由于ROC曲线一般都处于y=x这条直线的上方，所以AUC的取值范围一般在0.5和1之间。使用AUC值作为评价标准是因为很多时候ROC曲线并不能清晰的说明哪个分类器的效果更好，而作为一个数值，对应AUC更大的分类器效果更好。</p>
+<p>AUC的计算有两种方式，梯形法和ROC AUCH法，都是以逼近法求近似值，具体见<a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve" target="_blank" rel="external">wikipedia</a>。</p>
 <h3 id="AUC意味着什么"><a href="#AUC意味着什么" class="headerlink" title="AUC意味着什么"></a>AUC意味着什么</h3><p>那么AUC值的含义是什么呢？根据(Fawcett, 2006)，AUC的值的含义是：</p>
 <blockquote>
 <p>The AUC value is equivalent to the probability that a randomly chosen positive example is ranked higher than a randomly chosen negative example.</p>
@@ -528,7 +528,7 @@
         <p><span>本文标题:</span><a href="/2017/04/14/ROC-AUC-Precision-Recall-analysis/">机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">zhwhong</a></p>
         <p><span>发布时间:</span>2017-04-14, 22:13:35</p>
-        <p><span>最后更新:</span>2017-04-14, 23:25:12</p>
+        <p><span>最后更新:</span>2017-04-14, 23:46:52</p>
 
         
             <p>

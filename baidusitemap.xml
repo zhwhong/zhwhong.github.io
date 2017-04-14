@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://zhwhong.ml/2017/04/14/ROC-AUC-Precision-Recall-analysis/</loc>
-    <lastmod>2017-04-14T15:25:12.452Z</lastmod>
+    <lastmod>2017-04-14T15:46:52.339Z</lastmod>
     <data>
         <display>
         <title>机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率</title>
@@ -201,9 +201,9 @@
         
         <tag>Deep Learning</tag>
          
-        <tag>CNN</tag>
-         
         <tag>TensorFlow</tag>
+         
+        <tag>CNN</tag>
          
         <tag>RNN</tag>
          
