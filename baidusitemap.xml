@@ -3,6 +3,30 @@
 
 
     
+  <url>
+    <loc>http://zhwhong.ml/2017/04/14/ROC-AUC-Precision-Recall-analysis/</loc>
+    <lastmod>2017-04-14T15:25:12.452Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率</title>
+        <pubTime>2017-04-14T14:13:35.000Z</pubTime>
+        
+        <tag>ROC</tag>
+         
+        <tag>AUC</tag>
+         
+        <tag>Classfication</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://zhwhong.ml/2017/03/28/neural-network-visualization/</loc>
@@ -177,9 +201,9 @@
         
         <tag>Deep Learning</tag>
          
-        <tag>TensorFlow</tag>
-         
         <tag>CNN</tag>
+         
+        <tag>TensorFlow</tag>
          
         <tag>RNN</tag>
          
@@ -249,11 +273,11 @@
         <title>[RNN] Simple LSTM代码实现 & BPTT理论推导</title>
         <pubTime>2017-02-24T10:26:58.000Z</pubTime>
         
-        <tag>Algorithm</tag>
-         
         <tag>RNN</tag>
          
         <tag>LSTM</tag>
+         
+        <tag>Algorithm</tag>
          
          
            

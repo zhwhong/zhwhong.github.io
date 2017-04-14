@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="zhwhong" />
+
+
+
+<meta name="description" content="在分类任务中，人们总是喜欢基于错误率来衡量分类器任务的成功程度。错误率指的是在所有测试样例中错分的样例比例。实际上，这样的度量错误掩盖了样例如何被分错的事实。在机器学习中，有一个普遍适用的称为混淆矩阵(confusion matrix)的工具，它可以帮助人们更好地了解分类中的错误。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率">
+<meta property="og:url" content="http://zhwhong.ml/2017/04/14/ROC-AUC-Precision-Recall-analysis/index.html">
+<meta property="og:site_name" content="Zhiwei's Blog">
+<meta property="og:description" content="在分类任务中，人们总是喜欢基于错误率来衡量分类器任务的成功程度。错误率指的是在所有测试样例中错分的样例比例。实际上，这样的度量错误掩盖了样例如何被分错的事实。在机器学习中，有一个普遍适用的称为混淆矩阵(confusion matrix)的工具，它可以帮助人们更好地了解分类中的错误。">
+<meta property="og:image" content="http://zhwhong.ml/1.png">
+<meta property="og:image" content="http://zhwhong.ml/2.png">
+<meta property="og:image" content="http://zhwhong.ml/3.png">
+<meta property="og:image" content="http://zhwhong.ml/wiki_matrix.png">
+<meta property="og:image" content="http://zhwhong.ml/4.png">
+<meta property="og:image" content="http://zhwhong.ml/5.png">
+<meta property="og:image" content="http://zhwhong.ml/6.png">
+<meta property="og:image" content="http://zhwhong.ml/7.png">
+<meta property="og:image" content="http://zhwhong.ml/8.png">
+<meta property="og:image" content="http://zhwhong.ml/9.png">
+<meta property="og:image" content="http://zhwhong.ml/10.png">
+<meta property="og:updated_time" content="2017-04-14T15:25:12.452Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率">
+<meta name="twitter:description" content="在分类任务中，人们总是喜欢基于错误率来衡量分类器任务的成功程度。错误率指的是在所有测试样例中错分的样例比例。实际上，这样的度量错误掩盖了样例如何被分错的事实。在机器学习中，有一个普遍适用的称为混淆矩阵(confusion matrix)的工具，它可以帮助人们更好地了解分类中的错误。">
+<meta name="twitter:image" content="http://zhwhong.ml/1.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Zhiwei&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率 | Zhiwei&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?c28078cddac47e3f37d968d55b8b4e4f";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">zhwhong</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Stay Hungry Stay Foolish | 常葆求知若饥 常存虚怀若愚</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">文章归档</a></li>
+                        
+                            <li><a href="/tags/">分类标签</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa Email" href="mailto:hongzhiwei886@gmail.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="http://weibo.com/zhwhong" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="//github.com/Hzwcode" title="GitHub"></a>
+                            
+                                <a class="fa Facebook" href="https://www.facebook.com/profile.php?id=100008115764524" title="Facebook"></a>
+                            
+                                <a class="fa 简书" href="http://www.jianshu.com/u/38cd2a8c425e" title="简书"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/zhwhong/activities" title="知乎"></a>
+                            
+                                <a class="fa 豆瓣" href="https://www.douban.com/people/zhwhong/" title="豆瓣"></a>
+                            
+                                <a class="fa 网易云音乐" href="http://music.163.com/#/user/home?id=49576672" title="网易云音乐"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AUC/">AUC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Caffe/">Caffe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Classfication/">Classfication</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debug/">Debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dicom/">Dicom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNU/">GNU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPU/">GPU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LIDC/">LIDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSTM/">LSTM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Makefile/">Makefile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Music/">Music</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Network/">Neural Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Detection/">Object Detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/">RNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ROC/">ROC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/">TensorFlow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Theme/">Theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xml/">Xml</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://scholar.google.com/">Google scholar</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://csrankings.org/?nsukey=eDYw1JlrTACtiYA%2BUn%2FlPzeKi7tH23c2yYScMmTD1d4O%2FM5MSONsPUiIwGeKGX5bfZSEDyKi0rIQS80brHuAVnx%2FJhlnzTuzAvY9ePyy5tnxNaVWdu3owBicjNIFvxJG9HFXi1kAsN0U2%2BLeGLXA3HBznVmKhbu1Vw6UBjQ%2FqqwQ95bobndqgpqO8OtwePuV">CS Rankings (beta)</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://karpathy.github.io/2016/09/07/phd/">A Survival Guide to a PhD - karpathy</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://zhuanlan.zhihu.com/p/25099638">博士这五年 - 李沐</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://arxiv.org/">arXiv.org</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.arxiv-sanity.com/">Arxiv Sanity Preserver</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">一只 Deep Learning, Data Mining, Bioinformatics 的CS小菜鸟(*´∇｀*), 欢迎分享知识。喜欢音乐、影视、阅读，爱好乒乓球、健身、户外，喜欢捣腾电脑blabla (●’◡’●)</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">zhwhong</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">zhwhong</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Stay Hungry Stay Foolish | 常葆求知若饥 常存虚怀若愚</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">文章归档</a></li>
+                
+                    <li><a href="/tags/">分类标签</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa Email" target="_blank" href="mailto:hongzhiwei886@gmail.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/zhwhong" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="//github.com/Hzwcode" title="GitHub"></a>
+                            
+                                <a class="fa Facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100008115764524" title="Facebook"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="http://www.jianshu.com/u/38cd2a8c425e" title="简书"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/zhwhong/activities" title="知乎"></a>
+                            
+                                <a class="fa 豆瓣" target="_blank" href="https://www.douban.com/people/zhwhong/" title="豆瓣"></a>
+                            
+                                <a class="fa 网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=49576672" title="网易云音乐"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-ROC-AUC-Precision-Recall-analysis" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/04/14/ROC-AUC-Precision-Recall-analysis/" class="article-date">
+      <time datetime="2017-04-14T14:13:35.000Z" itemprop="datePublished">2017-04-14</time>
+</a>
+
+ 
+    <a href="/2017/04/14/ROC-AUC-Precision-Recall-analysis/#comments" title="查看评论">
+        <i class="fa fa-comments-o" aria-hidden="true"></i>
+        <span class="count-comment"></span>
+        
+            <span class="ds-thread-count" ></span>
+        
+        
+    </a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率
+    </h1>
+  
+
+        
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">2,942字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">11分</span>
+      </span>
+    </span>
+</div>
+    <!-- <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+        <span class="post-meta-item-text">  阅读量: </span>
+        <span id="busuanzi_value_page_pv"></span>次
+      </span>
+    </span> -->
+
+        
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+          <br>
+          <br>
+        
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning<span class="article-category-count">9</span></a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AUC/">AUC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Classfication/">Classfication</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ROC/">ROC</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <script src="/assets/js/APlayer.min.js"> </script><p>在分类任务中，人们总是喜欢基于错误率来衡量分类器任务的成功程度。错误率指的是在所有测试样例中错分的样例比例。实际上，这样的度量错误掩盖了样例如何被分错的事实。在机器学习中，有一个普遍适用的称为混淆矩阵(<a href="https://en.wikipedia.org/wiki/Confusion_matrix" target="_blank" rel="external">confusion matrix</a>)的工具，它可以帮助人们更好地了解分类中的错误。</p>
+<a id="more"></a>
+<p>比如有这样一个在房子周围可能发现的动物类型的预测，这个预测的三类问题的混淆矩阵如下表所示：</p>
+<p><img src="1.png" alt="一个三类问题的混淆矩阵"></p>
+<p>利用混淆矩阵可以充分理解分类中的错误了。如果混淆矩阵中的非对角线元素均为0，就会得到一个近乎完美的分类器。</p>
+<p>在接下来的讨论中，将以经典的二分类问题为例，对于多分类类比推断。</p>
+<p>二分类问题在机器学习中是一个很常见的问题，经常会用到。<a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic" target="_blank" rel="external">ROC</a> (Receiver Operating Characteristic) 曲线和 <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve" target="_blank" rel="external">AUC</a> (Area Under the Curve) 值常被用来评价一个二值分类器 (<a href="https://en.wikipedia.org/wiki/Binary_classification" target="_blank" rel="external">binary classifier</a>) 的优劣。之前做医学图像计算机辅助肺结节检测时，在评定模型预测结果时，就用到了ROC和AUC，这里简单介绍一下它们的特点，以及更为深入地，讨论如何作出ROC曲线图和计算AUC值。</p>
+<h2 id="一、医学图像识别二分类问题"><a href="#一、医学图像识别二分类问题" class="headerlink" title="一、医学图像识别二分类问题"></a>一、医学图像识别二分类问题</h2><p>针对一个二分类问题，我们将实例分成<strong>正类</strong>(positive)和<strong>负类</strong>(negative)两种。</p>
+<p>例如：在肺结节计算机辅助识别这一问题上，一幅肺部CT图像中有肺结节被认为是<strong>阳性</strong>(positive)，没有肺结节被认为是<strong>阴性</strong>(negative)。对于部分有肺结节的示意图如下：</p>
+<p><img src="2.png" alt="常见肺结节示意图"></p>
+<p>所以在实际检测时，就会有如下四种情况：</p>
+<blockquote>
+<p>(1) 真阳性(True Positive，TP)：检测有结节，且实际有结节；正确肯定的匹配数目；<br>(2) 假阳性(False Positive，FP)：检测有结节，但实际无结节；误报，给出的匹配是不正确的；<br>(3) 真阴性(True Negative，TN)：检测无结节，且实际无结节；正确拒绝的非匹配数目；<br>(4) 假阴性(False Negative，FN)：检测无结节，但实际有结节；漏报，没有正确找到的匹配的数目。</p>
+</blockquote>
+<p>详细图解（原创，转载请标明出处）如下：</p>
+<p><img src="3.png" alt="混淆矩阵"></p>
+<p>上图中涉及到很多相关概念及参数，详细请见Wiki上的<a href="https://en.wikipedia.org/wiki/Sensitivity_and_specificity#Definitions" target="_blank" rel="external">定义</a>及其<a href="https://en.wikipedia.org/wiki/Sensitivity_and_specificity#Confusion_matrix" target="_blank" rel="external">混淆矩阵</a>。</p>
+<p><img src="wiki_matrix.png" alt="wiki混淆矩阵"></p>
+<p>这里整理肺结节识别中的几个主要参数指标如下：</p>
+<ul>
+<li><strong>正确率</strong>(<a href="https://en.wikipedia.org/wiki/Precision_and_recall#Precision" target="_blank" rel="external">Precision</a>)：</li>
+</ul>
+<p>$$ Precision=\dfrac{TP}{TP+FP} $$</p>
+<ul>
+<li><strong>真阳性率</strong>(True Positive Rate，<a href="https://en.wikipedia.org/wiki/Sensitivity_and_specificity" target="_blank" rel="external">TPR</a>)，<strong>灵敏度</strong>(<a href="https://en.wikipedia.org/wiki/Sensitivity_and_specificity#Sensitivity" target="_blank" rel="external">Sensitivity</a>)，<strong>召回率</strong>(<a href="https://en.wikipedia.org/wiki/Precision_and_recall#Recall" target="_blank" rel="external">Recall</a>)：</li>
+</ul>
+<p>$$ Sensitivity=Recall=TPR=\dfrac{TP}{TP+FN} $$</p>
+<ul>
+<li><strong>真阴性率</strong>(True Negative Rate，<a href="https://en.wikipedia.org/wiki/Sensitivity_and_specificity" target="_blank" rel="external">TNR</a>)，<strong>特异度</strong>(<a href="https://en.wikipedia.org/wiki/Sensitivity_and_specificity#Specificity" target="_blank" rel="external">Specificity</a>)：</li>
+</ul>
+<p>$$ Specificity=TNR=\dfrac{TN}{FP+TN} $$</p>
+<ul>
+<li><strong>假阴性率</strong>(False Negatice Rate，<a href="https://en.wikipedia.org/wiki/False_positives_and_false_negatives#False_positive_and_false_negative_rates" target="_blank" rel="external">FNR</a>)，<strong>漏诊率</strong>( = 1 - 灵敏度)：</li>
+</ul>
+<p>$$ FNR=\dfrac{FN}{TP+FN} $$</p>
+<ul>
+<li><strong>假阳性率</strong>(False Positice Rate，<a href="https://en.wikipedia.org/wiki/False_positive_rate" target="_blank" rel="external">FPR</a>)，<strong>误诊率</strong>( = 1 - 特异度)：</li>
+</ul>
+<p>$$ FPR=\dfrac{FP}{FP+TN} $$</p>
+<ul>
+<li><strong>阳性似然比</strong>(<a href="https://en.wikipedia.org/wiki/Likelihood_ratios_in_diagnostic_testing#positive_likelihood_ratio" target="_blank" rel="external">Positive Likelihood Ratio (LR+)</a>)：</li>
+</ul>
+<p>$$ LR+ = \dfrac{TPR}{FPR} = \dfrac{Sensitivity}{1-Specificity} $$</p>
+<ul>
+<li><strong>阴性似然比</strong>(<a href="https://en.wikipedia.org/wiki/Likelihood_ratios_in_diagnostic_testing#negative_likelihood_ratio" target="_blank" rel="external">Negative Likelihood Ratio (LR−) </a>)：</li>
+</ul>
+<p>$$ LR- = \dfrac{FNR}{TNR} = \dfrac{1-Sensitivity}{Specificity} $$</p>
+<ul>
+<li><strong>Youden指数</strong>(<a href="http://baike.baidu.com/link?url=ocB5vtVDdo5gYlDxy3xlonrDGQUTZVNv3_uK3FRE30qVYsTeeXPif3fEbQSw2-IZzEoseco7zo-WVEnXM2rngLNp-e2xSej_cUfT6a3afELWFUmvrLtZIKfwMOFNCbKG" target="_blank" rel="external">Youden index</a>)：</li>
+</ul>
+<p>$$ \text{Youden index} = Sensitivity + Specificity - 1 = TPR - FPR $$</p>
+<h2 id="二、ROC曲线"><a href="#二、ROC曲线" class="headerlink" title="二、ROC曲线"></a>二、ROC曲线</h2><p><strong>ROC曲线</strong>：接收者操作特征曲线（<a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic" target="_blank" rel="external">receiver operating characteristic curve</a>），是反映敏感性和特异性连续变量的综合指标，roc曲线上每个点反映着对同一信号刺激的感受性。</p>
+<p>对于分类器或者说分类算法，评价指标主要有<a href="https://en.wikipedia.org/wiki/Precision_and_recall#Precision" target="_blank" rel="external">precision</a>，<a href="https://en.wikipedia.org/wiki/Precision_and_recall#Recall" target="_blank" rel="external">recall</a>，<a href="https://en.wikipedia.org/wiki/F1_score" target="_blank" rel="external">F1 score</a>等，以及这里要讨论的<a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic" target="_blank" rel="external">ROC</a>和<a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve" target="_blank" rel="external">AUC</a>。下图是一个ROC曲线的示例：</p>
+<p><img src="4.png" alt=""></p>
+<ul>
+<li>横坐标：<strong>Sensitivity</strong>，伪正类率(False positive rate， FPR)，<strong>预测为正但实际为负</strong>的样本占<strong>所有负例样本</strong> 的比例；</li>
+<li>纵坐标：<strong>1-Specificity</strong>，真正类率(True positive rate， TPR)，<strong>预测为正且实际为正</strong>的样本占<strong>所有正例样本</strong> 的比例。</li>
+</ul>
+<p>在一个二分类模型中，假设采用逻辑回归分类器，其给出针对每个实例为正类的概率，那么通过设定一个阈值如0.6，概率大于等于0.6的为正类，小于0.6的为负类。对应的就可以算出一组(FPR,TPR)，在平面中得到对应坐标点。随着阈值的逐渐减小，越来越多的实例被划分为正类，但是这些正类中同样也掺杂着真正的负实例，即TPR和FPR会同时增大。阈值最大时，对应坐标点为(0,0)，阈值最小时，对应坐标点(1,1)。</p>
+<p>如下面这幅图，(a)图中实线为ROC曲线，线上每个点对应一个阈值。</p>
+<p><img src="5.png" alt="ROC曲线和它相关的比率"></p>
+<p>(a) 理想情况下，TPR应该接近1，FPR应该接近0。ROC曲线上的每一个点对应于一个threshold，对于一个分类器，每个threshold下会有一个TPR和FPR。比如Threshold最大时，TP=FP=0，对应于原点；Threshold最小时，TN=FN=0，对应于右上角的点(1,1)。<br>(b) P和N得分不作为特征间距离d的一个函数，随着阈值theta增加，TP和FP都增加。</p>
+<ul>
+<li>横轴FPR：1-TNR，1-Specificity，FPR越大，预测正类中实际负类越多。</li>
+<li>纵轴TPR：Sensitivity(正类覆盖率)，TPR越大，预测正类中实际正类越多。</li>
+<li>理想目标：TPR=1，FPR=0，即图中(0,1)点，故ROC曲线越靠拢(0,1)点，越偏离45度对角线越好，Sensitivity、Specificity越大效果越好。</li>
+</ul>
+<p>随着阈值threshold调整，ROC坐标系里的点如何移动可以参考：</p>
+<p><img src="6.png" alt=""></p>
+<h2 id="三、如何画ROC曲线"><a href="#三、如何画ROC曲线" class="headerlink" title="三、如何画ROC曲线"></a>三、如何画ROC曲线</h2><p>对于一个特定的分类器和测试数据集，显然只能得到一个分类结果，即一组FPR和TPR结果，而要得到一个曲线，我们实际上需要一系列FPR和TPR的值，这又是如何得到的呢？我们先来看一下Wikipedia上对ROC曲线的<a href="http://en.wikipedia.org/wiki/Receiver_operating_characteristic" target="_blank" rel="external">定义</a>：</p>
+<blockquote>
+<p>In signal detection theory, a receiver operating characteristic (ROC), or simply ROC curve, is a graphical plot which illustrates the performance of a binary classifier system as its discrimination threshold is varied.</p>
+</blockquote>
+<p>问题在于“as its discrimination threashold is varied”。如何理解这里的“discrimination threashold”呢？我们忽略了分类器的一个重要功能“概率输出”，即表示分类器认为某个样本具有多大的概率属于正样本（或负样本）。通过更深入地了解各个分类器的内部机理，我们总能想办法得到一种概率输出。通常来说，是将一个实数范围通过某个变换映射到(0,1)区间。</p>
+<p>假如我们已经得到了所有样本的概率输出（属于正样本的概率），现在的问题是如何改变“discrimination threashold”？我们根据每个测试样本属于正样本的概率值从大到小排序。下图是一个示例，图中共有20个测试样本，“Class”一栏表示每个测试样本真正的标签（p表示正样本，n表示负样本），“Score”表示每个测试样本属于正样本的概率。</p>
+<p><img src="7.png" alt=""></p>
+<p>接下来，我们从高到低，依次将“Score”值作为阈值threshold，当测试样本属于正样本的概率大于或等于这个threshold时，我们认为它为正样本，否则为负样本。举例来说，对于图中的第4个样本，其“Score”值为0.6，那么样本1，2，3，4都被认为是正样本，因为它们的“Score”值都大于等于0.6，而其他样本则都认为是负样本。每次选取一个不同的threshold，我们就可以得到一组FPR和TPR，即ROC曲线上的一点。这样一来，我们一共得到了20组FPR和TPR的值，将它们画在ROC曲线的结果如下图：</p>
+<p><img src="8.png" alt=""></p>
+<p>当我们将threshold设置为1和0时，分别可以得到ROC曲线上的(0,0)和(1,1)两个点。将这些(FPR,TPR)对连接起来，就得到了ROC曲线。当threshold取值越多，ROC曲线越平滑。</p>
+<p>其实，我们并不一定要得到每个测试样本是正样本的概率值，只要得到这个分类器对该测试样本的“评分值”即可（评分值并不一定在(0,1)区间）。评分越高，表示分类器越肯定地认为这个测试样本是正样本，而且同时使用各个评分值作为threshold。我认为将评分值转化为概率更易于理解一些。</p>
+<h2 id="四、AUC"><a href="#四、AUC" class="headerlink" title="四、AUC"></a>四、AUC</h2><h3 id="AUC值的计算"><a href="#AUC值的计算" class="headerlink" title="AUC值的计算"></a>AUC值的计算</h3><p>AUC（<a href="https://en.wikipedia.org/wiki/Area_under_the_curve_(pharmacokinetics" target="_blank" rel="external">Area Under Curve</a>)）被定义为ROC曲线下的面积，显然这个面积的数值不会大于1。又由于ROC曲线一般都处于y=x这条直线的上方，所以AUC的取值范围一般在0.5和1之间。使用AUC值作为评价标准是因为很多时候ROC曲线并不能清晰的说明哪个分类器的效果更好，而作为一个数值，对应AUC更大的分类器效果更好。</p>
+<p>AUC的计算有两种方式，梯形法和ROC AUCH法，都是以逼近法求近似值，具体见<a href="https://zh.wikipedia.org/wiki/ROC%E6%9B%B2%E7%BA%BF#.E8.A8.88.E7.AE.97" target="_blank" rel="external">wikipedia</a>。</p>
+<h3 id="AUC意味着什么"><a href="#AUC意味着什么" class="headerlink" title="AUC意味着什么"></a>AUC意味着什么</h3><p>那么AUC值的含义是什么呢？根据(Fawcett, 2006)，AUC的值的含义是：</p>
+<blockquote>
+<p>The AUC value is equivalent to the probability that a randomly chosen positive example is ranked higher than a randomly chosen negative example.</p>
+</blockquote>
+<p>这句话有些绕，我尝试解释一下：首先AUC值是一个概率值，当你随机挑选一个正样本以及一个负样本，当前的分类算法根据计算得到的Score值将这个正样本排在负样本前面的概率就是AUC值。当然，AUC值越大，当前的分类算法越有可能将正样本排在负样本前面，即能够更好的分类。</p>
+<p>从AUC判断分类器（预测模型）优劣的标准：</p>
+<ul>
+<li>AUC = 1，是完美分类器，采用这个预测模型时，存在至少一个阈值能得出完美预测。绝大多数预测的场合，不存在完美分类器。</li>
+<li>0.5 &lt; AUC &lt; 1，优于随机猜测。这个分类器（模型）妥善设定阈值的话，能有预测价值。</li>
+<li>AUC = 0.5，跟随机猜测一样（例：丢铜板），模型没有预测价值。</li>
+<li>AUC &lt; 0.5，比随机猜测还差；但只要总是反预测而行，就优于随机猜测。</li>
+</ul>
+<p>三种AUC值示例：</p>
+<p><img src="9.png" alt=""></p>
+<p>简单说：<strong>AUC值越大的分类器，正确率越高</strong>。</p>
+<h3 id="为什么使用ROC曲线"><a href="#为什么使用ROC曲线" class="headerlink" title="为什么使用ROC曲线"></a>为什么使用ROC曲线</h3><p>既然已经这么多评价标准，为什么还要使用ROC和AUC呢？因为ROC曲线有个很好的特性：当测试集中的正负样本的分布变化的时候，ROC曲线能够保持不变。在实际的数据集中经常会出现类不平衡(class imbalance)现象，即负样本比正样本多很多(或者相反)，而且测试数据中的正负样本的分布也可能随着时间变化。下图是ROC曲线和<a href="https://en.wikipedia.org/wiki/Precision_and_recall" target="_blank" rel="external">Precision-Recall</a>曲线的对比：</p>
+<p><img src="10.png" alt=""></p>
+<p>在上图中，(a)和(c)为ROC曲线，(b)和(d)为Precision-Recall曲线。(a)和(b)展示的是分类其在原始测试集(正负样本分布平衡)的结果，(c)和(d)是将测试集中负样本的数量增加到原来的10倍后，分类器的结果。可以明显的看出，ROC曲线基本保持原貌，而Precision-Recall曲线则变化较大。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li>Wikipedia：<a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic" target="_blank" rel="external">Receiver operating characteristic</a></li>
+<li>孔明的博客：<a href="http://alexkong.net/2013/06/introduction-to-auc-and-roc/" target="_blank" rel="external">ROC和AUC介绍以及如何计算AUC</a></li>
+<li>Rachel Zhang的专栏(CSDN)：<a href="http://blog.csdn.net/abcjennifer/article/details/7359370" target="_blank" rel="external">ROC曲线-阈值评价标准</a></li>
+<li>博客园dzl_ML：<a href="http://www.cnblogs.com/dlml/p/4403482.html" target="_blank" rel="external">机器学习之分类器性能指标之ROC曲线、AUC值</a></li>
+<li>知乎：<a href="https://www.zhihu.com/question/30643044" target="_blank" rel="external">精确率、召回率、F1 值、ROC、AUC 各自的优缺点是什么？</a></li>
+</ul>
+<p>（在此对以上博文的博主表示感谢！）</p>
+<hr>
+<p>写在最后：转载请联系作者并注明出处，谢谢！</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/04/14/ROC-AUC-Precision-Recall-analysis/">机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">zhwhong</a></p>
+        <p><span>发布时间:</span>2017-04-14, 22:13:35</p>
+        <p><span>最后更新:</span>2017-04-14, 23:25:12</p>
+
+        
+            <p>
+                <span>更新历史:</span><i class="fa fa-github"></i>
+                <a href="https://github.com/Hzwcode/Hzwcode.github.io/blame/blog-source/source/_posts/2017-04-14.ROC-AUC-Precision-Recall-analysis.md" title="顺序查看文章各部分修改记录" target = "_blank">Blame</a>,
+                <a href="https://github.com/Hzwcode/Hzwcode.github.io/commits/blog-source/source/_posts/2017-04-14.ROC-AUC-Precision-Recall-analysis.md" title="查看文章有关更新记录" target = "_blank">History</a><span class="raw">&nbsp;&nbsp;文本模式:</span><i class="fa fa-file-text-o"></i>
+                <a href="https://raw.githubusercontent.com/Hzwcode/Hzwcode.github.io/blog-source/source/_posts/2017-04-14.ROC-AUC-Precision-Recall-analysis.md" title="查看 & 下载文章 Markdown 原始文本" target = "_blank"> .md Raw</a>
+            </p>
+        
+
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/04/14/ROC-AUC-Precision-Recall-analysis/" title="机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率">http://zhwhong.ml/2017/04/14/ROC-AUC-Precision-Recall-analysis/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://zhwhong.ml/2017/04/14/ROC-AUC-Precision-Recall-analysis/　　作者: zhwhong" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/03/28/neural-network-visualization/">
+                    深度神经网络可视化工具
+                </a>
+            </div>
+        
+    </nav>
+
+
+  
+  
+	
+    <div style="padding: 0; margin: 20px auto; width: 90%; text-align: center;">
+      <br>
+      <div>哎呦，不行了，要睡觉了，赏我 e(=2.72) 元咖啡钱吧，您的支持将鼓励我继续创作！</div>
+      <br>
+      <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+        <div class="btn btn-pay">打赏支持</div>
+      </button>
+      <br>
+      <br>
+      <div id="QR" style="display: none;">
+        
+          <div id="wechat" style="display: inline-block;">
+            <img id="wechat_qr" src="/images/wechat-reward-image.jpg" alt="zhwhong WeChat Pay"/>
+            <p>微信打赏</p>
+          </div>
+        
+        
+          <div id="alipay" style="display: inline-block">
+            <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="zhwhong Alipay"/>
+            <p>支付宝打赏</p>
+          </div>
+        
+        <br>
+        <br>
+      </div>
+    </div>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、医学图像识别二分类问题"><span class="toc-text">一、医学图像识别二分类问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、ROC曲线"><span class="toc-text">二、ROC曲线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、如何画ROC曲线"><span class="toc-text">三、如何画ROC曲线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、AUC"><span class="toc-text">四、AUC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AUC值的计算"><span class="toc-text">AUC值的计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AUC意味着什么"><span class="toc-text">AUC意味着什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么使用ROC曲线"><span class="toc-text">为什么使用ROC曲线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"true"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <!-- <a href="#" class="fa fa-facebook bds_fbook" data-cmd="fbook" title="分享到Facebook"></a> -->
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率　| Zhiwei's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/04/14/ROC-AUC-Precision-Recall-analysis/" data-title="机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率" data-url="http://zhwhong.ml/2017/04/14/ROC-AUC-Precision-Recall-analysis/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"zhwhong"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//hzwcode.github.io/resources/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+            // Add comment count
+            $(function(){
+                var jsonUrl = "http://api.duoshuo.com/threads/counts.jsonp?short_name=zhwhong&threads=2017/04/14/ROC-AUC-Precision-Recall-analysis/&callback=?";
+                $.getJSON(jsonUrl, function(result){
+                    $.each(result.response, function(i, field){
+                        var value = field.comments;
+                        if (value > 0) {
+                            $(".count-comment").text(value);
+                            return;
+                        }
+                    })
+                })
+            })
+        
+    </script>
+    
+    <aside class="comment-bar">
+        <a href="javascript:void(0);">
+            <i class="fa fa-commenting-o animated infinite pulse"></i>
+            <i class="fa fa-spinner fa-pulse"></i>
+            <span class="count-comment"></span>
+        </a>
+    </aside>
+    <script>
+        var $commentBar = $("#comments aside.comment-bar");
+        var load$hide = function(){
+            $commentBar.find("a > i").toggle();
+            loadComment();
+            $commentBar.fadeOut(800);
+        }
+        $commentBar.click(function(){
+            load$hide();
+        })
+        $commentBar.children("a").hover(function(){
+            load$hide();
+        })
+        if (window.location.hash === "#comments") {
+            load$hide();
+        }
+    </script>
+
+
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/03/28/neural-network-visualization/" title="下一篇: 深度神经网络可视化工具">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/14/ROC-AUC-Precision-Recall-analysis/">机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/neural-network-visualization/">深度神经网络可视化工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/">LIDC-IDRI肺结节公开数据集Dicom和XML标注详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/24/AI-DL-CV-org-and-person/">那些深度学习与计算机视觉之路上的大佬们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/23/deal-with-hexo-article-top-problem/">解决Hexo博客文章置顶问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/Introduction-to-debugging-neural-networks/">[译] Introduction to debugging neural networks</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/13/mnist-gpu-cpu/">GPU和CPU服务器测试mnist手写数字集</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/GNU-make/">GNU MAKE命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/26/music-test/">Blog Music Test</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Backpropagation-through-time-BPTT/">[RNN] Simple LSTM代码实现 & BPTT理论推导</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Backpropagation-principle/">深度学习 — 反向传播(BP)理论推导</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Detection-CNN/">[Detection] 深度学习之 "物体检测" 方法梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/">[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition(附翻译，作业)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Linux-Ubuntu_Flatabulous/">[Linux] Ubuntu下超好看扁平主题 : Flatabulous</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/23/Machine-Learning-Materials/">Machine Learning Materials</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i>
+                2017 zhwhong
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+                <span>| </span>
+                <span class="post-count">博客全站共32.9k字</span>
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 10;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+             post: ".article-entry a[href], .copyright a[href]", 
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) 我藏好了哦~ " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+    <script type="text/javascript" src="/resources/love.js"></script>
+    <!-- <script type="text/javascript" src="/resources/float.js"></script> -->
+    <!-- <script type="text/javascript" src="/resources/typewriter.js"></script> -->
+    <!-- <script type="text/javascript" color=0,104,183 opacity=1 zindex=-1 count=50 src="/resources/particle.js"></script> -->
+
+
+  </div>
+</body>
+</html>
