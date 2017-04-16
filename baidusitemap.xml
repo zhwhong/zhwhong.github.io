@@ -199,15 +199,15 @@
         <title>Machine Learning Materials</title>
         <pubTime>2017-02-23T08:57:14.000Z</pubTime>
         
+        <tag>RNN</tag>
+         
+        <tag>LSTM</tag>
+         
         <tag>Deep Learning</tag>
          
         <tag>TensorFlow</tag>
          
         <tag>CNN</tag>
-         
-        <tag>RNN</tag>
-         
-        <tag>LSTM</tag>
          
         <tag>Object Detection</tag>
          
@@ -321,9 +321,9 @@
         <title>深度学习 — 反向传播(BP)理论推导</title>
         <pubTime>2017-02-24T10:23:35.000Z</pubTime>
         
-        <tag>Deep Learning</tag>
-         
         <tag>Algorithm</tag>
+         
+        <tag>Deep Learning</tag>
          
          
            
@@ -354,6 +354,7 @@
     </data>
     </url>
 
+    
     
     
     
