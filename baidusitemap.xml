@@ -4,6 +4,29 @@
 
     
   <url>
+    <loc>http://zhwhong.ml/2017/03/24/AI-DL-CV-org-and-person/</loc>
+    <lastmod>2017-04-20T13:06:38.173Z</lastmod>
+    <data>
+        <display>
+        <title>那些深度学习与计算机视觉之路上的大佬们</title>
+        <pubTime>2017-03-24T07:48:24.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+        <tag>Computer Vision</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
     <loc>http://zhwhong.ml/2017/04/14/ROC-AUC-Precision-Recall-analysis/</loc>
     <lastmod>2017-04-14T15:46:52.339Z</lastmod>
     <data>
@@ -26,7 +49,6 @@
     </data>
     </url>
 
-    
     
   <url>
     <loc>http://zhwhong.ml/2017/03/28/neural-network-visualization/</loc>
@@ -98,28 +120,6 @@
     </url>
 
     
-    
-  <url>
-    <loc>http://zhwhong.ml/2017/03/24/AI-DL-CV-org-and-person/</loc>
-    <lastmod>2017-03-25T16:04:21.066Z</lastmod>
-    <data>
-        <display>
-        <title>那些深度学习与计算机视觉之路上的大佬们</title>
-        <pubTime>2017-03-24T07:48:24.000Z</pubTime>
-        
-        <tag>Deep Learning</tag>
-         
-        <tag>Computer Vision</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>http://zhwhong.ml/2017/02/24/Detection-CNN/</loc>
@@ -199,15 +199,15 @@
         <title>Machine Learning Materials</title>
         <pubTime>2017-02-23T08:57:14.000Z</pubTime>
         
-        <tag>RNN</tag>
-         
-        <tag>LSTM</tag>
-         
         <tag>Deep Learning</tag>
+         
+        <tag>CNN</tag>
          
         <tag>TensorFlow</tag>
          
-        <tag>CNN</tag>
+        <tag>RNN</tag>
+         
+        <tag>LSTM</tag>
          
         <tag>Object Detection</tag>
          
@@ -321,9 +321,9 @@
         <title>深度学习 — 反向传播(BP)理论推导</title>
         <pubTime>2017-02-24T10:23:35.000Z</pubTime>
         
-        <tag>Algorithm</tag>
-         
         <tag>Deep Learning</tag>
+         
+        <tag>Algorithm</tag>
          
          
            

@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://zhwhong.ml/2017/04/14/ROC-AUC-Precision-Recall-analysis/</loc>
+    <loc>http://zhwhong.ml/2017/03/24/AI-DL-CV-org-and-person/</loc>
     
-    <lastmod>2017-04-14T15:46:52.339Z</lastmod>
+    <lastmod>2017-04-20T13:06:38.173Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zhwhong.ml/about/index.html</loc>
     
-    <lastmod>2017-04-05T04:23:16.761Z</lastmod>
+    <lastmod>2017-04-20T12:41:44.292Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhwhong.ml/2017/04/14/ROC-AUC-Precision-Recall-analysis/</loc>
+    
+    <lastmod>2017-04-14T15:46:52.339Z</lastmod>
     
   </url>
   
@@ -40,13 +47,6 @@
     <loc>http://zhwhong.ml/categories/index.html</loc>
     
     <lastmod>2017-03-26T15:22:15.426Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhwhong.ml/2017/03/24/AI-DL-CV-org-and-person/</loc>
-    
-    <lastmod>2017-03-25T16:04:21.066Z</lastmod>
     
   </url>
   
