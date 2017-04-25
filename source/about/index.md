@@ -59,7 +59,7 @@ fancybox: false
 
 > "古人之观于天地、山川、草木、虫鱼、鸟兽，往往有得，以其求思之深而无不在也。夫夷以近，则游者众；险以远，则至者少。而世之奇伟、瑰怪，非常之观，常在于险远，而人之所罕至焉，故非有志者不能至也。有志矣，不随以止也，然力不足者，亦不能至也。有志与力，而又不随以怠，至于幽暗昏惑而无物以相之，亦不能至也。然力足以至焉，于人为可讥，而在己为有悔；尽吾志也而不能至者，可以无悔矣，其孰能讥之乎？"
 
-> <p class="sign"><span>——</span> 临川王安石, 至和元年</p>
+> <p class="sign"><span>——</span> 《游褒禅山记》, 临川王安石, 至和元年</p>
 
 ### <span class="fa fa-user"></span> Basic Info.
 
@@ -77,8 +77,8 @@ fancybox: false
 
 个人邮件及社交网站等信息见边栏底部，有什么留言或问题直接在文末留下评论即可，当然如果有志同道合的小伙伴，欢迎加好友！
 
-- <span class="fa fa-envelope"></span> Email:  `hongzhiwei886@gmail.com` | `shsf_hzw@qq.com`
-- <span class="fa fa-qq"></span> QQ:  `1359434736`
+- <span class="fa fa-envelope"></span> Email:  **hongzhiwei886@gmail.com** , **shsf_hzw@qq.com**
+- <span class="fa fa-qq"></span> QQ:  **1359434736**
 - <span class="fa fa-wechat"></span> 微信:  扫码告诉你～
 
 <div style="float:left;"><img src="/images/wechat.png" alt="wechat"></div>
@@ -94,9 +94,15 @@ fancybox: false
 
 ### <span class="fa fa-sticky-note"></span> About the blog
 
-　　博客创建于2017年02月23日，最近觉得自身的缺点还是蛮多的，对知识掌握的也不够牢固，所以想搭建一个自己的博客，积攒知识，巩固知识，提升自身的能力。之前记载东西主要在[简书](http://www.jianshu.com/u/38cd2a8c425e)，简书写文学类文章很方便，自己也很喜欢，但有些东西不是很方便，然后这年头，程序猿不搞个自己的主页还不好意思出来混，所以说干就干。
+喜欢写Blog的人，一般会经历三个阶段：
 
-　　博客采用 [Hexo](https://hexo.io/zh-cn/) 框架搭建，使用过 [Next](http://theme-next.iissnan.com/) | [Yelee](https://github.com/MOxFIVE/hexo-theme-yelee) 主题，目前在用为Yelee。博客采用[Travis CI](https://travis-ci.com/)自动化部署，项目托管在 Github - [zhwhong's blog](https://github.com/Hzwcode/Hzwcode.github.io)。主分支master存放Blog内容，blog-source分支备份博客源码。
+- 第一阶段，刚接触Blog，觉得很新鲜，试着选择一个免费空间来写。
+- 第二阶段，发现免费空间限制太多，就自己购买域名和空间，搭建独立博客。
+- 第三阶段，觉得独立博客的管理太麻烦，最好在保留控制权的前提下，让别人来管，自己只负责写文章。
+
+本博客创建于2017年02月23日，最近觉得自身的缺点还是蛮多的，对知识掌握的也不够牢固，所以想搭建一个自己的博客，积攒知识，巩固知识，提升自身的能力。之前记载东西主要在[简书](http://www.jianshu.com/u/38cd2a8c425e)，简书写文学类文章很方便，自己也很喜欢，但有些东西不是很方便，然后这年头，程序猿不搞个自己的主页还不好意思出来混，所以说干就干。
+
+博客采用 [Hexo](https://hexo.io/zh-cn/) 框架搭建，使用过 [Next](http://theme-next.iissnan.com/) | [Yelee](https://github.com/MOxFIVE/hexo-theme-yelee) 主题，目前在用为Yelee。博客采用[Travis CI](https://travis-ci.com/)自动化部署，项目托管在 Github - [zhwhong's blog](https://github.com/Hzwcode/Hzwcode.github.io)。主分支 [master](https://github.com/Hzwcode/Hzwcode.github.io/tree/master) 存放Blog内容，[blog-source](https://github.com/Hzwcode/Hzwcode.github.io) 分支备份博客源码。
 
 <div class="github-widget" data-repo="Hzwcode/Hzwcode.github.io"></div>
 
@@ -104,24 +110,24 @@ fancybox: false
 
 ---
 
-喜欢写Blog的人，会经历三个阶段：
-
-> 第一阶段，刚接触Blog，觉得很新鲜，试着选择一个免费空间来写。
-> 第二阶段，发现免费空间限制太多，就自己购买域名和空间，搭建独立博客。
-> 第三阶段，觉得独立博客的管理太麻烦，最好在保留控制权的前提下，让别人来管，自己只负责写文章。
-
 博客参考阅读：
 
 > [Hexo 中文文档](https://hexo.io/zh-cn/docs/) & [GitHub-hexo](https://github.com/hexojs/hexo)
 > [Hexo Themes](https://hexo.io/themes/) & [GitHub-hexo_Themes](https://github.com/hexojs/hexo/wiki/Themes)
-> [Next 主题中文文档](http://theme-next.iissnan.com/) & [GitHub-hexo_theme_next](https://github.com/iissnan/hexo-theme-next)
-> [Yelee — 简而不减 Hexo 双栏博客主题](http://moxfive.coding.me/yelee/)
+> [Next 主题中文文档](http://theme-next.iissnan.com/) & [hexo-theme-next](https://github.com/iissnan/hexo-theme-next)
+> [Yelee — 简而不减 Hexo 双栏博客主题](http://moxfive.coding.me/yelee/) & [hexo-theme-yilla](https://github.com/MOxFIVE/hexo-theme-yelee)
 > [手把手教从零开始在GitHub上使用Hexo搭建博客教程-知乎](https://zhuanlan.zhihu.com/z-hexo)
-> [Fontawesome.io/cheatsheet/图标](http://fontawesome.io/cheatsheet/)
 > [多说样式折腾记录 — 添加 UA 浏览器标识、旋转头像等](http://moxfive.xyz/2015/09/29/duoshuo-style/#参考资料)
+> [Fontawesome.io/cheatsheet/图标](http://fontawesome.io/cheatsheet/)
 > [Hexo 博客补丁](http://frankorz.com/2016/09/30/Hexo-patch/)
 
 ---
+
+当前时间：
+
+<div style="text-align:center;margin-top:-40px;">
+<embed wmode="transparent" src="http://files2.17173.com/__flash/2011/10/21/honehone_clock_tr.swf" quality="high" bgcolor="#ffffff" width="500" height="100%" name="honehoneclock" align="center" allowscriptaccess="always" type="application/x-shockwave-flash" loop="true" autostart="true" autorewind="true"  pluginspage="http://www.macromedia.com/go/getflashplayer">
+</div>
 
 逛累了听听歌：
 
