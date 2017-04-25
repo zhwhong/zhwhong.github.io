@@ -3,6 +3,7 @@
 
 
     
+    
   <url>
     <loc>http://zhwhong.ml/2017/03/24/AI-DL-CV-org-and-person/</loc>
     <lastmod>2017-04-20T13:06:38.173Z</lastmod>
@@ -24,7 +25,6 @@
     </data>
     </url>
 
-    
     
   <url>
     <loc>http://zhwhong.ml/2017/04/14/ROC-AUC-Precision-Recall-analysis/</loc>
@@ -201,9 +201,9 @@
         
         <tag>Deep Learning</tag>
          
-        <tag>CNN</tag>
-         
         <tag>TensorFlow</tag>
+         
+        <tag>CNN</tag>
          
         <tag>RNN</tag>
          
