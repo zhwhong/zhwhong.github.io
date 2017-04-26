@@ -1,8 +1,8 @@
 # My Blog
 
-This is my [blog](https://Hzwcode.github.io/) based on [Hexo](https://hexo.io/). It is a fast, simple & powerful blog framework, powered by [Node.js](https://nodejs.org/en/).
+This is my [blog](http://zhwhong.ml/) based on [Hexo](https://hexo.io/). It is a fast, simple & powerful blog framework, powered by [Node.js](https://nodejs.org/en/).
 
-> 博客主页page部署在仓库[master](https://github.com/Hzwcode/Hzwcode.github.io/tree/master)分支，源码部署在[blog-source](https://github.com/Hzwcode/Hzwcode.github.io)分支，需要查看博客页面内容**请切换到[master](https://github.com/Hzwcode/Hzwcode.github.io/tree/master)分支**。
+> 博客主页page部署在仓库[master](https://github.com/zhwhong/zhwhong.github.io/tree/master)分支，源码部署在[blog-source](https://github.com/zhwhong/zhwhong.github.io)分支，需要查看博客页面内容**请切换到[master](https://github.com/zhwhong/zhwhong.github.io/tree/master)分支**。
 
 My jianshu page : [zhwhong@jianshu](http://www.jianshu.com/u/38cd2a8c425e).
 

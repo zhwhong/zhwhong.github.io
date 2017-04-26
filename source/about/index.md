@@ -49,7 +49,7 @@ fancybox: false
 
 ---
 
-<a href="https://github.com/Hzwcode"><img style="position: absolute; top: -10px; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+<a href="https://github.com/zhwhong"><img style="position: absolute; top: -10px; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
 
 ***"常葆求知若饥，常存虚怀若愚！"***
 
@@ -86,7 +86,7 @@ fancybox: false
 
 <!-- *   <span class="fa fa-wechat"></span> 微信:  hzw1359434736
 *   <span class="fa fa-weibo"></span> 微博:   [zhwhong_shsf](http://weibo.com/zhwhong)
-*   <span class="fa fa-github"></span> Github: [Hzwcode](https://github.com/Hzwcode)
+*   <span class="fa fa-github"></span> Github: [zhwhong](https://github.com/zhwhong)
 *   <span class="fa fa-facebook-official"></span> Facebook:  [Zhiwei Hong](https://www.facebook.com/profile.php?id=100008115764524)
 *   <span class="fa fa-book"></span> 简书:  [zhwhong](http://www.jianshu.com/u/38cd2a8c425e)
 *   <span class="fa fa-battery-full"></span> 知乎:  [zhwhong](https://www.zhihu.com/people/zhwhong/activities)
@@ -102,9 +102,9 @@ fancybox: false
 
 本博客创建于2017年02月23日，最近觉得自身的缺点还是蛮多的，对知识掌握的也不够牢固，所以想搭建一个自己的博客，积攒知识，巩固知识，提升自身的能力。之前记载东西主要在[简书](http://www.jianshu.com/u/38cd2a8c425e)，简书写文学类文章很方便，自己也很喜欢，但有些东西不是很方便，然后这年头，程序猿不搞个自己的主页还不好意思出来混，所以说干就干。
 
-博客采用 [Hexo](https://hexo.io/zh-cn/) 框架搭建，使用过 [Next](http://theme-next.iissnan.com/) | [Yelee](https://github.com/MOxFIVE/hexo-theme-yelee) 主题，目前在用为Yelee。博客采用[Travis CI](https://travis-ci.com/)自动化部署，项目托管在 Github - [zhwhong's blog](https://github.com/Hzwcode/Hzwcode.github.io)。主分支 [master](https://github.com/Hzwcode/Hzwcode.github.io/tree/master) 存放Blog内容，[blog-source](https://github.com/Hzwcode/Hzwcode.github.io) 分支备份博客源码。
+博客采用 [Hexo](https://hexo.io/zh-cn/) 框架搭建，使用过 [Next](http://theme-next.iissnan.com/) | [Yelee](https://github.com/MOxFIVE/hexo-theme-yelee) 主题，目前在用为Yelee。博客采用[Travis CI](https://travis-ci.com/)自动化部署，项目托管在 Github - [zhwhong's blog](https://github.com/zhwhong/zhwhong.github.io)。主分支 [master](https://github.com/zhwhong/zhwhong.github.io/tree/master) 存放Blog内容，[blog-source](https://github.com/zhwhong/zhwhong.github.io) 分支备份博客源码。
 
-<div class="github-widget" data-repo="Hzwcode/Hzwcode.github.io"></div>
+<div class="github-widget" data-repo="zhwhong/zhwhong.github.io"></div>
 
 忙碌了几天完成了博客的雏形，后期需要做的还很多，继续加油～
 

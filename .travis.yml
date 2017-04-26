@@ -21,7 +21,7 @@ before_install:
 # 添加ssh配置文件
 - cp .travis/ssh_config ~/.ssh/config
 # 设置github账户信息
-- git config --global user.name "Hzwcode" #设置github用户名
+- git config --global user.name "zhwhong" #设置github用户名
 - git config --global user.email 1359434736@qq.com #设置github用户邮箱
 # 安装依赖组件
 install:

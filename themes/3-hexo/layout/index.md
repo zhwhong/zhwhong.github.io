@@ -17,7 +17,7 @@
 *   <span class="fa fa-qq"></span> QQ:  1359434736
 *   <span class="fa fa-wechat"></span> 微信:  hzw1359434736
 *   <span class="fa fa-weibo"></span> 微博:   [zhwhong_shsf](http://weibo.com/zhwhong/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1)
-*   <span class="fa fa-github"></span> Github: [Hzwcode](https://github.com/Hzwcode)
+*   <span class="fa fa-github"></span> Github: [zhwhong](https://github.com/zhwhong)
 *   <span class="fa fa-facebook-official"></span> Facebook:  [洪志伟](https://www.facebook.com/profile.php?id=100008115764524)
 *   <span class="fa fa-book"></span> 简书:  [zhwhong](http://www.jianshu.com/u/38cd2a8c425e)
 *   <span class="fa fa-battery-full"></span> 知乎:  [zhwhong](https://www.zhihu.com/people/zhwhong/activities)
@@ -27,7 +27,7 @@
 
 　　博客创建于2017年02月23日，最近觉得自身的缺点还是蛮多的，对知识掌握的也不够牢固，所以想搭建一个自己的博客，积攒知识，巩固知识，提升自身的能力。之前记载东西主要在[简书](http://www.jianshu.com/u/38cd2a8c425e)，简书写文学类文章很方便，自己也很喜欢，但有些东西不是很方便，然后这年头，程序猿不搞个自己的主页还不好意思出来混，所以说干就干。
 
-　　博客采用 [Hexo](https://hexo.io/zh-cn/) + Git 搭建，使用 [Next](http://theme-next.iissnan.com/) 主题，项目托管在 Github - [zhwhong's blog](https://github.com/Hzwcode/Hzwcode.github.io)，使用Travis CI自动化部署，忙碌了几天完成了博客的雏形。后期需要做的还很多，继续加油～
+　　博客采用 [Hexo](https://hexo.io/zh-cn/) + Git 搭建，使用 [Next](http://theme-next.iissnan.com/) 主题，项目托管在 Github - [zhwhong's blog](https://github.com/zhwhong/zhwhong.github.io)，使用Travis CI自动化部署，忙碌了几天完成了博客的雏形。后期需要做的还很多，继续加油～
 
 参考资料：
 
