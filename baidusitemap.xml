@@ -3,10 +3,34 @@
 
 
     
+  <url>
+    <loc>http://zhwhong.ml/2017/03/13/mnist-gpu-cpu/</loc>
+    <lastmod>2017-04-26T08:24:36.683Z</lastmod>
+    <data>
+        <display>
+        <title>GPU和CPU服务器测试mnist手写数字集</title>
+        <pubTime>2017-03-13T10:22:15.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+        <tag>TensorFlow</tag>
+         
+        <tag>GPU</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://zhwhong.ml/2017/03/24/AI-DL-CV-org-and-person/</loc>
-    <lastmod>2017-04-20T13:06:38.173Z</lastmod>
+    <lastmod>2017-04-26T08:23:41.596Z</lastmod>
     <data>
         <display>
         <title>那些深度学习与计算机视觉之路上的大佬们</title>
@@ -15,6 +39,52 @@
         <tag>Deep Learning</tag>
          
         <tag>Computer Vision</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zhwhong.ml/2017/02/24/Backpropagation-through-time-BPTT/</loc>
+    <lastmod>2017-04-26T08:23:22.649Z</lastmod>
+    <data>
+        <display>
+        <title>[RNN] Simple LSTM代码实现 & BPTT理论推导</title>
+        <pubTime>2017-02-24T10:26:58.000Z</pubTime>
+        
+        <tag>RNN</tag>
+         
+        <tag>LSTM</tag>
+         
+        <tag>Algorithm</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zhwhong.ml/2017/02/24/Backpropagation-principle/</loc>
+    <lastmod>2017-04-26T08:22:16.650Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习 — 反向传播(BP)理论推导</title>
+        <pubTime>2017-02-24T10:23:35.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+        <tag>Algorithm</tag>
          
          
            
@@ -144,30 +214,6 @@
 
     
   <url>
-    <loc>http://zhwhong.ml/2017/03/13/mnist-gpu-cpu/</loc>
-    <lastmod>2017-03-25T07:51:43.263Z</lastmod>
-    <data>
-        <display>
-        <title>GPU和CPU服务器测试mnist手写数字集</title>
-        <pubTime>2017-03-13T10:22:15.000Z</pubTime>
-        
-        <tag>Deep Learning</tag>
-         
-        <tag>TensorFlow</tag>
-         
-        <tag>GPU</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://zhwhong.ml/2017/03/20/Introduction-to-debugging-neural-networks/</loc>
     <lastmod>2017-03-25T07:48:00.346Z</lastmod>
     <data>
@@ -266,30 +312,6 @@
 
     
   <url>
-    <loc>http://zhwhong.ml/2017/02/24/Backpropagation-through-time-BPTT/</loc>
-    <lastmod>2017-03-24T16:19:50.974Z</lastmod>
-    <data>
-        <display>
-        <title>[RNN] Simple LSTM代码实现 & BPTT理论推导</title>
-        <pubTime>2017-02-24T10:26:58.000Z</pubTime>
-        
-        <tag>RNN</tag>
-         
-        <tag>LSTM</tag>
-         
-        <tag>Algorithm</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://zhwhong.ml/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/</loc>
     <lastmod>2017-03-24T13:25:11.791Z</lastmod>
     <data>
@@ -302,28 +324,6 @@
         <tag>CNN</tag>
          
         <tag>Computer Vision</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zhwhong.ml/2017/02/24/Backpropagation-principle/</loc>
-    <lastmod>2017-03-24T07:26:49.605Z</lastmod>
-    <data>
-        <display>
-        <title>深度学习 — 反向传播(BP)理论推导</title>
-        <pubTime>2017-02-24T10:23:35.000Z</pubTime>
-        
-        <tag>Deep Learning</tag>
-         
-        <tag>Algorithm</tag>
          
          
            

@@ -16,7 +16,7 @@
 
 
 <meta name="description" content="参考：Nico’s Blog - Simple LSTM
-Github代码：https://github.com/Hzwcode/lstm
+Github代码：https://github.com/zhwhong/lstm
 
 
 前面我们介绍过CNN中普通的BP反向传播算法的推导，但是在RNN（比如LSTM）中，反向传播被称作BPTT（Back Propagation Through Time），它是和时间序列有关的。">
@@ -25,7 +25,7 @@ Github代码：https://github.com/Hzwcode/lstm
 <meta property="og:url" content="http://zhwhong.ml/2017/02/24/Backpropagation-through-time-BPTT/index.html">
 <meta property="og:site_name" content="Zhiwei's Blog">
 <meta property="og:description" content="参考：Nico’s Blog - Simple LSTM
-Github代码：https://github.com/Hzwcode/lstm
+Github代码：https://github.com/zhwhong/lstm
 
 
 前面我们介绍过CNN中普通的BP反向传播算法的推导，但是在RNN（比如LSTM）中，反向传播被称作BPTT（Back Propagation Through Time），它是和时间序列有关的。">
@@ -57,11 +57,11 @@ Github代码：https://github.com/Hzwcode/lstm
 <meta property="og:image" content="http://latex.codecogs.com/png.latex?\\\frac{dL(t)}{ds_i(t)}%20=%20\frac{dL(t)}{dh_i(t)}%20\frac{dh_i(t)}{ds_i(t)}%20+%20\frac{dL(t)}{dh_i(t+1)}%20\frac{dh_i(t+1)}{ds_i(t)}%20\\\\\\=%20\frac{dL(t)}{dh_i(t)}%20\frac{dh_i(t)}{ds_i(t)}%20+%20\frac{dL(t+1)}{dh_i(t+1)}%20\frac{dh_i(t+1)}{ds_i(t)}%20\\\\\\=%20\frac{dL(t)}{dh_i(t)}%20\frac{dh_i(t)}{ds_i(t)}%20+%20\frac{dL(t+1)}{ds_i(t)}%20\\\\\\%20=%20\frac{dL(t)}{dh_i(t)}%20\frac{dh_i(t)}{ds_i(t)}%20+%20[\texttt{top\_diff\_s}]_i%20\\">
 <meta property="og:image" content="http://latex.codecogs.com/png.latex?h(t)%20=%20s(t)%20*%20o(t)">
 <meta property="og:image" content="http://latex.codecogs.com/png.latex?\frac{dL(t)}{dh_i(t)}%20*%20\frac{dh_i(t)}{ds_i(t)}%20=%20o_i(t)%20*%20[\texttt{top\_diff\_h}]_i">
-<meta property="og:updated_time" content="2017-03-24T16:19:50.974Z">
+<meta property="og:updated_time" content="2017-04-26T08:23:22.649Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[RNN] Simple LSTM代码实现 & BPTT理论推导">
 <meta name="twitter:description" content="参考：Nico’s Blog - Simple LSTM
-Github代码：https://github.com/Hzwcode/lstm
+Github代码：https://github.com/zhwhong/lstm
 
 
 前面我们介绍过CNN中普通的BP反向传播算法的推导，但是在RNN（比如LSTM）中，反向传播被称作BPTT（Back Propagation Through Time），它是和时间序列有关的。">
@@ -236,7 +236,7 @@ Github代码：https://github.com/Hzwcode/lstm
                             
                                 <a class="fa 新浪微博" href="http://weibo.com/zhwhong" title="新浪微博"></a>
                             
-                                <a class="fa GitHub" href="//github.com/Hzwcode" title="GitHub"></a>
+                                <a class="fa GitHub" href="//github.com/zhwhong" title="GitHub"></a>
                             
                                 <a class="fa Facebook" href="https://www.facebook.com/profile.php?id=100008115764524" title="Facebook"></a>
                             
@@ -332,7 +332,7 @@ Github代码：https://github.com/Hzwcode/lstm
                             
                                 <a class="fa 新浪微博" target="_blank" href="http://weibo.com/zhwhong" title="新浪微博"></a>
                             
-                                <a class="fa GitHub" target="_blank" href="//github.com/Hzwcode" title="GitHub"></a>
+                                <a class="fa GitHub" target="_blank" href="//github.com/zhwhong" title="GitHub"></a>
                             
                                 <a class="fa Facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100008115764524" title="Facebook"></a>
                             
@@ -438,10 +438,10 @@ Github代码：https://github.com/Hzwcode/lstm
           
         <script src="/assets/js/APlayer.min.js"> </script><ul>
 <li>参考：<a href="http://nicodjimenez.github.io/2014/08/08/lstm.html" target="_blank" rel="external">Nico’s Blog - Simple LSTM</a></li>
-<li>Github代码：<a href="https://github.com/Hzwcode/lstm" target="_blank" rel="external">https://github.com/Hzwcode/lstm</a></li>
+<li>Github代码：<a href="https://github.com/zhwhong/lstm" target="_blank" rel="external">https://github.com/zhwhong/lstm</a></li>
 </ul>
 <hr>
-<p>前面我们介绍过CNN中普通的<a href="https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/" target="_blank" rel="external">BP反向传播算法的推导</a>，但是在RNN（比如<a href="https://en.wikipedia.org/wiki/Long_short-term_memory" target="_blank" rel="external">LSTM</a>）中，反向传播被称作<a href="https://en.wikipedia.org/wiki/Backpropagation_through_time" target="_blank" rel="external">BPTT</a>（Back Propagation Through Time），它是和时间序列有关的。</p>
+<p>前面我们介绍过CNN中普通的<a href="https://zhwhong.github.io/2017/02/24/Backpropagation-principle/" target="_blank" rel="external">BP反向传播算法的推导</a>，但是在RNN（比如<a href="https://en.wikipedia.org/wiki/Long_short-term_memory" target="_blank" rel="external">LSTM</a>）中，反向传播被称作<a href="https://en.wikipedia.org/wiki/Backpropagation_through_time" target="_blank" rel="external">BPTT</a>（Back Propagation Through Time），它是和时间序列有关的。</p>
 <a id="more"></a>
 <p><img src="http://upload-images.jianshu.io/upload_images/145616-113aeedc747a3628.gif?imageMogr2/auto-orient/strip" alt="Back Propagation Through Time"></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/145616-4ae3ab8b8426cdcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
@@ -516,13 +516,13 @@ Github代码：https://github.com/Hzwcode/lstm
 <hr>
 <blockquote>
 <h1 id="Test-LSTM-Network"><a href="#Test-LSTM-Network" class="headerlink" title="Test  LSTM Network"></a>Test  LSTM Network</h1></blockquote>
-<p>此 <a href="https://github.com/Hzwcode/lstm" target="_blank" rel="external">代码</a> 其是通过自己实现 lstm 网络来逼近一个序列，y_list = [-0.5, 0.2, 0.1, -0.5]，测试结果如下：</p>
+<p>此 <a href="https://github.com/zhwhong/lstm" target="_blank" rel="external">代码</a> 其是通过自己实现 lstm 网络来逼近一个序列，y_list = [-0.5, 0.2, 0.1, -0.5]，测试结果如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line">cur iter:  0</div><div class="line">y_pred[0] : 0.041349</div><div class="line">y_pred[1] : 0.069304</div><div class="line">y_pred[2] : 0.116993</div><div class="line">y_pred[3] : 0.165624</div><div class="line">loss:  0.753483886253</div><div class="line">cur iter:  1</div><div class="line">y_pred[0] : -0.223297</div><div class="line">y_pred[1] : -0.323066</div><div class="line">y_pred[2] : -0.394514</div><div class="line">y_pred[3] : -0.433984</div><div class="line">loss:  0.599065083953</div><div class="line">cur iter:  2</div><div class="line">y_pred[0] : -0.140715</div><div class="line">y_pred[1] : -0.181836</div><div class="line">y_pred[2] : -0.219436</div><div class="line">y_pred[3] : -0.238904</div><div class="line">loss:  0.445095565699</div><div class="line">cur iter:  3</div><div class="line">y_pred[0] : -0.138010</div><div class="line">y_pred[1] : -0.166091</div><div class="line">y_pred[2] : -0.203394</div><div class="line">y_pred[3] : -0.233627</div><div class="line">loss:  0.428061605701</div><div class="line">cur iter:  4</div><div class="line">y_pred[0] : -0.139986</div><div class="line">y_pred[1] : -0.157368</div><div class="line">y_pred[2] : -0.195655</div><div class="line">y_pred[3] : -0.237612</div><div class="line">loss:  0.413581711096</div><div class="line">cur iter:  5</div><div class="line">y_pred[0] : -0.144410</div><div class="line">y_pred[1] : -0.151859</div><div class="line">y_pred[2] : -0.191676</div><div class="line">y_pred[3] : -0.246137</div><div class="line">loss:  0.399770442382</div><div class="line">cur iter:  6</div><div class="line">y_pred[0] : -0.150306</div><div class="line">y_pred[1] : -0.147921</div><div class="line">y_pred[2] : -0.189501</div><div class="line">y_pred[3] : -0.257119</div><div class="line">loss:  0.386136380384</div><div class="line">cur iter:  7</div><div class="line">y_pred[0] : -0.157119</div><div class="line">y_pred[1] : -0.144659</div><div class="line">y_pred[2] : -0.188067</div><div class="line">y_pred[3] : -0.269322</div><div class="line">loss:  0.372552465753</div><div class="line">cur iter:  8</div><div class="line">y_pred[0] : -0.164490</div><div class="line">y_pred[1] : -0.141537</div><div class="line">y_pred[2] : -0.186737</div><div class="line">y_pred[3] : -0.281914</div><div class="line">loss:  0.358993892096</div><div class="line">cur iter:  9</div><div class="line">y_pred[0] : -0.172187</div><div class="line">y_pred[1] : -0.138216</div><div class="line">y_pred[2] : -0.185125</div><div class="line">y_pred[3] : -0.294326</div><div class="line">loss:  0.345449256686</div><div class="line">cur iter:  10</div><div class="line">y_pred[0] : -0.180071</div><div class="line">y_pred[1] : -0.134484</div><div class="line">y_pred[2] : -0.183013</div><div class="line">y_pred[3] : -0.306198</div><div class="line">loss:  0.331888922037</div><div class="line"></div><div class="line">……</div><div class="line"></div><div class="line">cur iter:  97</div><div class="line">y_pred[0] : -0.500351</div><div class="line">y_pred[1] : 0.201185</div><div class="line">y_pred[2] : 0.099026</div><div class="line">y_pred[3] : -0.499154</div><div class="line">loss:  3.1926009167e-06</div><div class="line">cur iter:  98</div><div class="line">y_pred[0] : -0.500342</div><div class="line">y_pred[1] : 0.201122</div><div class="line">y_pred[2] : 0.099075</div><div class="line">y_pred[3] : -0.499190</div><div class="line">loss:  2.88684626031e-06</div><div class="line">cur iter:  99</div><div class="line">y_pred[0] : -0.500331</div><div class="line">y_pred[1] : 0.201063</div><div class="line">y_pred[2] : 0.099122</div><div class="line">y_pred[3] : -0.499226</div><div class="line">loss:  2.61076360677e-06</div></pre></td></tr></table></figure>
 <p>可以看出迭代100轮，最后Loss在不断收敛，并且逐渐逼近了预期序列：y_list = [-0.5, 0.2, 0.1, -0.5]。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
 <li><a href="http://www.jianshu.com/p/408ab8177a53" target="_blank" rel="external">深度学习 — 反向传播(BP)理论推导 (zhwhong)</a></li>
 <li><a href="http://nicodjimenez.github.io/2014/08/08/lstm.html" target="_blank" rel="external">Nico’s Blog：Simple LSTM</a></li>
-<li><a href="https://github.com/Hzwcode/lstm" target="_blank" rel="external">Github仓库：https://github.com/Hzwcode/lstm</a></li>
+<li><a href="https://github.com/zhwhong/lstm" target="_blank" rel="external">Github仓库：https://github.com/zhwhong/lstm</a></li>
 <li><a href="http://www.wildml.com/2015/10/recurrent-neural-networks-tutorial-part-3-backpropagation-through-time-and-vanishing-gradients/" target="_blank" rel="external">RECURRENT NEURAL NETWORKS TUTORIAL, PART 3 – BACKPROPAGATION THROUGH TIME AND VANISHING GRADIENTS</a></li>
 <li><a href="http://www.jianshu.com/p/c930d61e1f16" target="_blank" rel="external">[福利] 深入理解 RNNs &amp; LSTM 网络学习资料</a></li>
 <li><a href="http://www.jianshu.com/p/c7e3f417641c" target="_blank" rel="external">关于简书中如何编辑Latex数学公式</a></li>
@@ -540,14 +540,14 @@ Github代码：https://github.com/Hzwcode/lstm
         <p><span>本文标题:</span><a href="/2017/02/24/Backpropagation-through-time-BPTT/">[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">zhwhong</a></p>
         <p><span>发布时间:</span>2017-02-24, 18:26:58</p>
-        <p><span>最后更新:</span>2017-03-25, 00:19:50</p>
+        <p><span>最后更新:</span>2017-04-26, 16:23:22</p>
 
         
             <p>
                 <span>更新历史:</span><i class="fa fa-github"></i>
-                <a href="https://github.com/Hzwcode/Hzwcode.github.io/blame/blog-source/source/_posts/2017-02-24.Backpropagation-through-time-BPTT.md" title="顺序查看文章各部分修改记录" target = "_blank">Blame</a>,
-                <a href="https://github.com/Hzwcode/Hzwcode.github.io/commits/blog-source/source/_posts/2017-02-24.Backpropagation-through-time-BPTT.md" title="查看文章有关更新记录" target = "_blank">History</a><span class="raw">&nbsp;&nbsp;文本模式:</span><i class="fa fa-file-text-o"></i>
-                <a href="https://raw.githubusercontent.com/Hzwcode/Hzwcode.github.io/blog-source/source/_posts/2017-02-24.Backpropagation-through-time-BPTT.md" title="查看 & 下载文章 Markdown 原始文本" target = "_blank"> .md Raw</a>
+                <a href="https://github.com/zhwhong/zhwhong.github.io/blame/blog-source/source/_posts/2017-02-24.Backpropagation-through-time-BPTT.md" title="顺序查看文章各部分修改记录" target = "_blank">Blame</a>,
+                <a href="https://github.com/zhwhong/zhwhong.github.io/commits/blog-source/source/_posts/2017-02-24.Backpropagation-through-time-BPTT.md" title="查看文章有关更新记录" target = "_blank">History</a><span class="raw">&nbsp;&nbsp;文本模式:</span><i class="fa fa-file-text-o"></i>
+                <a href="https://raw.githubusercontent.com/zhwhong/zhwhong.github.io/blog-source/source/_posts/2017-02-24.Backpropagation-through-time-BPTT.md" title="查看 & 下载文章 Markdown 原始文本" target = "_blank"> .md Raw</a>
             </p>
         
 
@@ -673,7 +673,7 @@ Github代码：https://github.com/Hzwcode/lstm
         var duoshuoQuery = {short_name:"zhwhong"};
         var loadComment = function(){
             var d = document, s = d.createElement('script');
-            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//hzwcode.github.io/resources/embed.js';
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//zhwhong.github.io/resources/embed.js';
             s.async = true; s.charset = 'UTF-8';
             (d.head || d.body).appendChild(s);
         }

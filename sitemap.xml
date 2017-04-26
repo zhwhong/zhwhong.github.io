@@ -2,16 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zhwhong.ml/2017/03/13/mnist-gpu-cpu/</loc>
+    
+    <lastmod>2017-04-26T08:24:36.683Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://zhwhong.ml/about/index.html</loc>
     
-    <lastmod>2017-04-25T03:28:48.389Z</lastmod>
+    <lastmod>2017-04-26T08:24:16.448Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zhwhong.ml/2017/03/24/AI-DL-CV-org-and-person/</loc>
     
-    <lastmod>2017-04-20T13:06:38.173Z</lastmod>
+    <lastmod>2017-04-26T08:23:41.596Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhwhong.ml/2017/02/24/Backpropagation-through-time-BPTT/</loc>
+    
+    <lastmod>2017-04-26T08:23:22.649Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhwhong.ml/2017/02/24/Backpropagation-principle/</loc>
+    
+    <lastmod>2017-04-26T08:22:16.650Z</lastmod>
     
   </url>
   
@@ -58,13 +79,6 @@
   </url>
   
   <url>
-    <loc>http://zhwhong.ml/2017/03/13/mnist-gpu-cpu/</loc>
-    
-    <lastmod>2017-03-25T07:51:43.263Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://zhwhong.ml/2017/03/20/Introduction-to-debugging-neural-networks/</loc>
     
     <lastmod>2017-03-25T07:48:00.346Z</lastmod>
@@ -93,23 +107,9 @@
   </url>
   
   <url>
-    <loc>http://zhwhong.ml/2017/02/24/Backpropagation-through-time-BPTT/</loc>
-    
-    <lastmod>2017-03-24T16:19:50.974Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://zhwhong.ml/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/</loc>
     
     <lastmod>2017-03-24T13:25:11.791Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhwhong.ml/2017/02/24/Backpropagation-principle/</loc>
-    
-    <lastmod>2017-03-24T07:26:49.605Z</lastmod>
     
   </url>
   

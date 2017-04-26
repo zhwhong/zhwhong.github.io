@@ -457,7 +457,7 @@
     <link href="http://zhwhong.ml/2017/03/24/AI-DL-CV-org-and-person/"/>
     <id>http://zhwhong.ml/2017/03/24/AI-DL-CV-org-and-person/</id>
     <published>2017-03-24T07:48:24.000Z</published>
-    <updated>2017-04-20T13:06:38.173Z</updated>
+    <updated>2017-04-26T08:23:41.596Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>本文整理、归纳了自己学习Deep Learning，Computer Vision方向看到的相关研究机构以及各位大佬们的信息。打算从事这个行业或者刚入门的朋友可以多关注、多了解一些CV的具体应用。搞研究的朋友也可以从中了解到很多牛人的研究动态、招生情况等。</p>
 <p>有句话说得好，<code>Sharing changes the world!</code>，知识只有分享才能产生更大的价值，希望能对朋友们有所帮助。</p>
@@ -523,7 +523,7 @@
 <p>(持续更新中……)</p>
 <h2 id="More-Reference"><a href="#More-Reference" class="headerlink" title="More Reference"></a>More Reference</h2><ul>
 <li><a href="http://blog.csdn.net/adong76/article/details/42491401" target="_blank" rel="external">计算机视觉领域的一些牛人博客，超有实力的研究机构</a></li>
-<li><a href="https://github.com/Hzwcode/awesome-deep-learning#user-content-researchers" target="_blank" rel="external">Awesome Deep Learning -&gt; Researchers 100人</a></li>
+<li><a href="https://github.com/zhwhong/awesome-deep-learning#user-content-researchers" target="_blank" rel="external">Awesome Deep Learning -&gt; Researchers 100人</a></li>
 </ul>
 ]]></content>
     
@@ -639,7 +639,7 @@
     <link href="http://zhwhong.ml/2017/03/13/mnist-gpu-cpu/"/>
     <id>http://zhwhong.ml/2017/03/13/mnist-gpu-cpu/</id>
     <published>2017-03-13T10:22:15.000Z</published>
-    <updated>2017-03-25T07:51:43.263Z</updated>
+    <updated>2017-04-26T08:24:36.683Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="一、GPU服务器"><a href="#一、GPU服务器" class="headerlink" title="一、GPU服务器"></a>一、GPU服务器</h1><p>服务器 IP ：<code>172.xx.xx.98</code> （4块NVIDIA <strong>TITAN X</strong> GPU，<strong>32</strong> CPU核心）</p>
 <a id="more"></a>
@@ -650,9 +650,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">mye@ubuntu:~$ lscpu</div><div class="line">Architecture:          x86_64</div><div class="line">CPU op-mode(s):        32-bit, 64-bit</div><div class="line">Byte Order:            Little Endian</div><div class="line">CPU(s):                128</div><div class="line">On-line CPU(s) list:   0-127</div><div class="line">Thread(s) per core:    1</div><div class="line">Core(s) per socket:    16</div><div class="line">Socket(s):             8</div><div class="line">NUMA node(s):          8</div><div class="line">Vendor ID:             GenuineIntel</div><div class="line">CPU family:            6</div><div class="line">Model:                 63</div><div class="line">Stepping:              4</div><div class="line">CPU MHz:               1200.031</div><div class="line">BogoMIPS:              4396.82</div><div class="line">Virtualization:        VT-x</div><div class="line">L1d cache:             32K</div><div class="line">L1i cache:             32K</div><div class="line">L2 cache:              256K</div><div class="line">L3 cache:              40960K</div><div class="line">NUMA node0 CPU(s):     0-15</div><div class="line">NUMA node1 CPU(s):     16-31</div><div class="line">NUMA node2 CPU(s):     32-47</div><div class="line">NUMA node3 CPU(s):     48-63</div><div class="line">NUMA node4 CPU(s):     64-79</div><div class="line">NUMA node5 CPU(s):     80-95</div><div class="line">NUMA node6 CPU(s):     96-111</div><div class="line">NUMA node7 CPU(s):     112-127</div></pre></td></tr></table></figure>
 <p>使用 <code>cat /proc/cpuinfo</code>  命令可以查看每一个cpu核详细信息.</p>
 <h1 id="三、mnist测试"><a href="#三、mnist测试" class="headerlink" title="三、mnist测试"></a>三、mnist测试</h1><ul>
-<li>测试代码： <a href="https://github.com/Hzwcode/awesome-deep-learning/tree/master/TensorFlow-Tutorials" target="_blank" rel="external"><strong>zhwhong/awesome-deep-learning/TensorFlow-Tutorials</strong></a></li>
+<li>测试代码： <a href="https://github.com/zhwhong/awesome-deep-learning/tree/master/TensorFlow-Tutorials" target="_blank" rel="external"><strong>zhwhong/awesome-deep-learning/TensorFlow-Tutorials</strong></a></li>
 </ul>
-<h2 id="1-逻辑回归logistic测试"><a href="#1-逻辑回归logistic测试" class="headerlink" title="(1)逻辑回归logistic测试"></a>(1)逻辑回归logistic测试</h2><p>Example: <a href="https://github.com/Hzwcode/awesome-deep-learning/blob/master/TensorFlow-Tutorials/02_logistic_regression.py" target="_blank" rel="external"><strong>02_logistic_regression.py</strong></a></p>
+<h2 id="1-逻辑回归logistic测试"><a href="#1-逻辑回归logistic测试" class="headerlink" title="(1)逻辑回归logistic测试"></a>(1)逻辑回归logistic测试</h2><p>Example: <a href="https://github.com/zhwhong/awesome-deep-learning/blob/master/TensorFlow-Tutorials/02_logistic_regression.py" target="_blank" rel="external"><strong>02_logistic_regression.py</strong></a></p>
 <p>测试结果：</p>
 <h3 id="a-batch-size-128"><a href="#a-batch-size-128" class="headerlink" title="a.batch_size : 128"></a>a.batch_size : 128</h3><table>
 <thead>
@@ -739,7 +739,7 @@
 <p><strong>CPU运行结果：</strong></p>
 <p><img src="logistic_cpu_1.png" alt=""></p>
 <p><img src="logistic_cpu_2.png" alt=""></p>
-<h2 id="2-卷积神经网络conv测试"><a href="#2-卷积神经网络conv测试" class="headerlink" title="(2)卷积神经网络conv测试"></a>(2)卷积神经网络conv测试</h2><p>Example : <a href="https://github.com/Hzwcode/awesome-deep-learning/blob/master/TensorFlow-Tutorials/05_convolutional_net.py" target="_blank" rel="external"><strong>05_convolutional_net.py</strong></a></p>
+<h2 id="2-卷积神经网络conv测试"><a href="#2-卷积神经网络conv测试" class="headerlink" title="(2)卷积神经网络conv测试"></a>(2)卷积神经网络conv测试</h2><p>Example : <a href="https://github.com/zhwhong/awesome-deep-learning/blob/master/TensorFlow-Tutorials/05_convolutional_net.py" target="_blank" rel="external"><strong>05_convolutional_net.py</strong></a></p>
 <p>测试结果：</p>
 <h3 id="a-batch-size-128-1"><a href="#a-batch-size-128-1" class="headerlink" title="a.batch_size : 128"></a>a.batch_size : 128</h3><table>
 <thead>
@@ -826,7 +826,7 @@
 <p><strong>CPU运行结果：</strong></p>
 <p><img src="conv_cpu_1.png" alt=""></p>
 <p><img src="conv_cpu_2.png" alt=""></p>
-<h2 id="3-循环神经网络lstm测试"><a href="#3-循环神经网络lstm测试" class="headerlink" title="(3)循环神经网络lstm测试"></a>(3)循环神经网络lstm测试</h2><p>Example : <a href="https://github.com/Hzwcode/awesome-deep-learning/blob/master/TensorFlow-Tutorials/07_lstm.py" target="_blank" rel="external"><strong>07_lstm.py</strong></a></p>
+<h2 id="3-循环神经网络lstm测试"><a href="#3-循环神经网络lstm测试" class="headerlink" title="(3)循环神经网络lstm测试"></a>(3)循环神经网络lstm测试</h2><p>Example : <a href="https://github.com/zhwhong/awesome-deep-learning/blob/master/TensorFlow-Tutorials/07_lstm.py" target="_blank" rel="external"><strong>07_lstm.py</strong></a></p>
 <p>测试结果：</p>
 <h3 id="batch-size-512"><a href="#batch-size-512" class="headerlink" title="batch_size : 512"></a>batch_size : 512</h3><table>
 <thead>
@@ -1167,14 +1167,14 @@
     <link href="http://zhwhong.ml/2017/02/24/Backpropagation-through-time-BPTT/"/>
     <id>http://zhwhong.ml/2017/02/24/Backpropagation-through-time-BPTT/</id>
     <published>2017-02-24T10:26:58.000Z</published>
-    <updated>2017-03-24T16:19:50.974Z</updated>
+    <updated>2017-04-26T08:23:22.649Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><ul>
 <li>参考：<a href="http://nicodjimenez.github.io/2014/08/08/lstm.html" target="_blank" rel="external">Nico’s Blog - Simple LSTM</a></li>
-<li>Github代码：<a href="https://github.com/Hzwcode/lstm" target="_blank" rel="external">https://github.com/Hzwcode/lstm</a></li>
+<li>Github代码：<a href="https://github.com/zhwhong/lstm" target="_blank" rel="external">https://github.com/zhwhong/lstm</a></li>
 </ul>
 <hr>
-<p>前面我们介绍过CNN中普通的<a href="https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/" target="_blank" rel="external">BP反向传播算法的推导</a>，但是在RNN（比如<a href="https://en.wikipedia.org/wiki/Long_short-term_memory" target="_blank" rel="external">LSTM</a>）中，反向传播被称作<a href="https://en.wikipedia.org/wiki/Backpropagation_through_time" target="_blank" rel="external">BPTT</a>（Back Propagation Through Time），它是和时间序列有关的。</p>
+<p>前面我们介绍过CNN中普通的<a href="https://zhwhong.github.io/2017/02/24/Backpropagation-principle/" target="_blank" rel="external">BP反向传播算法的推导</a>，但是在RNN（比如<a href="https://en.wikipedia.org/wiki/Long_short-term_memory" target="_blank" rel="external">LSTM</a>）中，反向传播被称作<a href="https://en.wikipedia.org/wiki/Backpropagation_through_time" target="_blank" rel="external">BPTT</a>（Back Propagation Through Time），它是和时间序列有关的。</p>
 <a id="more"></a>
 <p><img src="http://upload-images.jianshu.io/upload_images/145616-113aeedc747a3628.gif?imageMogr2/auto-orient/strip" alt="Back Propagation Through Time"></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/145616-4ae3ab8b8426cdcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
@@ -1249,13 +1249,13 @@
 <hr>
 <blockquote>
 <h1 id="Test-LSTM-Network"><a href="#Test-LSTM-Network" class="headerlink" title="Test  LSTM Network"></a>Test  LSTM Network</h1></blockquote>
-<p>此 <a href="https://github.com/Hzwcode/lstm" target="_blank" rel="external">代码</a> 其是通过自己实现 lstm 网络来逼近一个序列，y_list = [-0.5, 0.2, 0.1, -0.5]，测试结果如下：</p>
+<p>此 <a href="https://github.com/zhwhong/lstm" target="_blank" rel="external">代码</a> 其是通过自己实现 lstm 网络来逼近一个序列，y_list = [-0.5, 0.2, 0.1, -0.5]，测试结果如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line">cur iter:  0</div><div class="line">y_pred[0] : 0.041349</div><div class="line">y_pred[1] : 0.069304</div><div class="line">y_pred[2] : 0.116993</div><div class="line">y_pred[3] : 0.165624</div><div class="line">loss:  0.753483886253</div><div class="line">cur iter:  1</div><div class="line">y_pred[0] : -0.223297</div><div class="line">y_pred[1] : -0.323066</div><div class="line">y_pred[2] : -0.394514</div><div class="line">y_pred[3] : -0.433984</div><div class="line">loss:  0.599065083953</div><div class="line">cur iter:  2</div><div class="line">y_pred[0] : -0.140715</div><div class="line">y_pred[1] : -0.181836</div><div class="line">y_pred[2] : -0.219436</div><div class="line">y_pred[3] : -0.238904</div><div class="line">loss:  0.445095565699</div><div class="line">cur iter:  3</div><div class="line">y_pred[0] : -0.138010</div><div class="line">y_pred[1] : -0.166091</div><div class="line">y_pred[2] : -0.203394</div><div class="line">y_pred[3] : -0.233627</div><div class="line">loss:  0.428061605701</div><div class="line">cur iter:  4</div><div class="line">y_pred[0] : -0.139986</div><div class="line">y_pred[1] : -0.157368</div><div class="line">y_pred[2] : -0.195655</div><div class="line">y_pred[3] : -0.237612</div><div class="line">loss:  0.413581711096</div><div class="line">cur iter:  5</div><div class="line">y_pred[0] : -0.144410</div><div class="line">y_pred[1] : -0.151859</div><div class="line">y_pred[2] : -0.191676</div><div class="line">y_pred[3] : -0.246137</div><div class="line">loss:  0.399770442382</div><div class="line">cur iter:  6</div><div class="line">y_pred[0] : -0.150306</div><div class="line">y_pred[1] : -0.147921</div><div class="line">y_pred[2] : -0.189501</div><div class="line">y_pred[3] : -0.257119</div><div class="line">loss:  0.386136380384</div><div class="line">cur iter:  7</div><div class="line">y_pred[0] : -0.157119</div><div class="line">y_pred[1] : -0.144659</div><div class="line">y_pred[2] : -0.188067</div><div class="line">y_pred[3] : -0.269322</div><div class="line">loss:  0.372552465753</div><div class="line">cur iter:  8</div><div class="line">y_pred[0] : -0.164490</div><div class="line">y_pred[1] : -0.141537</div><div class="line">y_pred[2] : -0.186737</div><div class="line">y_pred[3] : -0.281914</div><div class="line">loss:  0.358993892096</div><div class="line">cur iter:  9</div><div class="line">y_pred[0] : -0.172187</div><div class="line">y_pred[1] : -0.138216</div><div class="line">y_pred[2] : -0.185125</div><div class="line">y_pred[3] : -0.294326</div><div class="line">loss:  0.345449256686</div><div class="line">cur iter:  10</div><div class="line">y_pred[0] : -0.180071</div><div class="line">y_pred[1] : -0.134484</div><div class="line">y_pred[2] : -0.183013</div><div class="line">y_pred[3] : -0.306198</div><div class="line">loss:  0.331888922037</div><div class="line"></div><div class="line">……</div><div class="line"></div><div class="line">cur iter:  97</div><div class="line">y_pred[0] : -0.500351</div><div class="line">y_pred[1] : 0.201185</div><div class="line">y_pred[2] : 0.099026</div><div class="line">y_pred[3] : -0.499154</div><div class="line">loss:  3.1926009167e-06</div><div class="line">cur iter:  98</div><div class="line">y_pred[0] : -0.500342</div><div class="line">y_pred[1] : 0.201122</div><div class="line">y_pred[2] : 0.099075</div><div class="line">y_pred[3] : -0.499190</div><div class="line">loss:  2.88684626031e-06</div><div class="line">cur iter:  99</div><div class="line">y_pred[0] : -0.500331</div><div class="line">y_pred[1] : 0.201063</div><div class="line">y_pred[2] : 0.099122</div><div class="line">y_pred[3] : -0.499226</div><div class="line">loss:  2.61076360677e-06</div></pre></td></tr></table></figure>
 <p>可以看出迭代100轮，最后Loss在不断收敛，并且逐渐逼近了预期序列：y_list = [-0.5, 0.2, 0.1, -0.5]。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
 <li><a href="http://www.jianshu.com/p/408ab8177a53" target="_blank" rel="external">深度学习 — 反向传播(BP)理论推导 (zhwhong)</a></li>
 <li><a href="http://nicodjimenez.github.io/2014/08/08/lstm.html" target="_blank" rel="external">Nico’s Blog：Simple LSTM</a></li>
-<li><a href="https://github.com/Hzwcode/lstm" target="_blank" rel="external">Github仓库：https://github.com/Hzwcode/lstm</a></li>
+<li><a href="https://github.com/zhwhong/lstm" target="_blank" rel="external">Github仓库：https://github.com/zhwhong/lstm</a></li>
 <li><a href="http://www.wildml.com/2015/10/recurrent-neural-networks-tutorial-part-3-backpropagation-through-time-and-vanishing-gradients/" target="_blank" rel="external">RECURRENT NEURAL NETWORKS TUTORIAL, PART 3 – BACKPROPAGATION THROUGH TIME AND VANISHING GRADIENTS</a></li>
 <li><a href="http://www.jianshu.com/p/c930d61e1f16" target="_blank" rel="external">[福利] 深入理解 RNNs &amp; LSTM 网络学习资料</a></li>
 <li><a href="http://www.jianshu.com/p/c7e3f417641c" target="_blank" rel="external">关于简书中如何编辑Latex数学公式</a></li>
@@ -1268,10 +1268,10 @@
     
       &lt;ul&gt;
 &lt;li&gt;参考：&lt;a href=&quot;http://nicodjimenez.github.io/2014/08/08/lstm.html&quot;&gt;Nico’s Blog - Simple LSTM&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Github代码：&lt;a href=&quot;https://github.com/Hzwcode/lstm&quot;&gt;https://github.com/Hzwcode/lstm&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Github代码：&lt;a href=&quot;https://github.com/zhwhong/lstm&quot;&gt;https://github.com/zhwhong/lstm&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;前面我们介绍过CNN中普通的&lt;a href=&quot;https://Hzwcode.github.io/2017/02/24/Backpropagation-principle/&quot;&gt;BP反向传播算法的推导&lt;/a&gt;，但是在RNN（比如&lt;a href=&quot;https://en.wikipedia.org/wiki/Long_short-term_memory&quot;&gt;LSTM&lt;/a&gt;）中，反向传播被称作&lt;a href=&quot;https://en.wikipedia.org/wiki/Backpropagation_through_time&quot;&gt;BPTT&lt;/a&gt;（Back Propagation Through Time），它是和时间序列有关的。&lt;/p&gt;
+&lt;p&gt;前面我们介绍过CNN中普通的&lt;a href=&quot;https://zhwhong.github.io/2017/02/24/Backpropagation-principle/&quot;&gt;BP反向传播算法的推导&lt;/a&gt;，但是在RNN（比如&lt;a href=&quot;https://en.wikipedia.org/wiki/Long_short-term_memory&quot;&gt;LSTM&lt;/a&gt;）中，反向传播被称作&lt;a href=&quot;https://en.wikipedia.org/wiki/Backpropagation_through_time&quot;&gt;BPTT&lt;/a&gt;（Back Propagation Through Time），它是和时间序列有关的。&lt;/p&gt;
     
     </summary>
     
@@ -1291,10 +1291,10 @@
     <link href="http://zhwhong.ml/2017/02/24/Backpropagation-principle/"/>
     <id>http://zhwhong.ml/2017/02/24/Backpropagation-principle/</id>
     <published>2017-02-24T10:23:35.000Z</published>
-    <updated>2017-03-24T07:26:49.605Z</updated>
+    <updated>2017-04-26T08:22:16.650Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><ul>
-<li><a href="https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/" target="_blank" rel="external">[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</a></li>
+<li><a href="https://zhwhong.github.io/2017/02/24/Backpropagation-through-time-BPTT/" target="_blank" rel="external">[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</a></li>
 </ul>
 <hr>
 <p>【知识预备】： <a href="http://deeplearning.stanford.edu/wiki/index.php/%E5%8F%8D%E5%90%91%E4%BC%A0%E5%AF%BC%E7%AE%97%E6%B3%95" target="_blank" rel="external">UFLDL教程 - 反向传导算法</a></p>
@@ -1406,7 +1406,7 @@
     <summary type="html">
     
       &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://Hzwcode.github.io/2017/02/24/Backpropagation-through-time-BPTT/&quot;&gt;[RNN] Simple LSTM代码实现 &amp;amp; BPTT理论推导&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://zhwhong.github.io/2017/02/24/Backpropagation-through-time-BPTT/&quot;&gt;[RNN] Simple LSTM代码实现 &amp;amp; BPTT理论推导&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;p&gt;【知识预备】： &lt;a href=&quot;http://deeplearning.stanford.edu/wiki/index.php/%E5%8F%8D%E5%90%91%E4%BC%A0%E5%AF%BC%E7%AE%97%E6%B3%95&quot;&gt;UFLDL教程 - 反向传导算法&lt;/a&gt;&lt;/p&gt;

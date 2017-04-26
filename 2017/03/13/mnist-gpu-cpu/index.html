@@ -33,7 +33,7 @@
 <meta property="og:image" content="http://zhwhong.ml/lstm_gpu_2.png">
 <meta property="og:image" content="http://zhwhong.ml/lstm_cpu_1.png">
 <meta property="og:image" content="http://zhwhong.ml/lstm_cpu_2.png">
-<meta property="og:updated_time" content="2017-03-25T07:51:43.263Z">
+<meta property="og:updated_time" content="2017-04-26T08:24:36.683Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GPU和CPU服务器测试mnist手写数字集">
 <meta name="twitter:description" content="本文主要通过tensorflow环境测试mnist手写数字集，来衡量GPU服务器与CPU服务器跑深度学习网络时的差异，了解不同网络模型，不同batch数对GPU和CPU占用率的影响，以及当GPU服务器跑满时顶的上多少台CPU服务器等。">
@@ -208,7 +208,7 @@
                             
                                 <a class="fa 新浪微博" href="http://weibo.com/zhwhong" title="新浪微博"></a>
                             
-                                <a class="fa GitHub" href="//github.com/Hzwcode" title="GitHub"></a>
+                                <a class="fa GitHub" href="//github.com/zhwhong" title="GitHub"></a>
                             
                                 <a class="fa Facebook" href="https://www.facebook.com/profile.php?id=100008115764524" title="Facebook"></a>
                             
@@ -304,7 +304,7 @@
                             
                                 <a class="fa 新浪微博" target="_blank" href="http://weibo.com/zhwhong" title="新浪微博"></a>
                             
-                                <a class="fa GitHub" target="_blank" href="//github.com/Hzwcode" title="GitHub"></a>
+                                <a class="fa GitHub" target="_blank" href="//github.com/zhwhong" title="GitHub"></a>
                             
                                 <a class="fa Facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100008115764524" title="Facebook"></a>
                             
@@ -417,9 +417,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">mye@ubuntu:~$ lscpu</div><div class="line">Architecture:          x86_64</div><div class="line">CPU op-mode(s):        32-bit, 64-bit</div><div class="line">Byte Order:            Little Endian</div><div class="line">CPU(s):                128</div><div class="line">On-line CPU(s) list:   0-127</div><div class="line">Thread(s) per core:    1</div><div class="line">Core(s) per socket:    16</div><div class="line">Socket(s):             8</div><div class="line">NUMA node(s):          8</div><div class="line">Vendor ID:             GenuineIntel</div><div class="line">CPU family:            6</div><div class="line">Model:                 63</div><div class="line">Stepping:              4</div><div class="line">CPU MHz:               1200.031</div><div class="line">BogoMIPS:              4396.82</div><div class="line">Virtualization:        VT-x</div><div class="line">L1d cache:             32K</div><div class="line">L1i cache:             32K</div><div class="line">L2 cache:              256K</div><div class="line">L3 cache:              40960K</div><div class="line">NUMA node0 CPU(s):     0-15</div><div class="line">NUMA node1 CPU(s):     16-31</div><div class="line">NUMA node2 CPU(s):     32-47</div><div class="line">NUMA node3 CPU(s):     48-63</div><div class="line">NUMA node4 CPU(s):     64-79</div><div class="line">NUMA node5 CPU(s):     80-95</div><div class="line">NUMA node6 CPU(s):     96-111</div><div class="line">NUMA node7 CPU(s):     112-127</div></pre></td></tr></table></figure>
 <p>使用 <code>cat /proc/cpuinfo</code>  命令可以查看每一个cpu核详细信息.</p>
 <h1 id="三、mnist测试"><a href="#三、mnist测试" class="headerlink" title="三、mnist测试"></a>三、mnist测试</h1><ul>
-<li>测试代码： <a href="https://github.com/Hzwcode/awesome-deep-learning/tree/master/TensorFlow-Tutorials" target="_blank" rel="external"><strong>zhwhong/awesome-deep-learning/TensorFlow-Tutorials</strong></a></li>
+<li>测试代码： <a href="https://github.com/zhwhong/awesome-deep-learning/tree/master/TensorFlow-Tutorials" target="_blank" rel="external"><strong>zhwhong/awesome-deep-learning/TensorFlow-Tutorials</strong></a></li>
 </ul>
-<h2 id="1-逻辑回归logistic测试"><a href="#1-逻辑回归logistic测试" class="headerlink" title="(1)逻辑回归logistic测试"></a>(1)逻辑回归logistic测试</h2><p>Example: <a href="https://github.com/Hzwcode/awesome-deep-learning/blob/master/TensorFlow-Tutorials/02_logistic_regression.py" target="_blank" rel="external"><strong>02_logistic_regression.py</strong></a></p>
+<h2 id="1-逻辑回归logistic测试"><a href="#1-逻辑回归logistic测试" class="headerlink" title="(1)逻辑回归logistic测试"></a>(1)逻辑回归logistic测试</h2><p>Example: <a href="https://github.com/zhwhong/awesome-deep-learning/blob/master/TensorFlow-Tutorials/02_logistic_regression.py" target="_blank" rel="external"><strong>02_logistic_regression.py</strong></a></p>
 <p>测试结果：</p>
 <h3 id="a-batch-size-128"><a href="#a-batch-size-128" class="headerlink" title="a.batch_size : 128"></a>a.batch_size : 128</h3><table>
 <thead>
@@ -506,7 +506,7 @@
 <p><strong>CPU运行结果：</strong></p>
 <p><img src="logistic_cpu_1.png" alt=""></p>
 <p><img src="logistic_cpu_2.png" alt=""></p>
-<h2 id="2-卷积神经网络conv测试"><a href="#2-卷积神经网络conv测试" class="headerlink" title="(2)卷积神经网络conv测试"></a>(2)卷积神经网络conv测试</h2><p>Example : <a href="https://github.com/Hzwcode/awesome-deep-learning/blob/master/TensorFlow-Tutorials/05_convolutional_net.py" target="_blank" rel="external"><strong>05_convolutional_net.py</strong></a></p>
+<h2 id="2-卷积神经网络conv测试"><a href="#2-卷积神经网络conv测试" class="headerlink" title="(2)卷积神经网络conv测试"></a>(2)卷积神经网络conv测试</h2><p>Example : <a href="https://github.com/zhwhong/awesome-deep-learning/blob/master/TensorFlow-Tutorials/05_convolutional_net.py" target="_blank" rel="external"><strong>05_convolutional_net.py</strong></a></p>
 <p>测试结果：</p>
 <h3 id="a-batch-size-128-1"><a href="#a-batch-size-128-1" class="headerlink" title="a.batch_size : 128"></a>a.batch_size : 128</h3><table>
 <thead>
@@ -593,7 +593,7 @@
 <p><strong>CPU运行结果：</strong></p>
 <p><img src="conv_cpu_1.png" alt=""></p>
 <p><img src="conv_cpu_2.png" alt=""></p>
-<h2 id="3-循环神经网络lstm测试"><a href="#3-循环神经网络lstm测试" class="headerlink" title="(3)循环神经网络lstm测试"></a>(3)循环神经网络lstm测试</h2><p>Example : <a href="https://github.com/Hzwcode/awesome-deep-learning/blob/master/TensorFlow-Tutorials/07_lstm.py" target="_blank" rel="external"><strong>07_lstm.py</strong></a></p>
+<h2 id="3-循环神经网络lstm测试"><a href="#3-循环神经网络lstm测试" class="headerlink" title="(3)循环神经网络lstm测试"></a>(3)循环神经网络lstm测试</h2><p>Example : <a href="https://github.com/zhwhong/awesome-deep-learning/blob/master/TensorFlow-Tutorials/07_lstm.py" target="_blank" rel="external"><strong>07_lstm.py</strong></a></p>
 <p>测试结果：</p>
 <h3 id="batch-size-512"><a href="#batch-size-512" class="headerlink" title="batch_size : 512"></a>batch_size : 512</h3><table>
 <thead>
@@ -641,14 +641,14 @@
         <p><span>本文标题:</span><a href="/2017/03/13/mnist-gpu-cpu/">GPU和CPU服务器测试mnist手写数字集</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">zhwhong</a></p>
         <p><span>发布时间:</span>2017-03-13, 18:22:15</p>
-        <p><span>最后更新:</span>2017-03-25, 15:51:43</p>
+        <p><span>最后更新:</span>2017-04-26, 16:24:36</p>
 
         
             <p>
                 <span>更新历史:</span><i class="fa fa-github"></i>
-                <a href="https://github.com/Hzwcode/Hzwcode.github.io/blame/blog-source/source/_posts/2017-03-13.mnist-gpu-cpu.md" title="顺序查看文章各部分修改记录" target = "_blank">Blame</a>,
-                <a href="https://github.com/Hzwcode/Hzwcode.github.io/commits/blog-source/source/_posts/2017-03-13.mnist-gpu-cpu.md" title="查看文章有关更新记录" target = "_blank">History</a><span class="raw">&nbsp;&nbsp;文本模式:</span><i class="fa fa-file-text-o"></i>
-                <a href="https://raw.githubusercontent.com/Hzwcode/Hzwcode.github.io/blog-source/source/_posts/2017-03-13.mnist-gpu-cpu.md" title="查看 & 下载文章 Markdown 原始文本" target = "_blank"> .md Raw</a>
+                <a href="https://github.com/zhwhong/zhwhong.github.io/blame/blog-source/source/_posts/2017-03-13.mnist-gpu-cpu.md" title="顺序查看文章各部分修改记录" target = "_blank">Blame</a>,
+                <a href="https://github.com/zhwhong/zhwhong.github.io/commits/blog-source/source/_posts/2017-03-13.mnist-gpu-cpu.md" title="查看文章有关更新记录" target = "_blank">History</a><span class="raw">&nbsp;&nbsp;文本模式:</span><i class="fa fa-file-text-o"></i>
+                <a href="https://raw.githubusercontent.com/zhwhong/zhwhong.github.io/blog-source/source/_posts/2017-03-13.mnist-gpu-cpu.md" title="查看 & 下载文章 Markdown 原始文本" target = "_blank"> .md Raw</a>
             </p>
         
 
@@ -774,7 +774,7 @@
         var duoshuoQuery = {short_name:"zhwhong"};
         var loadComment = function(){
             var d = document, s = d.createElement('script');
-            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//hzwcode.github.io/resources/embed.js';
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//zhwhong.github.io/resources/embed.js';
             s.async = true; s.charset = 'UTF-8';
             (d.head || d.body).appendChild(s);
         }
