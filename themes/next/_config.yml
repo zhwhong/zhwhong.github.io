@@ -295,7 +295,7 @@ mathjax:
 # swiftype_key: 68yKUUxyKGRH7RecXuQy
 
 # Baidu Analytics ID
-baidu_analytics: c28078cddac47e3f37d968d55b8b4e4f
+baidu_analytics: d56e3e389de0eb071ac9b56b7d5f66c1
 
 # Duoshuo ShortName
 duoshuo_shortname: zhwhong
@@ -344,7 +344,7 @@ duoshuo_share: true
 #yandex_site_verification:
 
 # CNZZ count
-cnzz_siteid: c28078cddac47e3f37d968d55b8b4e4f
+cnzz_siteid: d56e3e389de0eb071ac9b56b7d5f66c1
 
 # Application Insights
 # See https://azure.microsoft.com/en-us/services/application-insights/

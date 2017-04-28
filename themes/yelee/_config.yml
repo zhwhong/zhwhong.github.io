@@ -279,7 +279,7 @@ google_analytics:
 
 # 百度统计 http://sitecenter.baidu.com/sc-web/
 # 查看代码，填入 //hm.baidu.com/hm.js? 之后的内容
-baidu_tongji: c28078cddac47e3f37d968d55b8b4e4f
+baidu_tongji: d56e3e389de0eb071ac9b56b7d5f66c1
 
 # 不蒜子网站计数设置
 # http://ibruce.info/2015/04/04/busuanzi/
