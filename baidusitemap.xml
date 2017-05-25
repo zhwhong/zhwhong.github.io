@@ -58,11 +58,11 @@
         <title>[RNN] Simple LSTM代码实现 & BPTT理论推导</title>
         <pubTime>2017-02-24T10:26:58.000Z</pubTime>
         
-        <tag>Algorithm</tag>
-         
         <tag>RNN</tag>
          
         <tag>LSTM</tag>
+         
+        <tag>Algorithm</tag>
          
          
            
@@ -82,9 +82,9 @@
         <title>深度学习 — 反向传播(BP)理论推导</title>
         <pubTime>2017-02-24T10:23:35.000Z</pubTime>
         
-        <tag>Deep Learning</tag>
-         
         <tag>Algorithm</tag>
+         
+        <tag>Deep Learning</tag>
          
          
            
@@ -138,6 +138,30 @@
            
              
               <breadCrumb title="Tool" url="http://zhwhong.ml/categories/Tool/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zhwhong.ml/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/</loc>
+    <lastmod>2017-03-27T15:13:22.800Z</lastmod>
+    <data>
+        <display>
+        <title>LIDC-IDRI肺结节公开数据集Dicom和XML标注详解</title>
+        <pubTime>2017-03-27T13:32:54.000Z</pubTime>
+        
+        <tag>LIDC</tag>
+         
+        <tag>Dicom</tag>
+         
+        <tag>Xml</tag>
+         
+         
+           
+             
+              <breadCrumb title="Medical Image" url="http://zhwhong.ml/categories/Medical-Image/"/>
           
         </display>
     </data>
@@ -221,17 +245,17 @@
         <title>Machine Learning Materials</title>
         <pubTime>2017-02-23T08:57:14.000Z</pubTime>
         
-        <tag>Deep Learning</tag>
-         
         <tag>RNN</tag>
          
         <tag>LSTM</tag>
          
+        <tag>Deep Learning</tag>
+         
+        <tag>Object Detection</tag>
+         
         <tag>TensorFlow</tag>
          
         <tag>CNN</tag>
-         
-        <tag>Object Detection</tag>
          
          
            
