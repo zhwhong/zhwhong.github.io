@@ -97,7 +97,7 @@ disqus:
   # you have set "disqus_shortname" in your site's "_config.yml"
 
 duoshuo:
-  on: true
+  #on: true
   domain: zhwhong
   # 是否开启多说评论，http://duoshuo.com/create-site/
   # 使用上面网址登陆你的多说，然后创建站点，在 domain 中填入你设定的域名前半部分
@@ -111,10 +111,13 @@ youyan:
   # 友言服务在 Web 环境下运行，普通本地环境无法查看，请部署后在线上测试。
 
 changyan:
-  # on: true
+  #on: true
   appid: # cysUJIsDc
   appkey: # prod_f3b45651c40acb065b603bb0c1ae489b
 
+wangyiyungentie:
+  on: true
+  domain: 95334c9c8dd54294bae1891912f39bac
 
 # >>> Style Customisation 样式自定义 <<<
 

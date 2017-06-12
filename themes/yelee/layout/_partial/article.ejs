@@ -83,6 +83,8 @@
         <%- partial('comments/youyan') %>
     <% } else if (theme.changyan.on) { %>
         <%- partial('comments/changyan') %>
+    <% } else if (theme.wangyiyungentie.on) { %>
+        <%- partial('comments/wangyiyungentie') %>
     <% } else if (theme.disqus.on) { %>
         <%- partial('comments/disqus', {
             shortname: theme.disqus.shortname
