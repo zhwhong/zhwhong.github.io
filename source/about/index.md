@@ -123,11 +123,11 @@ fancybox: false
 
 ---
 
-当前时间：
+<!-- 当前时间：
 
 <div style="text-align:center;margin-top:-40px;">
 <embed wmode="transparent" src="http://files2.17173.com/__flash/2011/10/21/honehone_clock_tr.swf" quality="high" bgcolor="#ffffff" width="500" height="100%" name="honehoneclock" align="center" allowscriptaccess="always" type="application/x-shockwave-flash" loop="true" autostart="true" autorewind="true"  pluginspage="http://www.macromedia.com/go/getflashplayer">
-</div>
+</div> -->
 
 逛累了听听歌：
 
@@ -135,17 +135,17 @@ fancybox: false
 <iframe scrolling="auto" frameborder="no" border="0" marginwidth="0" marginheight="0" width=100% height=330 src="http://music.163.com/outchain/player?type=0&id=3778678&auto=0&height=430"></iframe>
 </div>
 
-最近访客
+<!-- 最近访客
 
-<!-- <div class="ds-recent-visitors"
+<div class="ds-recent-visitors"
     data-num-items="36"
     data-avatar-size="42"
     id="ds-recent-visitors">
-</div>
--->
+</div> -->
 
-<ul class="ds-recent-visitors" data-num-items="30" data-avatar-size="56"></ul>
 
-<div style="clear:both;"></div>
+<!-- <ul class="ds-recent-visitors" data-num-items="30" data-avatar-size="56"></ul>
+
+<div style="clear:both;"></div> -->
 
 ---
