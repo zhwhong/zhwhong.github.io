@@ -81,7 +81,7 @@ subnav:
 # Chose ONE as your comment system and keep others disable.
 # 选一个作为网站评论系统，其他保持禁用。
 
-preload_comment: false
+preload_comment: true
 ## false: 当点击评论条等区域时再加载评论模块
 ## false: load comment's section until u click/hover on the bar/icon
 
@@ -104,7 +104,7 @@ duoshuo:
   # http://<要填的部分>.duoshuo.com (domain只填上<>里的内容，不要填整个网址)
 
 youyan:
-  #on: true
+  on: true
   id: 2128915
   # 是否开启友言评论，http://www.uyan.cc/index.php
   # id 中填写你的友言用户数字ID，注册后进入后台管理即可查看
@@ -116,7 +116,7 @@ changyan:
   appkey: # prod_f3b45651c40acb065b603bb0c1ae489b
 
 wangyiyungentie:
-  on: true
+  #on: true
   domain: 95334c9c8dd54294bae1891912f39bac
 
 # >>> Style Customisation 样式自定义 <<<
