@@ -256,8 +256,8 @@
 <p>对于分类器或者说分类算法，评价指标主要有<a href="https://en.wikipedia.org/wiki/Precision_and_recall#Precision" target="_blank" rel="external">precision</a>，<a href="https://en.wikipedia.org/wiki/Precision_and_recall#Recall" target="_blank" rel="external">recall</a>，<a href="https://en.wikipedia.org/wiki/F1_score" target="_blank" rel="external">F1 score</a>等，以及这里要讨论的<a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic" target="_blank" rel="external">ROC</a>和<a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve" target="_blank" rel="external">AUC</a>。下图是一个ROC曲线的示例：</p>
 <p><img src="4.png" alt=""></p>
 <ul>
-<li>横坐标：<strong>Sensitivity</strong>，伪正类率(False positive rate， FPR)，<strong>预测为正但实际为负</strong>的样本占<strong>所有负例样本</strong> 的比例；</li>
-<li>纵坐标：<strong>1-Specificity</strong>，真正类率(True positive rate， TPR)，<strong>预测为正且实际为正</strong>的样本占<strong>所有正例样本</strong> 的比例。</li>
+<li>横坐标：<strong>1-Specificity</strong>，伪正类率(False positive rate， FPR)，<strong>预测为正但实际为负</strong>的样本占<strong>所有负例样本</strong> 的比例；</li>
+<li>纵坐标：<strong>Sensitivity</strong>，真正类率(True positive rate， TPR)，<strong>预测为正且实际为正</strong>的样本占<strong>所有正例样本</strong> 的比例。</li>
 </ul>
 <p>在一个二分类模型中，假设采用逻辑回归分类器，其给出针对每个实例为正类的概率，那么通过设定一个阈值如0.6，概率大于等于0.6的为正类，小于0.6的为负类。对应的就可以算出一组(FPR,TPR)，在平面中得到对应坐标点。随着阈值的逐渐减小，越来越多的实例被划分为正类，但是这些正类中同样也掺杂着真正的负实例，即TPR和FPR会同时增大。阈值最大时，对应坐标点为(0,0)，阈值最小时，对应坐标点(1,1)。</p>
 <p>如下面这幅图，(a)图中实线为ROC曲线，线上每个点对应一个阈值。</p>

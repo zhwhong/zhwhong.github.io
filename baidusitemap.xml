@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>http://zhwhong.ml/2017/04/14/ROC-AUC-Precision-Recall-analysis/</loc>
+    <lastmod>2017-11-03T02:34:45.839Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率</title>
+        <pubTime>2017-04-14T14:13:35.000Z</pubTime>
+        
+        <tag>ROC</tag>
+         
+        <tag>AUC</tag>
+         
+        <tag>Classfication</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zhwhong.ml/2017/10/24/Model-based-Analysis-of-ChIP-Seq/</loc>
     <lastmod>2017-10-24T10:29:14.874Z</lastmod>
     <data>
@@ -131,30 +155,6 @@
         <tag>Deep Learning</tag>
          
         <tag>Algorithm</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://zhwhong.ml/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zhwhong.ml/2017/04/14/ROC-AUC-Precision-Recall-analysis/</loc>
-    <lastmod>2017-04-14T15:46:52.339Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率</title>
-        <pubTime>2017-04-14T14:13:35.000Z</pubTime>
-        
-        <tag>ROC</tag>
-         
-        <tag>AUC</tag>
-         
-        <tag>Classfication</tag>
          
          
            
