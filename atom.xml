@@ -5,9 +5,9 @@
   <subtitle>Stay Hungry Stay Foolish | 常葆求知若饥 常存虚怀若愚</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://zhwhong.ml/"/>
+  <link href="http://zhwhong.cn/"/>
   <updated>2017-10-24T10:29:14.874Z</updated>
-  <id>http://zhwhong.ml/</id>
+  <id>http://zhwhong.cn/</id>
   
   <author>
     <name>zhwhong</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Model-based Analysis of ChIP-Seq</title>
-    <link href="http://zhwhong.ml/2017/10/24/Model-based-Analysis-of-ChIP-Seq/"/>
-    <id>http://zhwhong.ml/2017/10/24/Model-based-Analysis-of-ChIP-Seq/</id>
+    <link href="http://zhwhong.cn/2017/10/24/Model-based-Analysis-of-ChIP-Seq/"/>
+    <id>http://zhwhong.cn/2017/10/24/Model-based-Analysis-of-ChIP-Seq/</id>
     <published>2017-10-24T10:12:58.000Z</published>
     <updated>2017-10-24T10:29:14.874Z</updated>
     
@@ -31,19 +31,19 @@
     
     </summary>
     
-      <category term="Bioinformatics" scheme="http://zhwhong.ml/categories/Bioinformatics/"/>
+      <category term="Bioinformatics" scheme="http://zhwhong.cn/categories/Bioinformatics/"/>
     
     
-      <category term="Bioinformatics" scheme="http://zhwhong.ml/tags/Bioinformatics/"/>
+      <category term="Bioinformatics" scheme="http://zhwhong.cn/tags/Bioinformatics/"/>
     
-      <category term="Paper" scheme="http://zhwhong.ml/tags/Paper/"/>
+      <category term="Paper" scheme="http://zhwhong.cn/tags/Paper/"/>
     
   </entry>
   
   <entry>
     <title>Bufbomb缓冲区溢出攻击实验详解-CSAPP</title>
-    <link href="http://zhwhong.ml/2017/05/29/buffer-overflow-attack/"/>
-    <id>http://zhwhong.ml/2017/05/29/buffer-overflow-attack/</id>
+    <link href="http://zhwhong.cn/2017/05/29/buffer-overflow-attack/"/>
+    <id>http://zhwhong.cn/2017/05/29/buffer-overflow-attack/</id>
     <published>2017-05-29T11:28:31.000Z</published>
     <updated>2017-05-29T12:08:19.699Z</updated>
     
@@ -60,21 +60,21 @@
     
     </summary>
     
-      <category term="Linux" scheme="http://zhwhong.ml/categories/Linux/"/>
+      <category term="Linux" scheme="http://zhwhong.cn/categories/Linux/"/>
     
     
-      <category term="Computer System" scheme="http://zhwhong.ml/tags/Computer-System/"/>
+      <category term="Computer System" scheme="http://zhwhong.cn/tags/Computer-System/"/>
     
-      <category term="IA-32" scheme="http://zhwhong.ml/tags/IA-32/"/>
+      <category term="IA-32" scheme="http://zhwhong.cn/tags/IA-32/"/>
     
-      <category term="Buflab" scheme="http://zhwhong.ml/tags/Buflab/"/>
+      <category term="Buflab" scheme="http://zhwhong.cn/tags/Buflab/"/>
     
   </entry>
   
   <entry>
     <title>机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率</title>
-    <link href="http://zhwhong.ml/2017/04/14/ROC-AUC-Precision-Recall-analysis/"/>
-    <id>http://zhwhong.ml/2017/04/14/ROC-AUC-Precision-Recall-analysis/</id>
+    <link href="http://zhwhong.cn/2017/04/14/ROC-AUC-Precision-Recall-analysis/"/>
+    <id>http://zhwhong.cn/2017/04/14/ROC-AUC-Precision-Recall-analysis/</id>
     <published>2017-04-14T14:13:35.000Z</published>
     <updated>2017-11-03T02:34:45.839Z</updated>
     
@@ -86,21 +86,21 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="http://zhwhong.ml/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://zhwhong.cn/categories/Machine-Learning/"/>
     
     
-      <category term="ROC" scheme="http://zhwhong.ml/tags/ROC/"/>
+      <category term="ROC" scheme="http://zhwhong.cn/tags/ROC/"/>
     
-      <category term="AUC" scheme="http://zhwhong.ml/tags/AUC/"/>
+      <category term="AUC" scheme="http://zhwhong.cn/tags/AUC/"/>
     
-      <category term="Classfication" scheme="http://zhwhong.ml/tags/Classfication/"/>
+      <category term="Classfication" scheme="http://zhwhong.cn/tags/Classfication/"/>
     
   </entry>
   
   <entry>
     <title>深度神经网络可视化工具</title>
-    <link href="http://zhwhong.ml/2017/03/28/neural-network-visualization/"/>
-    <id>http://zhwhong.ml/2017/03/28/neural-network-visualization/</id>
+    <link href="http://zhwhong.cn/2017/03/28/neural-network-visualization/"/>
+    <id>http://zhwhong.cn/2017/03/28/neural-network-visualization/</id>
     <published>2017-03-28T04:36:46.000Z</published>
     <updated>2017-03-28T08:34:43.687Z</updated>
     
@@ -112,21 +112,21 @@
     
     </summary>
     
-      <category term="Tool" scheme="http://zhwhong.ml/categories/Tool/"/>
+      <category term="Tool" scheme="http://zhwhong.cn/categories/Tool/"/>
     
     
-      <category term="TensorFlow" scheme="http://zhwhong.ml/tags/TensorFlow/"/>
+      <category term="TensorFlow" scheme="http://zhwhong.cn/tags/TensorFlow/"/>
     
-      <category term="Neural Network" scheme="http://zhwhong.ml/tags/Neural-Network/"/>
+      <category term="Neural Network" scheme="http://zhwhong.cn/tags/Neural-Network/"/>
     
-      <category term="Caffe" scheme="http://zhwhong.ml/tags/Caffe/"/>
+      <category term="Caffe" scheme="http://zhwhong.cn/tags/Caffe/"/>
     
   </entry>
   
   <entry>
     <title>LIDC-IDRI肺结节公开数据集Dicom和XML标注详解</title>
-    <link href="http://zhwhong.ml/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/"/>
-    <id>http://zhwhong.ml/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/</id>
+    <link href="http://zhwhong.cn/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/"/>
+    <id>http://zhwhong.cn/2017/03/27/LIDC-Dicom-data-and-XML-annotation-parse/</id>
     <published>2017-03-27T13:32:54.000Z</published>
     <updated>2017-03-27T15:13:22.800Z</updated>
     
@@ -141,21 +141,21 @@
     
     </summary>
     
-      <category term="Medical Image" scheme="http://zhwhong.ml/categories/Medical-Image/"/>
+      <category term="Medical Image" scheme="http://zhwhong.cn/categories/Medical-Image/"/>
     
     
-      <category term="LIDC" scheme="http://zhwhong.ml/tags/LIDC/"/>
+      <category term="LIDC" scheme="http://zhwhong.cn/tags/LIDC/"/>
     
-      <category term="Dicom" scheme="http://zhwhong.ml/tags/Dicom/"/>
+      <category term="Dicom" scheme="http://zhwhong.cn/tags/Dicom/"/>
     
-      <category term="Xml" scheme="http://zhwhong.ml/tags/Xml/"/>
+      <category term="Xml" scheme="http://zhwhong.cn/tags/Xml/"/>
     
   </entry>
   
   <entry>
     <title>那些深度学习与计算机视觉之路上的大佬们</title>
-    <link href="http://zhwhong.ml/2017/03/24/AI-DL-CV-org-and-person/"/>
-    <id>http://zhwhong.ml/2017/03/24/AI-DL-CV-org-and-person/</id>
+    <link href="http://zhwhong.cn/2017/03/24/AI-DL-CV-org-and-person/"/>
+    <id>http://zhwhong.cn/2017/03/24/AI-DL-CV-org-and-person/</id>
     <published>2017-03-24T07:48:24.000Z</published>
     <updated>2017-04-26T08:23:41.596Z</updated>
     
@@ -168,19 +168,19 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="http://zhwhong.ml/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://zhwhong.cn/categories/Machine-Learning/"/>
     
     
-      <category term="Deep Learning" scheme="http://zhwhong.ml/tags/Deep-Learning/"/>
+      <category term="Deep Learning" scheme="http://zhwhong.cn/tags/Deep-Learning/"/>
     
-      <category term="Computer Vision" scheme="http://zhwhong.ml/tags/Computer-Vision/"/>
+      <category term="Computer Vision" scheme="http://zhwhong.cn/tags/Computer-Vision/"/>
     
   </entry>
   
   <entry>
     <title>解决Hexo博客文章置顶问题</title>
-    <link href="http://zhwhong.ml/2017/03/23/deal-with-hexo-article-top-problem/"/>
-    <id>http://zhwhong.ml/2017/03/23/deal-with-hexo-article-top-problem/</id>
+    <link href="http://zhwhong.cn/2017/03/23/deal-with-hexo-article-top-problem/"/>
+    <id>http://zhwhong.cn/2017/03/23/deal-with-hexo-article-top-problem/</id>
     <published>2017-03-23T09:07:29.000Z</published>
     <updated>2017-03-24T07:26:02.528Z</updated>
     
@@ -194,17 +194,17 @@
     
     </summary>
     
-      <category term="Tool" scheme="http://zhwhong.ml/categories/Tool/"/>
+      <category term="Tool" scheme="http://zhwhong.cn/categories/Tool/"/>
     
     
-      <category term="Hexo" scheme="http://zhwhong.ml/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://zhwhong.cn/tags/Hexo/"/>
     
   </entry>
   
   <entry>
     <title>[译] Introduction to debugging neural networks</title>
-    <link href="http://zhwhong.ml/2017/03/20/Introduction-to-debugging-neural-networks/"/>
-    <id>http://zhwhong.ml/2017/03/20/Introduction-to-debugging-neural-networks/</id>
+    <link href="http://zhwhong.cn/2017/03/20/Introduction-to-debugging-neural-networks/"/>
+    <id>http://zhwhong.cn/2017/03/20/Introduction-to-debugging-neural-networks/</id>
     <published>2017-03-19T16:08:22.000Z</published>
     <updated>2017-03-25T07:48:00.346Z</updated>
     
@@ -216,21 +216,21 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="http://zhwhong.ml/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://zhwhong.cn/categories/Machine-Learning/"/>
     
     
-      <category term="Deep Learning" scheme="http://zhwhong.ml/tags/Deep-Learning/"/>
+      <category term="Deep Learning" scheme="http://zhwhong.cn/tags/Deep-Learning/"/>
     
-      <category term="Neural Network" scheme="http://zhwhong.ml/tags/Neural-Network/"/>
+      <category term="Neural Network" scheme="http://zhwhong.cn/tags/Neural-Network/"/>
     
-      <category term="Debug" scheme="http://zhwhong.ml/tags/Debug/"/>
+      <category term="Debug" scheme="http://zhwhong.cn/tags/Debug/"/>
     
   </entry>
   
   <entry>
     <title>GPU和CPU服务器测试mnist手写数字集</title>
-    <link href="http://zhwhong.ml/2017/03/13/mnist-gpu-cpu/"/>
-    <id>http://zhwhong.ml/2017/03/13/mnist-gpu-cpu/</id>
+    <link href="http://zhwhong.cn/2017/03/13/mnist-gpu-cpu/"/>
+    <id>http://zhwhong.cn/2017/03/13/mnist-gpu-cpu/</id>
     <published>2017-03-13T10:22:15.000Z</published>
     <updated>2017-04-26T08:24:36.683Z</updated>
     
@@ -242,21 +242,21 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="http://zhwhong.ml/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://zhwhong.cn/categories/Machine-Learning/"/>
     
     
-      <category term="Deep Learning" scheme="http://zhwhong.ml/tags/Deep-Learning/"/>
+      <category term="Deep Learning" scheme="http://zhwhong.cn/tags/Deep-Learning/"/>
     
-      <category term="TensorFlow" scheme="http://zhwhong.ml/tags/TensorFlow/"/>
+      <category term="TensorFlow" scheme="http://zhwhong.cn/tags/TensorFlow/"/>
     
-      <category term="GPU" scheme="http://zhwhong.ml/tags/GPU/"/>
+      <category term="GPU" scheme="http://zhwhong.cn/tags/GPU/"/>
     
   </entry>
   
   <entry>
     <title>GNU MAKE命令</title>
-    <link href="http://zhwhong.ml/2017/03/11/GNU-make/"/>
-    <id>http://zhwhong.ml/2017/03/11/GNU-make/</id>
+    <link href="http://zhwhong.cn/2017/03/11/GNU-make/"/>
+    <id>http://zhwhong.cn/2017/03/11/GNU-make/</id>
     <published>2017-03-10T17:07:07.000Z</published>
     <updated>2017-03-27T13:23:04.918Z</updated>
     
@@ -269,19 +269,19 @@
     
     </summary>
     
-      <category term="Linux" scheme="http://zhwhong.ml/categories/Linux/"/>
+      <category term="Linux" scheme="http://zhwhong.cn/categories/Linux/"/>
     
     
-      <category term="GNU" scheme="http://zhwhong.ml/tags/GNU/"/>
+      <category term="GNU" scheme="http://zhwhong.cn/tags/GNU/"/>
     
-      <category term="Makefile" scheme="http://zhwhong.ml/tags/Makefile/"/>
+      <category term="Makefile" scheme="http://zhwhong.cn/tags/Makefile/"/>
     
   </entry>
   
   <entry>
     <title>Blog Music Test</title>
-    <link href="http://zhwhong.ml/2017/02/26/music-test/"/>
-    <id>http://zhwhong.ml/2017/02/26/music-test/</id>
+    <link href="http://zhwhong.cn/2017/02/26/music-test/"/>
+    <id>http://zhwhong.cn/2017/02/26/music-test/</id>
     <published>2017-02-26T08:56:23.000Z</published>
     <updated>2017-03-25T07:26:12.746Z</updated>
     
@@ -293,19 +293,19 @@
     
     </summary>
     
-      <category term="Tool" scheme="http://zhwhong.ml/categories/Tool/"/>
+      <category term="Tool" scheme="http://zhwhong.cn/categories/Tool/"/>
     
     
-      <category term="Hexo" scheme="http://zhwhong.ml/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://zhwhong.cn/tags/Hexo/"/>
     
-      <category term="Music" scheme="http://zhwhong.ml/tags/Music/"/>
+      <category term="Music" scheme="http://zhwhong.cn/tags/Music/"/>
     
   </entry>
   
   <entry>
     <title>[RNN] Simple LSTM代码实现 &amp; BPTT理论推导</title>
-    <link href="http://zhwhong.ml/2017/02/24/Backpropagation-through-time-BPTT/"/>
-    <id>http://zhwhong.ml/2017/02/24/Backpropagation-through-time-BPTT/</id>
+    <link href="http://zhwhong.cn/2017/02/24/Backpropagation-through-time-BPTT/"/>
+    <id>http://zhwhong.cn/2017/02/24/Backpropagation-through-time-BPTT/</id>
     <published>2017-02-24T10:26:58.000Z</published>
     <updated>2017-04-26T08:23:22.649Z</updated>
     
@@ -322,21 +322,21 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="http://zhwhong.ml/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://zhwhong.cn/categories/Machine-Learning/"/>
     
     
-      <category term="RNN" scheme="http://zhwhong.ml/tags/RNN/"/>
+      <category term="Algorithm" scheme="http://zhwhong.cn/tags/Algorithm/"/>
     
-      <category term="LSTM" scheme="http://zhwhong.ml/tags/LSTM/"/>
+      <category term="RNN" scheme="http://zhwhong.cn/tags/RNN/"/>
     
-      <category term="Algorithm" scheme="http://zhwhong.ml/tags/Algorithm/"/>
+      <category term="LSTM" scheme="http://zhwhong.cn/tags/LSTM/"/>
     
   </entry>
   
   <entry>
     <title>深度学习 — 反向传播(BP)理论推导</title>
-    <link href="http://zhwhong.ml/2017/02/24/Backpropagation-principle/"/>
-    <id>http://zhwhong.ml/2017/02/24/Backpropagation-principle/</id>
+    <link href="http://zhwhong.cn/2017/02/24/Backpropagation-principle/"/>
+    <id>http://zhwhong.cn/2017/02/24/Backpropagation-principle/</id>
     <published>2017-02-24T10:23:35.000Z</published>
     <updated>2017-04-26T08:22:16.650Z</updated>
     
@@ -353,19 +353,19 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="http://zhwhong.ml/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://zhwhong.cn/categories/Machine-Learning/"/>
     
     
-      <category term="Deep Learning" scheme="http://zhwhong.ml/tags/Deep-Learning/"/>
+      <category term="Deep Learning" scheme="http://zhwhong.cn/tags/Deep-Learning/"/>
     
-      <category term="Algorithm" scheme="http://zhwhong.ml/tags/Algorithm/"/>
+      <category term="Algorithm" scheme="http://zhwhong.cn/tags/Algorithm/"/>
     
   </entry>
   
   <entry>
     <title>[Detection] 深度学习之 &quot;物体检测&quot; 方法梳理</title>
-    <link href="http://zhwhong.ml/2017/02/24/Detection-CNN/"/>
-    <id>http://zhwhong.ml/2017/02/24/Detection-CNN/</id>
+    <link href="http://zhwhong.cn/2017/02/24/Detection-CNN/"/>
+    <id>http://zhwhong.cn/2017/02/24/Detection-CNN/</id>
     <published>2017-02-24T10:20:50.000Z</published>
     <updated>2017-03-25T16:00:40.709Z</updated>
     
@@ -377,19 +377,19 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="http://zhwhong.ml/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://zhwhong.cn/categories/Machine-Learning/"/>
     
     
-      <category term="Deep Learning" scheme="http://zhwhong.ml/tags/Deep-Learning/"/>
+      <category term="Deep Learning" scheme="http://zhwhong.cn/tags/Deep-Learning/"/>
     
-      <category term="Object Detection" scheme="http://zhwhong.ml/tags/Object-Detection/"/>
+      <category term="Object Detection" scheme="http://zhwhong.cn/tags/Object-Detection/"/>
     
   </entry>
   
   <entry>
     <title>[斯坦福CS231n课程整理] Convolutional Neural Networks for Visual Recognition(附翻译，作业)</title>
-    <link href="http://zhwhong.ml/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/"/>
-    <id>http://zhwhong.ml/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/</id>
+    <link href="http://zhwhong.cn/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/"/>
+    <id>http://zhwhong.cn/2017/02/24/Convolutional-Neural-Networks-for-Visual-Recognition-CS231n/</id>
     <published>2017-02-24T09:27:52.000Z</published>
     <updated>2017-03-24T13:25:11.791Z</updated>
     
@@ -409,21 +409,21 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="http://zhwhong.ml/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://zhwhong.cn/categories/Machine-Learning/"/>
     
     
-      <category term="Deep Learning" scheme="http://zhwhong.ml/tags/Deep-Learning/"/>
+      <category term="Deep Learning" scheme="http://zhwhong.cn/tags/Deep-Learning/"/>
     
-      <category term="CNN" scheme="http://zhwhong.ml/tags/CNN/"/>
+      <category term="CNN" scheme="http://zhwhong.cn/tags/CNN/"/>
     
-      <category term="Computer Vision" scheme="http://zhwhong.ml/tags/Computer-Vision/"/>
+      <category term="Computer Vision" scheme="http://zhwhong.cn/tags/Computer-Vision/"/>
     
   </entry>
   
   <entry>
     <title>[Linux] Ubuntu下超好看扁平主题 : Flatabulous</title>
-    <link href="http://zhwhong.ml/2017/02/24/Linux-Ubuntu_Flatabulous/"/>
-    <id>http://zhwhong.ml/2017/02/24/Linux-Ubuntu_Flatabulous/</id>
+    <link href="http://zhwhong.cn/2017/02/24/Linux-Ubuntu_Flatabulous/"/>
+    <id>http://zhwhong.cn/2017/02/24/Linux-Ubuntu_Flatabulous/</id>
     <published>2017-02-24T08:12:16.000Z</published>
     <updated>2017-03-24T16:24:30.647Z</updated>
     
@@ -435,19 +435,19 @@
     
     </summary>
     
-      <category term="Linux" scheme="http://zhwhong.ml/categories/Linux/"/>
+      <category term="Linux" scheme="http://zhwhong.cn/categories/Linux/"/>
     
     
-      <category term="Ubuntu" scheme="http://zhwhong.ml/tags/Ubuntu/"/>
+      <category term="Ubuntu" scheme="http://zhwhong.cn/tags/Ubuntu/"/>
     
-      <category term="Theme" scheme="http://zhwhong.ml/tags/Theme/"/>
+      <category term="Theme" scheme="http://zhwhong.cn/tags/Theme/"/>
     
   </entry>
   
   <entry>
     <title>Machine Learning Materials</title>
-    <link href="http://zhwhong.ml/2017/02/23/Machine-Learning-Materials/"/>
-    <id>http://zhwhong.ml/2017/02/23/Machine-Learning-Materials/</id>
+    <link href="http://zhwhong.cn/2017/02/23/Machine-Learning-Materials/"/>
+    <id>http://zhwhong.cn/2017/02/23/Machine-Learning-Materials/</id>
     <published>2017-02-23T08:57:14.000Z</published>
     <updated>2017-03-25T07:43:23.111Z</updated>
     
@@ -459,20 +459,20 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="http://zhwhong.ml/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://zhwhong.cn/categories/Machine-Learning/"/>
     
     
-      <category term="Deep Learning" scheme="http://zhwhong.ml/tags/Deep-Learning/"/>
+      <category term="Deep Learning" scheme="http://zhwhong.cn/tags/Deep-Learning/"/>
     
-      <category term="TensorFlow" scheme="http://zhwhong.ml/tags/TensorFlow/"/>
+      <category term="TensorFlow" scheme="http://zhwhong.cn/tags/TensorFlow/"/>
     
-      <category term="CNN" scheme="http://zhwhong.ml/tags/CNN/"/>
+      <category term="CNN" scheme="http://zhwhong.cn/tags/CNN/"/>
     
-      <category term="RNN" scheme="http://zhwhong.ml/tags/RNN/"/>
+      <category term="RNN" scheme="http://zhwhong.cn/tags/RNN/"/>
     
-      <category term="LSTM" scheme="http://zhwhong.ml/tags/LSTM/"/>
+      <category term="LSTM" scheme="http://zhwhong.cn/tags/LSTM/"/>
     
-      <category term="Object Detection" scheme="http://zhwhong.ml/tags/Object-Detection/"/>
+      <category term="Object Detection" scheme="http://zhwhong.cn/tags/Object-Detection/"/>
     
   </entry>
   

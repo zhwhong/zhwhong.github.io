@@ -18,25 +18,25 @@
 <meta name="description" content="在分类任务中，人们总是喜欢基于错误率来衡量分类器任务的成功程度。错误率指的是在所有测试样例中错分的样例比例。实际上，这样的度量错误掩盖了样例如何被分错的事实。在机器学习中，有一个普遍适用的称为混淆矩阵(confusion matrix)的工具，它可以帮助人们更好地了解分类中的错误。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率">
-<meta property="og:url" content="http://zhwhong.ml/2017/04/14/ROC-AUC-Precision-Recall-analysis/index.html">
+<meta property="og:url" content="http://zhwhong.cn/2017/04/14/ROC-AUC-Precision-Recall-analysis/index.html">
 <meta property="og:site_name" content="Zhiwei's Blog">
 <meta property="og:description" content="在分类任务中，人们总是喜欢基于错误率来衡量分类器任务的成功程度。错误率指的是在所有测试样例中错分的样例比例。实际上，这样的度量错误掩盖了样例如何被分错的事实。在机器学习中，有一个普遍适用的称为混淆矩阵(confusion matrix)的工具，它可以帮助人们更好地了解分类中的错误。">
-<meta property="og:image" content="http://zhwhong.ml/1.png">
-<meta property="og:image" content="http://zhwhong.ml/2.png">
-<meta property="og:image" content="http://zhwhong.ml/3.png">
-<meta property="og:image" content="http://zhwhong.ml/wiki_matrix.png">
-<meta property="og:image" content="http://zhwhong.ml/4.png">
-<meta property="og:image" content="http://zhwhong.ml/5.png">
-<meta property="og:image" content="http://zhwhong.ml/6.png">
-<meta property="og:image" content="http://zhwhong.ml/7.png">
-<meta property="og:image" content="http://zhwhong.ml/8.png">
-<meta property="og:image" content="http://zhwhong.ml/9.png">
-<meta property="og:image" content="http://zhwhong.ml/10.png">
+<meta property="og:image" content="http://zhwhong.cn/1.png">
+<meta property="og:image" content="http://zhwhong.cn/2.png">
+<meta property="og:image" content="http://zhwhong.cn/3.png">
+<meta property="og:image" content="http://zhwhong.cn/wiki_matrix.png">
+<meta property="og:image" content="http://zhwhong.cn/4.png">
+<meta property="og:image" content="http://zhwhong.cn/5.png">
+<meta property="og:image" content="http://zhwhong.cn/6.png">
+<meta property="og:image" content="http://zhwhong.cn/7.png">
+<meta property="og:image" content="http://zhwhong.cn/8.png">
+<meta property="og:image" content="http://zhwhong.cn/9.png">
+<meta property="og:image" content="http://zhwhong.cn/10.png">
 <meta property="og:updated_time" content="2017-11-03T02:34:45.839Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率">
 <meta name="twitter:description" content="在分类任务中，人们总是喜欢基于错误率来衡量分类器任务的成功程度。错误率指的是在所有测试样例中错分的样例比例。实际上，这样的度量错误掩盖了样例如何被分错的事实。在机器学习中，有一个普遍适用的称为混淆矩阵(confusion matrix)的工具，它可以帮助人们更好地了解分类中的错误。">
-<meta name="twitter:image" content="http://zhwhong.ml/1.png">
+<meta name="twitter:image" content="http://zhwhong.cn/1.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -531,8 +531,8 @@
         
 
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/04/14/ROC-AUC-Precision-Recall-analysis/" title="机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率">http://zhwhong.ml/2017/04/14/ROC-AUC-Precision-Recall-analysis/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://zhwhong.ml/2017/04/14/ROC-AUC-Precision-Recall-analysis/　　作者: zhwhong" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/04/14/ROC-AUC-Precision-Recall-analysis/" title="机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率">http://zhwhong.cn/2017/04/14/ROC-AUC-Precision-Recall-analysis/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://zhwhong.cn/2017/04/14/ROC-AUC-Precision-Recall-analysis/　　作者: zhwhong" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -695,7 +695,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i>
-                2017 zhwhong
+                2017-2018 zhwhong
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
