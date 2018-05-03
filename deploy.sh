@@ -1,5 +1,5 @@
 #!/bin/bash
 
-rm -rf ../zhwhong.ml
-git clone -b master https://github.com/zhwhong/zhwhong.github.io.git ../zhwhong.ml
-rm -rf ../zhwhong.ml/.git
+rm -rf ../zhwhong.cn
+git clone -b master https://github.com/zhwhong/zhwhong.github.io.git ../zhwhong.cn
+rm -rf ../zhwhong.cn/.git
