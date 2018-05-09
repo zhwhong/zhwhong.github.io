@@ -464,13 +464,13 @@
     
       <category term="Deep Learning" scheme="http://zhwhong.cn/tags/Deep-Learning/"/>
     
-      <category term="TensorFlow" scheme="http://zhwhong.cn/tags/TensorFlow/"/>
-    
-      <category term="CNN" scheme="http://zhwhong.cn/tags/CNN/"/>
-    
       <category term="RNN" scheme="http://zhwhong.cn/tags/RNN/"/>
     
       <category term="LSTM" scheme="http://zhwhong.cn/tags/LSTM/"/>
+    
+      <category term="TensorFlow" scheme="http://zhwhong.cn/tags/TensorFlow/"/>
+    
+      <category term="CNN" scheme="http://zhwhong.cn/tags/CNN/"/>
     
       <category term="Object Detection" scheme="http://zhwhong.cn/tags/Object-Detection/"/>
     
