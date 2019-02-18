@@ -1427,11 +1427,11 @@
         
         <tags>
             
-            <tag> Algorithm </tag>
-            
             <tag> RNN </tag>
             
             <tag> LSTM </tag>
+            
+            <tag> Algorithm </tag>
             
         </tags>
         
@@ -2150,13 +2150,13 @@
             
             <tag> Deep Learning </tag>
             
-            <tag> RNN </tag>
-            
-            <tag> LSTM </tag>
-            
             <tag> TensorFlow </tag>
             
             <tag> CNN </tag>
+            
+            <tag> RNN </tag>
+            
+            <tag> LSTM </tag>
             
             <tag> Object Detection </tag>
             
